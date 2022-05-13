@@ -12,6 +12,7 @@ const Home: NextPage = () => {
       </div>
       <div>
         <h1>xin chao</h1>
+        <h1>testing</h1>
       </div>
     </div>
   )
