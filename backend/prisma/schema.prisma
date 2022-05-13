@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AuthProvider {
+  id          String @id @default(cuid())
+  userId      String @unique
+  providerKey String @unique
+  user        User   @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id             String          @id @default(cuid())
+  username       String          @unique
+  password       String?
+  name           String
+  createdAt      DateTime        @default(now())
+  role           Role            @default(paperRequester)
+  AuthProvider   AuthProvider?
+  operator       Operator?
+  PaperMaker     PaperMaker?
+  PaperRequester PaperRequester?
+}
+
+model Operator {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model PaperRequester {
+  id      String    @id @default(cuid())
+  userId  String    @unique
+  user    User      @relation(fields: [userId], references: [id])
+  Booking Booking[]
+}
+
+model PaperMaker {
+  id                  String               @id @default(cuid())
+  userId              String               @unique
+  addresslat          Float
+  addresslon          Float
+  totalCases          Int
+  pastSuccessfulCases Int
+  rating              Float
+  status              PaperRequesterStatus
+  avatar              String
+  isConfirmed         Boolean
+  user                User                 @relation(fields: [userId], references: [id])
+  OfferedService      OfferedService[]
+}
+
+model Service {
+  id             String           @id @default(cuid())
+  name           String
+  description    String
+  OfferedService OfferedService[]
+}
+
+model OfferedService {
+  id           String     @id @default(cuid())
+  paperMakerId String
+  serviceId    String
+  price        Float
+  duration     Int
+  paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
+  service      Service    @relation(fields: [serviceId], references: [id])
+  Booking      Booking[]
+}
+
+model Booking {
+  id               String         @id @default(cuid())
+  paperRequesterId String
+  offeredServiceId String
+  note             String
+  offeredService   OfferedService @relation(fields: [offeredServiceId], references: [id])
+  paperRequester   PaperRequester @relation(fields: [paperRequesterId], references: [id])
+  transaction      Deal?
+}
+
+model Deal {
+  bookingId   String  @unique
+  actualPrice Float
+  payAmount   Float
+  keep        Float
+  booking     Booking @relation(fields: [bookingId], references: [id])
+}
+
+enum Role {
+  operator
+  paperRequester
+  paperMaker
+}
+
+enum PaperRequesterStatus {
+  available
+  busy
+}
+
+enum BookingStatus {
+  accept
+  deny
+}
