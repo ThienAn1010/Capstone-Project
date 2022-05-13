@@ -6,9 +6,16 @@ import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-    <div >
+    <div>
+      <div >
         <h1>hello</h1>
+        <h2>hahaha</h2>
+      </div>
+      <div>
+      <h1>xin chao</h1>
+      </div>
     </div>
+
   )
 }
 
