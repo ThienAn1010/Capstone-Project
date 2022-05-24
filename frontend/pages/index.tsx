@@ -5,7 +5,7 @@ import type { NextPage } from "next"
 
 const Home: NextPage = () => {
   return (
-    // this is a test
+    // This is a test
     <div>
       <div>
         <h1>hello</h1>
