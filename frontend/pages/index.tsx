@@ -8,6 +8,7 @@ const Home: NextPage = () => {
     // This is a test
     <div>
       <div>
+        <h1>testing actions</h1>
         <h1>hello</h1>
         <h2>hahaha</h2>
       </div>
