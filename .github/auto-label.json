@@ -2,6 +2,6 @@
     "rules": {
         "Frontend": ["*.tsx", "*.css", "*.html"],
         "Backend": ["*.ts", "*.prisma"],
-        "CI/CD": ".yml"
+        "CI/CD": "*.yml"
     }
 }
