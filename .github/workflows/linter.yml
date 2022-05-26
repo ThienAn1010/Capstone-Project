@@ -54,4 +54,4 @@ jobs:
                   DEFAULT_BRANCH: main
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   FILTER_REGEX_EXCLUDE: .*frontend/lint-staged.config.js
-                  FILTER_REGEX_EXCLUDE: .*backend/.*
+                  VALIDATE_TYPESCRIPT_STANDARD: false
