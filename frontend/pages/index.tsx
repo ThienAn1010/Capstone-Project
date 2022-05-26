@@ -1,22 +1,16 @@
 import type { NextPage } from "next"
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import styles from '../styles/Home.module.css'
+import Head from "next/head"
+import NavBar from "../components/navbar/NavBar"
 
 const Home: NextPage = () => {
   return (
-    // This is a test
-    <div>
-      <div>
-        <h1>testing actions</h1>
-        <h1>hello</h1>
-        <h2>hahaha</h2>
-      </div>
-      <div>
-        <h1>xin chao</h1>
-        <h1>testing</h1>
-      </div>
-    </div>
+    <>
+      <Head>
+        <title>Homepage</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <NavBar />
+    </>
   )
 }
 
