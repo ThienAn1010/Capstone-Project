@@ -1,7 +1,6 @@
 name: Inspect dependencies
 on:
-    pull_request:
-        types: [opened, synchronize]
+    - pull_request
 
 jobs:
     check_new_dependencies:
