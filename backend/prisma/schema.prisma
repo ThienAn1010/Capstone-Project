@@ -19,12 +19,13 @@ model User {
   username       String          @unique
   password       String?
   name           String
+  picture        String
   createdAt      DateTime        @default(now())
   role           Role            @default(paperRequester)
-  AuthProvider   AuthProvider?
+  authProvider   AuthProvider?
   operator       Operator?
-  PaperMaker     PaperMaker?
-  PaperRequester PaperRequester?
+  paperMaker     PaperMaker?
+  paperRequester PaperRequester?
 }
 
 model Operator {
@@ -37,7 +38,7 @@ model PaperRequester {
   id      String    @id @default(cuid())
   userId  String    @unique
   user    User      @relation(fields: [userId], references: [id])
-  Booking Booking[]
+  booking Booking[]
 }
 
 model PaperMaker {
@@ -52,14 +53,14 @@ model PaperMaker {
   avatar              String
   isConfirmed         Boolean
   user                User                 @relation(fields: [userId], references: [id])
-  OfferedService      OfferedService[]
+  offeredService      OfferedService[]
 }
 
 model Service {
   id             String           @id @default(cuid())
   name           String
   description    String
-  OfferedService OfferedService[]
+  offeredService OfferedService[]
 }
 
 model OfferedService {
@@ -70,7 +71,7 @@ model OfferedService {
   duration     Int
   paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
   service      Service    @relation(fields: [serviceId], references: [id])
-  Booking      Booking[]
+  booking      Booking[]
 }
 
 model Booking {
