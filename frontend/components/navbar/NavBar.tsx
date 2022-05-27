@@ -2,20 +2,23 @@ import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline"
 import { Fragment } from "react"
 import Link from "next/link"
+import NavCategory from "./NavCategory"
 // import Image from "next/image"
 
-export default function Category() {
+export default function NavBar() {
   const navigation = [{ name: "Categories", href: "#", current: false }]
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ")
   }
 
+  let categories = ["Marriage Certificate", "Work Permit"]
+
   return (
-    <Disclosure as="nav" className="bg-blue-700">
+    <Disclosure as="nav" className="bg-white shadow-md">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="w-full mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -32,37 +35,21 @@ export default function Category() {
                 <div className="flex-shrink-0 flex items-center">
                   <Link href="/">
                     <img
-                      className="block lg:hidden h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                      alt="Workflow"
+                      className="block lg:hidden h-10 w-auto cursor-pointer"
+                      src="/thelab-logo.png"
+                      alt=""
                     />
                   </Link>
                   <Link href="/">
                     <img
-                      className="hidden lg:block h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                      alt="Workflow"
+                      className="hidden lg:block h-10 w-auto cursor-pointer"
+                      src="/thelab-logo.png"
+                      alt=""
                     />
                   </Link>
                 </div>
-                <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
+                <div className="hidden sm:block sm:ml-6 relative">
+                  <NavCategory categories={categories} />
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
