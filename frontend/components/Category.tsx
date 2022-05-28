@@ -16,11 +16,11 @@ export default function Category() {
     { id: "8", name: "Passport", src: "/Passport.svg" },
   ]
   return (
-    <div className="flex flex-wrap justify-around lg:mt-10 px-32">
+    <div className="flex flex-wrap justify-around px-2 lg:px-32 mt-10 ">
       {categories.map((category) => (
         <React.Fragment key={category.id}>
-          <div className="hidden sm:inline-block flex-none w-52 group cursor-pointer mb-5 lg:inline-block w-80 flex-none group cursor-pointer mb-5">
-            <div className="h-24 w-24 lg:w-64 h-64 ">
+          <div className="hidden sm:inline-block w-52 flex-none group cursor-pointer mb-5 lg:inline-block w-80 flex-none group cursor-pointer mb-5">
+            <div className="w-44 h-44 lg:h-64 lg:w-64">
               <img
                 src={category.src}
                 className="object-cover border rounded-md h-full w-full mix-blend-multiply lg:transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
