@@ -3,6 +3,7 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline"
 import { Fragment } from "react"
 import Link from "next/link"
 import NavCategory from "./NavCategory"
+import SearchBar from "./SearchBar"
 // import Image from "next/image"
 
 export default function NavBar() {
@@ -47,10 +48,13 @@ export default function NavBar() {
                       alt=""
                     />
                   </Link>
+                  <div className="hidden sm:block sm:ml-6 relative">
+                    <NavCategory categories={categories} />
+                  </div>
                 </div>
-                <div className="hidden sm:block sm:ml-6 relative">
-                  <NavCategory categories={categories} />
-                </div>
+              </div>
+              <div className="flex-shrink items-center hidden md:justify-start md:flex md:w-2/5 lg:w-3/5 px-2">
+                <SearchBar />
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
