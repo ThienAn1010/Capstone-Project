@@ -2,7 +2,7 @@ export default function SearchBar() {
   return (
     <div>
       <form>
-        <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">
+        <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-900">
           Search
         </label>
         <div className="relative">
@@ -25,7 +25,7 @@ export default function SearchBar() {
           <input
             type="search"
             id="default-search"
-            className=" p-4 pl-10 w-64 text-sm rounded-full text-gray-900 bg-white border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className=" p-4 pl-10 w-64 text-sm rounded-full text-gray-900 bg-white border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search for anything"
           />
           {/* <button
