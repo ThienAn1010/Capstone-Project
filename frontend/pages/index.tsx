@@ -1,20 +1,21 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import useGetMe from "../hooks/useGetMe";
-import axiosInstance from "../util/axiosInstace";
-import Image from "next/image";
+import type { NextPage } from "next"
+import Head from "next/head"
+import Link from "next/link"
+import useGetMe from "../hooks/useGetMe"
+import axiosInstance from "../util/axiosInstace"
+import Image from "next/image"
+import Category from "../components/Category"
 
 const Home: NextPage = () => {
-  const { data, isLoading, mutate } = useGetMe();
+  const { data, isLoading, mutate } = useGetMe()
   const handleLogout = () => {
     mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
       optimisticData: undefined,
-    });
-  };
-  console.log(data);
+    })
+  }
+  console.log(data)
   const displayContent = () => {
-    if (isLoading) return "Loading...";
+    if (isLoading) return "Loading..."
     if (!data)
       return (
         <Link href="/login">
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
             Login to proceed
           </a>
         </Link>
-      );
+      )
     if (data)
       return (
         <div className="flex flex-col items-center">
@@ -46,8 +47,8 @@ const Home: NextPage = () => {
             Logout
           </button>
         </div>
-      );
-  };
+      )
+  }
 
   return (
     <>
@@ -58,10 +59,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="mx-auto container">
+        <Category />
         <nav className="mt-2 text-center">{displayContent()}</nav>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
