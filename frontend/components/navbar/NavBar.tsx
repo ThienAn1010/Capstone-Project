@@ -4,6 +4,9 @@ import { Fragment } from "react"
 import Link from "next/link"
 import NavCategory from "./NavCategory"
 import SearchBar from "./SearchBar"
+import useGetMe from "../../hooks/useGetMe"
+import axiosInstance from "../../util/axiosInstace"
+import Image from "next/image"
 // import Image from "next/image"
 
 export default function NavBar() {
@@ -15,6 +18,43 @@ export default function NavBar() {
 
   let categories = ["Marriage Certificate", "Work Permit"]
 
+  const { data, isLoading, mutate } = useGetMe()
+  const handleLogout = () => {
+    mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
+      optimisticData: undefined,
+    })
+  }
+  const displayContent = () => {
+    if (isLoading) return "Loading..."
+    if (!data)
+      return (
+        //<a className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
+
+        <Link href="/login">
+          <a className="text-white items-center bg-blue-500 py-3 px-6 mr-5 rounded-sm ">
+            Login
+          </a>
+        </Link>
+      )
+    if (data)
+      return (
+        <div className="flex flex-col items-center">
+          <button
+            className="text-white bg-blue-500 px-4 py-2 rounded-sm mt-2"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+          <button
+            type="button"
+            className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+          >
+            <span className="sr-only">View notifications</span>
+            <BellIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+      )
+  }
   return (
     <Disclosure as="nav" className="bg-white shadow-md">
       {({ open }) => (
@@ -32,7 +72,7 @@ export default function NavBar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+              <div className=" flex inline-flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <Link href="/">
                     <img
@@ -57,13 +97,9 @@ export default function NavBar() {
                 <SearchBar />
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <div className="mt-2 text-center hidden sm:block sm:ml-6 relative ">
+                  {displayContent()}
+                </div>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">

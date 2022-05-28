@@ -56,7 +56,7 @@ const Home: NextPage = () => {
       </Head>
       <NavBar />
       <main className="mx-auto container">
-        <nav className="mt-2 text-center">{displayContent()}</nav>
+        {/* <nav className="mt-2 text-center">{displayContent()}</nav> */}
       </main>
     </>
   )
