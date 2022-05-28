@@ -14,6 +14,20 @@ export class AuthController {
     private readonly configService: ConfigService,
   ) {}
 
+  private async redirect(
+    response: Response,
+    accessToken: string,
+    expires: Date,
+  ) {
+    response.cookie('accessToken', accessToken, {
+      secure:
+        this.configService.get('NODE_ENV') === 'production' ? true : false,
+      httpOnly: true,
+      expires,
+    });
+    response.redirect('http://localhost:3000');
+  }
+
   @Get('/google')
   getGoogleOAuth2Link(@Res({ passthrough: true }) response: Response) {
     response.redirect(this.googleService.getLink());
@@ -25,13 +39,11 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const accessToken = await this.authService.loginWithGoogle(code);
-    console.log(accessToken);
-    response.cookie('accessToken', accessToken, {
-      secure:
-        this.configService.get('NODE_ENV') === 'production' ? true : false,
-      httpOnly: true,
-    });
-    response.redirect('http://localhost:3000');
+    return this.redirect(
+      response,
+      accessToken,
+      new Date(Date.now() + 1000 * 60 * 60 * 24),
+    );
   }
 
   @Get('/facebook')
@@ -45,13 +57,11 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const accessToken = await this.authService.loginWithFacebook(code);
-    console.log(accessToken);
-    response.cookie('accessToken', accessToken, {
-      secure:
-        this.configService.get('NODE_ENV') === 'production' ? true : false,
-      httpOnly: true,
-    });
-    response.redirect('http://localhost:3000');
+    return this.redirect(
+      response,
+      accessToken,
+      new Date(Date.now() + 1000 * 60 * 60 * 24),
+    );
   }
 
   @Post('/logout')
