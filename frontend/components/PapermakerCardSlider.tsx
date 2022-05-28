@@ -1,6 +1,65 @@
 import Carousel from "react-grid-carousel"
+import Card from "./Card"
 
 export default function RoomCardsSlider() {
+  let ppmkers = [
+    {
+      id: "1",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+    {
+      id: "2",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+    {
+      id: "3",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+    {
+      id: "4",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+    {
+      id: "5",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+    {
+      id: "6",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+    {
+      id: "7",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+    {
+      id: "8",
+      name: "Thien An",
+      type: "Passport",
+      price: "$19.99",
+      location: "D1, HCMC",
+    },
+  ]
   return (
     <Carousel
       cols={5}
@@ -35,11 +94,11 @@ export default function RoomCardsSlider() {
         },
       ]}
     >
-      {/* {data.data.rooms.map((room) => (
-        <Carousel.Item key={room._id}>
-          <Card key={room._id} props={room} />
+      {ppmkers.map((ppmaker) => (
+        <Carousel.Item key={ppmaker.id}>
+          <Card key={ppmaker.id} ppmker={ppmaker} />
         </Carousel.Item>
-      ))} */}
+      ))}
     </Carousel>
   )
 }

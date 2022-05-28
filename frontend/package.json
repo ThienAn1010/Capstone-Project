@@ -11,6 +11,8 @@
     "pre-commit": "npm run lint -- --fix && git add -A ."
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^0.27.2",
     "next": "12.1.6",
     "react": "18.1.0",

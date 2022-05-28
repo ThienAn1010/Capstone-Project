@@ -1,28 +1,32 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import useGetMe from "../hooks/useGetMe";
-import axiosInstance from "../util/axiosInstace";
-import Image from "next/image";
+import type { NextPage } from "next"
+import Head from "next/head"
+// import Link from "next/link"
+import useGetMe from "../hooks/useGetMe"
+import axiosInstance from "../util/axiosInstace"
+import Image from "next/image"
+import PapermakerCardSlider from "../components/PapermakerCardSlider"
 
 const Home: NextPage = () => {
-  const { data, isLoading, mutate } = useGetMe();
+  const { data, isLoading, mutate } = useGetMe()
   const handleLogout = () => {
     mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
       optimisticData: undefined,
-    });
-  };
-  console.log(data);
+    })
+  }
+  console.log(data)
   const displayContent = () => {
-    if (isLoading) return "Loading...";
+    if (isLoading) return "Loading..."
     if (!data)
       return (
-        <Link href="/login">
-          <a className="text-white bg-blue-500 px-4 py-2 rounded-sm ">
-            Login to proceed
-          </a>
-        </Link>
-      );
+        <div>
+          <PapermakerCardSlider />
+          {/* <Link href="/login">
+            <a className="text-white bg-blue-500 px-4 py-2 rounded-sm ">
+              Login to proceed
+            </a>
+          </Link> */}
+        </div>
+      )
     if (data)
       return (
         <div className="flex flex-col items-center">
@@ -46,8 +50,8 @@ const Home: NextPage = () => {
             Logout
           </button>
         </div>
-      );
-  };
+      )
+  }
 
   return (
     <>
@@ -61,7 +65,7 @@ const Home: NextPage = () => {
         <nav className="mt-2 text-center">{displayContent()}</nav>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
