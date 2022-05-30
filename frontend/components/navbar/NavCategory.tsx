@@ -7,7 +7,7 @@ export default function NavCategory({ categories }: { categories: string[] }) {
     <div>
       <Menu as="div" className="relative inline-block text-left mr-3">
         <div>
-          <Menu.Button className="inline-flex justify-center items-center w-full px-4 py-2 text-base font-medium text-gray-800">
+          <Menu.Button className="inline-flex justify-center items-center w-full px-4 py-2 text-base font-medium text-white">
             Categories
             <ChevronDownIcon
               className="w-5 h-5 ml-2 -mr-1 text-black-200 hover:text-black-100"

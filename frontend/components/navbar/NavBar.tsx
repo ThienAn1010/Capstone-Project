@@ -6,8 +6,6 @@ import NavCategory from "./NavCategory"
 import SearchBar from "./SearchBar"
 import useGetMe from "../../hooks/useGetMe"
 import axiosInstance from "../../util/axiosInstace"
-import Image from "next/image"
-// import Image from "next/image"
 
 export default function NavBar() {
   const navigation = [{ name: "Categories", href: "#", current: false }]
@@ -28,7 +26,7 @@ export default function NavBar() {
     if (isLoading) return "Loading..."
     if (!data)
       return (
-        //<a className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
+        // <a className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
 
         <Link href="/login">
           <a className="text-white items-center bg-blue-500 py-3 px-6 mr-5 rounded-sm ">
@@ -104,7 +102,7 @@ export default function NavBar() {
                   {({ active }) => (
                     <a
                       onClick={handleLogout}
-                      //href="#"
+                      // href="#"
                       className={classNames(
                         active ? "bg-gray-100" : "",
                         "block px-4 py-2 text-sm text-gray-700"
@@ -112,7 +110,6 @@ export default function NavBar() {
                     >
                       Sign out
                     </a>
-                    
                   )}
                 </Menu.Item>
               </Menu.Items>
@@ -142,15 +139,15 @@ export default function NavBar() {
                 <div className="flex-shrink-0 flex items-center">
                   <Link href="/">
                     <img
-                      className="block lg:hidden h-10 w-auto cursor-pointer"
-                      src="/Paperworks.svg"
+                      className="block lg:hidden h-32 w-auto cursor-pointer"
+                      src="/paperwork.svg"
                       alt=""
                     />
                   </Link>
                   <Link href="/">
                     <img
-                      className="hidden lg:block h-20 w-auto cursor-pointer"
-                      src="/Paperworks.svg"
+                      className="hidden lg:block h-36 w-auto cursor-pointer"
+                      src="/paperwork.svg"
                       alt=""
                     />
                   </Link>
