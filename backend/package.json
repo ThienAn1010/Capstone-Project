@@ -27,6 +27,7 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^3.14.0",
+    "axios": "^0.27.2",
     "cookie-parser": "^1.4.6",
     "google-auth-library": "^8.0.2",
     "jsonwebtoken": "^8.5.1",

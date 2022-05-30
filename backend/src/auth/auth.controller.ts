@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Query, Res } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
+import { FacebookService } from 'src/facebook/facebook.service';
 import { GoogleService } from 'src/google/google.service';
 import { AuthService } from './auth.service';
 
@@ -9,8 +10,23 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly googleService: GoogleService,
+    private readonly facebookService: FacebookService,
     private readonly configService: ConfigService,
   ) {}
+
+  private async redirect(
+    response: Response,
+    accessToken: string,
+    expires: Date,
+  ) {
+    response.cookie('accessToken', accessToken, {
+      secure:
+        this.configService.get('NODE_ENV') === 'production' ? true : false,
+      httpOnly: true,
+      expires,
+    });
+    response.redirect('http://localhost:3000');
+  }
 
   @Get('/google')
   getGoogleOAuth2Link(@Res({ passthrough: true }) response: Response) {
@@ -23,13 +39,29 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const accessToken = await this.authService.loginWithGoogle(code);
-    console.log(accessToken);
-    response.cookie('accessToken', accessToken, {
-      secure:
-        this.configService.get('NODE_ENV') === 'production' ? true : false,
-      httpOnly: true,
-    });
-    response.redirect('http://localhost:3000');
+    return this.redirect(
+      response,
+      accessToken,
+      new Date(Date.now() + 1000 * 60 * 60 * 24),
+    );
+  }
+
+  @Get('/facebook')
+  getFacebookOAuth2Link(@Res({ passthrough: true }) response: Response) {
+    response.redirect(this.facebookService.getLink());
+  }
+
+  @Get('/facebook/callback')
+  async handleFacebookRedirect(
+    @Query('code') code: string,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const accessToken = await this.authService.loginWithFacebook(code);
+    return this.redirect(
+      response,
+      accessToken,
+      new Date(Date.now() + 1000 * 60 * 60 * 24),
+    );
   }
 
   @Post('/logout')

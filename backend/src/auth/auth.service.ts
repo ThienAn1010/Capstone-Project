@@ -4,11 +4,14 @@ import { GoogleService } from 'src/google/google.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
+import { FacebookService, UserDataFB } from 'src/facebook/facebook.service';
+
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly googleService: GoogleService,
+    private readonly facebookService: FacebookService,
     private readonly configService: ConfigService,
   ) {}
   private async checkGoogleCode(code: string) {
@@ -23,7 +26,17 @@ export class AuthService {
       throw new BadRequestException();
     }
   }
-  private async upsertUserToDb(user: TokenPayload) {
+  private async checkFacebookCode(code: string) {
+    try {
+      const request = await this.facebookService.getToken(code);
+      const token = request.data.access_token;
+      const extractUserData = await this.facebookService.getUserData(token);
+      return extractUserData.data;
+    } catch (error) {
+      throw new BadRequestException();
+    }
+  }
+  private async upsertUserToDb(user: TokenPayload | UserDataFB) {
     const findUserInDb = await this.prismaService.user.findFirst({
       where: { username: { equals: user.email } },
     });
@@ -33,10 +46,10 @@ export class AuthService {
         username: user.email,
         name: user.name,
         role: 'paperRequester',
-        picture: user.picture,
+        picture: 'id' in user ? user.picture.data.url : user.picture,
         authProvider: {
           create: {
-            providerKey: user.sub,
+            providerKey: 'id' in user ? user.id : user.sub,
           },
         },
         paperRequester: {
@@ -68,6 +81,11 @@ export class AuthService {
     if (typeof accessToken === 'string') return accessToken;
     else throw new BadRequestException();
   }
-
-  async logout() {}
+  async loginWithFacebook(code: string) {
+    const token = await this.checkFacebookCode(code);
+    const user = await this.upsertUserToDb(token);
+    const accessToken = await this.createToken(user.id);
+    if (typeof accessToken === 'string') return accessToken;
+    else throw new BadRequestException();
+  }
 }

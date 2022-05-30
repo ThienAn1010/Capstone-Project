@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -35,8 +39,12 @@ export class UsersService {
           picture: true,
         },
       });
+      if (!user) {
+        throw new NotFoundException();
+      }
       return user;
     } catch (error) {
+      if (error instanceof NotFoundException) return;
       throw new BadRequestException();
     }
   }
