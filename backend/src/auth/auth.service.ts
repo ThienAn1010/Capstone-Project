@@ -38,7 +38,9 @@ export class AuthService {
   }
   private async upsertUserToDb(user: TokenPayload | UserDataFB) {
     const findUserInDb = await this.prismaService.user.findFirst({
-      where: { username: { equals: user.email } },
+      where: {
+        authProvider: { providerKey: 'id' in user ? user.id : user.sub },
+      },
     });
     if (findUserInDb) return findUserInDb;
     const savedUserInDb = await this.prismaService.user.create({

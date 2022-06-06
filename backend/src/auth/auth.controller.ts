@@ -14,65 +14,61 @@ export class AuthController {
     private readonly configService: ConfigService,
   ) {}
 
-  private async redirect(
-    response: Response,
-    accessToken: string,
-    expires: Date,
-  ) {
-    response.cookie('accessToken', accessToken, {
+  private async redirect(res: Response, accessToken: string, expires: Date) {
+    res.cookie('accessToken', accessToken, {
       secure:
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires,
     });
-    response.redirect('http://localhost:3000');
+    res.redirect('http://localhost:3000');
   }
 
   @Get('/google')
-  getGoogleOAuth2Link(@Res({ passthrough: true }) response: Response) {
-    response.redirect(this.googleService.getLink());
+  getGoogleOAuth2Link(@Res({ passthrough: true }) res: Response) {
+    res.redirect(this.googleService.getLink());
   }
 
   @Get('/google/callback')
   async handleGoogleRedirect(
     @Query('code') code: string,
-    @Res({ passthrough: true }) response: Response,
+    @Res({ passthrough: true }) res: Response,
   ) {
     const accessToken = await this.authService.loginWithGoogle(code);
     return this.redirect(
-      response,
+      res,
       accessToken,
       new Date(Date.now() + 1000 * 60 * 60 * 24),
     );
   }
 
   @Get('/facebook')
-  getFacebookOAuth2Link(@Res({ passthrough: true }) response: Response) {
-    response.redirect(this.facebookService.getLink());
+  getFacebookOAuth2Link(@Res({ passthrough: true }) res: Response) {
+    res.redirect(this.facebookService.getLink());
   }
 
   @Get('/facebook/callback')
   async handleFacebookRedirect(
     @Query('code') code: string,
-    @Res({ passthrough: true }) response: Response,
+    @Res({ passthrough: true }) res: Response,
   ) {
     const accessToken = await this.authService.loginWithFacebook(code);
     return this.redirect(
-      response,
+      res,
       accessToken,
       new Date(Date.now() + 1000 * 60 * 60 * 24),
     );
   }
 
   @Post('/logout')
-  async logout(@Res({ passthrough: true }) response: Response) {
+  async logout(@Res({ passthrough: true }) res: Response) {
     const expireCookie = Date.now() - 1000 * 10;
-    response.cookie('accessToken', null, {
+    res.cookie('accessToken', null, {
       secure:
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires: new Date(expireCookie),
     });
-    response.send({});
+    res.json({});
   }
 }
