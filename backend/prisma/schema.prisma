@@ -44,14 +44,13 @@ model PaperRequester {
 model PaperMaker {
   id                  String               @id @default(cuid())
   userId              String               @unique
-  addresslat          Float
-  addresslon          Float
-  totalCases          Int
-  pastSuccessfulCases Int
-  rating              Float
-  status              PaperRequesterStatus
-  avatar              String
-  isConfirmed         Boolean
+  lat                 Float
+  long                Float
+  totalCases          Int                  @default(0)
+  pastSuccessfulCases Int                  @default(0)
+  rating              Float                @default(0)
+  status              PaperRequesterStatus @default(available)
+  isConfirmed         Boolean              @default(false)
   user                User                 @relation(fields: [userId], references: [id])
   offeredService      OfferedService[]
 }
@@ -69,6 +68,7 @@ model OfferedService {
   serviceId    String
   price        Float
   duration     Int
+  createdAt    DateTime   @default(now())
   paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
   service      Service    @relation(fields: [serviceId], references: [id])
   booking      Booking[]
@@ -85,6 +85,7 @@ model Booking {
 }
 
 model Deal {
+  id          String  @id @default(cuid())
   bookingId   String  @unique
   actualPrice Float
   payAmount   Float
