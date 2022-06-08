@@ -9,23 +9,23 @@ datasource db {
 
 model AuthProvider {
   id          String @id @default(cuid())
-  userId      String @unique
   providerKey String @unique
+  userId      String @unique
   user        User   @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id             String          @id @default(cuid())
-  username       String          @unique
-  password       String?
-  name           String
-  picture        String
-  createdAt      DateTime        @default(now())
-  role           Role            @default(paperRequester)
-  authProvider   AuthProvider?
-  operator       Operator?
-  paperMaker     PaperMaker?
-  paperRequester PaperRequester?
+  id           String        @id @default(cuid())
+  username     String
+  password     String?
+  name         String
+  picture      String
+  createdAt    DateTime      @default(now())
+  role         Role          @default(user)
+  operator     Operator?
+  paperMaker   PaperMaker?
+  authProvider AuthProvider?
+  bookings     Booking[]
 }
 
 model Operator {
@@ -34,32 +34,26 @@ model Operator {
   user   User   @relation(fields: [userId], references: [id])
 }
 
-model PaperRequester {
-  id      String    @id @default(cuid())
-  userId  String    @unique
-  user    User      @relation(fields: [userId], references: [id])
-  booking Booking[]
-}
-
 model PaperMaker {
-  id                  String               @id @default(cuid())
-  userId              String               @unique
+  id                  String           @id @default(cuid())
+  userId              String           @unique
+  user                User             @relation(fields: [userId], references: [id])
+  address             String
   lat                 Float
   long                Float
-  totalCases          Int                  @default(0)
-  pastSuccessfulCases Int                  @default(0)
-  rating              Float                @default(0)
-  status              PaperRequesterStatus @default(available)
-  isConfirmed         Boolean              @default(false)
-  user                User                 @relation(fields: [userId], references: [id])
-  offeredService      OfferedService[]
+  totalCases          Int              @default(0)
+  pastSuccessfulCases Int              @default(0)
+  rating              Float            @default(0)
+  status              PaperMakerStatus @default(available)
+  isConfirmed         Boolean          @default(false)
+  offeredServices     OfferedService[]
 }
 
 model Service {
-  id             String           @id @default(cuid())
-  name           String
-  description    String
-  offeredService OfferedService[]
+  id              String           @id @default(cuid())
+  name            String           @unique
+  description     String
+  offeredServices OfferedService[]
 }
 
 model OfferedService {
@@ -71,16 +65,16 @@ model OfferedService {
   createdAt    DateTime   @default(now())
   paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
   service      Service    @relation(fields: [serviceId], references: [id])
-  booking      Booking[]
+  bookings     Booking[]
 }
 
 model Booking {
   id               String         @id @default(cuid())
-  paperRequesterId String
   offeredServiceId String
-  note             String
   offeredService   OfferedService @relation(fields: [offeredServiceId], references: [id])
-  paperRequester   PaperRequester @relation(fields: [paperRequesterId], references: [id])
+  userId           String
+  user             User           @relation(fields: [userId], references: [id])
+  note             String
   transaction      Deal?
 }
 
@@ -95,11 +89,11 @@ model Deal {
 
 enum Role {
   operator
-  paperRequester
   paperMaker
+  user
 }
 
-enum PaperRequesterStatus {
+enum PaperMakerStatus {
   available
   busy
 }
@@ -107,4 +101,5 @@ enum PaperRequesterStatus {
 enum BookingStatus {
   accept
   deny
+  pending
 }
