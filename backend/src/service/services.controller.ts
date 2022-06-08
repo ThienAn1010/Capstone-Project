@@ -1,7 +1,9 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
+  Param,
   Patch,
   Post,
   Query,
@@ -10,6 +12,8 @@ import {
 import { User } from 'src/decorator/user.decorator';
 import { AuthGuard } from 'src/guard/auth.guard';
 import { RoleGuard } from 'src/guard/role.guard';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 import { ServicesService } from './services.service';
 
 @Controller('/services')
@@ -23,21 +27,38 @@ export class ServicesController {
   @UseGuards(RoleGuard('paperMaker'))
   @UseGuards(AuthGuard)
   @Post('')
-  async createSerive(@User() user) {
-    return user;
+  async createSerive(@User() user, @Body() createServiceDto: CreateServiceDto) {
+    return this.servicesService.createService({
+      ...createServiceDto,
+      userId: user.id,
+    });
   }
 
   @UseGuards(RoleGuard('paperMaker'))
   @UseGuards(AuthGuard)
-  @Patch('')
-  async updateSerive(@User() user) {
-    return user;
+  @Patch('/:serviceId')
+  async updateSerive(
+    @User() user,
+    @Param('serviceId') offeredServiceId: string,
+    @Body() updateServiceDto: UpdateServiceDto,
+  ) {
+    return this.servicesService.updateService({
+      ...updateServiceDto,
+      userId: user.id,
+      offeredServiceId,
+    });
   }
 
   @UseGuards(RoleGuard('paperMaker'))
   @UseGuards(AuthGuard)
-  @Delete('')
-  async deleteSerive(@User() user) {
-    return user;
+  @Delete('/:serviceId')
+  async deleteSerive(
+    @User() user,
+    @Param('serviceId') offeredServiceId: string,
+  ) {
+    return this.servicesService.deleteService({
+      offeredServiceId,
+      userId: user.id,
+    });
   }
 }

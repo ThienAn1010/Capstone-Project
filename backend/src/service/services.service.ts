@@ -1,5 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Injectable()
 export class ServicesService {
@@ -95,7 +97,108 @@ export class ServicesService {
       return { status: 'success', length: services.length, data: services };
     } catch (error) {
       console.log(error);
-      throw new BadRequestException();
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Invalid request',
+      });
     }
+  }
+
+  async createService(service: CreateServiceDto) {
+    const { duration, serviceId, price, userId } = service;
+    const paperMaker = await this.prismaService.paperMaker.findFirst({
+      where: {
+        userId: userId,
+      },
+      include: {
+        offeredServices: true,
+      },
+    });
+    if (paperMaker.offeredServices.length > 0) {
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'PaperMaker can only have one service',
+      });
+    }
+    const offeredService = await this.prismaService.offeredService.create({
+      data: {
+        duration,
+        price,
+        serviceId,
+        paperMakerId: paperMaker.id,
+      },
+      include: {
+        service: true,
+        paperMaker: true,
+      },
+    });
+    return offeredService;
+  }
+
+  private async findServiceByUserId(offeredServiceId: string, userId: string) {
+    const offeredService = await this.prismaService.offeredService.findFirst({
+      where: {
+        id: offeredServiceId,
+        paperMaker: {
+          userId: userId,
+        },
+      },
+    });
+    return offeredService;
+  }
+
+  async updateService(updateServiceDto: UpdateServiceDto) {
+    const offeredService = await this.findServiceByUserId(
+      updateServiceDto.offeredServiceId,
+      updateServiceDto.userId,
+    );
+    if (!offeredService) {
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Not an author or invalid offered service provided',
+      });
+    }
+    const updatedField = {} as any;
+    if (updateServiceDto.price) {
+      updatedField.price = updateServiceDto.price;
+    }
+    if (updateServiceDto.duration) {
+      updatedField.duration = updateServiceDto.duration;
+    }
+    const updateOfferedService = await this.prismaService.offeredService.update(
+      {
+        where: {
+          id: updateServiceDto.offeredServiceId,
+        },
+        data: updatedField,
+        include: {
+          paperMaker: true,
+          service: true,
+        },
+      },
+    );
+    return updateOfferedService;
+  }
+
+  async deleteService(deleteService: {
+    userId: string;
+    offeredServiceId: string;
+  }) {
+    const offeredService = await this.findServiceByUserId(
+      deleteService.offeredServiceId,
+      deleteService.userId,
+    );
+    if (!offeredService) {
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Not an author or invalid offered service provided',
+      });
+    }
+    await this.prismaService.offeredService.delete({
+      where: {
+        id: deleteService.offeredServiceId,
+      },
+    });
+    return { status: 'success' };
   }
 }
