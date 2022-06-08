@@ -1,10 +1,16 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { TokenPayload } from 'google-auth-library';
 import { GoogleService } from 'src/google/google.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { FacebookService, UserDataFB } from 'src/facebook/facebook.service';
+import * as bcrypt from 'bcrypt';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -47,15 +53,11 @@ export class AuthService {
       data: {
         username: user.email,
         name: user.name,
-        role: 'paperRequester',
         picture: 'id' in user ? user.picture.data.url : user.picture,
         authProvider: {
           create: {
             providerKey: 'id' in user ? user.id : user.sub,
           },
-        },
-        paperRequester: {
-          create: {},
         },
       },
     });
@@ -89,5 +91,21 @@ export class AuthService {
     const accessToken = await this.createToken(user.id);
     if (typeof accessToken === 'string') return accessToken;
     else throw new BadRequestException();
+  }
+
+  async login(login: LoginDto) {
+    const { username, password } = login;
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        username,
+      },
+    });
+    if (!user) throw new NotFoundException();
+    const isCorrect = await bcrypt.compare(password, user.password);
+    if (isCorrect) {
+      const accessToken = await this.createToken(user.id);
+      return accessToken;
+    }
+    throw new BadRequestException();
   }
 }

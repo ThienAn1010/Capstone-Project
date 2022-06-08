@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { FacebookService } from 'src/facebook/facebook.service';
 import { GoogleService } from 'src/google/google.service';
 import { AuthService } from './auth.service';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('/auth')
 export class AuthController {
@@ -14,14 +15,19 @@ export class AuthController {
     private readonly configService: ConfigService,
   ) {}
 
-  private async redirect(res: Response, accessToken: string, expires: Date) {
+  private async redirect(
+    res: Response,
+    accessToken: string,
+    expires: Date,
+    url?: string,
+  ) {
     res.cookie('accessToken', accessToken, {
       secure:
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires,
     });
-    res.redirect('http://localhost:3000');
+    res.redirect(`${this.configService.get('CLIENT_URL')}/${url ? url : ''}`);
   }
 
   @Get('/google')
@@ -34,12 +40,14 @@ export class AuthController {
     @Query('code') code: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken = await this.authService.loginWithGoogle(code);
-    return this.redirect(
-      res,
-      accessToken,
-      new Date(Date.now() + 1000 * 60 * 60 * 24),
-    );
+    try {
+      const accessToken = await this.authService.loginWithGoogle(code);
+      return this.redirect(
+        res,
+        accessToken,
+        new Date(Date.now() + 1000 * 60 * 60 * 24),
+      );
+    } catch (error) {}
   }
 
   @Get('/facebook')
@@ -70,5 +78,20 @@ export class AuthController {
       expires: new Date(expireCookie),
     });
     res.json({});
+  }
+
+  @Post('/login')
+  async login(
+    @Body() login: LoginDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const accessToken = await this.authService.login(login);
+    res.cookie('accessToken', accessToken, {
+      secure:
+        this.configService.get('NODE_ENV') === 'production' ? true : false,
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    });
+    return { accessToken: accessToken };
   }
 }
