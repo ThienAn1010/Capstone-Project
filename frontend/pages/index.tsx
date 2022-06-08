@@ -5,7 +5,7 @@ import Head from "next/head"
 // import useGetMe from "../hooks/useGetMe"
 // import axiosInstance from "../util/axiosInstace"
 // import Image from "next/image"
-import TestNav from "../components/navbar/TestNav"
+import NavBarNoLog from "../components/navbar/NavBarNoLog"
 
 const Home: NextPage = () => {
   // const { data, isLoading, mutate } = useGetMe()
@@ -55,8 +55,8 @@ const Home: NextPage = () => {
         <title>Homepage</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      {/* <NavBar /> */}
-      <TestNav />
+
+      <NavBarNoLog />
       <main className="mx-auto container">
         {/* <nav className="mt-2 text-center">{displayContent()}</nav> */}
       </main>
