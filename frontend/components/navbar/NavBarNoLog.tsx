@@ -25,7 +25,7 @@ export default function NavBarNoLog() {
         {({ open }) => (
           <>
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
+              <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-6">
                 <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
                   <div className="flex-shrink-0 flex items-center">
                     <a href="#">
@@ -37,7 +37,7 @@ export default function NavBarNoLog() {
                     </a>
                   </div>
                 </div>
-                <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
+                <div className="hidden lg:flex lg:items-center lg:justify-start xl:col-span-1">
                   <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
                     CATEGORIES
                   </p>
@@ -50,9 +50,15 @@ export default function NavBarNoLog() {
                   <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open menu</span>
                     {open ? (
-                      <XIcon className="block h-6 w-6" aria-hidden="true" />
+                      <XIcon
+                        className="block h-6 w-6 text-white"
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                      <MenuIcon
+                        className="block h-6 w-6 text-white"
+                        aria-hidden="true"
+                      />
                     )}
                   </Popover.Button>
                 </div>
@@ -225,9 +231,112 @@ export default function NavBarNoLog() {
                 </div>
               </div>
             </div>
-            <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
-              <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4"></div>
-              <div className="border-t border-gray-200 pt-4 pb-3"></div>
+            <Popover.Panel
+              as="nav"
+              className="bg-white rounded-xl lg:hidden"
+              aria-label="Global"
+            >
+              <div className="max-w-3xl mx-auto px-2 py-4 space-y-1 sm:px-4">
+                <div className="flex justify-center space-x-2 items-center hover:cursor-pointer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <a href="#" className="block text-xl font-semibold">
+                    Sign In
+                  </a>
+                </div>
+              </div>
+              <div className="border-t-4 border-gray-300">
+                <div className="flex justify-center space-x-2 items-center py-4 hover:cursor-pointer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                  <p className="text-lg font-medium">Categories</p>
+                </div>
+                <div className="border-t-4 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <p className="text-lg font-medium">Become a papermaker</p>
+                </div>
+              </div>
+              <div className="border-t-4 border-gray-300">
+                <div className="flex justify-center space-x-2 items-center py-4 hover:cursor-pointer">
+                  <svg
+                    fill="currentColor"
+                    className="h-8 w-8"
+                    stroke="unset"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 50 50"
+                  >
+                    <defs>
+                      <rect
+                        x="6"
+                        y="13"
+                        width="36.7659574"
+                        height="21.7358491"
+                        id="rect-1"
+                      ></rect>
+                    </defs>
+                    <g
+                      id="icons/icon-menu/icon-lang-vn"
+                      stroke="none"
+                      strokeWidth="1"
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <g id="Bitmap">
+                        <image
+                          x="6"
+                          y="13"
+                          width="36.7659574"
+                          height="21.7358491"
+                          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAeCAYAAAC8AUekAAAABGdBTUEAALGOfPtRkwAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAL6ADAAQAAAABAAAAHgAAAAB0FVfBAAADG0lEQVRYCe2WyWsUQRTGv1e9JDPZo+QQjBtGwXjwpKigd/Gs/6FXwYN/gBEvohLwEiTEuKBZNPtkpru6y6+6Z5h2SCTTCyGQgp7qqXpd9Xtfvfe6ZffZXYNT2tQp5U6wz+BP6vSqU95mUsXZ5FaiGiWRUa4s5N9mH1eyC8pXnmrLgMCZ43XL3nOgohOoRvkBwLk9CHGA6FMTaFRDXwm81AVqtk4PqPxQC2azGvhyw4aMUjNQV9mP+5ARH841ScaqCJ388ExGm5D/XDYvhwXunAcoTvJSNz0Ix5LWa98eTif7/80VNuKTeZIys4fphoSwqsg0YW8METyFUdfrUFdCiB/CZKUSkgd8/I/AsM/TcsGbkGwzAu/hMGRqMC2FHSd8hsl5Kt8Re3IA/tMJAradtNB0wqw3oef3ode6zvfrQC54G7/xF0CPtOA9ciGzNbIqDrdBsjwOYacZ/ySjW7SIYT4fQH9sIV62C/WL3LXPB8/nzSrL4FYAsxbDfRCyNLK6jDGOOifQ3YNj/EPFzU6AaKEB/aaJeFHDNNNTyJr2c58bPjn6QKAXIpiNfZZDDffOMFVmkc8qb2nIaH42Eb3bg35Nxb/bsWLgdtlsCtn//TXun7yIvjGEqGa03Djy+fgrQ2WeNis0sbvy2aItv/KZnYUwMuJAzrWXOwRMTTI3RmmjCgR5Zk97Wwq8VVFNuVAXa2nIhEzLLZ1spca5hcdUnanRpoVItXoQ8v8tDs/4lnEDucBvgTqX249YiZoIX+6QysB7Mso3Lp0aclheqfwEa9ImvT3kdPp1ozg8o0BNs1BeJvy2RvR2B8Erfs9spVkb/9iF/7gF5/4Y5JKirUL0m3M0L9oKwxsLP8USyVAJn29Af6Cy9isyZU8+yoIXAZzlDbj3bOh40HGQJPqJw9tPhWgpQLzKa4XgBz0hYf3YM4jex4jXG3SMEcNqWuTl1HG6sPJ2oXiVhL94o3vAO7tw2DpllmhnY719Kp3pvH1xeAtioW1vwY5qdi46ajLfeLGXVHbP/4Fn7Uq8Lw++RKjjLnUGf1ylyrY71cr/BSy59FsLOQsYAAAAAElFTkSuQmCC"
+                        ></image>
+                        <use
+                          stroke="#FFFFFF"
+                          strokeWidth="0.5"
+                          href="#rect-1"
+                        ></use>
+                      </g>
+                    </g>
+                  </svg>
+                  <p className="text-lg font-medium">Tiếng Việt</p>
+                </div>
+              </div>
             </Popover.Panel>
           </>
         )}
