@@ -252,7 +252,7 @@ export default function NavBarNoLog() {
                       d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <a href="#" className="block text-xl font-semibold">
+                  <a href="#" className="block text-lg font-semibold">
                     Sign In
                   </a>
                 </div>
@@ -273,7 +273,7 @@ export default function NavBarNoLog() {
                       d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     />
                   </svg>
-                  <p className="text-lg font-medium">Categories</p>
+                  <p className="text-md font-medium">Categories</p>
                 </div>
                 <div className="border-t-4 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
                   <svg
@@ -290,7 +290,7 @@ export default function NavBarNoLog() {
                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                     />
                   </svg>
-                  <p className="text-lg font-medium">Become a papermaker</p>
+                  <p className="text-md font-medium">Become a papermaker</p>
                 </div>
               </div>
               <div className="border-t-4 border-gray-300">
@@ -334,7 +334,7 @@ export default function NavBarNoLog() {
                       </g>
                     </g>
                   </svg>
-                  <p className="text-lg font-medium">Tiếng Việt</p>
+                  <p className="text-md font-medium">Tiếng Việt</p>
                 </div>
               </div>
             </Popover.Panel>
