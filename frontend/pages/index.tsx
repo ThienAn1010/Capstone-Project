@@ -4,6 +4,7 @@ import Link from "next/link";
 import useGetMe from "../hooks/useGetMe";
 import axiosInstance from "../util/axiosInstace";
 import Image from "next/image";
+import CheckoutForm from "../components/CheckoutForm";
 
 const Home: NextPage = () => {
   const { data, isLoading, mutate } = useGetMe();
@@ -59,6 +60,7 @@ const Home: NextPage = () => {
 
       <main className="mx-auto container">
         <nav className="mt-2 text-center">{displayContent()}</nav>
+        <CheckoutForm />
       </main>
     </>
   );
