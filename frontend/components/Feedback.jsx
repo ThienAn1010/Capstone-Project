@@ -9,10 +9,10 @@ const Feedback = () => {
     totalCount: 1624,
     counts: [
       { rating: 5, count: 1019 },
-      { rating: 4, count: 162 },
+      { rating: 4, count: 362 },
       { rating: 3, count: 97 },
-      { rating: 2, count: 199 },
-      { rating: 1, count: 147 },
+      { rating: 2, count: 99 },
+      { rating: 1, count: 47 },
     ],
     featured: [
       {
