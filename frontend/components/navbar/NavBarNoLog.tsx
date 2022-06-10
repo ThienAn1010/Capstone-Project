@@ -44,7 +44,7 @@ export default function NavBarNoLog() {
                     </a>
                   </div>
                 </div>
-                <div className="hidden lg:flex lg:items-center lg:justify-start xl:col-span-1">
+                <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
                   <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
                     CATEGORIES
                   </p>
@@ -76,7 +76,7 @@ export default function NavBarNoLog() {
                     </p>
                   </div>
                   <div className="hidden space-x-2 pl-4 lg:flex lg:items-center lg:justify-end">
-                    <div className="items-center justify-center hover:cursor-pointer">
+                    {/* <div className="items-center justify-center hover:cursor-pointer">
                       <svg
                         fill="currentColor"
                         className="h-8 w-8"
@@ -116,7 +116,7 @@ export default function NavBarNoLog() {
                           </g>
                         </g>
                       </svg>
-                    </div>
+                    </div> */}
                     <Menu as="div" className="inline-flex items-center">
                       <div>
                         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
@@ -158,7 +158,7 @@ export default function NavBarNoLog() {
                                       fill="#fff"
                                     ></path>
                                   </svg>
-                                  <span className="font-medium text-md">
+                                  <span className="font-medium text-md hover:cursor-pointer">
                                     Facebook
                                   </span>
                                 </div>
@@ -189,7 +189,7 @@ export default function NavBarNoLog() {
                                       d="M 43.609375 20.082031 L 42 20.082031 L 42 20 L 24 20 L 24 28 L 35.304688 28 C 34.511719 30.238281 33.070313 32.164063 31.214844 33.570313 C 31.21875 33.570313 31.21875 33.570313 31.21875 33.570313 L 37.410156 38.808594 C 36.972656 39.203125 44 34 44 24 C 44 22.660156 43.863281 21.351563 43.609375 20.082031 Z "
                                     ></path>
                                   </svg>
-                                  <span className="font-medium text-md">
+                                  <span className="font-medium text-md hover:cursor-pointer">
                                     Google
                                   </span>
                                 </div>
@@ -240,7 +240,7 @@ export default function NavBarNoLog() {
             </div>
             <Popover.Panel
               as="nav"
-              className="bg-white rounded-xl lg:hidden"
+              className="bg-white lg:hidden"
               aria-label="Global"
             >
               <div className="max-w-3xl mx-auto px-2 py-4 space-y-1 sm:px-4">
