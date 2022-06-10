@@ -39,18 +39,18 @@ export default GoogleButton;
 
 // https://accounts.google.com/o/oauth2/v2/auth?client_id=346121408906-evbb0dn7ncjb37hcjjrtl687o8u0jq7u.apps.googleusercontent.com&redirect_uri=http://localhost:3000/login&response_type=id_token&scope=openid%20profile%20email&nonce=123
 
-// const getGoogleOAuthUrl = () => {
-//   const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
-//   const options = {
-//     client_id:
+// Const getGoogleOAuthUrl = () => {
+//   Const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+//   Const options = {
+//     Client_id:
 //       "346121408906-evbb0dn7ncjb37hcjjrtl687o8u0jq7u.apps.googleusercontent.com",
-//     redirect_uri: "http://localhost:8000/auth/google/callback",
-//     response_type: "code",
-//     scope: [
+//     Redirect_uri: "http://localhost:8000/auth/google/callback",
+//     Response_type: "code",
+//     Scope: [
 //       "https://www.googleapis.com/auth/userinfo.profile",
 //       "https://www.googleapis.com/auth/userinfo.email",
 //     ].join(" "),
 //   };
-//   const queryString = new URLSearchParams(options);
-//   return `${rootUrl}?${queryString.toString()}`;
+//   Const queryString = new URLSearchParams(options);
+//   Return `${rootUrl}?${queryString.toString()}`;
 // };
