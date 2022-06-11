@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from "next/link"
 
 const LoginButton = () => {
   return (
-    <Link href="http://localhost:8000/auth/google">
+    <Link href="http://localhost:8000/auth/facebook">
       <a className="px-5 py-3 bg-white shadow-md border w-full flex font-bold gap-x-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,7 @@ const LoginButton = () => {
         <span>Continue with Facebook</span>
       </a>
     </Link>
-  );
-};
+  )
+}
 
-export default LoginButton;
+export default LoginButton
