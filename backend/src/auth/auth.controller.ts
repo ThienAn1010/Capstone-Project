@@ -5,6 +5,7 @@ import { FacebookService } from 'src/facebook/facebook.service';
 import { GoogleService } from 'src/google/google.service';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
 
 @Controller('/auth')
 export class AuthController {
@@ -86,6 +87,21 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const accessToken = await this.authService.login(login);
+    res.cookie('accessToken', accessToken, {
+      secure:
+        this.configService.get('NODE_ENV') === 'production' ? true : false,
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    });
+    return { accessToken: accessToken };
+  }
+
+  @Post('/register')
+  async register(
+    @Body() registerDto: RegisterDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const accessToken = await this.authService.register(registerDto);
     res.cookie('accessToken', accessToken, {
       secure:
         this.configService.get('NODE_ENV') === 'production' ? true : false,

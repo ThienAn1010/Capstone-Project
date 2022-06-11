@@ -32,6 +32,7 @@ const seed = async () => {
   });
   await client.user.create({
     data: {
+      phoneNumber: '123',
       id: '1',
       username: 'papermaker1@gmail.com',
       name: 'Vu Minh Long',
@@ -57,6 +58,7 @@ const seed = async () => {
   });
   await client.user.create({
     data: {
+      phoneNumber: '123',
       id: '2',
       username: 'papermaker2@gmail.com',
       name: 'Vu Minh Phuc',
@@ -82,6 +84,7 @@ const seed = async () => {
   });
   await client.user.create({
     data: {
+      phoneNumber: '123',
       id: '3',
       username: 'papermaker3@gmail.com',
       name: 'Phuc Minh Hoa',

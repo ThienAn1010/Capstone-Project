@@ -19,7 +19,8 @@ model User {
   username     String
   password     String?
   name         String
-  picture      String
+  picture      String        @default("https://res.cloudinary.com/dybygufkr/image/upload/v1593000869/avatar_q2ysxd.jpg")
+  phoneNumber  String?
   createdAt    DateTime      @default(now())
   role         Role          @default(user)
   operator     Operator?

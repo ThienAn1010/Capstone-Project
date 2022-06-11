@@ -11,6 +11,7 @@ import { ConfigService } from '@nestjs/config';
 import { FacebookService, UserDataFB } from 'src/facebook/facebook.service';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
 
 @Injectable()
 export class AuthService {
@@ -93,8 +94,8 @@ export class AuthService {
     else throw new BadRequestException();
   }
 
-  async login(login: LoginDto) {
-    const { username, password } = login;
+  async login(loginDto: LoginDto) {
+    const { username, password } = loginDto;
     const user = await this.prismaService.user.findFirst({
       where: {
         username,
@@ -107,5 +108,41 @@ export class AuthService {
       return accessToken;
     }
     throw new BadRequestException();
+  }
+
+  async register(registerDto: RegisterDto) {
+    const { address, password, phoneNumber, username, name, picture } =
+      registerDto;
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        username,
+      },
+    });
+    if (user) {
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Email already in used',
+      });
+    }
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const createdUser = await this.prismaService.user.create({
+      data: {
+        name,
+        picture,
+        username,
+        password: hashedPassword,
+        phoneNumber,
+        role: 'paperMaker',
+        paperMaker: {
+          create: {
+            address,
+            lat: 123,
+            long: 123,
+          },
+        },
+      },
+    });
+    const accessToken = await this.createToken(createdUser.id);
+    return accessToken;
   }
 }
