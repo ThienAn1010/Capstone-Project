@@ -15,29 +15,40 @@ export default function Category() {
     { id: "7", name: "Personal Income Tax", src: "/Personal Income Tax.svg" },
     { id: "8", name: "Passport", src: "/Passport.svg" },
   ]
+
   return (
-    <div className="flex flex-wrap justify-around px-2 lg:px-32 mt-10 ">
-      {categories.map((category) => (
-        <React.Fragment key={category.id}>
-          <div className="hidden sm:inline-block w-52 flex-none group cursor-pointer mb-5 lg:inline-block lg:w-80 flex-none group cursor-pointer mb-5">
-            <div className="w-34 h-34 lg:w-56 lg:h-56">
+    <div className="max-w-2xl mx-auto py-16 px-4 sm:py-12 sm:px-6 lg:max-w-full lg:px-20">
+      <div className="md:flex md:items-center md:justify-between">
+        <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
+          Popular Categories
+        </h2>
+        <a
+          href="#"
+          className="hidden text-sm font-medium text-test hover:text-blue-800 md:block"
+        >
+          View all categories<span aria-hidden="true"> &rarr;</span>
+        </a>
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-x-2 gap-y-4 justify-items-center sm:gap-x-4 md:grid-cols-4 md:gap-y-4 lg:gap-x-2">
+        {categories.map((category) => (
+          <div key={category.id} className="group relative">
+            <div className="w-full h-36 rounded-md overflow-hidden border-2 shadow-sm shadow-gray-300 group-hover:opacity-75 hover:cursor-pointer lg:h-44 lg:w-full xl:h-64 xl:w-full">
               <img
                 src={category.src}
-                className="object-cover border rounded-md h-full w-full mix-blend-multiply lg:transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
-                alt="category"
+                alt="testing101"
+                className="w-full h-full object-center"
               />
             </div>
-            {/* <div className="mt-2">
-              <h1 className="font-bold">{category.name}</h1>
-            </div> */}
           </div>
-          <div className="flex-initial mt-2 mb-2 sm:hidden">
-            <h1 className="rounded-full border py-1 px-2 mr-1 font-bold border-black hover:bg-gray-200 flex items-center justify-center text-center">
-              {category.name}
-            </h1>
-          </div>
-        </React.Fragment>
-      ))}
+        ))}
+      </div>
+
+      <div className="mt-8 text-sm md:hidden">
+        <a href="#" className="font-medium text-test hover:text-indigo-500">
+          View all categories<span aria-hidden="true"> &rarr;</span>
+        </a>
+      </div>
     </div>
   )
 }
