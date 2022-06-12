@@ -56,3 +56,4 @@ jobs:
                   FILTER_REGEX_EXCLUDE: .*(frontend|backend)/(lint-staged.config.js|.eslintrc.js|next.config.js|prisma|tailwind.config.js)
                   VALIDATE_TYPESCRIPT_STANDARD: false
                   VALIDATE_JSCPD: false
+                  VALIDATE_MARKDOWN: false
