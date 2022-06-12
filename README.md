@@ -7,7 +7,7 @@ Hi! This is "Paperworks" project of Nextway Technology developed by WebDev team.
 </h1>
 
 ## 📖 Project Description
-Paperworks is an online platform that allows communication between the user and papermakers to simplify the process of acquiring the necessary papers.
+Paperworks is an online platform that allows communication between the user and papermakers to simplify the process of acquiring the necessary papers. It's in development process.
 
 ## 💻 Technology Used
 ![](https://img.shields.io/badge/Code-React-informational?style=flat&logo=react&color=61DAFB)
