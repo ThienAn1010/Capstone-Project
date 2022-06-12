@@ -1,4 +1,4 @@
-<p align="center">
+<h1 align="center">
   <img src="https://user-images.githubusercontent.com/57244622/168282989-1aa0f4ec-01d4-4569-aea7-779226cab548.png" alt="my banner">
 </p>
 
