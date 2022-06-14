@@ -11,7 +11,7 @@
     "pre-commit": "npm run lint -- --fix && git add -A ."
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.3",
+    "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
     "axios": "^0.27.2",
     "next": "12.1.6",
