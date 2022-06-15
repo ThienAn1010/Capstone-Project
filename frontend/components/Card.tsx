@@ -1,6 +1,6 @@
 import { StarIcon } from "@heroicons/react/solid"
 
-export default function Card({ ppmker }) {
+export default function Card({ ppmker }: any) {
   return (
     <div className="flex flex-wrap -mx-4 p-2">
       <div className="w-full sm:w-60 md:w-64 xl:w-72 p-4">
