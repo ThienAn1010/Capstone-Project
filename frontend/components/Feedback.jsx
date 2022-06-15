@@ -24,6 +24,7 @@ const Feedback = () => {
         author: 'Ngo Vu Hien Hoa',
         avatarSrc:
           'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
+        date: '15/06/2022',
       },
       {
         id: 2,
@@ -34,6 +35,7 @@ const Feedback = () => {
         author: 'Emily Selman',
         avatarSrc:
           'https://www.faceapp.com/static/img/content/compare/beard-example-before@3x.jpg',
+        date: '15/06/2022',
       },
       {
         id: 2,
@@ -44,6 +46,7 @@ const Feedback = () => {
         author: 'Emily Selman',
         avatarSrc:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGa_HSPmOuXZjwVPe3iRFse3_ev61GED0hTg&usqp=CAU',
+        date: '15/06/2022',
       },
       
     ],
@@ -138,7 +141,7 @@ const Feedback = () => {
             </dl>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10" hidden>
             <h3 className="text-lg font-medium text-gray-900">Share your thoughts</h3>
             <p className="mt-1 text-sm text-gray-600">
               Share your thoughts with other customers after finishing your services
@@ -161,9 +164,10 @@ const Feedback = () => {
               {reviews.featured.map((review) => (
                 <div key={review.id} className="py-12">
                   <div className="flex items-center">
-                    <img src={review.avatarSrc} alt={`${review.author}.`} className="h-12 w-12 rounded-full" />
+                    <img src={review.avatarSrc} alt={`${review.author}.`} className="h-16 w-16 rounded-full" />
                     <div className="ml-4">
-                      <h4 className="text-sm font-bold text-gray-900">{review.author}</h4>
+                      <h4 className="text-sm font-bold text-gray-900">{review.author} </h4>
+                     
                       <div className="mt-1 flex items-center">
                         {[0, 1, 2, 3, 4].map((rating) => (
                           <StarIcon
@@ -176,6 +180,7 @@ const Feedback = () => {
                           />
                         ))}
                       </div>
+                      <h6 className="text-sm text-gray-500">{review.date}</h6>
                       <p className="sr-only">{review.rating} out of 5 stars</p>
                     </div>
                   </div>
