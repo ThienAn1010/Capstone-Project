@@ -17,9 +17,9 @@ export default function Category() {
   ]
 
   return (
-    <div className="max-w-2xl mx-auto py-16 px-4 sm:py-12 sm:px-6 lg:max-w-full lg:px-20">
+    <div className="max-w-2xl mx-auto py-16 px-4 sm:py-12 sm:px-6 lg:max-w-full bg-green-500">
       <div className="md:flex md:items-center md:justify-between">
-        <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Popular Categories
         </h2>
         <a

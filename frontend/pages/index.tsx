@@ -1,5 +1,6 @@
 import type { NextPage } from "next"
 import Head from "next/head"
+import CardSlider from "../components/CardSlider"
 import Category from "../components/Category"
 // import NavBar from "../components/navbar/NavBar"
 // import Link from "next/link"
@@ -60,6 +61,7 @@ const Home: NextPage = () => {
       <NavBarNoLog />
       <main className="mx-auto container">
         <Category />
+        <CardSlider />
       </main>
     </>
   )
