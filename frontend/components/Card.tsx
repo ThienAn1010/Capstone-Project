@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/solid"
 
 export default function Card({ ppmker }: any) {
   return (
-    <div className="flex flex-wrap -mx-4 p-2">
+    <div className="flex flex-wrap -mx-4 p-2 group cursor-pointer">
       <div className="w-full sm:w-60 md:w-64 xl:w-72 p-4">
         <a
           href=""
@@ -16,7 +16,9 @@ export default function Card({ ppmker }: any) {
             />
           </div>
           <div className="p-4">
-            <h2 className="text-sm md:text-base font-bold">{ppmker.name}</h2>
+            <h2 className="text-sm md:text-base font-bold truncate">
+              {ppmker.name}
+            </h2>
             <p className="text-sm md:text-base truncate">{ppmker.location}</p>
             <p className="text-yellow-700 font-semibold inline">4.7</p>
             <StarIcon className="h-4 w-4 text-yellow-500 inline mb-1" />

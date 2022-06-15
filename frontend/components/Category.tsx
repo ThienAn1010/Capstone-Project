@@ -17,7 +17,7 @@ export default function Category() {
   ]
 
   return (
-    <div className="max-w-2xl mx-auto py-16 px-4 sm:py-12 sm:px-6 lg:max-w-full bg-green-500">
+    <div className="max-w-2xl mx-auto py-4 px-4 sm:py-8 sm:px-6 lg:max-w-full">
       <div className="md:flex md:items-center md:justify-between">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Popular Categories
@@ -33,11 +33,11 @@ export default function Category() {
       <div className="mt-6 grid grid-cols-2 gap-x-2 gap-y-4 justify-items-center sm:gap-x-4 md:grid-cols-4 md:gap-y-4 lg:gap-x-2">
         {categories.map((category) => (
           <div key={category.id} className="group relative">
-            <div className="w-full h-36 rounded-md overflow-hidden border-2 shadow-sm shadow-gray-300 group-hover:opacity-75 hover:cursor-pointer lg:h-44 lg:w-full xl:h-64 xl:w-full">
+            <div className="w-full h-36 rounded-md overflow-hidden border-2 shadow-sm shadow-gray-300 hover:cursor-pointer lg:h-44 lg:w-full xl:h-64 xl:w-full">
               <img
                 src={category.src}
                 alt="testing101"
-                className="w-full h-full object-center"
+                className="w-full h-full object-center hover:scale-110"
               />
             </div>
           </div>

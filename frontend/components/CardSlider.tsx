@@ -40,7 +40,7 @@ export default function RoomCardsSlider() {
   ]
 
   return (
-    <div className="max-w-2xl mx-auto py-16 px-4 sm:py-12 sm:px-6 lg:max-w-full bg-red-500">
+    <div className="max-w-2xl mx-auto py-4 px-4 sm:py-8 sm:px-6 lg:max-w-full">
       <div className="md:flex md:items-center md:justify-between">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Popular papermaker in Marriage Certificate
@@ -52,10 +52,17 @@ export default function RoomCardsSlider() {
           View all papermakers<span aria-hidden="true"> &rarr;</span>
         </a>
       </div>
-      <div className="grid grid-cols-2 justify-items-center lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 xl:gap-2">
+      <div className="grid grid-cols-1 justify-items-center sm:grid-cols-2 sm:gap-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 xl:gap-4">
         {ppmkers.map((ppmker) => (
-          <Card ppmker={ppmker} key={ppmker.id} />
+          <div key={ppmker.id} className="col-span-1">
+            <Card ppmker={ppmker} />
+          </div>
         ))}
+      </div>
+      <div className="mt-2 text-sm md:hidden">
+        <a href="#" className="font-medium text-test hover:text-indigo-500">
+          View all categories<span aria-hidden="true"> &rarr;</span>
+        </a>
       </div>
     </div>
   )
