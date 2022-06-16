@@ -93,7 +93,7 @@ export default function RoomCardsSlider() {
           </div>
         ))}
       </Carousel>
-      ;
+
       <div className="mt-2 text-sm md:hidden">
         <a href="#" className="font-medium text-test hover:text-indigo-500">
           View all <span aria-hidden="true"> &rarr;</span>
