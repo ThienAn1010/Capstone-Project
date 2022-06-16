@@ -1,37 +1,77 @@
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Lazy, Pagination, Navigation } from "swiper"
-import "swiper/css"
-import "swiper/css/lazy"
-import "swiper/css/pagination"
-import "swiper/css/navigation"
-import Image from "next/image"
+import Carousel from "react-multi-carousel"
+import "react-multi-carousel/lib/styles.css"
 
 export default function MainCarousel() {
+  const responsive = {
+    desktop: {
+      breakpoint: {
+        max: 3000,
+        min: 1024,
+      },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: {
+        max: 464,
+        min: 0,
+      },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: {
+        max: 1024,
+        min: 464,
+      },
+      items: 1,
+    },
+  }
   return (
-    <Swiper
-      slidesPerView={1}
-      pagination={{
-        dynamicBullets: true,
-        clickable: true,
-      }}
-      modules={[Lazy, Pagination, Navigation]}
-      lazy={true}
-      className="mt-6"
-    >
-      <SwiperSlide className="bg-red-700">
-        <div style={{ position: "relative", width: "100vw", height: "40vh" }}>
-          <Image
-            alt="Carousel Images"
-            src="/test2.jpg"
-            layout="fill"
-            quality={100}
-            objectFit="cover"
+    <div className="">
+      <Carousel
+        // autoPlay={true}
+        responsive={responsive}
+        additionalTransfrom={0}
+        arrows={false}
+        autoPlaySpeed={3000}
+        swipeable
+        showDots
+      >
+        <div>
+          <img
+            src="/testing.jpg"
+            alt="carousel image"
+            className="object-cover w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
-      </SwiperSlide>
-      <SwiperSlide></SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-    </Swiper>
+        <div>
+          <img
+            src="/test2.jpg"
+            alt="carousel image"
+            className="object-cover w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+          />
+        </div>
+        <div>
+          <img
+            src="https://source.unsplash.com/g1Kr4Ozfoac"
+            alt="carousel image"
+            className="object-cover w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+          />
+        </div>
+        <div>
+          <img
+            src="https://source.unsplash.com/376KN_ISplE"
+            alt="carousel image"
+            className="object-cover w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+          />
+        </div>
+        <div>
+          <img
+            src="https://source.unsplash.com/OQMZwNd3ThU/2400x1601"
+            alt="carousel image"
+            className="object-cover w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+          />
+        </div>
+      </Carousel>
+    </div>
   )
 }

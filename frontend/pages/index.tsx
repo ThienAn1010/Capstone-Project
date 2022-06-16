@@ -59,8 +59,8 @@ const Home: NextPage = () => {
       </Head>
 
       <NavBarNoLog />
+      <MainCarousel />
       <main className="mx-auto container">
-        <MainCarousel />
         <Category />
       </main>
     </>
