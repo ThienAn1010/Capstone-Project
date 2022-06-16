@@ -2,8 +2,8 @@ import { StarIcon } from "@heroicons/react/solid"
 
 export default function Card({ ppmker }: any) {
   return (
-    <div className="flex flex-wrap -mx-4 p-2 group cursor-pointer">
-      <div className="w-full sm:w-60 md:w-64 xl:w-72 p-4">
+    <div className="flex flex-wrap -mx-4 px-2 group cursor-pointer">
+      <div className="w-52 sm:w-60 md:w-64 xl:w-72 p-4">
         <a
           href=""
           className="block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden"
