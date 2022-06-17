@@ -28,7 +28,7 @@ export default function MainCarousel() {
   return (
     <div className="">
       <Carousel
-        // autoPlay={true}
+        autoPlay={true}
         responsive={responsive}
         additionalTransfrom={0}
         arrows={false}
@@ -40,35 +40,35 @@ export default function MainCarousel() {
           <img
             src="https://source.unsplash.com/x3voiJL-PfY"
             alt="carousel image"
-            className="object-cover object-top w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+            className="object-cover object-top w-full md:object-center sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
         <div>
           <img
             src="https://source.unsplash.com/wgcUx0kR1ps"
             alt="carousel image"
-            className="object-cover object-top w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+            className="object-cover object-top w-full md:object-center sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
         <div>
           <img
             src="https://source.unsplash.com/g1Kr4Ozfoac"
             alt="carousel image"
-            className="object-cover object-top w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+            className="object-cover object-top w-full md:object-center sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
         <div>
           <img
             src="https://source.unsplash.com/376KN_ISplE"
             alt="carousel image"
-            className="object-cover object-top w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+            className="object-cover object-top w-full md:object-center sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
         <div>
           <img
             src="https://source.unsplash.com/OQMZwNd3ThU/2400x1601"
             alt="carousel image"
-            className="object-cover object-top w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
+            className="object-cover object-top w-full md:object-center sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
       </Carousel>
