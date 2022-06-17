@@ -29,9 +29,16 @@ function classNames(...classes: string[]) {
 export default function UserDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showForm, setShowForm] = useState(false);
-
-  const form = () => {
+  const [showemailForm, setShowemailForm] = useState(false);
+  const [showphoneForm, setShowphoneForm] = useState(false);
+  const nameform = () => {
     setShowForm(!showForm);
+  }
+  const phoneform = () => {
+    setShowphoneForm(!showphoneForm);
+  }
+  const emailform = () => {
+    setShowemailForm(!showemailForm);
   }
   return (
     <>
@@ -250,7 +257,7 @@ export default function UserDashboard() {
                                   <button
                                     type="button"
                                     className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                    onClick={form}
+                                    onClick={nameform}
                                   >
                                     Update
                                   </button>
@@ -275,14 +282,6 @@ export default function UserDashboard() {
                                     alt=""
                                   />
                                 </span>
-                                <span className="ml-4 flex-shrink-0 flex items-start space-x-4">
-                                  <button
-                                    type="button"
-                                    className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                  >
-                                    Update
-                                  </button>
-                                </span>
                               </dd>
                             </div>
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
@@ -293,10 +292,19 @@ export default function UserDashboard() {
                                   <button
                                     type="button"
                                     className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                                    onClick={emailform}
                                   >
                                     Update
                                   </button>
                                 </span>
+                                {showemailForm && (
+                                  <form>
+                                    <input
+                                    type='email'
+                                    placeholder='Email'>
+                                    </input>
+                                  </form>
+                                )}
                               </dd>
                             </div>
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
@@ -307,11 +315,19 @@ export default function UserDashboard() {
                                   <button
                                     type="button"
                                     className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                    // onChange={(e) => }
+                                    onClick={phoneform}
                                   >
                                     Update
                                   </button>
                                 </span>
+                                {showphoneForm && (
+                                  <form>
+                                    <input
+                                    type='text'
+                                    placeholder='Phone number'>
+                                    </input>
+                                  </form>
+                                )}
                               </dd>
                             </div>
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
