@@ -10,7 +10,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-export default function NavBarNoLog() {
+export default function NavBarLog({ data }: any) {
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
@@ -121,7 +121,7 @@ export default function NavBarNoLog() {
                     <Menu as="div" className="inline-flex items-center">
                       <div>
                         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
-                          <p>Sign In</p>
+                          <p>{data.name}</p>
                           <ChevronDownIcon
                             className="-mr-1 ml-2 mt-0.5 h-5 w-5"
                             aria-hidden="true"
@@ -137,7 +137,7 @@ export default function NavBarNoLog() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="block absolute top-16 right-0 mt-2 w-80 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                        <Menu.Items className="block absolute z-10 top-16 right-0 mt-2 w-80 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
                           <div className="px-4 py-3 space-y-2">
                             <p className="text-xl font-semibold">Login with</p>
                             <div className="grid grid-cols-2 gap-4">
@@ -232,7 +232,7 @@ export default function NavBarNoLog() {
                                     href="#"
                                     className="block text-md font-medium"
                                   >
-                                    Sign in with Paperworks account
+                                    Sign Out
                                   </a>
                                 </div>
                               )}

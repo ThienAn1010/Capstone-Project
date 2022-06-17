@@ -3,13 +3,14 @@ import Head from "next/head"
 import Category from "../components/Category"
 // import NavBar from "../components/navbar/NavBar"
 // import Link from "next/link"
-// import useGetMe from "../hooks/useGetMe"
+import useGetMe from "../hooks/useGetMe"
 // import axiosInstance from "../util/axiosInstace"
 // import Image from "next/image"
 import NavBarNoLog from "../components/navbar/NavBarNoLog"
+import NavBarLog from "../components/navbar/NavBarLog"
 
 const Home: NextPage = () => {
-  // const { data, isLoading, mutate } = useGetMe()
+  const { data } = useGetMe()
   // const handleLogout = () => {
   //   mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
   //     optimisticData: undefined,
@@ -56,8 +57,8 @@ const Home: NextPage = () => {
         <title>Homepage</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      {data ? <NavBarLog data={data} /> : <NavBarNoLog />}
 
-      <NavBarNoLog />
       <main className="mx-auto container">
         <Category />
       </main>
