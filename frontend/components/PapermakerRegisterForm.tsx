@@ -46,7 +46,7 @@ const PapermakerRegisterForm = () => {
                     htmlFor="text"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Full Name
+                    Full Name 123
                   </label>
                   <div className="mt-1">
                     <input
