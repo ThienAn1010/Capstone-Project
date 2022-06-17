@@ -38,14 +38,14 @@ export default function MainCarousel() {
       >
         <div>
           <img
-            src="/testing.jpg"
+            src="https://source.unsplash.com/x3voiJL-PfY"
             alt="carousel image"
             className="object-cover w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
         <div>
           <img
-            src="/test2.jpg"
+            src="https://source.unsplash.com/wgcUx0kR1ps"
             alt="carousel image"
             className="object-cover w-full sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
