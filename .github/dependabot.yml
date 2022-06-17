@@ -11,18 +11,12 @@ updates:
       interval: "daily"
     labels:
       - "Frontend Dependency"
-    reviewers:
-      - "dangvuthang"
-      - "ThienAn1010"
       
     # Enable version updates for Backend
   - package-ecosystem: "npm"
-    # Look for a `Dockerfile` in the `root` directory
     directory: "/backend"
     schedule:
       interval: "daily"
     labels:
       - "Backend Dependency"
-    reviewers:
-      - "dangvuthang"
-      - "ThienAn1010"
+
