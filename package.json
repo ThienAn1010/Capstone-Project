@@ -21,10 +21,12 @@
   },
   "homepage": "https://github.com/ThienAn1010/Capstone-Project#readme",
   "devDependencies": {
-    "concurrently": "^7.2.1"
+    "concurrently": "^7.2.1",
+    "node": "^17.7.2"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.3",
     "@heroicons/react": "^1.0.6"
+   
   }
 }
