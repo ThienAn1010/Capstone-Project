@@ -20,8 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "dev": "npx prisma generate && npm run start:dev",
-    "seed": "ts-node prisma/seed.ts",
-    "clean": "ts-node prisma/clean.ts"
+    "seed": "node dist/prisma/seed.js",
+    "clean": "node dist/prisma/clean.js"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
