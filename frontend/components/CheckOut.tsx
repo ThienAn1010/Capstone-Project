@@ -10,7 +10,7 @@ const products = [
     imageAlt: 'Front of zip tote bag with white canvas, white handles, and black drawstring top.',
 },
 ]
-export default function Checkout() {
+const Checkout = () => {
 return (
     <div className="bg-white">
     {/* Background color split screen for large screens */}
@@ -161,3 +161,4 @@ return (
     </div>
 )
 }
+export default Checkout
