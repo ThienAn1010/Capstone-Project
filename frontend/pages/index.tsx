@@ -7,6 +7,7 @@ import Category from "../components/Category"
 // import axiosInstance from "../util/axiosInstace"
 // import Image from "next/image"
 import NavBarNoLog from "../components/navbar/NavBarNoLog"
+import CombinedSlider from "../components/MainCardSlider/CombinedSlider"
 
 const Home: NextPage = () => {
   // const { data, isLoading, mutate } = useGetMe()
@@ -60,6 +61,7 @@ const Home: NextPage = () => {
       <NavBarNoLog />
       <main className="mx-auto container">
         <Category />
+        <CombinedSlider />
       </main>
     </>
   )
