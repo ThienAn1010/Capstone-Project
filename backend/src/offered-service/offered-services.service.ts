@@ -1,26 +1,31 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-<<<<<<< HEAD
-=======
-import { CreateServiceDto } from './dto/create-service.dto';
-import { UpdateServiceDto } from './dto/update-service.dto';
->>>>>>> issue-25-_BE_CRUD_Services
+import { CreateOfferedServiceDto } from './dto/create-offered-service.dto';
+import { UpdateOfferedServiceDto } from './dto/update-offered-service.dto';
 
 @Injectable()
-export class ServicesService {
+export class OfferedServicesService {
   constructor(private readonly prismaService: PrismaService) {}
-<<<<<<< HEAD
-
-  async getAllServices() {
-    const services = await this.prismaService.service.findMany();
-    return { status: 'success', length: services.length, services: services };
-=======
   private checkSortField(field: string) {
     if (field.charAt(0) === '+' || field.charAt(0) === '-') {
       const orderBy = field.charAt(0) === '+' ? 'asc' : 'desc';
       const actualFied = field.slice(1);
+      if (actualFied === 'rating' || actualFied === 'totalCases') {
+        return {
+          paperMaker: {
+            [actualFied]: orderBy,
+          },
+        };
+      }
       return { [actualFied]: orderBy };
     } else {
+      if (field === 'rating' || field === 'totalCases') {
+        return {
+          paperMaker: {
+            [field]: 'asc',
+          },
+        };
+      }
       return { [field]: 'asc' };
     }
   }
@@ -49,6 +54,7 @@ export class ServicesService {
     if (!sort) {
       return { createdAt: 'desc' };
     }
+
     const fields = sort.split(',');
     return fields.map(this.checkSortField) as any;
   }
@@ -73,7 +79,7 @@ export class ServicesService {
     console.log(filterBy);
     return filterBy;
   }
-  async getAllServices(query) {
+  async getAllOfferedServices(query) {
     // Filter
     // Allowed filter fields = service=id, paperMaker
     const filterBy = this.filter(query);
@@ -83,7 +89,7 @@ export class ServicesService {
     const { skip, take } = this.pagination(query);
 
     try {
-      const services = await this.prismaService.offeredService.findMany({
+      const offeredServices = await this.prismaService.offeredService.findMany({
         include: {
           paperMaker: {
             include: {
@@ -103,7 +109,11 @@ export class ServicesService {
         skip,
         take,
       });
-      return { status: 'success', length: services.length, data: services };
+      return {
+        status: 'success',
+        length: offeredServices.length,
+        offeredServices: offeredServices,
+      };
     } catch (error) {
       console.log(error);
       throw new BadRequestException({
@@ -113,7 +123,7 @@ export class ServicesService {
     }
   }
 
-  async createService(service: CreateServiceDto) {
+  async createOfferedService(service: CreateOfferedServiceDto) {
     const { duration, serviceId, price, userId } = service;
     const paperMaker = await this.prismaService.paperMaker.findFirst({
       where: {
@@ -144,7 +154,10 @@ export class ServicesService {
     return offeredService;
   }
 
-  private async findServiceByUserId(offeredServiceId: string, userId: string) {
+  private async findOfferedServiceByUserId(
+    offeredServiceId: string,
+    userId: string,
+  ) {
     const offeredService = await this.prismaService.offeredService.findFirst({
       where: {
         id: offeredServiceId,
@@ -156,10 +169,10 @@ export class ServicesService {
     return offeredService;
   }
 
-  async updateService(updateServiceDto: UpdateServiceDto) {
-    const offeredService = await this.findServiceByUserId(
-      updateServiceDto.offeredServiceId,
-      updateServiceDto.userId,
+  async updateOfferedService(updateOfferedServiceDto: UpdateOfferedServiceDto) {
+    const offeredService = await this.findOfferedServiceByUserId(
+      updateOfferedServiceDto.offeredServiceId,
+      updateOfferedServiceDto.userId,
     );
     if (!offeredService) {
       throw new BadRequestException({
@@ -168,16 +181,16 @@ export class ServicesService {
       });
     }
     const updatedField = {} as any;
-    if (updateServiceDto.price) {
-      updatedField.price = updateServiceDto.price;
+    if (updateOfferedServiceDto.price) {
+      updatedField.price = updateOfferedServiceDto.price;
     }
-    if (updateServiceDto.duration) {
-      updatedField.duration = updateServiceDto.duration;
+    if (updateOfferedServiceDto.duration) {
+      updatedField.duration = updateOfferedServiceDto.duration;
     }
     const updateOfferedService = await this.prismaService.offeredService.update(
       {
         where: {
-          id: updateServiceDto.offeredServiceId,
+          id: updateOfferedServiceDto.offeredServiceId,
         },
         data: updatedField,
         include: {
@@ -189,11 +202,11 @@ export class ServicesService {
     return updateOfferedService;
   }
 
-  async deleteService(deleteService: {
+  async deleteOfferedService(deleteService: {
     userId: string;
     offeredServiceId: string;
   }) {
-    const offeredService = await this.findServiceByUserId(
+    const offeredService = await this.findOfferedServiceByUserId(
       deleteService.offeredServiceId,
       deleteService.userId,
     );
@@ -209,6 +222,5 @@ export class ServicesService {
       },
     });
     return { status: 'success' };
->>>>>>> issue-25-_BE_CRUD_Services
   }
 }
