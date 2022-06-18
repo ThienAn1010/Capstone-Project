@@ -1,5 +1,6 @@
 import type { NextPage } from "next"
 import Head from "next/head"
+import MainCarousel from "../components/MainCarousel"
 import Category from "../components/Category"
 // import NavBar from "../components/navbar/NavBar"
 // import Link from "next/link"
@@ -7,6 +8,7 @@ import Category from "../components/Category"
 // import axiosInstance from "../util/axiosInstace"
 // import Image from "next/image"
 import NavBarNoLog from "../components/navbar/NavBarNoLog"
+import CombinedSlider from "../components/MainCardSlider/CombinedSlider"
 
 const Home: NextPage = () => {
   // const { data, isLoading, mutate } = useGetMe()
@@ -58,8 +60,10 @@ const Home: NextPage = () => {
       </Head>
 
       <NavBarNoLog />
+      <MainCarousel />
       <main className="mx-auto container">
         <Category />
+        <CombinedSlider />
       </main>
     </>
   )
