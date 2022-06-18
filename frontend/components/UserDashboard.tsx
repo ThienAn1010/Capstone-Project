@@ -31,6 +31,8 @@ const UserDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [showemailForm, setShowemailForm] = useState(false);
   const [showphoneForm, setShowphoneForm] = useState(false);
+  const [showaddressForm, setShowaddressForm] = useState(false);
+
   const nameform = () => {
     setShowForm(!showForm);
   }
@@ -40,6 +42,10 @@ const UserDashboard = () => {
   const emailform = () => {
     setShowemailForm(!showemailForm);
   }
+  const addressform = () => {
+    setShowaddressForm(!showaddressForm);
+  }
+
   return (
     <>
       <div>
@@ -140,7 +146,7 @@ const UserDashboard = () => {
         {/* Static sidebar for desktop */}
         <div className="hidden md:flex md:w-64 md:flex-col md: md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <nav className="bg-gray-50 border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto">
+          <nav className="bg-gray-50 border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto flow-left">
             <div className="flex-grow mt-5">
               <div className="space-y-1">
                 {navigation.map((item) => (
@@ -182,7 +188,7 @@ const UserDashboard = () => {
         </div>
 
         {/* Content area */}
-        <div className="md:pl-64">
+        <div className="md:pl-64 ">
           <div className="max-w-4xl mx-auto flex flex-col md:px-8 xl:px-0">
             <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex">
               <button
@@ -267,7 +273,7 @@ const UserDashboard = () => {
                                     <input
                                     type='text'
                                     placeholder='Name'
-                                    className='text-center'>
+                                    className='text-center ml-10'>
                                     </input>
                                   </form>
                                 )}
@@ -302,7 +308,8 @@ const UserDashboard = () => {
                                   <form>
                                     <input
                                     type='email'
-                                    placeholder='Email'>
+                                    placeholder='Email'
+                                    className='text-center ml-10'>
                                     </input>
                                   </form>
                                 )}
@@ -325,7 +332,8 @@ const UserDashboard = () => {
                                   <form>
                                     <input
                                     type='text'
-                                    placeholder='Phone number'>
+                                    placeholder='Phone number'
+                                    className='text-center ml-10'>
                                     </input>
                                   </form>
                                 )}
@@ -339,11 +347,20 @@ const UserDashboard = () => {
                                   <button
                                     type="button"
                                     className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                    // onChange={(e) => }
+                                    onClick={addressform}
                                   >
                                     Update
                                   </button>
                                 </span>
+                                {showaddressForm && (
+                                  <form>
+                                    <input
+                                    type='text'
+                                    placeholder='Address'
+                                    className='text-center ml-10'>
+                                    </input>
+                                  </form>
+                                )}
                               </dd>
                             </div>
                           </dl>
