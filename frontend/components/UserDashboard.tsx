@@ -26,7 +26,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function UserDashboard() {
+const UserDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showemailForm, setShowemailForm] = useState(false);
@@ -266,7 +266,8 @@ export default function UserDashboard() {
                                   <form>
                                     <input
                                     type='text'
-                                    placeholder='Name'>
+                                    placeholder='Name'
+                                    className='text-center'>
                                     </input>
                                   </form>
                                 )}
@@ -360,3 +361,4 @@ export default function UserDashboard() {
     </>
   )
 }
+export default UserDashboard
