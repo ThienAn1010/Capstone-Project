@@ -6,6 +6,7 @@ import { GoogleService } from 'src/google/google.service';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { SocialLoginDto } from './dto/social-login.dto';
 
 @Controller('/auth')
 export class AuthController {
@@ -42,7 +43,10 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     try {
-      const accessToken = await this.authService.loginWithGoogle(code);
+      const { accessToken } = await this.authService.socialLogin({
+        code,
+        type: 'google',
+      });
       return this.redirect(
         res,
         accessToken,
@@ -61,12 +65,32 @@ export class AuthController {
     @Query('code') code: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken = await this.authService.loginWithFacebook(code);
+    const { accessToken } = await this.authService.socialLogin({
+      code,
+      type: 'facebook',
+    });
     return this.redirect(
       res,
       accessToken,
       new Date(Date.now() + 1000 * 60 * 60 * 24),
     );
+  }
+
+  @Post('/social')
+  async socialLogin(
+    @Body() socialLoginDto: SocialLoginDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { accessToken, user } = await this.authService.socialLogin(
+      socialLoginDto,
+    );
+    res.cookie('accessToken', accessToken, {
+      secure:
+        this.configService.get('NODE_ENV') === 'production' ? true : false,
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    });
+    return { user, accessToken };
   }
 
   @Post('/logout')

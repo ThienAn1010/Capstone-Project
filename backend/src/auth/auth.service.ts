@@ -12,6 +12,7 @@ import { FacebookService, UserDataFB } from 'src/facebook/facebook.service';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { SocialLoginDto } from './dto/social-login.dto';
 
 @Injectable()
 export class AuthService {
@@ -44,10 +45,18 @@ export class AuthService {
     }
   }
   private async upsertUserToDb(user: TokenPayload | UserDataFB) {
+    const select = {
+      id: true,
+      name: true,
+      role: true,
+      username: true,
+      picture: true,
+    };
     const findUserInDb = await this.prismaService.user.findFirst({
       where: {
         authProvider: { providerKey: 'id' in user ? user.id : user.sub },
       },
+      select,
     });
     if (findUserInDb) return findUserInDb;
     const savedUserInDb = await this.prismaService.user.create({
@@ -61,6 +70,7 @@ export class AuthService {
           },
         },
       },
+      select,
     });
     return savedUserInDb;
   }
@@ -79,19 +89,21 @@ export class AuthService {
       );
     });
   }
-  async loginWithGoogle(code: string) {
-    const token = await this.checkGoogleCode(code);
+
+  private loginWithSocialMedia = async ({ code, type }: SocialLoginDto) => {
+    const token =
+      type === 'google'
+        ? await this.checkGoogleCode(code)
+        : await this.checkFacebookCode(code);
     const user = await this.upsertUserToDb(token);
     const accessToken = await this.createToken(user.id);
-    if (typeof accessToken === 'string') return accessToken;
+    if (typeof accessToken === 'string') return { accessToken, user };
     else throw new BadRequestException();
-  }
-  async loginWithFacebook(code: string) {
-    const token = await this.checkFacebookCode(code);
-    const user = await this.upsertUserToDb(token);
-    const accessToken = await this.createToken(user.id);
-    if (typeof accessToken === 'string') return accessToken;
-    else throw new BadRequestException();
+  };
+
+  async socialLogin(socialLoginDto: SocialLoginDto) {
+    const data = await this.loginWithSocialMedia(socialLoginDto);
+    return data;
   }
 
   async login(loginDto: LoginDto) {
