@@ -1,8 +1,24 @@
 import Link from "next/link"
 
+const getGoogleOAuthUrl = () => {
+  const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth"
+  const options = {
+    client_id:
+      "346121408906-evbb0dn7ncjb37hcjjrtl687o8u0jq7u.apps.googleusercontent.com",
+    redirect_uri: "http://localhost:3000/",
+    response_type: "code",
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+    ].join(" "),
+  }
+  const queryString = new URLSearchParams(options)
+  return `${rootUrl}?${queryString.toString()}`
+}
+
 const GoogleButton = () => {
   return (
-    <Link href={"http://localhost:8000/auth/google"}>
+    <Link href={getGoogleOAuthUrl()}>
       <a className="px-5 py-3 bg-white shadow-md border w-full flex items-center font-bold gap-x-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
