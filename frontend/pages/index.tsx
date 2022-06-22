@@ -9,49 +9,43 @@ import Category from "../components/Category"
 // import Image from "next/image"
 import NavBarNoLog from "../components/navbar/NavBarNoLog"
 import CombinedSlider from "../components/MainCardSlider/CombinedSlider"
+import { useEffect } from "react"
+import { useRouter } from "next/router"
+import axiosInstance from "../util/axiosInstace"
+import useGetMe from "../hooks/useGetMe"
 
 const Home: NextPage = () => {
-  // const { data, isLoading, mutate } = useGetMe()
-  // const handleLogout = () => {
-  //   mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
-  //     optimisticData: undefined,
-  //   })
-  // }
-  // const displayContent = () => {
-  //   if (isLoading) return "Loading..."
-  //   if (!data)
-  //     return (
-  //       <Link href="/login">
-  //         <a className="text-white bg-blue-500 px-4 py-2 rounded-sm ">
-  //           Login to proceed
-  //         </a>
-  //       </Link>
-  //     )
-  //   if (data)
-  //     return (
-  //       <div className="flex flex-col items-center">
-  //         <div className="flex justify-center items-center gap-x-2">
-  //           <div className="w-8 h-8 relative">
-  //             <Image
-  //               src={data.picture}
-  //               alt="Photo"
-  //               layout="fill"
-  //               className="rounded-full"
-  //             />
-  //           </div>
-  //           <h3 className="text-lg font-semibold tracking-wide">
-  //             Hello {data.name}
-  //           </h3>
-  //         </div>
-  //         <button
-  //           className="text-white bg-blue-500 px-4 py-2 rounded-sm mt-2"
-  //           onClick={handleLogout}
-  //         >
-  //           Logout
-  //         </button>
-  //       </div>
-  //     )
-  // }
+  const router = useRouter()
+  const { code, scope } = router.query
+  const { data, error, isLoading, mutate } = useGetMe()
+
+  useEffect(() => {
+    let controller: AbortController | undefined
+    const loginWithSocialMedia = async () => {
+      if (!code) return
+      try {
+        controller = new AbortController()
+        const response = await axiosInstance.post(
+          "/auth/social",
+          {
+            code,
+            type: scope ? "google" : "facebook",
+          },
+          { signal: controller.signal }
+        )
+        mutate(undefined, {
+          optimisticData: response.data.user,
+        })
+        router.replace("/")
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    loginWithSocialMedia()
+    return () => controller?.abort()
+  }, [code, scope, mutate, router])
+
+  console.log({ data, error, isLoading })
   return (
     <>
       <Head>
@@ -70,3 +64,45 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+// const { data, isLoading, mutate } = useGetMe()
+// const handleLogout = () => {
+//   mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
+//     optimisticData: undefined,
+//   })
+// }
+// const displayContent = () => {
+//   if (isLoading) return "Loading..."
+//   if (!data)
+//     return (
+//       <Link href="/login">
+//         <a className="text-white bg-blue-500 px-4 py-2 rounded-sm ">
+//           Login to proceed
+//         </a>
+//       </Link>
+//     )
+//   if (data)
+//     return (
+//       <div className="flex flex-col items-center">
+//         <div className="flex justify-center items-center gap-x-2">
+//           <div className="w-8 h-8 relative">
+//             <Image
+//               src={data.picture}
+//               alt="Photo"
+//               layout="fill"
+//               className="rounded-full"
+//             />
+//           </div>
+//           <h3 className="text-lg font-semibold tracking-wide">
+//             Hello {data.name}
+//           </h3>
+//         </div>
+//         <button
+//           className="text-white bg-blue-500 px-4 py-2 rounded-sm mt-2"
+//           onClick={handleLogout}
+//         >
+//           Logout
+//         </button>
+//       </div>
+//     )
+// }
