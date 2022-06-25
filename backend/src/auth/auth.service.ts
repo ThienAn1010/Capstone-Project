@@ -31,7 +31,10 @@ export class AuthService {
       const user = userData.getPayload();
       return user;
     } catch (error) {
-      throw new BadRequestException();
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Invalid code',
+      });
     }
   }
   private async checkFacebookCode(code: string) {
@@ -41,7 +44,10 @@ export class AuthService {
       const extractUserData = await this.facebookService.getUserData(token);
       return extractUserData.data;
     } catch (error) {
-      throw new BadRequestException();
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Invalid code',
+      });
     }
   }
   private async upsertUserToDb(user: TokenPayload | UserDataFB) {
