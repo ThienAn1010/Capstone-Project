@@ -1,8 +1,19 @@
 import Link from "next/link"
 
+const getFacebookOAuthUrl = () => {
+  const rootUrl = "https://www.facebook.com/v14.0/dialog/oauth"
+  const options = {
+    client_id: "945889392770900",
+    redirect_uri: "http://localhost:3000/",
+    scope: ["public_profile", "email"].join(","),
+  }
+  const queryString = new URLSearchParams(options)
+  return `${rootUrl}?${queryString.toString()}`
+}
+
 const LoginButton = () => {
   return (
-    <Link href="http://localhost:8000/auth/facebook">
+    <Link href={getFacebookOAuthUrl()}>
       <a className="px-5 py-3 bg-white shadow-md border w-full flex font-bold gap-x-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
