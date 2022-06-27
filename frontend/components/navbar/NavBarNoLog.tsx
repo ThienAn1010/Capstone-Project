@@ -144,7 +144,7 @@ export default function NavBarNoLog() {
                               <Link
                                 href={"http://localhost:8000/auth/facebook"}
                               >
-                                <div className="border border-gray-300 rounded-md px-2 py-1">
+                                <div className="border border-gray-300 rounded-md px-2 py-1 hover:cursor-pointer">
                                   <div className="flex justify-center space-x-2 items-center">
                                     <svg
                                       fill="currentColor"
@@ -169,7 +169,7 @@ export default function NavBarNoLog() {
                                 </div>
                               </Link>
                               <Link href={"http://localhost:8000/auth/google"}>
-                                <div className="border border-gray-300 rounded-md px-2 py-1">
+                                <div className="border border-gray-300 rounded-md px-2 py-1 hover:cursor-pointer">
                                   <div className="flex justify-center space-x-2 items-center">
                                     <svg
                                       fill="currentColor"
