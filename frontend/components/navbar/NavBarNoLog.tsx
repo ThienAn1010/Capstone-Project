@@ -118,7 +118,7 @@ export default function NavBarNoLog() {
                         </g>
                       </svg>
                     </div> */}
-                    <Menu as="div" className="inline-flex items-center">
+                    <Menu as="div" className="inline-flex items-center ">
                       <div>
                         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
                           <p>Sign In</p>
@@ -137,7 +137,7 @@ export default function NavBarNoLog() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="block absolute top-16 right-0 mt-2 w-80 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                        <Menu.Items className="block absolute z-10 top-16 right-0 mt-2 w-80 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
                           <div className="px-4 py-3 space-y-2">
                             <p className="text-xl font-semibold">Login with</p>
                             <div className="grid grid-cols-2 gap-4">
@@ -305,50 +305,6 @@ export default function NavBarNoLog() {
                     />
                   </svg>
                   <p className="text-md font-medium">Become a papermaker</p>
-                </div>
-              </div>
-              <div className="border-t-4 border-gray-300">
-                <div className="flex justify-center space-x-2 items-center py-4 hover:cursor-pointer">
-                  <svg
-                    fill="currentColor"
-                    className="h-8 w-8"
-                    stroke="unset"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 50 50"
-                  >
-                    <defs>
-                      <rect
-                        x="6"
-                        y="13"
-                        width="36.7659574"
-                        height="21.7358491"
-                        id="rect-1"
-                      ></rect>
-                    </defs>
-                    <g
-                      id="icons/icon-menu/icon-lang-vn"
-                      stroke="none"
-                      strokeWidth="1"
-                      fill="none"
-                      fillRule="evenodd"
-                    >
-                      <g id="Bitmap">
-                        <image
-                          x="6"
-                          y="13"
-                          width="36.7659574"
-                          height="21.7358491"
-                          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAeCAYAAAC8AUekAAAABGdBTUEAALGOfPtRkwAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAL6ADAAQAAAABAAAAHgAAAAB0FVfBAAADG0lEQVRYCe2WyWsUQRTGv1e9JDPZo+QQjBtGwXjwpKigd/Gs/6FXwYN/gBEvohLwEiTEuKBZNPtkpru6y6+6Z5h2SCTTCyGQgp7qqXpd9Xtfvfe6ZffZXYNT2tQp5U6wz+BP6vSqU95mUsXZ5FaiGiWRUa4s5N9mH1eyC8pXnmrLgMCZ43XL3nOgohOoRvkBwLk9CHGA6FMTaFRDXwm81AVqtk4PqPxQC2azGvhyw4aMUjNQV9mP+5ARH841ScaqCJ388ExGm5D/XDYvhwXunAcoTvJSNz0Ix5LWa98eTif7/80VNuKTeZIys4fphoSwqsg0YW8METyFUdfrUFdCiB/CZKUSkgd8/I/AsM/TcsGbkGwzAu/hMGRqMC2FHSd8hsl5Kt8Re3IA/tMJAradtNB0wqw3oef3ode6zvfrQC54G7/xF0CPtOA9ciGzNbIqDrdBsjwOYacZ/ySjW7SIYT4fQH9sIV62C/WL3LXPB8/nzSrL4FYAsxbDfRCyNLK6jDGOOifQ3YNj/EPFzU6AaKEB/aaJeFHDNNNTyJr2c58bPjn6QKAXIpiNfZZDDffOMFVmkc8qb2nIaH42Eb3bg35Nxb/bsWLgdtlsCtn//TXun7yIvjGEqGa03Djy+fgrQ2WeNis0sbvy2aItv/KZnYUwMuJAzrWXOwRMTTI3RmmjCgR5Zk97Wwq8VVFNuVAXa2nIhEzLLZ1spca5hcdUnanRpoVItXoQ8v8tDs/4lnEDucBvgTqX249YiZoIX+6QysB7Mso3Lp0aclheqfwEa9ImvT3kdPp1ozg8o0BNs1BeJvy2RvR2B8Erfs9spVkb/9iF/7gF5/4Y5JKirUL0m3M0L9oKwxsLP8USyVAJn29Af6Cy9isyZU8+yoIXAZzlDbj3bOh40HGQJPqJw9tPhWgpQLzKa4XgBz0hYf3YM4jex4jXG3SMEcNqWuTl1HG6sPJ2oXiVhL94o3vAO7tw2DpllmhnY719Kp3pvH1xeAtioW1vwY5qdi46ajLfeLGXVHbP/4Fn7Uq8Lw++RKjjLnUGf1ylyrY71cr/BSy59FsLOQsYAAAAAElFTkSuQmCC"
-                        ></image>
-                        <use
-                          stroke="#FFFFFF"
-                          strokeWidth="0.5"
-                          href="#rect-1"
-                        ></use>
-                      </g>
-                    </g>
-                  </svg>
-                  <p className="text-md font-medium">Tiếng Việt</p>
                 </div>
               </div>
             </Popover.Panel>
