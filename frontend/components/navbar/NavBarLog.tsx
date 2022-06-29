@@ -19,6 +19,7 @@ export default function NavBarLog({ data }: any) {
       optimisticData: undefined,
     })
   }
+  console.log(data.picture)
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
@@ -128,7 +129,12 @@ export default function NavBarLog({ data }: any) {
                     </div> */}
                     <Menu as="div" className="inline-flex items-center">
                       <div>
-                        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
+                        <Menu.Button className="inline-flex justify-center items-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
+                          <img
+                            className="mr-2 h-7 w-7 rounded-full"
+                            alt="User Avatar"
+                            src={data.picture}
+                          />
                           <p>{data.name}</p>
                           <ChevronDownIcon
                             className="-mr-1 ml-2 mt-0.5 h-5 w-5"
@@ -145,8 +151,8 @@ export default function NavBarLog({ data }: any) {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="block absolute z-10 top-16 right-0 mt-2 w-80 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-                          <div className="py-1">
+                        <Menu.Items className="block absolute z-10 top-16 right-0 mt-2 w-64 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                          <div>
                             <Menu.Item>
                               {({ active }) => (
                                 <div
@@ -154,7 +160,7 @@ export default function NavBarLog({ data }: any) {
                                     active
                                       ? "bg-gray-100 text-black"
                                       : "text-gray-900",
-                                    "flex justify-center space-x-2 items-center px-2 py-4 hover:cursor-pointer"
+                                    "flex justify-start space-x-2 items-center px-4 py-4 hover:cursor-pointer"
                                   )}
                                 >
                                   <svg
@@ -181,7 +187,7 @@ export default function NavBarLog({ data }: any) {
                               )}
                             </Menu.Item>
                           </div>
-                          <div className="py-1">
+                          <div>
                             <Menu.Item>
                               {({ active }) => (
                                 <div
@@ -189,8 +195,9 @@ export default function NavBarLog({ data }: any) {
                                     active
                                       ? "bg-gray-100 text-black"
                                       : "text-gray-900",
-                                    "flex justify-center space-x-2 items-center px-2 py-4 hover:cursor-pointer"
+                                    "flex justify-start space-x-2 items-center px-4 py-4 hover:cursor-pointer"
                                   )}
+                                  onClick={handleLogout}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +216,6 @@ export default function NavBarLog({ data }: any) {
                                   <a
                                     href="#"
                                     className="block text-md font-medium"
-                                    onClick={handleLogout}
                                   >
                                     Sign Out
                                   </a>
