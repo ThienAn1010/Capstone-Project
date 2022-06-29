@@ -35,7 +35,7 @@ const Home: NextPage = () => {
           },
           { signal: controller.signal }
         )
-        mutate(undefined, {
+        await mutate(undefined, {
           optimisticData: response.data.user,
         })
       } catch (error) {
