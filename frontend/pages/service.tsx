@@ -18,15 +18,24 @@ import axiosInstance from "../util/axiosInstace"
 import useSWR from "swr"
 import CardLoader from "../components/CardLoader"
 import Star from "../components/Star"
+import { useRouter } from "next/router"
 
 const sortOptions = [
   { name: "Newest", value: "" },
-  { name: "Most Popular", value: "sort=-totalCases" },
-  { name: "Shortest Duration", value: "sort=duration" },
-  { name: "Highest Rating", value: "sort=-rating" },
-  { name: "Price: Low to High", value: "sort=price" },
-  { name: "Price: High to Low", value: "sort=-price" },
+  { name: "Most Popular", value: "-totalCases" },
+  { name: "Shortest Duration", value: "duration" },
+  { name: "Highest Rating", value: "-rating" },
+  { name: "Price: Low to High", value: "price" },
+  { name: "Price: High to Low", value: "-price" },
 ]
+// const sortOptions = [
+//   { name: "Newest", value: "" },
+//   { name: "Most Popular", value: "sort=-totalCases" },
+//   { name: "Shortest Duration", value: "sort=duration" },
+//   { name: "Highest Rating", value: "sort=-rating" },
+//   { name: "Price: Low to High", value: "sort=price" },
+//   { name: "Price: High to Low", value: "sort=-price" },
+// ]
 const subCategories = [
   { name: "Totes", href: "#" },
   { name: "Backpacks", href: "#" },
@@ -39,40 +48,40 @@ const filters = [
     id: "rating",
     name: "Ratings",
     options: [
-      { value: 5, label: "5 star", checked: false },
-      { value: 4, label: "4.0 star & up", checked: false },
-      { value: 3, label: "3.0 star & up", checked: true },
-      { value: 2, label: "2.0 star & up", checked: false },
-      { value: 1, label: "1.0 star & up", checked: false },
+      { value: "5", label: "5 star" },
+      { value: "4", label: "4.0 star & up" },
+      { value: "3", label: "3.0 star & up" },
+      { value: "2", label: "2.0 star & up" },
+      { value: "1", label: "1.0 star & up" },
     ],
   },
   {
     id: "category",
     name: "Category",
     options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+      { value: "new-arrivals", label: "New Arrivals" },
+      { value: "sale", label: "Sale" },
+      { value: "travel", label: "Travel" },
+      { value: "organization", label: "Organization" },
+      { value: "accessories", label: "Accessories" },
     ],
   },
   {
     id: "duration",
     name: "Duration",
     options: [
-      { value: 7, label: "5-7 days", checked: false },
-      { value: 14, label: "7-14 days", checked: false },
-      { value: 15, label: "15+ days", checked: false },
+      { value: "7", label: "5-7 days" },
+      { value: "14", label: "7-14 days" },
+      { value: "15", label: "15+ days" },
     ],
   },
   {
     id: "price",
     name: "Price",
     options: [
-      { value: "10", label: "$10-$50", checked: false },
-      { value: "50", label: "$50-$100", checked: false },
-      { value: "100", label: "$100+", checked: false },
+      { value: "10", label: "$10-$50" },
+      { value: "50", label: "$50-$100" },
+      { value: "100", label: "$100+" },
     ],
   },
 ]
@@ -94,7 +103,7 @@ export interface OfferedService {
     pastSuccessfulCases: number
     rating: number
     status: string
-    totalCases: 0
+    totalCases: number
     user: {
       name: string
       picture: string
@@ -125,16 +134,9 @@ const ServicePage: NextPage<ServicePageProps> = ({
   services,
 }) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const [sort, setSort] = useState(sortOptions[0])
-  const [filter, setFilter] = useState({
-    rating: "",
-    categories: "",
-    duration: "",
-    price: 0,
-  })
-  console.log({ filter, setFilter })
-
-  const criteria = key + "?" + sort.value
+  const router = useRouter()
+  const url = new URLSearchParams(router.query as any).toString()
+  const criteria = key + "?" + url
   console.log(criteria)
   const { data, error } = useSWR(
     criteria === "/offered-services?" ? null : criteria,
@@ -147,6 +149,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
     }
   )
 
+  console.log(router)
   return (
     <>
       <Head>
@@ -253,7 +256,6 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                     name={`${section.id}[]`}
                                     defaultValue={option.value}
                                     type="checkbox"
-                                    defaultChecked={option.checked}
                                     className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label
@@ -279,7 +281,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative z-10 flex items-baseline justify-between pt-12 pb-6 border-b border-gray-200">
           <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-            {sort.name}
+            {router.query.sort ? router.query.sort : "Newest"}
           </h1>
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
@@ -308,9 +310,20 @@ const ServicePage: NextPage<ServicePageProps> = ({
                       <Menu.Item key={option.value}>
                         {({ active }) => (
                           <button
-                            onClick={() => setSort(option)}
+                            onClick={async () => {
+                              await router.replace(
+                                {
+                                  query: {
+                                    ...router.query,
+                                    sort: option.value,
+                                  },
+                                },
+                                undefined,
+                                { shallow: true }
+                              )
+                            }}
                             className={classNames(
-                              option.value === sort.value
+                              option.value === router.query.sort
                                 ? "font-medium text-gray-900"
                                 : "text-gray-500",
                               active ? "bg-gray-100" : "",
@@ -386,72 +399,86 @@ const ServicePage: NextPage<ServicePageProps> = ({
                       <Disclosure.Panel className="pt-6">
                         <div className="space-y-4">
                           {section.id === "rating" &&
-                            section.options.map((section) => (
-                              <div
-                                key={section.label}
-                                className="flex items-center"
-                              >
+                            section.options.map((s) => (
+                              <div key={s.label} className="flex items-center">
                                 <input
-                                  id={section.label}
+                                  id={s.label}
                                   name="notification-method"
                                   type="radio"
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                  onChange={() => {
+                                    console.log(router.basePath)
+                                    router.push(
+                                      {
+                                        query: {
+                                          ...router.query,
+                                          [`${section.id}[gte]`]: s.value,
+                                        },
+                                      },
+                                      undefined,
+                                      {
+                                        shallow: true,
+                                      }
+                                    )
+                                  }}
                                 />
                                 <label
-                                  htmlFor={section.label}
+                                  htmlFor={s.label}
                                   className="ml-3 text-sm flex items-center gap-x-1"
                                 >
-                                  <Star rating={section.value as number} />
-                                  <span>{section.label}</span>
+                                  <Star rating={parseInt(s.value)} />
+                                  <span>{s.label}</span>
                                 </label>
                               </div>
                             ))}
                           {section.id === "category" &&
-                            services.map((service) => (
-                              <div
-                                key={service.id}
-                                className="flex items-center"
-                              >
+                            services.map((s) => (
+                              <div key={s.id} className="flex items-center">
                                 <input
-                                  id={`filter-${service.id}-${service.name}`}
-                                  name={`${service.id}[]`}
-                                  defaultValue={service.id}
+                                  id={`filter-${s.id}-${s.name}`}
+                                  name={`${s.id}[]`}
                                   type="checkbox"
-                                  defaultChecked={
-                                    service.id === filter.categories
-                                  }
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                  onChange={() => {
+                                    router.push(
+                                      {
+                                        query: {
+                                          ...router.query,
+                                          serviceId: s.id,
+                                        },
+                                      },
+                                      undefined,
+                                      {
+                                        shallow: true,
+                                      }
+                                    )
+                                  }}
                                 />
                                 <label
-                                  htmlFor={`filter-${service.id}-${service.name}`}
+                                  htmlFor={`filter-${s.id}-${s.name}`}
                                   className="ml-3 text-sm text-gray-600"
                                 >
-                                  {service.name}
+                                  {s.name}
                                 </label>
                               </div>
                             ))}
                           {(section.id === "duration" ||
                             section.id === "price") &&
-                            section.options.map((section) => (
-                              <div
-                                key={section.label}
-                                className="flex items-center"
-                              >
+                            section.options.map((s) => (
+                              <div key={s.label} className="flex items-center">
                                 <input
-                                  id={`filter-${section.value}-${section.label}`}
-                                  name={`${section.label}[]`}
-                                  defaultValue={section.value}
+                                  id={`filter-${s.value}-${s.label}`}
+                                  name={`${s.label}[]`}
+                                  defaultValue={s.value}
                                   type="checkbox"
-                                  defaultChecked={
-                                    section.value === filter.duration
-                                  }
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                  onChange={() => {}}
                                 />
                                 <label
-                                  htmlFor={`filter-${section.value}-${section.label}`}
+                                  htmlFor={`filter-${s.value}-${s.label}`}
                                   className="ml-3 text-sm text-gray-600"
                                 >
-                                  {section.label}
+                                  {s.label}
                                 </label>
                               </div>
                             ))}
@@ -467,8 +494,8 @@ const ServicePage: NextPage<ServicePageProps> = ({
             <div className="grid grid-cols-1 gap-y-5 gap-x-6 lg:col-span-3 lg:gap-x-5">
               {!data &&
                 !error &&
-                Array(3)
-                  .fill(3)
+                Array(5)
+                  .fill(5)
                   .map((_, index) => <CardLoader key={index} />)}
               {data?.map((offeredService) => (
                 <Card key={offeredService.id} offeredService={offeredService} />
@@ -490,6 +517,5 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const response = await Promise.all([requestOfferedServices, requestServices])
   const offeredServices = response[0].data.offeredServices
   const services = response[1].data.services
-  console.log(offeredServices, services)
   return { props: { offeredServices, services } }
 }
