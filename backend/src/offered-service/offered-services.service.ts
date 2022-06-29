@@ -76,6 +76,13 @@ export class OfferedServicesService {
       };
       delete filterBy.rating;
     }
+    if (filterBy.serviceId) {
+      if (typeof filterBy.serviceId === 'object') {
+        filterBy.serviceId = {
+          in: filterBy.serviceId,
+        };
+      }
+    }
     console.log(filterBy);
     return filterBy;
   }
