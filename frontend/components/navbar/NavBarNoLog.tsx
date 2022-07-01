@@ -30,8 +30,8 @@ export default function NavBarNoLog() {
                   <div className="flex-shrink-0 flex items-center">
                     <a href="#">
                       <img
-                        className="block h-8 w-auto lg:hidden"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue"
+                        className="block h-10 w-auto lg:hidden"
+                        src="/mobile_logo.png"
                         alt="Workflow"
                       />
                     </a>
