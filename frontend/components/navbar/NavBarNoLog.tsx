@@ -26,7 +26,7 @@ export default function NavBarNoLog() {
           <>
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-6">
-                <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
+                <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1 ">
                   <div className="flex-shrink-0 flex items-center">
                     <a href="#">
                       <img
@@ -38,13 +38,13 @@ export default function NavBarNoLog() {
                     <a href="#">
                       <img
                         className="hidden lg:block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                        src="/logo.png"
                         alt="Workflow"
                       />
                     </a>
                   </div>
                 </div>
-                <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
+                <div className="hidden lg:flex lg:items-center lg:justify-center lg:ml-10 xl:col-span-1 lg:ml-10" >
                   <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
                     CATEGORIES
                   </p>
