@@ -5,8 +5,8 @@ import type { NextPage } from "next"
 
 const Home: NextPage = () => {
   return (
-    <div className="w-screen h-screen bg-gradient-to-bl from-indigo-900 via-blue-400 to-indigo-900 pt-36">
-      <div className="container max-w-xl bg-white mx-auto px-12 py-4 rounded-lg shadow-md">
+    <div className="w-screen h-screen bg-gradient-to-bl from-test via-sky-400 to-test pt-36">
+      <div className="container max-w-2xl bg-white mx-auto px-12 py-8 rounded-lg shadow-md">
         <h1 className="text-center text-xl subpixel-antialiased font-bold mb-4">
           Login Account
         </h1>
