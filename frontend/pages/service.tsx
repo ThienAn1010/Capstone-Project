@@ -15,13 +15,15 @@ import {
 import Card from "../components/Card"
 import Pagination from "../components/Pagination"
 import axiosInstance from "../util/axiosInstace"
-import useSWR from "swr"
 import CardLoader from "../components/CardLoader"
 import Star from "../components/Star"
 import { useRouter } from "next/router"
+import useGetOfferedServices from "../hooks/useGetOfferedServices"
+import { Service } from "../types/Service"
+import { OfferedService } from "../types/OfferedService"
 
 const sortOptions = [
-  { name: "Newest", value: "" },
+  { name: "Newest", value: "-createdAt" },
   { name: "Most Popular", value: "-totalCases" },
   { name: "Shortest Duration", value: "duration" },
   { name: "Highest Rating", value: "-rating" },
@@ -70,18 +72,18 @@ const filters = [
     id: "duration",
     name: "Duration",
     options: [
-      { value: "7", label: "5-7 days" },
-      { value: "14", label: "7-14 days" },
-      { value: "15", label: "15+ days" },
+      { value: "7", label: "Less than 7 days" },
+      { value: "14", label: "Less than 14 days" },
+      { value: "15", label: "More than 15 days" },
     ],
   },
   {
     id: "price",
     name: "Price",
     options: [
-      { value: "10", label: "$10-$50" },
-      { value: "50", label: "$50-$100" },
-      { value: "100", label: "$100+" },
+      { value: "50", label: "Less than $50" },
+      { value: "99", label: "Less than $99" },
+      { value: "100", label: "More than $100" },
     ],
   },
 ]
@@ -90,66 +92,34 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-export interface OfferedService {
-  createdAt: string
-  duration: number
-  id: string
-  paperMaker: {
-    address: string
-    id: string
-    isConfirmed: boolean
-    lat: number
-    long: number
-    pastSuccessfulCases: number
-    rating: number
-    status: string
-    totalCases: number
-    user: {
-      name: string
-      picture: string
-      username: string
-    }
-  }
-  paperMakerId: string
-  price: number
-  service: Service
-  serviceId: string
-}
-
-interface Service {
-  id: string
-  name: string
-  description: string
-}
-
 interface ServicePageProps {
-  offeredServices: OfferedService[]
+  offeredServicesData: {
+    offeredServices: OfferedService[]
+    length: number
+    numberOfRecords: number
+  }
   services: Service[]
 }
 
 const key = "/offered-services"
 
 const ServicePage: NextPage<ServicePageProps> = ({
-  offeredServices,
+  offeredServicesData,
   services,
 }) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const router = useRouter()
-  const url = new URLSearchParams(router.query as any).toString()
+  const searchParams = router.asPath.indexOf("?") + 1
+  const url = router.asPath.includes("?")
+    ? router.asPath.slice(searchParams)
+    : ""
   const criteria = key + "?" + url
-  console.log(criteria)
-  const { data, error } = useSWR(
-    criteria === "/offered-services?" ? null : criteria,
-    (url) =>
-      axiosInstance
-        .get<{ offeredServices: OfferedService[] }>(url)
-        .then((response) => response.data.offeredServices),
-    {
-      fallbackData: criteria === "/offered-services?" ? offeredServices : null,
-    }
+  const { data, error, isLoading } = useGetOfferedServices(
+    criteria,
+    offeredServicesData
   )
 
-  console.log(router)
+  console.log({ data, error, isLoading })
   return (
     <>
       <Head>
@@ -280,8 +250,8 @@ const ServicePage: NextPage<ServicePageProps> = ({
       </div>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative z-10 flex items-baseline justify-between pt-12 pb-6 border-b border-gray-200">
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-            {router.query.sort ? router.query.sort : "Newest"}
+          <h1 className="text-xl font-extrabold tracking-tight text-gray-900">
+            {isLoading ? "Loading..." : data?.numberOfRecords + " results"}
           </h1>
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
@@ -407,8 +377,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                   type="radio"
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                   onChange={() => {
-                                    console.log(router.basePath)
-                                    router.push(
+                                    router.replace(
                                       {
                                         query: {
                                           ...router.query,
@@ -440,18 +409,29 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                   type="checkbox"
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                   onChange={() => {
-                                    router.push(
-                                      {
-                                        query: {
-                                          ...router.query,
-                                          serviceId: s.id,
-                                        },
-                                      },
-                                      undefined,
-                                      {
-                                        shallow: true,
-                                      }
-                                    )
+                                    const queryServiceId =
+                                      router.query.serviceId
+                                    const query = {
+                                      ...router.query,
+                                      serviceId: !queryServiceId
+                                        ? s.id
+                                        : queryServiceId.includes(s.id)
+                                        ? typeof queryServiceId === "string"
+                                          ? "delete"
+                                          : queryServiceId.filter(
+                                              (id) => id !== s.id
+                                            )
+                                        : [
+                                            ...(queryServiceId as string[]),
+                                            s.id,
+                                          ],
+                                    } as any
+                                    if (query.serviceId === "delete") {
+                                      delete query.serviceId
+                                    }
+                                    router.replace({ query }, undefined, {
+                                      shallow: true,
+                                    })
                                   }}
                                 />
                                 <label
@@ -468,11 +448,30 @@ const ServicePage: NextPage<ServicePageProps> = ({
                               <div key={s.label} className="flex items-center">
                                 <input
                                   id={`filter-${s.value}-${s.label}`}
-                                  name={`${s.label}[]`}
                                   defaultValue={s.value}
-                                  type="checkbox"
+                                  name={`${section.id}-group`}
+                                  type="radio"
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                                  onChange={() => {}}
+                                  onChange={() => {
+                                    const value =
+                                      (s.value === "15" &&
+                                        section.id === "duration") ||
+                                      (s.value === "100" &&
+                                        section.id === "price")
+                                        ? "[gte]"
+                                        : "[lte]"
+                                    router.replace(
+                                      {
+                                        query: {
+                                          [`${section.id}${value}`]: s.value,
+                                        },
+                                      },
+                                      undefined,
+                                      {
+                                        shallow: true,
+                                      }
+                                    )
+                                  }}
                                 />
                                 <label
                                   htmlFor={`filter-${s.value}-${s.label}`}
@@ -492,15 +491,26 @@ const ServicePage: NextPage<ServicePageProps> = ({
 
             {/* Product grid */}
             <div className="grid grid-cols-1 gap-y-5 gap-x-6 lg:col-span-3 lg:gap-x-5">
-              {!data &&
-                !error &&
+              {isLoading &&
                 Array(5)
                   .fill(5)
                   .map((_, index) => <CardLoader key={index} />)}
-              {data?.map((offeredService) => (
+              {data?.numberOfRecords === 0 && (
+                <h4 className="text-center">No results found</h4>
+              )}
+              {data?.offeredServices.map((offeredService) => (
                 <Card key={offeredService.id} offeredService={offeredService} />
               ))}
-              <Pagination />
+              {!(
+                isLoading ||
+                data?.numberOfRecords === 0 ||
+                data?.length === 0
+              ) && (
+                <Pagination
+                  pageSize={5}
+                  numberOfRecords={data!.numberOfRecords}
+                />
+              )}
             </div>
           </div>
         </section>
@@ -511,11 +521,22 @@ const ServicePage: NextPage<ServicePageProps> = ({
 
 export default ServicePage
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const requestOfferedServices = axiosInstance.get("/offered-services")
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const queryString = context.resolvedUrl.includes("?")
+    ? "offered-services" +
+      context.resolvedUrl.slice(context.resolvedUrl.indexOf("?"))
+    : "offered-services"
+  const requestOfferedServices = axiosInstance.get(queryString)
   const requestServices = axiosInstance.get("/services")
   const response = await Promise.all([requestOfferedServices, requestServices])
   const offeredServices = response[0].data.offeredServices
   const services = response[1].data.services
-  return { props: { offeredServices, services } }
+  const offeredServicesData = {
+    offeredServices,
+    length: response[0].data.length,
+    numberOfRecords: response[0].data.numberOfRecords,
+  }
+  return {
+    props: { offeredServicesData, services },
+  }
 }
