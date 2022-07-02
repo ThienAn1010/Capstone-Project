@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { OfferedService } from "../pages/service"
+import { OfferedService } from "../types/OfferedService"
 import Star from "./Star"
 interface CardProps {
   offeredService: OfferedService
