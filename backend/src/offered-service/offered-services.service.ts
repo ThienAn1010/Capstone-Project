@@ -83,7 +83,6 @@ export class OfferedServicesService {
         };
       }
     }
-    console.log(filterBy);
     return filterBy;
   }
   async getAllOfferedServices(query) {
@@ -102,6 +101,8 @@ export class OfferedServicesService {
             include: {
               user: {
                 select: {
+                  id: true,
+                  role: true,
                   name: true,
                   username: true,
                   picture: true,
@@ -116,9 +117,13 @@ export class OfferedServicesService {
         skip,
         take,
       });
+      const numberOfRecords = await this.prismaService.offeredService.count({
+        where: filterBy,
+      });
       return {
         status: 'success',
         length: offeredServices.length,
+        numberOfRecords,
         offeredServices: offeredServices,
       };
     } catch (error) {
