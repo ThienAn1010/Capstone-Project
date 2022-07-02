@@ -192,9 +192,11 @@ const Home: NextPage = () => {
             </button>
             <div className="flex justify-center">
               <p className="opacity-75">Become a papermaker?&nbsp;</p>
-              <p className="opacity-75 text-blue-600 hover:text-blue-700 focus:text-blue-700 hover:cursor-pointer hover:underline hover:underline-offset-2">
-                Sign up
-              </p>
+              <Link href="/register">
+                <p className="opacity-75 text-blue-600 hover:text-blue-700 focus:text-blue-700 hover:cursor-pointer hover:underline hover:underline-offset-2">
+                  Sign up
+                </p>
+              </Link>
             </div>
           </form>
         </div>
