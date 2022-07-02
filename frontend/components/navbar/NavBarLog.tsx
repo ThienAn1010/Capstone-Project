@@ -64,7 +64,7 @@ export default function NavBarLog({ data }: any) {
                 </div>
                 <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
                   {/* Mobile menu button */}
-                  <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open menu</span>
                     {open ? (
                       <XIcon
@@ -270,28 +270,42 @@ export default function NavBarLog({ data }: any) {
               className="bg-white lg:hidden"
               aria-label="Global"
             >
-              <div className="max-w-3xl mx-auto px-2 py-4 space-y-1 sm:px-4">
-                <div className="flex justify-center space-x-2 items-center hover:cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <a href="#" className="block text-lg font-semibold">
-                    Sign In
-                  </a>
-                </div>
+              <div className="border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                  />
+                </svg>
+                <p className="text-md font-medium">Dashboard</p>
               </div>
-              <div className="border-t-4 border-gray-300">
+              <div className="border-t-2 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                  />
+                </svg>
+                <p className="text-md font-medium">My Order</p>
+              </div>
+
+              <div className="border-t-2 border-gray-300">
                 <div className="flex justify-center space-x-2 items-center py-4 hover:cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -309,7 +323,7 @@ export default function NavBarLog({ data }: any) {
                   </svg>
                   <p className="text-md font-medium">Categories</p>
                 </div>
-                <div className="border-t-4 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
+                <div className="border-t-2 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -326,49 +340,22 @@ export default function NavBarLog({ data }: any) {
                   </svg>
                   <p className="text-md font-medium">Become a papermaker</p>
                 </div>
-              </div>
-              <div className="border-t-4 border-gray-300">
-                <div className="flex justify-center space-x-2 items-center py-4 hover:cursor-pointer">
+                <div className="border-t-2 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
                   <svg
-                    fill="currentColor"
-                    className="h-8 w-8"
-                    stroke="unset"
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 50 50"
+                    className="h-7 w-7"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
                   >
-                    <defs>
-                      <rect
-                        x="6"
-                        y="13"
-                        width="36.7659574"
-                        height="21.7358491"
-                        id="rect-1"
-                      ></rect>
-                    </defs>
-                    <g
-                      id="icons/icon-menu/icon-lang-vn"
-                      stroke="none"
-                      strokeWidth="1"
-                      fill="none"
-                      fillRule="evenodd"
-                    >
-                      <g id="Bitmap">
-                        <image
-                          x="6"
-                          y="13"
-                          width="36.7659574"
-                          height="21.7358491"
-                          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAeCAYAAAC8AUekAAAABGdBTUEAALGOfPtRkwAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAL6ADAAQAAAABAAAAHgAAAAB0FVfBAAADG0lEQVRYCe2WyWsUQRTGv1e9JDPZo+QQjBtGwXjwpKigd/Gs/6FXwYN/gBEvohLwEiTEuKBZNPtkpru6y6+6Z5h2SCTTCyGQgp7qqXpd9Xtfvfe6ZffZXYNT2tQp5U6wz+BP6vSqU95mUsXZ5FaiGiWRUa4s5N9mH1eyC8pXnmrLgMCZ43XL3nOgohOoRvkBwLk9CHGA6FMTaFRDXwm81AVqtk4PqPxQC2azGvhyw4aMUjNQV9mP+5ARH841ScaqCJ388ExGm5D/XDYvhwXunAcoTvJSNz0Ix5LWa98eTif7/80VNuKTeZIys4fphoSwqsg0YW8METyFUdfrUFdCiB/CZKUSkgd8/I/AsM/TcsGbkGwzAu/hMGRqMC2FHSd8hsl5Kt8Re3IA/tMJAradtNB0wqw3oef3ode6zvfrQC54G7/xF0CPtOA9ciGzNbIqDrdBsjwOYacZ/ySjW7SIYT4fQH9sIV62C/WL3LXPB8/nzSrL4FYAsxbDfRCyNLK6jDGOOifQ3YNj/EPFzU6AaKEB/aaJeFHDNNNTyJr2c58bPjn6QKAXIpiNfZZDDffOMFVmkc8qb2nIaH42Eb3bg35Nxb/bsWLgdtlsCtn//TXun7yIvjGEqGa03Djy+fgrQ2WeNis0sbvy2aItv/KZnYUwMuJAzrWXOwRMTTI3RmmjCgR5Zk97Wwq8VVFNuVAXa2nIhEzLLZ1spca5hcdUnanRpoVItXoQ8v8tDs/4lnEDucBvgTqX249YiZoIX+6QysB7Mso3Lp0aclheqfwEa9ImvT3kdPp1ozg8o0BNs1BeJvy2RvR2B8Erfs9spVkb/9iF/7gF5/4Y5JKirUL0m3M0L9oKwxsLP8USyVAJn29Af6Cy9isyZU8+yoIXAZzlDbj3bOh40HGQJPqJw9tPhWgpQLzKa4XgBz0hYf3YM4jex4jXG3SMEcNqWuTl1HG6sPJ2oXiVhL94o3vAO7tw2DpllmhnY719Kp3pvH1xeAtioW1vwY5qdi46ajLfeLGXVHbP/4Fn7Uq8Lw++RKjjLnUGf1ylyrY71cr/BSy59FsLOQsYAAAAAElFTkSuQmCC"
-                        ></image>
-                        <use
-                          stroke="#FFFFFF"
-                          strokeWidth="0.5"
-                          href="#rect-1"
-                        ></use>
-                      </g>
-                    </g>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                    />
                   </svg>
-                  <p className="text-md font-medium">Tiếng Việt</p>
+                  <p className="text-md font-medium">Sign Out</p>
                 </div>
               </div>
             </Popover.Panel>
