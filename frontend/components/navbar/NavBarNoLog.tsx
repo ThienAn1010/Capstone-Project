@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { Popover } from "@headlessui/react"
-import { MenuIcon, XIcon } from "@heroicons/react/outline"
+import { MenuIcon, XIcon, UserIcon } from "@heroicons/react/outline"
 import SearchBar from "./SearchBar"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/solid"
@@ -71,11 +71,13 @@ export default function NavBarNoLog() {
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:divide-x lg:divide-gray-100 lg:items-center lg:justify-end xl:col-span-4">
-                  <div className="px-4">
-                    <p className="text-md subpixel-antialiased font-medium border-b border-transparent text-white hover:cursor-pointer hover:border-white">
-                      BECOME A PAPERMAKER
-                    </p>
-                  </div>
+                  <Link href={"/papermaker_register"}>
+                    <div className="px-4">
+                      <p className="text-md subpixel-antialiased font-medium border-b border-transparent text-white hover:cursor-pointer hover:border-white">
+                        BECOME A PAPERMAKER
+                      </p>
+                    </div>
+                  </Link>
                   <div className="hidden space-x-2 pl-4 lg:flex lg:items-center lg:justify-end">
                     {/* <div className="items-center justify-center hover:cursor-pointer">
                       <svg
@@ -121,6 +123,10 @@ export default function NavBarNoLog() {
                     <Menu as="div" className="inline-flex items-center ">
                       <div>
                         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
+                          <UserIcon
+                            aria-hidden="true"
+                            className="mt-0.5 h-5 w-5 mr-1 -ml-1"
+                          />
                           <p>Sign In</p>
                           <ChevronDownIcon
                             className="-mr-1 ml-2 mt-0.5 h-5 w-5"
