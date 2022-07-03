@@ -7,7 +7,7 @@ interface CardProps {
 
 const Card: FC<CardProps> = ({ offeredService }) => {
   return (
-    <div className="pb-3 border-b border-b-[#d1d7dc]">
+    <div className="pb-3 border-b border-b-[#d1d7dc] relative">
       <div className="flex justify-start items-start">
         <div className="mr-2">
           <img
@@ -16,13 +16,13 @@ const Card: FC<CardProps> = ({ offeredService }) => {
             src="https://images.smartcapitalmind.com/person-using-pen-near-documents-and-chart.jpg"
           />
         </div>
-        <div className="flex-1 text-gray-500 text-sm">
+        <div className="text-gray-500 text-sm pr-20 flex-1">
           <h3 className="font-bold text-lg text-gray-900">
             {offeredService.paperMaker.user.name} -{" "}
             {offeredService.service.name}
           </h3>
           <div className="flex text-xs mb-1">Ho Chi Minh City</div>
-          <p className="max-w-md truncate">
+          <p className="line-clamp-2">
             The best service only available on PaperWork, and task will be
             finished within 7 days. The service ensure quality and fastest in
             the whole system
@@ -49,7 +49,7 @@ const Card: FC<CardProps> = ({ offeredService }) => {
             </span>
           </div>
         </div>
-        <div className="font-bold text-lg text-gray-900">
+        <div className="font-bold text-lg text-gray-900 absolute top-o right-0">
           ${offeredService.price}
         </div>
       </div>
