@@ -30,21 +30,7 @@ const sortOptions = [
   { name: "Price: Low to High", value: "price" },
   { name: "Price: High to Low", value: "-price" },
 ]
-// const sortOptions = [
-//   { name: "Newest", value: "" },
-//   { name: "Most Popular", value: "sort=-totalCases" },
-//   { name: "Shortest Duration", value: "sort=duration" },
-//   { name: "Highest Rating", value: "sort=-rating" },
-//   { name: "Price: Low to High", value: "sort=price" },
-//   { name: "Price: High to Low", value: "sort=-price" },
-// ]
-const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
-]
+
 const filters = [
   {
     id: "rating",
@@ -172,20 +158,6 @@ const ServicePage: NextPage<ServicePageProps> = ({
 
                 {/* Filters */}
                 <form className="mt-4 border-t border-gray-200">
-                  <h3 className="sr-only">Categories</h3>
-                  <ul
-                    role="list"
-                    className="font-medium text-gray-900 px-2 py-3"
-                  >
-                    {subCategories.map((category) => (
-                      <li key={category.name}>
-                        <a href={category.href} className="block px-2 py-3">
-                          {category.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-
                   {filters.map((section) => (
                     <Disclosure
                       as="div"
@@ -216,26 +188,126 @@ const ServicePage: NextPage<ServicePageProps> = ({
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`filter-mobile-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                    className="ml-3 min-w-0 flex-1 text-gray-500"
+                              {section.id === "rating" &&
+                                section.options.map((s) => (
+                                  <div
+                                    key={s.label}
+                                    className="flex items-center"
                                   >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
+                                    <input
+                                      id={s.label}
+                                      name="notification-method"
+                                      type="radio"
+                                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                      onChange={() => {
+                                        router.replace(
+                                          {
+                                            query: {
+                                              ...router.query,
+                                              [`${section.id}[gte]`]: s.value,
+                                            },
+                                          },
+                                          undefined,
+                                          {
+                                            shallow: true,
+                                          }
+                                        )
+                                      }}
+                                    />
+                                    <label
+                                      htmlFor={s.label}
+                                      className="flex items-center gap-x-1 ml-3 min-w-0 flex-1 text-gray-500"
+                                    >
+                                      <Star rating={parseInt(s.value)} />
+                                      <span>{s.label}</span>
+                                    </label>
+                                  </div>
+                                ))}
+                              {section.id === "category" &&
+                                services.map((s) => (
+                                  <div key={s.id} className="flex items-center">
+                                    <input
+                                      id={`filter-${s.id}-${s.name}`}
+                                      name={`${s.id}[]`}
+                                      type="checkbox"
+                                      className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                      onChange={() => {
+                                        const queryServiceId =
+                                          router.query.serviceId
+                                        const query = {
+                                          ...router.query,
+                                          serviceId: !queryServiceId
+                                            ? s.id
+                                            : queryServiceId.includes(s.id)
+                                            ? typeof queryServiceId === "string"
+                                              ? "delete"
+                                              : queryServiceId.filter(
+                                                  (id) => id !== s.id
+                                                )
+                                            : [
+                                                ...(queryServiceId as string[]),
+                                                s.id,
+                                              ],
+                                        } as any
+                                        if (query.serviceId === "delete") {
+                                          delete query.serviceId
+                                        }
+                                        router.replace({ query }, undefined, {
+                                          shallow: true,
+                                        })
+                                      }}
+                                    />
+                                    <label
+                                      htmlFor={`filter-${s.id}-${s.name}`}
+                                      className="ml-3 text-sm text-gray-600"
+                                    >
+                                      {s.name}
+                                    </label>
+                                  </div>
+                                ))}
+                              {(section.id === "duration" ||
+                                section.id === "price") &&
+                                section.options.map((s) => (
+                                  <div
+                                    key={s.label}
+                                    className="flex items-center"
+                                  >
+                                    <input
+                                      id={`filter-${s.value}-${s.label}`}
+                                      defaultValue={s.value}
+                                      name={`${section.id}-group`}
+                                      type="radio"
+                                      className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                      onChange={() => {
+                                        const value =
+                                          (s.value === "15" &&
+                                            section.id === "duration") ||
+                                          (s.value === "100" &&
+                                            section.id === "price")
+                                            ? "[gte]"
+                                            : "[lte]"
+                                        router.replace(
+                                          {
+                                            query: {
+                                              [`${section.id}${value}`]:
+                                                s.value,
+                                            },
+                                          },
+                                          undefined,
+                                          {
+                                            shallow: true,
+                                          }
+                                        )
+                                      }}
+                                    />
+                                    <label
+                                      htmlFor={`filter-${s.value}-${s.label}`}
+                                      className="ml-3 text-sm text-gray-600"
+                                    >
+                                      {s.label}
+                                    </label>
+                                  </div>
+                                ))}
                             </div>
                           </Disclosure.Panel>
                         </>
@@ -251,7 +323,9 @@ const ServicePage: NextPage<ServicePageProps> = ({
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative z-10 flex items-baseline justify-between pt-12 pb-6 border-b border-gray-200">
           <h1 className="text-xl font-extrabold tracking-tight text-gray-900">
-            {isLoading ? "Loading..." : data?.numberOfRecords + " results"}
+            {isLoading
+              ? "Loading..."
+              : `Showing ${data?.length}/${data?.numberOfRecords} results`}
           </h1>
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
