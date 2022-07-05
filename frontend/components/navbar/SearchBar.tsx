@@ -36,8 +36,8 @@ export default function SearchBar() {
             {({ open }) => (
               <>
                 <div className="relative">
-                  <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-r-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none sm:text-sm hover:cursor-pointer">
-                    <span className="block">{selected.name}</span>
+                  <Listbox.Button className="bg-white relative w-14 md:w-32 border border-gray-300 rounded-r-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none sm:text-sm hover:cursor-pointer ">
+                    <span className="block truncate">{selected.name}</span>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                       <SelectorIcon
                         className="h-5 w-5 text-gray-400"

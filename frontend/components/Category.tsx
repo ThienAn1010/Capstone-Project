@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function Category() {
   let categories = [
     { id: "1", name: "Marriage Certificate", src: "/Marriage Certificate.svg" },
