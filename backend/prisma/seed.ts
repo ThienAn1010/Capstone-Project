@@ -450,7 +450,7 @@ const seed = async () => {
             create: {
               duration: 20,
               price: 30,
-              serviceId: '5',
+              serviceId: '1',
             },
           },
         },
