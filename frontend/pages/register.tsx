@@ -2,7 +2,7 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import PapermakerRegisterForm from "../components/PapermakerRegisterForm"
 
-const PapermakerRegister: NextPage = () => {
+const Register: NextPage = () => {
   return (
     <>
       <Head>
@@ -22,4 +22,4 @@ const PapermakerRegister: NextPage = () => {
   )
 }
 
-export default PapermakerRegister
+export default Register
