@@ -8,9 +8,10 @@ interface PaginationProps {
 
 const Pagination: FC<PaginationProps> = ({ pageSize, numberOfRecords }) => {
   const router = useRouter()
-  const pages = Math.floor(numberOfRecords / pageSize)
+  const pages = Math.ceil(numberOfRecords / pageSize)
   const totalPages = Array.from({ length: pages }, (_, index) => index + 1)
   const currentPage = parseInt(router.query?.page as string) || 1
+  const query = router.query
   if (pages < 2) return null
   return (
     <div className="flex justify-end gap-x-0.5">
@@ -20,7 +21,7 @@ const Pagination: FC<PaginationProps> = ({ pageSize, numberOfRecords }) => {
         }`}
         onClick={async () => {
           await router.replace(
-            { query: { page: currentPage - 1 } },
+            { query: { ...query, page: currentPage - 1 } },
             undefined,
             {
               shallow: true,
@@ -39,7 +40,7 @@ const Pagination: FC<PaginationProps> = ({ pageSize, numberOfRecords }) => {
               : "text-gray-900 hover:bg-blue-400 hover:text-blue-50"
           } transition`}
           onClick={async () => {
-            await router.replace({ query: { page } }, undefined, {
+            await router.replace({ query: { ...query, page } }, undefined, {
               shallow: true,
             })
           }}
@@ -53,7 +54,7 @@ const Pagination: FC<PaginationProps> = ({ pageSize, numberOfRecords }) => {
         }`}
         onClick={async () => {
           await router.replace(
-            { query: { page: currentPage + 1 } },
+            { query: { ...query, page: currentPage + 1 } },
             undefined,
             {
               shallow: true,
