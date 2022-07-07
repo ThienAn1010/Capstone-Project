@@ -35,6 +35,7 @@ const filters = [
   {
     id: "rating",
     name: "Ratings",
+    type: "radio",
     options: [
       { value: "5", label: "5 star" },
       { value: "4", label: "4.0 star & up" },
@@ -46,17 +47,13 @@ const filters = [
   {
     id: "category",
     name: "Category",
-    options: [
-      { value: "new-arrivals", label: "New Arrivals" },
-      { value: "sale", label: "Sale" },
-      { value: "travel", label: "Travel" },
-      { value: "organization", label: "Organization" },
-      { value: "accessories", label: "Accessories" },
-    ],
+    type: "checkbox",
+    options: [],
   },
   {
     id: "duration",
     name: "Duration",
+    type: "radio",
     options: [
       { value: "7", label: "Less than 7 days" },
       { value: "14", label: "Less than 14 days" },
@@ -66,6 +63,7 @@ const filters = [
   {
     id: "price",
     name: "Price",
+    type: "radio",
     options: [
       { value: "50", label: "Less than $50" },
       { value: "99", label: "Less than $99" },
@@ -100,12 +98,11 @@ const ServicePage: NextPage<ServicePageProps> = ({
     ? router.asPath.slice(searchParams)
     : ""
   const criteria = key + "?" + url
-  const { data, error, isLoading } = useGetOfferedServices(
+  const { data, isLoading } = useGetOfferedServices(
     criteria,
     offeredServicesData
   )
-
-  console.log({ data, error, isLoading })
+  console.log(router.query)
   return (
     <>
       <Head>
@@ -200,10 +197,12 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                       type="radio"
                                       className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                       onChange={() => {
+                                        const query = { ...router.query }
+                                        delete query.page
                                         router.replace(
                                           {
                                             query: {
-                                              ...router.query,
+                                              ...query,
                                               [`${section.id}[gte]`]: s.value,
                                             },
                                           },
@@ -252,6 +251,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                         if (query.serviceId === "delete") {
                                           delete query.serviceId
                                         }
+                                        delete query.page
                                         router.replace({ query }, undefined, {
                                           shallow: true,
                                         })
@@ -286,9 +286,12 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                             section.id === "price")
                                             ? "[gte]"
                                             : "[lte]"
+                                        const query = { ...router.query }
+                                        delete query.page
                                         router.replace(
                                           {
                                             query: {
+                                              ...query,
                                               [`${section.id}${value}`]:
                                                 s.value,
                                             },
@@ -323,9 +326,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative z-10 flex items-baseline justify-between pt-12 pb-6 border-b border-gray-200">
           <h1 className="text-xl font-extrabold tracking-tight text-gray-900">
-            {isLoading
-              ? "Loading..."
-              : `Showing ${data?.length}/${data?.numberOfRecords} results`}
+            {isLoading ? "Loading..." : `${data?.numberOfRecords} results`}
           </h1>
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
@@ -355,10 +356,12 @@ const ServicePage: NextPage<ServicePageProps> = ({
                         {({ active }) => (
                           <button
                             onClick={async () => {
+                              const query = { ...router.query }
+                              delete query.page
                               await router.replace(
                                 {
                                   query: {
-                                    ...router.query,
+                                    ...query,
                                     sort: option.value,
                                   },
                                 },
@@ -449,12 +452,18 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                   id={s.label}
                                   name="notification-method"
                                   type="radio"
+                                  defaultChecked={
+                                    s.value ===
+                                    `${router.query[`${section.id}[gte]`]}`
+                                  }
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                                   onChange={() => {
+                                    const query = { ...router.query }
+                                    delete query.page
                                     router.replace(
                                       {
                                         query: {
-                                          ...router.query,
+                                          ...query,
                                           [`${section.id}[gte]`]: s.value,
                                         },
                                       },
@@ -481,6 +490,9 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                   id={`filter-${s.id}-${s.name}`}
                                   name={`${s.id}[]`}
                                   type="checkbox"
+                                  defaultChecked={router.query.serviceId?.includes(
+                                    s.id
+                                  )}
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                   onChange={() => {
                                     const queryServiceId =
@@ -503,6 +515,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                     if (query.serviceId === "delete") {
                                       delete query.serviceId
                                     }
+                                    delete query.page
                                     router.replace({ query }, undefined, {
                                       shallow: true,
                                     })
@@ -525,6 +538,19 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                   defaultValue={s.value}
                                   name={`${section.id}-group`}
                                   type="radio"
+                                  defaultChecked={(() => {
+                                    const value =
+                                      (s.value === "15" &&
+                                        section.id === "duration") ||
+                                      (s.value === "100" &&
+                                        section.id === "price")
+                                        ? "[gte]"
+                                        : "[lte]"
+                                    return (
+                                      s.value ===
+                                      router.query[`${section.id}${value}`]
+                                    )
+                                  })()}
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
                                   onChange={() => {
                                     const value =
@@ -534,9 +560,14 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                         section.id === "price")
                                         ? "[gte]"
                                         : "[lte]"
+                                    const query = { ...router.query }
+                                    delete query.page
+                                    delete query[`${section.id}[gte]`]
+                                    delete query[`${section.id}[lte]`]
                                     router.replace(
                                       {
                                         query: {
+                                          ...query,
                                           [`${section.id}${value}`]: s.value,
                                         },
                                       },
@@ -566,8 +597,8 @@ const ServicePage: NextPage<ServicePageProps> = ({
             {/* Product grid */}
             <div className="grid grid-cols-1 gap-y-5 gap-x-6 lg:col-span-3 lg:gap-x-5">
               {isLoading &&
-                Array(5)
-                  .fill(5)
+                Array(3)
+                  .fill(3)
                   .map((_, index) => <CardLoader key={index} />)}
               {data?.numberOfRecords === 0 && (
                 <h4 className="text-center">No results found</h4>
@@ -581,7 +612,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
                 data?.length === 0
               ) && (
                 <Pagination
-                  pageSize={5}
+                  pageSize={10}
                   numberOfRecords={data!.numberOfRecords}
                 />
               )}
