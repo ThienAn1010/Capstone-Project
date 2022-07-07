@@ -153,7 +153,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
                   </button>
                 </div>
 
-                {/* Filters */}
+                {/* Filters Mobile */}
                 <form className="mt-4 border-t border-gray-200">
                   {filters.map((section) => (
                     <Disclosure
@@ -196,6 +196,10 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                       name="notification-method"
                                       type="radio"
                                       className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                      defaultChecked={
+                                        s.value ===
+                                        `${router.query[`${section.id}[gte]`]}`
+                                      }
                                       onChange={() => {
                                         const query = { ...router.query }
                                         delete query.page
@@ -230,6 +234,9 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                       name={`${s.id}[]`}
                                       type="checkbox"
                                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                      defaultChecked={router.query.serviceId?.includes(
+                                        s.id
+                                      )}
                                       onChange={() => {
                                         const queryServiceId =
                                           router.query.serviceId
@@ -278,6 +285,19 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                       name={`${section.id}-group`}
                                       type="radio"
                                       className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                      defaultChecked={(() => {
+                                        const value =
+                                          (s.value === "15" &&
+                                            section.id === "duration") ||
+                                          (s.value === "100" &&
+                                            section.id === "price")
+                                            ? "[gte]"
+                                            : "[lte]"
+                                        return (
+                                          s.value ===
+                                          router.query[`${section.id}${value}`]
+                                        )
+                                      })()}
                                       onChange={() => {
                                         const value =
                                           (s.value === "15" &&
@@ -411,7 +431,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10 lg:items-baseline">
-            {/* Filters */}
+            {/* Filters Desktop*/}
             <form className="hidden lg:block mb-auto">
               <h3 className="sr-only">Categories</h3>
 
