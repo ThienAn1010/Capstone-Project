@@ -19,7 +19,6 @@ export default function NavBarLog({ data }: any) {
       optimisticData: undefined,
     })
   }
-  console.log(data.picture)
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}

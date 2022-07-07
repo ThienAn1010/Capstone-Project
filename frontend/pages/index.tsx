@@ -48,7 +48,6 @@ const Home: NextPage = () => {
     return () => controller?.abort()
   }, [code, scope, mutate, router])
 
-  // console.log({ data, error, isLoading })
   return (
     <>
       <Head>
