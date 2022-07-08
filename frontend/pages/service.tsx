@@ -15,64 +15,59 @@ import {
 import Card from "../components/Card"
 import Pagination from "../components/Pagination"
 import axiosInstance from "../util/axiosInstace"
-import useSWR from "swr"
 import CardLoader from "../components/CardLoader"
 import Star from "../components/Star"
+import { useRouter } from "next/router"
+import useGetOfferedServices from "../hooks/useGetOfferedServices"
+import { Service } from "../types/Service"
+import { OfferedService } from "../types/OfferedService"
 
 const sortOptions = [
-  { name: "Newest", value: "" },
-  { name: "Most Popular", value: "sort=-totalCases" },
-  { name: "Shortest Duration", value: "sort=duration" },
-  { name: "Highest Rating", value: "sort=-rating" },
-  { name: "Price: Low to High", value: "sort=price" },
-  { name: "Price: High to Low", value: "sort=-price" },
+  { name: "Newest", value: "-createdAt" },
+  { name: "Most Popular", value: "-totalCases" },
+  { name: "Shortest Duration", value: "duration" },
+  { name: "Highest Rating", value: "-rating" },
+  { name: "Price: Low to High", value: "price" },
+  { name: "Price: High to Low", value: "-price" },
 ]
-const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
-]
+
 const filters = [
   {
     id: "rating",
     name: "Ratings",
+    type: "radio",
     options: [
-      { value: 5, label: "5 star", checked: false },
-      { value: 4, label: "4.0 star & up", checked: false },
-      { value: 3, label: "3.0 star & up", checked: true },
-      { value: 2, label: "2.0 star & up", checked: false },
-      { value: 1, label: "1.0 star & up", checked: false },
+      { value: "5", label: "5 star" },
+      { value: "4", label: "4.0 star & up" },
+      { value: "3", label: "3.0 star & up" },
+      { value: "2", label: "2.0 star & up" },
+      { value: "1", label: "1.0 star & up" },
     ],
   },
   {
     id: "category",
     name: "Category",
-    options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
-    ],
+    type: "checkbox",
+    options: [],
   },
   {
     id: "duration",
     name: "Duration",
+    type: "radio",
     options: [
-      { value: 7, label: "5-7 days", checked: false },
-      { value: 14, label: "7-14 days", checked: false },
-      { value: 15, label: "15+ days", checked: false },
+      { value: "7", label: "Less than 7 days" },
+      { value: "14", label: "Less than 14 days" },
+      { value: "15", label: "More than 15 days" },
     ],
   },
   {
     id: "price",
     name: "Price",
+    type: "radio",
     options: [
-      { value: "10", label: "$10-$50", checked: false },
-      { value: "50", label: "$50-$100", checked: false },
-      { value: "100", label: "$100+", checked: false },
+      { value: "50", label: "Less than $50" },
+      { value: "99", label: "Less than $99" },
+      { value: "100", label: "More than $100" },
     ],
   },
 ]
@@ -81,72 +76,33 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-export interface OfferedService {
-  createdAt: string
-  duration: number
-  id: string
-  paperMaker: {
-    address: string
-    id: string
-    isConfirmed: boolean
-    lat: number
-    long: number
-    pastSuccessfulCases: number
-    rating: number
-    status: string
-    totalCases: 0
-    user: {
-      name: string
-      picture: string
-      username: string
-    }
-  }
-  paperMakerId: string
-  price: number
-  service: Service
-  serviceId: string
-}
-
-interface Service {
-  id: string
-  name: string
-  description: string
-}
-
 interface ServicePageProps {
-  offeredServices: OfferedService[]
+  offeredServicesData: {
+    offeredServices: OfferedService[]
+    length: number
+    numberOfRecords: number
+  }
   services: Service[]
 }
 
 const key = "/offered-services"
 
 const ServicePage: NextPage<ServicePageProps> = ({
-  offeredServices,
+  offeredServicesData,
   services,
 }) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const [sort, setSort] = useState(sortOptions[0])
-  const [filter, setFilter] = useState({
-    rating: "",
-    categories: "",
-    duration: "",
-    price: 0,
-  })
-  console.log({ filter, setFilter })
-
-  const criteria = key + "?" + sort.value
-  console.log(criteria)
-  const { data, error } = useSWR(
-    criteria === "/offered-services?" ? null : criteria,
-    (url) =>
-      axiosInstance
-        .get<{ offeredServices: OfferedService[] }>(url)
-        .then((response) => response.data.offeredServices),
-    {
-      fallbackData: criteria === "/offered-services?" ? offeredServices : null,
-    }
+  const router = useRouter()
+  const searchParams = router.asPath.indexOf("?") + 1
+  const url = router.asPath.includes("?")
+    ? router.asPath.slice(searchParams)
+    : ""
+  const criteria = key + "?" + url
+  const { data, isLoading } = useGetOfferedServices(
+    criteria,
+    offeredServicesData
   )
-
+  console.log(router.query)
   return (
     <>
       <Head>
@@ -197,22 +153,8 @@ const ServicePage: NextPage<ServicePageProps> = ({
                   </button>
                 </div>
 
-                {/* Filters */}
+                {/* Filters Mobile */}
                 <form className="mt-4 border-t border-gray-200">
-                  <h3 className="sr-only">Categories</h3>
-                  <ul
-                    role="list"
-                    className="font-medium text-gray-900 px-2 py-3"
-                  >
-                    {subCategories.map((category) => (
-                      <li key={category.name}>
-                        <a href={category.href} className="block px-2 py-3">
-                          {category.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-
                   {filters.map((section) => (
                     <Disclosure
                       as="div"
@@ -243,27 +185,152 @@ const ServicePage: NextPage<ServicePageProps> = ({
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`filter-mobile-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    defaultChecked={option.checked}
-                                    className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                    className="ml-3 min-w-0 flex-1 text-gray-500"
+                              {section.id === "rating" &&
+                                section.options.map((s) => (
+                                  <div
+                                    key={s.label}
+                                    className="flex items-center"
                                   >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
+                                    <input
+                                      id={s.label}
+                                      name="notification-method"
+                                      type="radio"
+                                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                      defaultChecked={
+                                        s.value ===
+                                        `${router.query[`${section.id}[gte]`]}`
+                                      }
+                                      onChange={() => {
+                                        const query = { ...router.query }
+                                        delete query.page
+                                        router.replace(
+                                          {
+                                            query: {
+                                              ...query,
+                                              [`${section.id}[gte]`]: s.value,
+                                            },
+                                          },
+                                          undefined,
+                                          {
+                                            shallow: true,
+                                          }
+                                        )
+                                      }}
+                                    />
+                                    <label
+                                      htmlFor={s.label}
+                                      className="flex items-center gap-x-1 ml-3 min-w-0 flex-1 text-gray-500"
+                                    >
+                                      <Star rating={parseInt(s.value)} />
+                                      <span>{s.label}</span>
+                                    </label>
+                                  </div>
+                                ))}
+                              {section.id === "category" &&
+                                services.map((s) => (
+                                  <div key={s.id} className="flex items-center">
+                                    <input
+                                      id={`filter-${s.id}-${s.name}`}
+                                      name={`${s.id}[]`}
+                                      type="checkbox"
+                                      className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                      defaultChecked={router.query.serviceId?.includes(
+                                        s.id
+                                      )}
+                                      onChange={() => {
+                                        const queryServiceId =
+                                          router.query.serviceId
+                                        const query = {
+                                          ...router.query,
+                                          serviceId: !queryServiceId
+                                            ? s.id
+                                            : queryServiceId.includes(s.id)
+                                            ? typeof queryServiceId === "string"
+                                              ? "delete"
+                                              : queryServiceId.filter(
+                                                  (id) => id !== s.id
+                                                )
+                                            : [
+                                                ...(queryServiceId as string[]),
+                                                s.id,
+                                              ],
+                                        } as any
+                                        if (query.serviceId === "delete") {
+                                          delete query.serviceId
+                                        }
+                                        delete query.page
+                                        router.replace({ query }, undefined, {
+                                          shallow: true,
+                                        })
+                                      }}
+                                    />
+                                    <label
+                                      htmlFor={`filter-${s.id}-${s.name}`}
+                                      className="ml-3 text-sm text-gray-600"
+                                    >
+                                      {s.name}
+                                    </label>
+                                  </div>
+                                ))}
+                              {(section.id === "duration" ||
+                                section.id === "price") &&
+                                section.options.map((s) => (
+                                  <div
+                                    key={s.label}
+                                    className="flex items-center"
+                                  >
+                                    <input
+                                      id={`filter-${s.value}-${s.label}`}
+                                      defaultValue={s.value}
+                                      name={`${section.id}-group`}
+                                      type="radio"
+                                      className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                      defaultChecked={(() => {
+                                        const value =
+                                          (s.value === "15" &&
+                                            section.id === "duration") ||
+                                          (s.value === "100" &&
+                                            section.id === "price")
+                                            ? "[gte]"
+                                            : "[lte]"
+                                        return (
+                                          s.value ===
+                                          router.query[`${section.id}${value}`]
+                                        )
+                                      })()}
+                                      onChange={() => {
+                                        const value =
+                                          (s.value === "15" &&
+                                            section.id === "duration") ||
+                                          (s.value === "100" &&
+                                            section.id === "price")
+                                            ? "[gte]"
+                                            : "[lte]"
+                                        const query = { ...router.query }
+                                        delete query.page
+                                        router.replace(
+                                          {
+                                            query: {
+                                              ...query,
+                                              [`${section.id}${value}`]:
+                                                s.value,
+                                            },
+                                          },
+                                          undefined,
+                                          {
+                                            shallow: true,
+                                          }
+                                        )
+                                      }}
+                                    />
+                                    <label
+                                      htmlFor={`filter-${s.value}-${s.label}`}
+                                      className="ml-3 text-sm text-gray-600"
+                                    >
+                                      {s.label}
+                                    </label>
+                                  </div>
+                                ))}
                             </div>
                           </Disclosure.Panel>
                         </>
@@ -278,8 +345,8 @@ const ServicePage: NextPage<ServicePageProps> = ({
       </div>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative z-10 flex items-baseline justify-between pt-12 pb-6 border-b border-gray-200">
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-            {sort.name}
+          <h1 className="text-xl font-extrabold tracking-tight text-gray-900">
+            {isLoading ? "Loading..." : `${data?.numberOfRecords} results`}
           </h1>
           <div className="flex items-center">
             <Menu as="div" className="relative inline-block text-left">
@@ -308,9 +375,22 @@ const ServicePage: NextPage<ServicePageProps> = ({
                       <Menu.Item key={option.value}>
                         {({ active }) => (
                           <button
-                            onClick={() => setSort(option)}
+                            onClick={async () => {
+                              const query = { ...router.query }
+                              delete query.page
+                              await router.replace(
+                                {
+                                  query: {
+                                    ...query,
+                                    sort: option.value,
+                                  },
+                                },
+                                undefined,
+                                { shallow: true }
+                              )
+                            }}
                             className={classNames(
-                              option.value === sort.value
+                              option.value === router.query.sort
                                 ? "font-medium text-gray-900"
                                 : "text-gray-500",
                               active ? "bg-gray-100" : "",
@@ -351,7 +431,7 @@ const ServicePage: NextPage<ServicePageProps> = ({
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10 lg:items-baseline">
-            {/* Filters */}
+            {/* Filters Desktop*/}
             <form className="hidden lg:block mb-auto">
               <h3 className="sr-only">Categories</h3>
 
@@ -386,72 +466,143 @@ const ServicePage: NextPage<ServicePageProps> = ({
                       <Disclosure.Panel className="pt-6">
                         <div className="space-y-4">
                           {section.id === "rating" &&
-                            section.options.map((section) => (
-                              <div
-                                key={section.label}
-                                className="flex items-center"
-                              >
+                            section.options.map((s) => (
+                              <div key={s.label} className="flex items-center">
                                 <input
-                                  id={section.label}
+                                  id={s.label}
                                   name="notification-method"
                                   type="radio"
+                                  defaultChecked={
+                                    s.value ===
+                                    `${router.query[`${section.id}[gte]`]}`
+                                  }
                                   className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                  onChange={() => {
+                                    const query = { ...router.query }
+                                    delete query.page
+                                    router.replace(
+                                      {
+                                        query: {
+                                          ...query,
+                                          [`${section.id}[gte]`]: s.value,
+                                        },
+                                      },
+                                      undefined,
+                                      {
+                                        shallow: true,
+                                      }
+                                    )
+                                  }}
                                 />
                                 <label
-                                  htmlFor={section.label}
+                                  htmlFor={s.label}
                                   className="ml-3 text-sm flex items-center gap-x-1"
                                 >
-                                  <Star rating={section.value as number} />
-                                  <span>{section.label}</span>
+                                  <Star rating={parseInt(s.value)} />
+                                  <span>{s.label}</span>
                                 </label>
                               </div>
                             ))}
                           {section.id === "category" &&
-                            services.map((service) => (
-                              <div
-                                key={service.id}
-                                className="flex items-center"
-                              >
+                            services.map((s) => (
+                              <div key={s.id} className="flex items-center">
                                 <input
-                                  id={`filter-${service.id}-${service.name}`}
-                                  name={`${service.id}[]`}
-                                  defaultValue={service.id}
+                                  id={`filter-${s.id}-${s.name}`}
+                                  name={`${s.id}[]`}
                                   type="checkbox"
-                                  defaultChecked={
-                                    service.id === filter.categories
-                                  }
+                                  defaultChecked={router.query.serviceId?.includes(
+                                    s.id
+                                  )}
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                  onChange={() => {
+                                    const queryServiceId =
+                                      router.query.serviceId
+                                    const query = {
+                                      ...router.query,
+                                      serviceId: !queryServiceId
+                                        ? s.id
+                                        : queryServiceId.includes(s.id)
+                                        ? typeof queryServiceId === "string"
+                                          ? "delete"
+                                          : queryServiceId.filter(
+                                              (id) => id !== s.id
+                                            )
+                                        : [
+                                            ...(queryServiceId as string[]),
+                                            s.id,
+                                          ],
+                                    } as any
+                                    if (query.serviceId === "delete") {
+                                      delete query.serviceId
+                                    }
+                                    delete query.page
+                                    router.replace({ query }, undefined, {
+                                      shallow: true,
+                                    })
+                                  }}
                                 />
                                 <label
-                                  htmlFor={`filter-${service.id}-${service.name}`}
+                                  htmlFor={`filter-${s.id}-${s.name}`}
                                   className="ml-3 text-sm text-gray-600"
                                 >
-                                  {service.name}
+                                  {s.name}
                                 </label>
                               </div>
                             ))}
                           {(section.id === "duration" ||
                             section.id === "price") &&
-                            section.options.map((section) => (
-                              <div
-                                key={section.label}
-                                className="flex items-center"
-                              >
+                            section.options.map((s) => (
+                              <div key={s.label} className="flex items-center">
                                 <input
-                                  id={`filter-${section.value}-${section.label}`}
-                                  name={`${section.label}[]`}
-                                  defaultValue={section.value}
-                                  type="checkbox"
-                                  defaultChecked={
-                                    section.value === filter.duration
-                                  }
+                                  id={`filter-${s.value}-${s.label}`}
+                                  defaultValue={s.value}
+                                  name={`${section.id}-group`}
+                                  type="radio"
+                                  defaultChecked={(() => {
+                                    const value =
+                                      (s.value === "15" &&
+                                        section.id === "duration") ||
+                                      (s.value === "100" &&
+                                        section.id === "price")
+                                        ? "[gte]"
+                                        : "[lte]"
+                                    return (
+                                      s.value ===
+                                      router.query[`${section.id}${value}`]
+                                    )
+                                  })()}
                                   className="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+                                  onChange={() => {
+                                    const value =
+                                      (s.value === "15" &&
+                                        section.id === "duration") ||
+                                      (s.value === "100" &&
+                                        section.id === "price")
+                                        ? "[gte]"
+                                        : "[lte]"
+                                    const query = { ...router.query }
+                                    delete query.page
+                                    delete query[`${section.id}[gte]`]
+                                    delete query[`${section.id}[lte]`]
+                                    router.replace(
+                                      {
+                                        query: {
+                                          ...query,
+                                          [`${section.id}${value}`]: s.value,
+                                        },
+                                      },
+                                      undefined,
+                                      {
+                                        shallow: true,
+                                      }
+                                    )
+                                  }}
                                 />
                                 <label
-                                  htmlFor={`filter-${section.value}-${section.label}`}
+                                  htmlFor={`filter-${s.value}-${s.label}`}
                                   className="ml-3 text-sm text-gray-600"
                                 >
-                                  {section.label}
+                                  {s.label}
                                 </label>
                               </div>
                             ))}
@@ -465,15 +616,26 @@ const ServicePage: NextPage<ServicePageProps> = ({
 
             {/* Product grid */}
             <div className="grid grid-cols-1 gap-y-5 gap-x-6 lg:col-span-3 lg:gap-x-5">
-              {!data &&
-                !error &&
+              {isLoading &&
                 Array(3)
                   .fill(3)
                   .map((_, index) => <CardLoader key={index} />)}
-              {data?.map((offeredService) => (
+              {data?.numberOfRecords === 0 && (
+                <h4 className="text-center">No results found</h4>
+              )}
+              {data?.offeredServices.map((offeredService) => (
                 <Card key={offeredService.id} offeredService={offeredService} />
               ))}
-              <Pagination />
+              {!(
+                isLoading ||
+                data?.numberOfRecords === 0 ||
+                data?.length === 0
+              ) && (
+                <Pagination
+                  pageSize={10}
+                  numberOfRecords={data!.numberOfRecords}
+                />
+              )}
             </div>
           </div>
         </section>
@@ -484,12 +646,22 @@ const ServicePage: NextPage<ServicePageProps> = ({
 
 export default ServicePage
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const requestOfferedServices = axiosInstance.get("/offered-services")
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const queryString = context.resolvedUrl.includes("?")
+    ? "offered-services" +
+      context.resolvedUrl.slice(context.resolvedUrl.indexOf("?"))
+    : "offered-services"
+  const requestOfferedServices = axiosInstance.get(queryString)
   const requestServices = axiosInstance.get("/services")
   const response = await Promise.all([requestOfferedServices, requestServices])
   const offeredServices = response[0].data.offeredServices
   const services = response[1].data.services
-  console.log(offeredServices, services)
-  return { props: { offeredServices, services } }
+  const offeredServicesData = {
+    offeredServices,
+    length: response[0].data.length,
+    numberOfRecords: response[0].data.numberOfRecords,
+  }
+  return {
+    props: { offeredServicesData, services },
+  }
 }
