@@ -11,8 +11,6 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axiosInstance from "../util/axiosInstace"
 import useGetMe from "../hooks/useGetMe"
-import NavBarLog from "../components/navbar/NavBarLog"
-
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -86,4 +84,3 @@ const Home: NextPage = () => {
 }
 
 export default Home
-
