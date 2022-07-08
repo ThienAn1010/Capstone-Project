@@ -1,6 +1,7 @@
 import type { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
+import { ChevronLeftIcon } from "@heroicons/react/solid"
 
 const Home: NextPage = () => {
   return (
@@ -9,8 +10,17 @@ const Home: NextPage = () => {
         <title>Login Page</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+
       <div className="w-screen min-h-screen bg-gradient-to-bl from-test via-sky-400 to-test pt-8 px-4 py-4 md:pt-36 ">
         <div className="container max-w-2xl bg-white mx-auto px-6 py-4 md:px-12 md:py-8 rounded-lg shadow-md">
+          <Link href={"/"}>
+            <div className="hidden md:flex justify-start items-center -ml-8 -mt-2">
+              <ChevronLeftIcon className="h-5 w-5 text-blue-600 hover:cursor-pointer hover:text-blue-700 focus:text-blue-700" />
+              <p className="-ml-1 text-blue-600 hover:cursor-pointer hover:text-blue-700 focus:text-blue-700">
+                Back
+              </p>
+            </div>
+          </Link>
           <h1 className="text-center text-xl subpixel-antialiased font-bold md:mb-6 md:text-2xl">
             Login Guest Account
           </h1>
