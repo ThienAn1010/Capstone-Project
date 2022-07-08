@@ -6,18 +6,16 @@ import Category from "../components/Category"
 // import Link from "next/link"
 // import axiosInstance from "../util/axiosInstace"
 // import Image from "next/image"
-import NavBarNoLog from "../components/navbar/NavBarNoLog"
 import CombinedSlider from "../components/MainCardSlider/CombinedSlider"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axiosInstance from "../util/axiosInstace"
 import useGetMe from "../hooks/useGetMe"
-import NavBarLog from "../components/navbar/NavBarLog"
 
 const Home: NextPage = () => {
   const router = useRouter()
   const { code, scope } = router.query
-  const { data, mutate } = useGetMe()
+  const { mutate } = useGetMe()
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -76,7 +74,6 @@ const Home: NextPage = () => {
         </div>
       )}
 
-      {data ? <NavBarLog data={data} /> : <NavBarNoLog />}
       <MainCarousel />
       <main className="mx-auto container">
         <Category />
@@ -87,4 +84,3 @@ const Home: NextPage = () => {
 }
 
 export default Home
-
