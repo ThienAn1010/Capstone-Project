@@ -5,18 +5,19 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/frontend" # Location of package manifests
-    schedule:
-      interval: "daily"
-    labels:
-      - "Frontend Dependency"
-      
-    # Enable version updates for Backend
-  - package-ecosystem: "npm"
-    directory: "/backend"
-    schedule:
-      interval: "daily"
-    labels:
-      - "Backend Dependency"
+    - package-ecosystem: "npm" # See documentation for possible values
+      directory: "/frontend" # Location of package manifests
+      schedule:
+          interval: "daily"
+      labels:
+          - "Frontend Dependency"
+      open-pull-requests-limit: 0
 
+      # Enable version updates for Backend
+    - package-ecosystem: "npm"
+      directory: "/backend"
+      schedule:
+          interval: "daily"
+      labels:
+          - "Backend Dependency"
+      open-pull-requests-limit: 0
