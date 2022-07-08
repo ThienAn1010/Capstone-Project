@@ -1,7 +1,6 @@
 import type { NextPage } from "next"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
-import NavBarNoLog from "../components/navbar/NavBarNoLog"
 import { Fragment, useState } from "react"
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react"
 import { XIcon } from "@heroicons/react/outline"
@@ -109,7 +108,6 @@ const ServicePage: NextPage<ServicePageProps> = ({
         <title>Service</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <NavBarNoLog />
 
       <div>
         {/* Mobile filter dialog */}
