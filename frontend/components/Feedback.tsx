@@ -92,7 +92,7 @@ const Feedback = () => {
                   <dt className="flex-1 flex items-center">
                     <p className="w-3 font-medium text-gray-900">
                       {count.rating}
-                      <span className="sr-only"> star reviews</span>
+                      <span className="sr-only">star reviews</span>
                     </p>
                     <div
                       aria-hidden="true"
@@ -151,7 +151,7 @@ const Feedback = () => {
           <div className="flow-root">
             <div className="-my-12 divide-y divide-gray-200">
               {reviews.featured.map((review) => (
-                <div key={review.id} className="py-12">
+                <div key={review.id} className="py-4">
                   <div className="flex items-center">
                     <img
                       src={review.avatarSrc}
