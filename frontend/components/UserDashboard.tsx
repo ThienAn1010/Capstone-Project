@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+// import {  useState } from 'react'
 import {
   BellIcon,
   UserCircleIcon,
@@ -16,23 +16,6 @@ function classNames(...classes: string[]) {
 }
 
 export default function UserDashboard() {
-    const [showForm, setShowForm] = useState(false);
-    const [showemailForm, setShowemailForm] = useState(false);
-    const [showphoneForm, setShowphoneForm] = useState(false);
-    const [showaddressForm, setShowaddressForm] = useState(false);
-
-    const nameform = () => {
-        setShowForm(!showForm);
-    }
-    const phoneform = () => {
-        setShowphoneForm(!showphoneForm);
-    }
-    const emailform = () => {
-        setShowemailForm(!showemailForm);
-    }
-    const addressform = () => {
-        setShowaddressForm(!showaddressForm);
-    }
 
   return (
     <div>
@@ -74,28 +57,21 @@ export default function UserDashboard() {
                     </div>
                     <div className="mt-6">
                         <dl className="divide-y divide-gray-200">
-                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                                <dt className="text-sm font-medium text-gray-500">Name</dt>
+                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-3">
+                                <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Name</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <span className="flex-grow">Nguyen Dang Lam Phuong</span>
+                                    <textarea className='flex-grow h-8 pt-1 pl-1 border-2 border-sky-600 rounded-lg'
+                                    >
+                                    Nguyen Dang Lam Phuong
+                                    </textarea>
                                     <span className="ml-4 flex-shrink-0">
                                         <button
-                                            type="button"
-                                            className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                            onClick={nameform}
+                                        type="button"
+                                        className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                                         >
-                                            Update
+                                        Update
                                         </button>
                                     </span>
-                                    {showForm && (
-                                        <form>
-                                            <input
-                                                type='text'
-                                                placeholder='Name'
-                                                className='text-center ml-10'>
-                                            </input>
-                                        </form>
-                                    )}
                                 </dd>
                             </div>
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
@@ -103,84 +79,62 @@ export default function UserDashboard() {
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                     <span className="flex-grow">
                                         <img
-                                            className="h-8 w-8 rounded-full"
-                                            src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
+                                        className="h-10 w-10 rounded-full"
+                                        src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                        alt=""
                                         />
                                     </span>
                                 </dd>
                             </div>
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
-                                <dt className="text-sm font-medium text-gray-500">Email</dt>
+                                <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Email</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <span className="flex-grow">s0000000@rmit.edu.vn  </span>
+                                    <textarea className='flex-grow h-8 pt-1 pl-1 border-2 border-sky-600 rounded-lg'
+                                    >
+                                    s0000000@rmit.edu.vn
+                                    </textarea>
                                     <span className="ml-4 flex-shrink-0">
                                         <button
-                                            type="button"
-                                            className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                            onClick={emailform}
+                                        type="button"
+                                        className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                                         >
-                                            Update
+                                        Update
                                         </button>
                                     </span>
-                                    {showemailForm && (
-                                        <form>
-                                            <input
-                                                type='email'
-                                                placeholder='Email'
-                                                className='text-center ml-10'>
-                                            </input>
-                                        </form>
-                                    )}
                                 </dd>
                             </div>
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
-                                <dt className="text-sm font-medium text-gray-500">Phone number</dt>
+                                <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Phone Number</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <span className="flex-grow">0123456789</span>
+                                    <textarea className='flex-grow h-8 pt-1 pl-1 border-2 border-sky-600 rounded-lg'
+                                    >
+                                    0123456789
+                                    </textarea>
                                     <span className="ml-4 flex-shrink-0">
                                         <button
                                             type="button"
                                             className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                            onClick={phoneform}
                                         >
                                             Update
                                         </button>
                                     </span>
-                                    {showphoneForm && (
-                                        <form>
-                                            <input
-                                                type='text'
-                                                placeholder='Phone number'
-                                                className='text-center ml-10'>
-                                            </input>
-                                        </form>
-                                    )}
                                 </dd>
                             </div>
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
-                                <dt className="text-sm font-medium text-gray-500">Address</dt>
+                                <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Address</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <span className="flex-grow">702 Nguyen Van Linh</span>
+                                    <textarea className='flex-grow h-8 pt-1 pl-1 border-2 border-sky-600 rounded-lg'
+                                    >
+                                    702 Nguyen Van Linh
+                                    </textarea>
                                     <span className="ml-4 flex-shrink-0">
                                         <button
                                             type="button"
                                             className="bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                            onClick={addressform}
                                         >
                                             Update
                                         </button>
                                     </span>
-                                    {showaddressForm && (
-                                        <form>
-                                            <input
-                                                type='text'
-                                                placeholder='Address'
-                                                className='text-center ml-10'
-                                            >
-                                            </input>
-                                        </form>
-                                    )}
                                 </dd>
                             </div>
                         </dl>
