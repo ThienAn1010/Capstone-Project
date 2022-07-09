@@ -20,8 +20,10 @@ export default function UserDashboard() {
     const [phoneNumber, setPhoneNumber] = react.useState("0123456789");
     const [address, setAddress] = react.useState("702 Nguyen Van Linh");
     const [image] = react.useState(null)
+    const isInvalid =
+        firstName ===""
     const isInvalidName =
-        !firstName.match(/[a-zA-Z]/)
+        firstName.match(/[^a-zA-Z]/)
     const isInvalidPhone =
         !phoneNumber.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
     const isInvalidAddress =
@@ -91,6 +93,15 @@ export default function UserDashboard() {
                                     />
                                 </dd>
                                 <div></div>
+                                {isInvalid && (
+                                    <div>
+                                        <h3 className="font-bold text-red-500">
+                                            Name must not be empty!
+                                        </h3>
+                                    </div>
+                                )
+
+                                }
                                 {isInvalidName && (
                                     <div>
                                         <h3 className="font-bold text-red-500">
@@ -156,6 +167,7 @@ export default function UserDashboard() {
                                     onChange={e => setAddress(e.target.value)}
                                     />
                                 </dd>
+                                <div></div>
                                 {isInvalidAddress && (
                                 <span>
                                     <h3 className="font-bold text-red-500 ">
