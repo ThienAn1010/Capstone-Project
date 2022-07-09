@@ -1,5 +1,5 @@
 import type { NextPage } from "next"
-import Feedback from "../components/Feedback"
+import Feedback from "../../components/Feedback"
 
 const Detail: NextPage = () => {
   return (

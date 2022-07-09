@@ -11,15 +11,15 @@ import {
   PlusSmIcon,
   ViewGridIcon,
 } from "@heroicons/react/solid"
-import Card from "../components/Card"
-import Pagination from "../components/Pagination"
-import axiosInstance from "../util/axiosInstace"
-import CardLoader from "../components/CardLoader"
-import Star from "../components/Star"
+import Card from "../../components/Card"
+import Pagination from "../../components/Pagination"
+import axiosInstance from "../../util/axiosInstace"
+import CardLoader from "../../components/CardLoader"
+import Star from "../../components/Star"
 import { useRouter } from "next/router"
-import useGetOfferedServices from "../hooks/useGetOfferedServices"
-import { Service } from "../types/Service"
-import { OfferedService } from "../types/OfferedService"
+import useGetOfferedServices from "../../hooks/useGetOfferedServices"
+import { Service } from "../../types/Service"
+import { OfferedService } from "../../types/OfferedService"
 
 const sortOptions = [
   { name: "Newest", value: "-createdAt" },
