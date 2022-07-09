@@ -35,7 +35,7 @@ const Feedback = () => {
         date: "15/06/2022",
       },
       {
-        id: 2,
+        id: 3,
         rating: 5,
         content: `
           <p>An exellent and supportive papermaker.</p>
