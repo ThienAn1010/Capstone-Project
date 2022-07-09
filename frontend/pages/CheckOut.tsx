@@ -1,6 +1,6 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import Checkout from "../components/CheckOut"
+import Checkout from "../components/checkoutpage"
 
 const CheckOut: NextPage = () => {
   return (
