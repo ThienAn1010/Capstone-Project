@@ -16,7 +16,7 @@ const Checkout = () => {
     const [phoneNumber, setPhoneNumber] = react.useState("0123456789");
     const [address, setAddress] = react.useState("702 Nguyen Van Linh");
     const isInvalidName =
-        !firstName.match(/[a-zA-Z]/)
+        firstName.match(/[^a-zA-Z]/)
     const isInvalidPhone =
         !phoneNumber.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
     const isInvalidAddress =
