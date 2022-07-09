@@ -30,21 +30,21 @@ export default function NavBarNoLog() {
                   <div className="flex-shrink-0 flex items-center">
                     <a href="#">
                       <img
-                        className="block h-10 w-auto lg:hidden"
+                        className="block h-8 w-auto lg:hidden "
                         src="/mobile_logo.png"
                         alt="Workflow"
                       />
                     </a>
                     <a href="#">
                       <img
-                        className="hidden lg:block h-8 w-auto"
+                        className="hidden lg:block h-9 w-auto mr-5"
                         src="/logo.png"
                         alt="Workflow"
                       />
                     </a>
                   </div>
                 </div>
-                <div className="hidden lg:flex lg:items-center lg:justify-center lg:ml-10 xl:col-span-1 lg:ml-10" >
+                <div className="hidden lg:flex lg:items-center lg:justify-center lg:ml-10 xl:col-span-1 lg:ml-10">
                   <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
                     CATEGORIES
                   </p>
