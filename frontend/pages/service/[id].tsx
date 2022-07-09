@@ -1,9 +1,15 @@
 import type { NextPage } from "next"
+import { useRouter } from "next/router"
+import BookNow from "../../components/BookNow"
 import Feedback from "../../components/Feedback"
+import useGetOfferedService from "../../hooks/useGetOfferedService"
 
 const Detail: NextPage = () => {
+  const router = useRouter()
+  const offeredService = useGetOfferedService(router.query.id as string)
+  console.log(offeredService)
   return (
-    <div className="container mx-auto px-14 py-12">
+    <div className="container mx-auto px-14 py-12 ">
       <div className="grid grid-cols-3 gap-2">
         <div className="col-span-2 space-y-8">
           <h1 className="text-3xl font-bold  text-gray-900">
@@ -31,6 +37,9 @@ const Detail: NextPage = () => {
           <h2 className="text-xl font-semibold text-gray-900">Service</h2>
           <h2 className="text-xl font-semibold text-gray-900">Statistics</h2>
           <Feedback />
+        </div>
+        <div className="relative ml-10">
+          <BookNow />
         </div>
       </div>
     </div>
