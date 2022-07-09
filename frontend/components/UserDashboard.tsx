@@ -1,4 +1,4 @@
-import react, {useState, useRef} from 'react'
+import react, {useState} from 'react'
 import {
   BellIcon,
   UserCircleIcon,
@@ -19,7 +19,7 @@ export default function UserDashboard() {
     const [firstName, setFirstName] = useState("Nguyen");
     const [phoneNumber, setPhoneNumber] = react.useState("0123456789");
     const [address, setAddress] = react.useState("702 Nguyen Van Linh");
-    const [image,setImage] = react.useState(null)
+    const [image] = react.useState(null)
     const isInvalid =
         firstName === "";
     const isInvalidName =
@@ -28,22 +28,22 @@ export default function UserDashboard() {
         !phoneNumber.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)
     const isInvalidAddress =
         address === "";
-    const ref = react.useRef();
-    const clear = () => {
-        ref.current.value = "";
-    };
-    const handleImageOnChange = (e) => {
-        e.preventDefault();
-        const file = e.target.files[0];
-        if (!file) return setImage(null);
-        console.log(file.size);
-        if (file.size > 2097152) {
-            alert("File is too big!");
-            clear();
-        } else {
-            setImage(e.target.files[0]);
-        }
-    };
+    // const ref = react.useRef();
+    // // const clear = () => {
+    // //     ref.current.value = "";
+    // // };
+    // const handleImageOnChange = (e) => {
+    //     e.preventDefault();
+    //     const file = e.target.files[0];
+    //     if (!file) return setImage(null);
+    //     console.log(file.size);
+    //     if (file.size > 2097152) {
+    //         alert("File is too big!");
+    //         clear();
+    //     } else {
+    //         setImage(e.target.files[0]);
+    //     }
+    // };
     return (
     <div>
         <div className="h-full">
@@ -103,7 +103,7 @@ export default function UserDashboard() {
                                 {isInvalid && (
                                     <div className="flex sm:mt-0 sm:col-span-2">
                                         <h3 className="flex-grow font-bold text-red-500 ">
-                                            All fields must not be empty!
+                                            Name must not be empty!
                                         </h3>
                                     </div>
                                 )}
@@ -111,7 +111,7 @@ export default function UserDashboard() {
                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
                                 <dt className="text-sm font-medium text-gray-500">Photo</dt>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <span className="flex-grow">
+                                    <span className="">
                                         <img
                                         className="h-10 w-10 rounded-full"
                                         src={image
@@ -125,9 +125,10 @@ export default function UserDashboard() {
                                     id="avatar"
                                     name="avatar"
                                     accept=".jpg,.png,.jpeg"
-                                    onChange={handleImageOnChange}
+                                    // onChange={handleImageOnChange}
                                     // ref={ref}
-                                    className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm
+                                    leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                     />
                                 </dd>
                             </div>
