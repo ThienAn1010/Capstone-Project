@@ -25,6 +25,10 @@ export class OfferedServicesController {
   async getAllOfferedServices(@Query() query) {
     return this.offeredServicesService.getAllOfferedServices(query);
   }
+  @Get('/:serviceId')
+  async getOfferedService(@Param('serviceId') offeredServiceId: string) {
+    return this.offeredServicesService.getOfferedService(offeredServiceId);
+  }
 
   @UseGuards(RoleGuard('paperMaker'))
   @UseGuards(AuthGuard)
