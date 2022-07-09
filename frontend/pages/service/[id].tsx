@@ -36,9 +36,11 @@ const Detail: NextPage = () => {
           </div>
           <h2 className="text-xl font-semibold text-gray-900">Service</h2>
           <h2 className="text-xl font-semibold text-gray-900">Statistics</h2>
-          <Feedback />
+          <div className="pt-16">
+            <Feedback />
+          </div>
         </div>
-        <div className="relative ml-10">
+        <div className="relative ml-14">
           <BookNow />
         </div>
       </div>

@@ -7,7 +7,6 @@ export default function Layout({ children }: any) {
   const { data } = useGetMe()
   const { pathname } = useRouter()
   const hideNav = pathname.includes("/login") || pathname.includes("/register")
-  console.log(hideNav)
 
   return (
     <>
