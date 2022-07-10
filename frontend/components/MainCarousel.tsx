@@ -39,7 +39,6 @@ export default function MainCarousel() {
         <div>
           <img
             src="https://source.unsplash.com/x3voiJL-PfY"
-            alt="carousel image"
             className="object-cover object-top w-full md:object-center sm:h-80 md:h-96 lg:h-[32rem] xl:h-[38rem]"
           />
         </div>
