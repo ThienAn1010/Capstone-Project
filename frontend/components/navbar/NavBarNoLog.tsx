@@ -75,7 +75,7 @@ export default function NavBarNoLog() {
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:divide-x lg:divide-gray-100 lg:items-center lg:justify-end xl:col-span-4">
-                  <Link href={"/papermaker_register"}>
+                  <Link href={"/register"}>
                     <div className="px-4">
                       <p className="text-md subpixel-antialiased font-medium border-b border-transparent text-white hover:cursor-pointer hover:border-white">
                         BECOME A PAPERMAKER
@@ -260,7 +260,7 @@ export default function NavBarNoLog() {
                   </svg>
                   <p className="text-md font-medium">Categories</p>
                 </div>
-                <Link href="/papermaker_register">
+                <Link href="/register">
                   <div className="border-t-4 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
