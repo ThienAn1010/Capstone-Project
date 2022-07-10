@@ -1,12 +1,12 @@
 import { Fragment } from "react"
 import { Popover } from "@headlessui/react"
 import { MenuIcon, XIcon, UserIcon } from "@heroicons/react/outline"
-import SearchBar from "./SearchBar"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/solid"
 import Link from "next/link"
 import NavFacebookButton from "../LoginButton/NavFacebookButton"
 import NavGoogleButton from "../LoginButton/NavGoogleButton"
+import SearchBar from "./SearchBar"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
