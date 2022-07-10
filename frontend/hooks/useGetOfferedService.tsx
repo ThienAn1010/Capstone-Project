@@ -7,7 +7,7 @@ const useGetOfferedService = (id: string) => {
     axiosInstance.get<OfferedService>(url).then((response) => response.data)
   )
 
-  return { data, error, isLoading: !!data && !!error, mutate }
+  return { data, error, isLoading: !data && !error, mutate }
 }
 
 export default useGetOfferedService
