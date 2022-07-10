@@ -6,21 +6,35 @@ import useGetOfferedService from "../../hooks/useGetOfferedService"
 
 const Detail: NextPage = () => {
   const router = useRouter()
-  const offeredService = useGetOfferedService(router.query.id as string)
-  console.log(offeredService)
+  const { data, error, isLoading } = useGetOfferedService(
+    router.query.id as string
+  )
+  console.log({ data, error, isLoading })
   return (
     <div className="container mx-auto px-14 py-12 ">
       <div className="grid grid-cols-3 gap-2">
         <div className="col-span-2 space-y-8">
-          <h1 className="text-3xl font-bold  text-gray-900">
-            Marriage Certificate - Nguyen Dang Lam Phuong
-          </h1>
+          {isLoading ? (
+            <h1 className="text-3xl font-bold animate-pulse bg-gray-400 h-[36px]"></h1>
+          ) : (
+            <h1 className="text-3xl font-bold  text-gray-900">
+              {`${data?.paperMaker.user.name}-${data?.service.name}`}
+            </h1>
+          )}
           <div className="flex space-x-8 px-4">
-            <img
-              className="h-48 w-48 rounded-full"
-              alt="User Avatar"
-              src="https://scontent.fsgn5-11.fna.fbcdn.net/v/t39.30808-1/274122720_3091224897757197_1462166273506091868_n.jpg?stp=dst-jpg_p200x200&_nc_cat=111&ccb=1-7&_nc_sid=7206a8&_nc_ohc=LXf3YxPfE-IAX8kxuR7&_nc_ht=scontent.fsgn5-11.fna&oh=00_AT-DsK9KMOK-dhK7Y_ogNcTgLpdzrD8ApoE9Sm2UezKv0g&oe=62CB0321"
-            />
+            {isLoading ? (
+              <img
+                src="https://as1.ftcdn.net/jpg/01/91/95/30/220_F_191953033_gehQATeDoh5z6PyRDbeKyBZuS83CjMEF.jpg"
+                alt="Loading..."
+                className="h-48 w-48 rounded-full object-cover border-2"
+              ></img>
+            ) : (
+              <img
+                className="h-48 w-48 rounded-full"
+                alt="User Avatar"
+                src={data?.paperMaker.user.picture}
+              />
+            )}
             <div className="space-y-2">
               <h2 className="text-xl font-semibold text-gray-900">
                 Description
