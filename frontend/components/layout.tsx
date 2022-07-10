@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import useGetMe from "../hooks/useGetMe"
-import NavBarNoLog from "./NavBar/NavBarNoLog"
-import NavBarLog from "./NavBar/NavBarLog"
+import NavBarNoLog from "./navbar/NavBarNoLog"
+import NavBarLog from "./navbar/NavBarLog"
 
 export default function Layout({ children }: any) {
   const { data } = useGetMe()
