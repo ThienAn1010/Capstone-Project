@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
-import NavBarNoLog from "../components/navbar/NavBarNoLog"
+import NavBarNoLog from "../components/NavBar/NavBarNoLog"
 import { Fragment, useState } from "react"
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react"
 import { XIcon } from "@heroicons/react/outline"
