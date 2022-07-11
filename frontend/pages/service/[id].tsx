@@ -14,13 +14,16 @@ const Detail: NextPage = () => {
     <div className="container mx-auto px-14 py-12 ">
       <div className="grid grid-cols-3 gap-2">
         <div className="col-span-2 space-y-8">
-          {isLoading ? (
-            <h1 className="text-3xl font-bold animate-pulse bg-gray-400 h-[36px]"></h1>
-          ) : (
-            <h1 className="text-3xl font-bold text-gray-900">
-              {`${data?.paperMaker.user.name}-${data?.service.name}`}
-            </h1>
-          )}
+          <div>
+            <h4 className="font-bold uppercase text-gray-400">PaperMaker</h4>
+            {isLoading ? (
+              <h1 className="text-3xl font-bold animate-pulse bg-gray-400 h-[36px]"></h1>
+            ) : (
+              <h3 className="text-3xl font-semibold text-gray-900 my-1">
+                {`${data?.paperMaker.user.name}`}
+              </h3>
+            )}
+          </div>
           <div className="flex space-x-8 px-4">
             {isLoading ? (
               <img
@@ -51,6 +54,7 @@ const Detail: NextPage = () => {
             </div>
           </div>
           <h2 className="text-xl font-semibold text-gray-900">Service</h2>
+          <p>{data?.description}</p>
           <h2 className="text-xl font-semibold text-gray-900">Statistics</h2>
           <div className="pt-16">
             <Feedback />
