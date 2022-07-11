@@ -161,7 +161,7 @@ export class OfferedServicesService {
   }
 
   async createOfferedService(service: CreateOfferedServiceDto) {
-    const { duration, serviceId, price, userId } = service;
+    const { duration, serviceId, price, userId, description } = service;
     const paperMaker = await this.prismaService.paperMaker.findFirst({
       where: {
         userId: userId,
@@ -179,6 +179,7 @@ export class OfferedServicesService {
     const offeredService = await this.prismaService.offeredService.create({
       data: {
         duration,
+        description,
         price,
         serviceId,
         paperMakerId: paperMaker.id,

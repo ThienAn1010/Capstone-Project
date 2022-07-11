@@ -10,6 +10,8 @@ export class CreateOfferedServiceDto {
   @IsString()
   @IsNotEmpty()
   serviceId: string;
-
+  @IsString()
+  @IsNotEmpty()
+  description: string;
   userId: string;
 }
