@@ -17,7 +17,7 @@ const Detail: NextPage = () => {
           {isLoading ? (
             <h1 className="text-3xl font-bold animate-pulse bg-gray-400 h-[36px]"></h1>
           ) : (
-            <h1 className="text-3xl font-bold  text-gray-900">
+            <h1 className="text-3xl font-bold text-gray-900">
               {`${data?.paperMaker.user.name}-${data?.service.name}`}
             </h1>
           )}
@@ -35,15 +35,19 @@ const Detail: NextPage = () => {
                 src={data?.paperMaker.user.picture}
               />
             )}
-            <div className="space-y-2">
+            <div className="space-y-2 flex-1">
               <h2 className="text-xl font-semibold text-gray-900">About me</h2>
-              <p className="text-justify">
-                Hello! My name is Phuong. Lorem, ipsum dolor sit amet
-                consectetur adipisicing elit. Fuga expedita omnis ullam dicta
-                quaerat modi quisquam rem quos pariatur accusantium eligendi
-                perspiciatis, laborum provident, fugit ab nihil quam cupiditate.
-                Et.
-              </p>
+              {isLoading ? (
+                <>
+                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
+                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
+                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
+                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
+                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
+                </>
+              ) : (
+                <p className="text-justify">{data?.paperMaker.aboutMe}</p>
+              )}{" "}
             </div>
           </div>
           <h2 className="text-xl font-semibold text-gray-900">Service</h2>
