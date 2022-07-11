@@ -48,6 +48,7 @@ model PaperMaker {
   status              PaperMakerStatus @default(available)
   isConfirmed         Boolean          @default(false)
   offeredServices     OfferedService[]
+  aboutMe             String?
 }
 
 model Service {
@@ -67,6 +68,7 @@ model OfferedService {
   paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
   service      Service    @relation(fields: [serviceId], references: [id])
   bookings     Booking[]
+  description  String
 }
 
 model Booking {
