@@ -36,9 +36,7 @@ const Detail: NextPage = () => {
               />
             )}
             <div className="space-y-2">
-              <h2 className="text-xl font-semibold text-gray-900">
-                Description
-              </h2>
+              <h2 className="text-xl font-semibold text-gray-900">About me</h2>
               <p className="text-justify">
                 Hello! My name is Phuong. Lorem, ipsum dolor sit amet
                 consectetur adipisicing elit. Fuga expedita omnis ullam dicta
