@@ -48,11 +48,15 @@ const seed = async () => {
           address: '48 Le Thi Tu Minh, Phuong 4, Quan Tan Binh',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 10,
               price: 100,
               serviceId: '1',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -77,11 +81,15 @@ const seed = async () => {
           address: '48 Le Thi Tu Minh, Phuong 4, Quan Tan Binh',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 20,
               price: 50,
               serviceId: '2',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -106,11 +114,15 @@ const seed = async () => {
           address: '48 Le Thi Tu Minh, Phuong 4, Quan Tan Binh',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 10,
               price: 300,
               serviceId: '3',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -135,11 +147,15 @@ const seed = async () => {
           address: '48 Le Thi Tu Minh, Phuong 4, Quan Tan Binh',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 5,
               price: 300,
               serviceId: '2',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -164,11 +180,15 @@ const seed = async () => {
           address: '48 Le Thi Tu Minh, Phuong 4, Quan Tan Binh',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 14,
               price: 50,
               serviceId: '1',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -193,11 +213,15 @@ const seed = async () => {
           address: '200 Nguyen Thi Thap, District 7, HCM',
           lat: 10.73839,
           long: 106.71724,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 10,
               price: 30,
               serviceId: '1',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -221,11 +245,15 @@ const seed = async () => {
           address: '200 Nam Ky Khoi Nghia, District 3, HCM',
           lat: 10.790064953643636,
           long: 106.68415921309577,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 15,
               price: 40,
               serviceId: '3',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -249,11 +277,15 @@ const seed = async () => {
           address: '290 Hoang Sa, District 3, HCM',
           lat: 10.784204522008878,
           long: 106.71724,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 10,
               price: 35,
               serviceId: '4',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -277,11 +309,15 @@ const seed = async () => {
           address: '290 Cao Dat, District 5, HCM',
           lat: 10.754156019671198,
           long: 106.68089061124546,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 12,
               price: 35,
               serviceId: '1',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -306,11 +342,15 @@ const seed = async () => {
           address: '21 Nguyen Hue, District 1, HCM',
           lat: 10.77202420841216,
           long: 106.70558405542431,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 15,
               price: 35,
               serviceId: '2',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -334,11 +374,15 @@ const seed = async () => {
           address: '23 Nguyễn Thị Minh Khai, Quận 1, Thành phố Hồ Chí Minh',
           lat: 10.784201700728243,
           long: 106.69970597076711,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 20,
               price: 30,
               serviceId: '2',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -362,11 +406,15 @@ const seed = async () => {
           address: '235 Nguyễn Văn Cừ, Quận 5, Thành phố Hồ Chí Minh',
           lat: 10.76201675485627,
           long: 106.68326526706699,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 10,
               price: 40,
               serviceId: '3',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -390,11 +438,15 @@ const seed = async () => {
           address: '155 Bến Vân Đồn, Phường 6, Quận 4, Thành phố Hồ Chí Minh',
           lat: 10.762355833648538,
           long: 106.6989938535741,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 10,
               price: 35,
               serviceId: '3',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -418,11 +470,15 @@ const seed = async () => {
           address: '231 Lê Hồng Phong, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
           lat: 10.759883735644246,
           long: 106.6772342265885,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 10,
               price: 50,
               serviceId: '3',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -446,11 +502,15 @@ const seed = async () => {
           address: '456 Sư Vạn Hạnh, Phường 9, Quận 10, Thành phố Hồ Chí Minh',
           lat: 10.766379931847815,
           long: 106.67201072658852,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 20,
               price: 30,
               serviceId: '1',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -475,11 +535,15 @@ const seed = async () => {
           address: '702 Nguyen Van Linh, Phuong Tan Phong, Quan 7',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 12,
               price: 75,
               serviceId: '3',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -504,11 +568,15 @@ const seed = async () => {
           address: '702 Nguyen Van Linh, Phuong Tan Phong, Quan 7',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 4,
               price: 70,
               serviceId: '1',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -533,11 +601,15 @@ const seed = async () => {
           address: '702 Nguyen Van Linh, Phuong Tan Phong, Quan 7',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 11,
               price: 48,
               serviceId: '2',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -562,11 +634,15 @@ const seed = async () => {
           address: '462 Nguyen Thi Minh Khai, Phuong 2, Quan 3',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 7,
               price: 30,
               serviceId: '4',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -591,11 +667,15 @@ const seed = async () => {
           address: '771 Tran Hung Dao, Phuong 1, Quan 5',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 7,
               price: 10,
               serviceId: '4',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -620,11 +700,15 @@ const seed = async () => {
           address: '75 Nguyen Thai Hoc, Phuong Cau Ong Lanh, Quan 1',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 9,
               price: 67,
               serviceId: '2',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -649,11 +733,15 @@ const seed = async () => {
           address: '128 Nguyen Gia Tri, Phuong 25, Quan Binh Thanh',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 13,
               price: 130,
               serviceId: '4',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -678,11 +766,15 @@ const seed = async () => {
           address: '65 Nguyen Trai, Phuong 2, Quan 5',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 20,
               price: 200,
               serviceId: '4',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -707,11 +799,15 @@ const seed = async () => {
           address: '153 Nguyen Chi Thanh, Phuong 9, Quan 5',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 5,
               price: 30,
               serviceId: '2',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
@@ -736,11 +832,15 @@ const seed = async () => {
           address: '217 Hong Bang, Phuong 11, Quan 5',
           lat: 10.802029,
           long: 106.649307,
+          aboutMe:
+            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
           offeredServices: {
             create: {
               duration: 17,
               price: 120,
               serviceId: '3',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
             },
           },
         },
