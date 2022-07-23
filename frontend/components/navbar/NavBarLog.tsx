@@ -1,12 +1,12 @@
 import { Fragment } from "react"
 import { Popover } from "@headlessui/react"
 import { MenuIcon, XIcon } from "@heroicons/react/outline"
-import SearchBar from "./SearchBar"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/solid"
 import axiosInstance from "../../util/axiosInstace"
 import useGetMe from "../../hooks/useGetMe"
 import Link from "next/link"
+import SearchBar from "./SearchBar"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
