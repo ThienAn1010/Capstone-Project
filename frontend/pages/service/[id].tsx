@@ -13,33 +13,37 @@ const Detail: NextPage = () => {
   return (
     <div className="container mx-auto px-14 py-12 ">
       <div className="grid grid-cols-3 gap-2">
-        <div className="col-span-2 space-y-8">
+        <div className="col-span-2 space-y-8 pl-28 pr-8">
           <div>
-            <h4 className="font-bold uppercase text-gray-400">PaperMaker</h4>
+            <h3 className="text-xl font-bold uppercase text-gray-500 ">
+              PaperMaker
+            </h3>
             {isLoading ? (
-              <h1 className="text-3xl font-bold animate-pulse bg-gray-400 h-[36px]"></h1>
+              <h1 className="text-4xl font-bold animate-pulse bg-gray-500 h-[36px]"></h1>
             ) : (
-              <h3 className="text-3xl font-semibold text-gray-900 my-1">
-                {`${data?.paperMaker.user.name}`}
-              </h3>
+              <>
+                <h3 className="text-4xl font-bold text-gray-900 my-1">
+                  {`${data?.paperMaker.user.name}`}
+                </h3>
+                {/* <h3 className="text-xl font-semibold text-gray-900 my-1">
+                  {`${data?.service.name}`}
+                </h3> */}
+              </>
             )}
           </div>
-          <div className="flex space-x-8 px-4">
-            {isLoading ? (
-              <img
-                src="https://as1.ftcdn.net/jpg/01/91/95/30/220_F_191953033_gehQATeDoh5z6PyRDbeKyBZuS83CjMEF.jpg"
-                alt="Loading..."
-                className="h-48 w-48 rounded-full object-cover border-2"
-              ></img>
-            ) : (
-              <img
-                className="h-48 w-48 rounded-full"
-                alt="User Avatar"
-                src={data?.paperMaker.user.picture}
-              />
-            )}
-            <div className="space-y-2 flex-1">
-              <h2 className="text-xl font-semibold text-gray-900">About me</h2>
+          <div className="flex space-x-8">
+            <div>
+              <h3 className="font-bold text-gray-500 text-xl">Total Orders</h3>
+              <h2 className="text-center text-2xl font-bold">{`${data?.paperMaker.totalCases}`}</h2>
+            </div>
+            <div>
+              <h3 className="font-bold text-gray-500 text-xl">Rating</h3>
+              <h2 className="text-center text-2xl font-bold">{`${data?.paperMaker.rating}`}</h2>
+            </div>
+          </div>
+          <div className="space-x-8">
+            <div className="">
+              <h2 className="text-xl font-bold text-gray-900">About me</h2>
               {isLoading ? (
                 <>
                   <p className="animate-pulse bg-gray-400 w-full h-5"></p>
@@ -50,12 +54,16 @@ const Detail: NextPage = () => {
                 </>
               ) : (
                 <p className="text-justify">{data?.paperMaker.aboutMe}</p>
-              )}{" "}
+              )}
             </div>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900">Service</h2>
-          <p>{data?.description}</p>
-          <h2 className="text-xl font-semibold text-gray-900">Statistics</h2>
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">Service</h2>
+            <p>{data?.description}</p>
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">Statistics</h2>
+          </div>
           <div className="pt-16">
             <Feedback />
           </div>

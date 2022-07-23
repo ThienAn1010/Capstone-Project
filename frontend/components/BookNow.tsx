@@ -26,12 +26,22 @@ const BookNow = () => {
       ref={element}
     >
       <div className="-mx-5 -mt-5 relative">
-        <div className="w-full h-full absolute bg-gray-400 opacity-40 z-0"></div>
-        <img
-          src="https://images.smartcapitalmind.com/person-using-pen-near-documents-and-chart.jpg"
-          className="w-full h-full"
-          alt="Avatar"
-        />
+        {isLoading ? (
+          <img
+            src="https://as1.ftcdn.net/jpg/01/91/95/30/220_F_191953033_gehQATeDoh5z6PyRDbeKyBZuS83CjMEF.jpg"
+            alt="Loading..."
+            className="h-48 w-full object-cover border-2"
+          ></img>
+        ) : (
+          <>
+            <div className="w-full h-full absolute bg-gray-400 opacity-40 z-0"></div>
+            <img
+              src={data?.paperMaker.user.picture}
+              className="h-48 w-full"
+              alt="Avatar"
+            />
+          </>
+        )}
       </div>
       {isLoading ? (
         <>
