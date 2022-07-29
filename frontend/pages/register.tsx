@@ -3,6 +3,7 @@ import Head from "next/head"
 import PapermakerRegisterForm from "../components/PapermakerRegisterForm"
 
 const Register: NextPage = () => {
+  
   return (
     <>
       <Head>
@@ -12,11 +13,9 @@ const Register: NextPage = () => {
       </Head>
 
       <main className=" mx-auto">
-        <div className="mt-5">
-          <div className=" mt-5 flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2">
             <PapermakerRegisterForm />
           </div>
-        </div>
       </main>
     </>
   )
