@@ -134,7 +134,7 @@ export default function UserDashboard() {
                                     />
                                 </dd>
                             </div>
-                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:pt-5">
+                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:pt-5">
                                 <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Email</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                     <input className='flex-grow h-8 pt-1 pl-1 border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-lg disabled'
@@ -142,10 +142,10 @@ export default function UserDashboard() {
                                     />
                                 </dd>
                             </div>
-                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
+                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:border-b sm:border-gray-200">
                                 <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Phone Number</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    <input className='flex-grow h-8 pt-1 pl-1 border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-lg'
+                                    <input className='flex-grow h-8 pl-1 border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-lg'
                                     value={phoneNumber}
                                     onChange={e => setPhoneNumber(e.target.value)}
                                     />
@@ -159,7 +159,7 @@ export default function UserDashboard() {
                                     </div>
                                 )}
                             </div>
-                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200">
+                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:border-b sm:border-gray-200">
                                 <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Address</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                     <input className='flex-grow h-8 pt-1 pl-1 border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500  rounded-lg'
