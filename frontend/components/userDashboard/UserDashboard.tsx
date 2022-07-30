@@ -4,21 +4,28 @@ import {
   UserCircleIcon,
   ShoppingCartIcon
 } from '@heroicons/react/outline'
+import { UserData } from './UserData'
 
 const subNavigation = [
-  { name: 'Profile', href: '#', icon: UserCircleIcon, current: true },
-  { name: 'My Order', href: '#', icon: ShoppingCartIcon, current: false },
-  { name: 'Notifications', href: '#', icon: BellIcon, current: false },
+  { name: 'Profile', href: '/user_dashboard', icon: UserCircleIcon, current: true },
+  { name: 'My Order', href: '/myorder', icon: ShoppingCartIcon, current: false },
+  { name: 'Notifications', href: 'notifications', icon: BellIcon, current: false },
 ]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
-
+const user:UserData = {
+    id: 1,
+    name: "Vinh",
+    phone: "0123456789",
+    address: "702 Nguyen Van Linh",
+    email: "s0000000@rmit.edu.vn"
+}
 export default function UserDashboard() {
-    const [firstName, setFirstName] = useState("Nguyen");
-    const [phoneNumber, setPhoneNumber] = react.useState("0123456789");
-    const [address, setAddress] = react.useState("702 Nguyen Van Linh");
+    const [firstName, setFirstName] = useState(user.name);
+    const [phoneNumber, setPhoneNumber] = react.useState(user.phone);
+    const [address, setAddress] = react.useState(user.address);
     const [image] = react.useState(null)
     const isInvalid =
         firstName ===""
@@ -84,7 +91,7 @@ export default function UserDashboard() {
                     </div>
                     <div className="mt-6">
                         <dl className="divide-y divide-gray-200">
-                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-3">
+                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:pt-5">
                                 <label htmlFor='nameInput' className="text-sm font-medium text-gray-500">Name</label>
                                 <dd className="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                     <input className='flex-grow h-8 pt-1 pl-1 border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg'
