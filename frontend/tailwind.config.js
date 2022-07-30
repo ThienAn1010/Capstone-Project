@@ -7,8 +7,9 @@ module.exports = {
     extend: {
       colors: {
         test: "#3456FF",
+        footer: "#F9FAFC",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp"), require("@tailwindcss/forms")],
 }

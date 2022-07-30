@@ -1,10 +1,18 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { TokenPayload } from 'google-auth-library';
 import { GoogleService } from 'src/google/google.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { FacebookService, UserDataFB } from 'src/facebook/facebook.service';
+import * as bcrypt from 'bcrypt';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import { SocialLoginDto } from './dto/social-login.dto';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +31,10 @@ export class AuthService {
       const user = userData.getPayload();
       return user;
     } catch (error) {
-      throw new BadRequestException();
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Invalid code',
+      });
     }
   }
   private async checkFacebookCode(code: string) {
@@ -33,29 +44,39 @@ export class AuthService {
       const extractUserData = await this.facebookService.getUserData(token);
       return extractUserData.data;
     } catch (error) {
-      throw new BadRequestException();
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Invalid code',
+      });
     }
   }
   private async upsertUserToDb(user: TokenPayload | UserDataFB) {
+    const select = {
+      id: true,
+      name: true,
+      role: true,
+      username: true,
+      picture: true,
+    };
     const findUserInDb = await this.prismaService.user.findFirst({
-      where: { username: { equals: user.email } },
+      where: {
+        authProvider: { providerKey: 'id' in user ? user.id : user.sub },
+      },
+      select,
     });
     if (findUserInDb) return findUserInDb;
     const savedUserInDb = await this.prismaService.user.create({
       data: {
         username: user.email,
         name: user.name,
-        role: 'paperRequester',
         picture: 'id' in user ? user.picture.data.url : user.picture,
         authProvider: {
           create: {
             providerKey: 'id' in user ? user.id : user.sub,
           },
         },
-        paperRequester: {
-          create: {},
-        },
       },
+      select,
     });
     return savedUserInDb;
   }
@@ -74,18 +95,72 @@ export class AuthService {
       );
     });
   }
-  async loginWithGoogle(code: string) {
-    const token = await this.checkGoogleCode(code);
+
+  private loginWithSocialMedia = async ({ code, type }: SocialLoginDto) => {
+    const token =
+      type === 'google'
+        ? await this.checkGoogleCode(code)
+        : await this.checkFacebookCode(code);
     const user = await this.upsertUserToDb(token);
     const accessToken = await this.createToken(user.id);
-    if (typeof accessToken === 'string') return accessToken;
+    if (typeof accessToken === 'string') return { accessToken, user };
     else throw new BadRequestException();
+  };
+
+  async socialLogin(socialLoginDto: SocialLoginDto) {
+    const data = await this.loginWithSocialMedia(socialLoginDto);
+    return data;
   }
-  async loginWithFacebook(code: string) {
-    const token = await this.checkFacebookCode(code);
-    const user = await this.upsertUserToDb(token);
-    const accessToken = await this.createToken(user.id);
-    if (typeof accessToken === 'string') return accessToken;
-    else throw new BadRequestException();
+
+  async login(loginDto: LoginDto) {
+    const { username, password } = loginDto;
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        username,
+      },
+    });
+    if (!user) throw new NotFoundException();
+    const isCorrect = await bcrypt.compare(password, user.password);
+    if (isCorrect) {
+      const accessToken = await this.createToken(user.id);
+      return accessToken;
+    }
+    throw new BadRequestException();
+  }
+
+  async register(registerDto: RegisterDto) {
+    const { address, password, phoneNumber, username, name, picture } =
+      registerDto;
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        username,
+      },
+    });
+    if (user) {
+      throw new BadRequestException({
+        status: 'fail',
+        message: 'Email already in used',
+      });
+    }
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const createdUser = await this.prismaService.user.create({
+      data: {
+        name,
+        picture,
+        username,
+        password: hashedPassword,
+        phoneNumber,
+        role: 'paperMaker',
+        paperMaker: {
+          create: {
+            address,
+            lat: 123,
+            long: 123,
+          },
+        },
+      },
+    });
+    const accessToken = await this.createToken(createdUser.id);
+    return accessToken;
   }
 }

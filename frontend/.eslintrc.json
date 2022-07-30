@@ -1,11 +1,11 @@
 {
   "extends": ["next/core-web-vitals", "eslint:recommended"],
   "rules": {
+    "@next/next/no-img-element": "off",
     "no-unused-vars": "error",
     "spaced-comment": ["warn", "always"],
     "arrow-spacing": ["error", { "before": true, "after": true }],
     "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
-    "no-trailing-spaces": "error",
-    "@next/next/no-img-element": "off"
+    "no-trailing-spaces": "error"
   }
 }
