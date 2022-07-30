@@ -1,6 +1,6 @@
 import { IsString, IsNumber, IsNotEmpty, IsInt } from 'class-validator';
 
-export class CreateServiceDto {
+export class CreateOfferedServiceDto {
   @IsNumber()
   @IsNotEmpty()
   price: number;

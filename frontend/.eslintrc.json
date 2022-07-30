@@ -5,7 +5,6 @@
     "spaced-comment": ["warn", "always"],
     "arrow-spacing": ["error", { "before": true, "after": true }],
     "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
-    "no-trailing-spaces": "error",
-    "@next/next/no-img-element": "off"
+    "no-trailing-spaces": "error"
   }
 }

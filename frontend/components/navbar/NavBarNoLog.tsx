@@ -1,9 +1,12 @@
 import { Fragment } from "react"
 import { Popover } from "@headlessui/react"
-import { MenuIcon, XIcon } from "@heroicons/react/outline"
-import SearchBar from "./SearchBar"
+import { MenuIcon, XIcon, UserIcon } from "@heroicons/react/outline"
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/solid"
+import Link from "next/link"
+import NavFacebookButton from "../LoginButton/NavFacebookButton"
+import NavGoogleButton from "../LoginButton/NavGoogleButton"
+import SearchBar from "./SearchBar"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -54,7 +57,7 @@ export default function NavBarNoLog() {
                 </div>
                 <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
                   {/* Mobile menu button */}
-                  <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open menu</span>
                     {open ? (
                       <XIcon
@@ -70,11 +73,13 @@ export default function NavBarNoLog() {
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:divide-x lg:divide-gray-100 lg:items-center lg:justify-end xl:col-span-4">
-                  <div className="px-4">
-                    <p className="text-md subpixel-antialiased font-medium border-b border-transparent text-white hover:cursor-pointer hover:border-white">
-                      BECOME A PAPERMAKER
-                    </p>
-                  </div>
+                  <Link href={"/papermaker_register"}>
+                    <div className="px-4">
+                      <p className="text-md subpixel-antialiased font-medium border-b border-transparent text-white hover:cursor-pointer hover:border-white">
+                        BECOME A PAPERMAKER
+                      </p>
+                    </div>
+                  </Link>
                   <div className="hidden space-x-2 pl-4 lg:flex lg:items-center lg:justify-end">
                     {/* <div className="items-center justify-center hover:cursor-pointer">
                       <svg
@@ -120,6 +125,10 @@ export default function NavBarNoLog() {
                     <Menu as="div" className="inline-flex items-center ">
                       <div>
                         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
+                          <UserIcon
+                            aria-hidden="true"
+                            className="mt-0.5 h-5 w-5 mr-1 -ml-1"
+                          />
                           <p>Sign In</p>
                           <ChevronDownIcon
                             className="-mr-1 ml-2 mt-0.5 h-5 w-5"
@@ -140,94 +149,44 @@ export default function NavBarNoLog() {
                           <div className="px-4 py-3 space-y-2">
                             <p className="text-xl font-semibold">Login with</p>
                             <div className="grid grid-cols-2 gap-4">
-                              <div className="border border-gray-300 rounded-md px-2 py-1">
-                                <div className="flex justify-center space-x-2 items-center">
-                                  <svg
-                                    fill="currentColor"
-                                    className="h-7 w-7"
-                                    stroke="unset"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 48 48"
-                                  >
-                                    <path
-                                      d="M44,38.44A5.56,5.56,0,0,1,38.44,44H9.56A5.56,5.56,0,0,1,4,38.44V9.56A5.56,5.56,0,0,1,9.56,4H38.44A5.56,5.56,0,0,1,44,9.56Z"
-                                      fill="#3f51b5"
-                                    ></path>
-                                    <path
-                                      d="M35.52,25.11H31.78V39.56H26.22V25.11H22.89V20.67h3.33V18c0-3.9,1.62-6.21,6.22-6.21h3.78v4.44H33.68c-1.79,0-1.91.67-1.91,1.91v2.53h4.44Z"
-                                      fill="#fff"
-                                    ></path>
-                                  </svg>
-                                  <span className="font-medium text-md hover:cursor-pointer">
-                                    Facebook
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="border border-gray-300 rounded-md px-2 py-1">
-                                <div className="flex justify-center space-x-2 items-center">
-                                  <svg
-                                    fill="currentColor"
-                                    className="h-7 w-7"
-                                    stroke="unset"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 48 48"
-                                  >
-                                    <path
-                                      fill="#FFC107"
-                                      d="M 43.609375 20.082031 L 42 20.082031 L 42 20 L 24 20 L 24 28 L 35.304688 28 C 33.652344 32.65625 29.222656 36 24 36 C 17.371094 36 12 30.628906 12 24 C 12 17.371094 17.371094 12 24 12 C 27.058594 12 29.84375 13.152344 31.960938 15.039063 L 37.617188 9.382813 C 34.046875 6.054688 29.269531 4 24 4 C 12.953125 4 4 12.953125 4 24 C 4 35.046875 12.953125 44 24 44 C 35.046875 44 44 35.046875 44 24 C 44 22.660156 43.863281 21.351563 43.609375 20.082031 Z "
-                                    ></path>
-                                    <path
-                                      fill="#FF3D00"
-                                      d="M 6.304688 14.691406 L 12.878906 19.511719 C 14.65625 15.109375 18.960938 12 24 12 C 27.058594 12 29.84375 13.152344 31.960938 15.039063 L 37.617188 9.382813 C 34.046875 6.054688 29.269531 4 24 4 C 16.316406 4 9.65625 8.335938 6.304688 14.691406 Z "
-                                    ></path>
-                                    <path
-                                      fill="#4CAF50"
-                                      d="M 24 44 C 29.164063 44 33.859375 42.023438 37.410156 38.808594 L 31.21875 33.570313 C 29.210938 35.089844 26.714844 36 24 36 C 18.796875 36 14.382813 32.683594 12.71875 28.054688 L 6.195313 33.078125 C 9.503906 39.554688 16.226563 44 24 44 Z "
-                                    ></path>
-                                    <path
-                                      fill="#1976D2"
-                                      d="M 43.609375 20.082031 L 42 20.082031 L 42 20 L 24 20 L 24 28 L 35.304688 28 C 34.511719 30.238281 33.070313 32.164063 31.214844 33.570313 C 31.21875 33.570313 31.21875 33.570313 31.21875 33.570313 L 37.410156 38.808594 C 36.972656 39.203125 44 34 44 24 C 44 22.660156 43.863281 21.351563 43.609375 20.082031 Z "
-                                    ></path>
-                                  </svg>
-                                  <span className="font-medium text-md hover:cursor-pointer">
-                                    Google
-                                  </span>
-                                </div>
-                              </div>
+                              <NavFacebookButton />
+                              <NavGoogleButton />
                             </div>
                           </div>
                           <div className="py-1">
                             <Menu.Item>
                               {({ active }) => (
-                                <div
-                                  className={classNames(
-                                    active
-                                      ? "bg-gray-100 text-black"
-                                      : "text-gray-900",
-                                    "flex justify-center space-x-2 items-center px-2 py-4 hover:cursor-pointer"
-                                  )}
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-7 w-7"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
+                                <Link href={"/login"}>
+                                  <div
+                                    className={classNames(
+                                      active
+                                        ? "bg-gray-100 text-black"
+                                        : "text-gray-900",
+                                      "flex justify-center space-x-2 items-center px-2 py-4 hover:cursor-pointer"
+                                    )}
                                   >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                                    />
-                                  </svg>
-                                  <a
-                                    href="#"
-                                    className="block text-md font-medium"
-                                  >
-                                    Sign in with Paperworks account
-                                  </a>
-                                </div>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-7 w-7"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                      strokeWidth="2"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                                      />
+                                    </svg>
+                                    <a
+                                      href="#"
+                                      className="block text-md font-medium"
+                                    >
+                                      Sign in with Paperworks account
+                                    </a>
+                                  </div>
+                                </Link>
                               )}
                             </Menu.Item>
                           </div>
@@ -243,27 +202,27 @@ export default function NavBarNoLog() {
               className="bg-white lg:hidden"
               aria-label="Global"
             >
-              <div className="max-w-3xl mx-auto px-2 py-4 space-y-1 sm:px-4">
-                <div className="flex justify-center space-x-2 items-center hover:cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <a href="#" className="block text-lg font-semibold">
-                    Sign In
-                  </a>
+              <Link href="/login">
+                <div className="max-w-3xl mx-auto px-2 py-4 space-y-1 sm:px-4">
+                  <div className="flex justify-center space-x-2 items-center hover:cursor-pointer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <a className="block text-lg font-semibold">Sign In</a>
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div className="border-t-4 border-gray-300">
                 <div className="flex justify-center space-x-2 items-center py-4 hover:cursor-pointer">
                   <svg
@@ -282,23 +241,25 @@ export default function NavBarNoLog() {
                   </svg>
                   <p className="text-md font-medium">Categories</p>
                 </div>
-                <div className="border-t-4 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <p className="text-md font-medium">Become a papermaker</p>
-                </div>
+                <Link href="/papermaker_register">
+                  <div className="border-t-4 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                    <p className="text-md font-medium">Become a papermaker</p>
+                  </div>
+                </Link>
               </div>
             </Popover.Panel>
           </>

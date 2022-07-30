@@ -1,6 +1,6 @@
 import { IsInt, IsNumber } from 'class-validator';
 
-export class UpdateServiceDto {
+export class UpdateOfferedServiceDto {
   @IsNumber()
   price?: number;
   @IsInt()
