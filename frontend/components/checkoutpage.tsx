@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import react, {useState} from "react";
 const products = [
     {
@@ -106,8 +107,8 @@ return (
                     <label htmlFor="fullname" className="block text-lg font-medium my-3 text-gray-700">
                         Full name
                     </label>
-                    <input className="mt-1 pl-3 h-10 focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    <input className="mt-1 pl-3 h-10 block w-full shadow-sm sm:text-sm
+                    border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
                     value={firstName}
                     onChange={e => setFirstName(e.target.value)}
                     />
@@ -121,16 +122,16 @@ return (
                     <label htmlFor="email-address" className="block text-lg font-medium my-3 text-gray-700">
                         Email address
                     </label>
-                    <input className="mt-1 pl-3 h-10 focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full shadow-sm sm:text-sm border-gray-300 rounded-md disabled"
+                    <input className="mt-1 pl-3 h-10 block w-full shadow-sm sm:text-sm
+                     border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
                     value="s0000000@rmit.edu.vn"
                     />
                     <dd>
                         <label htmlFor="fullname" className="block text-lg font-medium my-3 text-gray-700">
                         Phone number
                         </label>
-                        <input className="mt-1 pl-3 h-10 focus:ring-indigo-500 focus:border-indigo-500 block
-                        w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        <input className="mt-1 pl-3 h-10 block w-full shadow-sm sm:text-sm
+                        border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
                         value={phoneNumber}
                         onChange={e => setPhoneNumber(e.target.value)}
                         />
@@ -145,8 +146,8 @@ return (
                     <label htmlFor="address" className="block text-lg font-medium my-3 text-gray-700">
                         Address
                     </label>
-                    <input className="mt-1 pl-3 h-10 focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    <input className="mt-1 pl-3 h-10 block w-full shadow-sm sm:text-sm
+                    border-2 border-gray-300 hover:border-blue-400 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
                     />
