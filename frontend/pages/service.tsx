@@ -57,6 +57,7 @@ const filters = [
       { value: "7", label: "Less than 7 days" },
       { value: "14", label: "Less than 14 days" },
       { value: "15", label: "More than 15 days" },
+      { value: "reset", label: "Reset" },
     ],
   },
   {
@@ -67,6 +68,7 @@ const filters = [
       { value: "50", label: "Less than $50" },
       { value: "99", label: "Less than $99" },
       { value: "100", label: "More than $100" },
+      { value: "reset", label: "Reset" },
     ],
   },
 ]
@@ -310,8 +312,10 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                           {
                                             query: {
                                               ...query,
-                                              [`${section.id}${value}`]:
-                                                s.value,
+                                              ...(s.value !== "reset" && {
+                                                [`${section.id}${value}`]:
+                                                  s.value,
+                                              }),
                                             },
                                           },
                                           undefined,
@@ -586,7 +590,9 @@ const ServicePage: NextPage<ServicePageProps> = ({
                                       {
                                         query: {
                                           ...query,
-                                          [`${section.id}${value}`]: s.value,
+                                          ...(s.value !== "reset" && {
+                                            [`${section.id}${value}`]: s.value,
+                                          }),
                                         },
                                       },
                                       undefined,
