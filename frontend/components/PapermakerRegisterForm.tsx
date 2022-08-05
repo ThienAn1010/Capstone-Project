@@ -13,25 +13,11 @@ const PapermakerRegisterForm = () => {
     phoneNumber === ""
 
   const isInvalidName = name.match(/[^a-zA-Z]/)
-  const isInvalidPhone = !phoneNumber.match(
-    /^(\s*|\d+)$/)
-    const isInvalidEmail = !email.match(/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/)
-  // const ref = react.useRef();
-  //     const clear = () => {
-  //         ref.current.value = "";
-  //     };
-  //     const handleImageOnChange = (e: any) => {
-  //         e.preventDefault();
-  //         const file = e.target.files[0];
-  //         if (!file) return setImage(null);
-  //         console.log(file.size);
-  //         if (file.size > 2097152) {
-  //             alert("File is too big!");
-  //             clear();
-  //         } else {
-  //             setImage(e.target.files[0]);
-  //         }
-  //     };
+  const isInvalidPhone = !phoneNumber.match(/^(\s*|\d+)$/)
+  const isInvalidEmail = !email.match(
+    /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/
+  )
+
   return (
     <div className="min-h-full flex">
       <div className="hidden lg:block relative w-0 flex-1">
@@ -188,8 +174,8 @@ const PapermakerRegisterForm = () => {
                       </svg>
                     </span>
                     <button
-                      //onChange={handleImageOnChange}
-                      //ref={ref}
+                      // onChange={handleImageOnChange}
+                      // ref={ref}
                       type="button"
                       className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
