@@ -135,8 +135,33 @@ export class OfferedServicesService {
     }
   }
 
+  async getOfferedService(serviceId: string) {
+    const offeredService = await this.prismaService.offeredService.findUnique({
+      where: {
+        id: serviceId,
+      },
+      include: {
+        service: true,
+        paperMaker: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                role: true,
+                name: true,
+                username: true,
+                picture: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    return offeredService;
+  }
+
   async createOfferedService(service: CreateOfferedServiceDto) {
-    const { duration, serviceId, price, userId } = service;
+    const { duration, serviceId, price, userId, description } = service;
     const paperMaker = await this.prismaService.paperMaker.findFirst({
       where: {
         userId: userId,
@@ -154,6 +179,7 @@ export class OfferedServicesService {
     const offeredService = await this.prismaService.offeredService.create({
       data: {
         duration,
+        description,
         price,
         serviceId,
         paperMakerId: paperMaker.id,

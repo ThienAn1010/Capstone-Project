@@ -16,9 +16,11 @@ export interface OfferedService {
     status: string
     totalCases: number
     user: User
+    aboutMe?: string
   }
   paperMakerId: string
   price: number
   service: Service
   serviceId: string
+  description: string
 }

@@ -104,8 +104,7 @@ export default function Example() {
               alt="Company name"
             />
             <p className="text-gray-500 text-base">
-              Making the world a better place through constructing elegant
-              hierarchies.
+              Making your life easier is our main goal.
             </p>
             <div className="flex space-x-6">
               {navigation.social.map((item) => (

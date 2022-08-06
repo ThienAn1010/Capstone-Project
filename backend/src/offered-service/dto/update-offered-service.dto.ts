@@ -5,7 +5,7 @@ export class UpdateOfferedServiceDto {
   price?: number;
   @IsInt()
   duration?: number;
-
+  description?: string;
   offeredServiceId: string;
   userId: string;
 }
