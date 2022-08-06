@@ -3,7 +3,6 @@ import Head from "next/head"
 import PapermakerRegisterForm from "../components/PapermakerRegisterForm"
 
 const Register: NextPage = () => {
-  
   return (
     <>
       <Head>

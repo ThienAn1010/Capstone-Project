@@ -1,21 +1,15 @@
-import { useState } from "react"
-const PapermakerRegisterForm = () => {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [password, setPassword] = useState("")
-  const [passwordConfirm, setPasswordConfirm] = useState("")
-  const isInvalid =
-    name === "" ||
-    email === "" ||
-    password === "" ||
-    passwordConfirm === "" ||
-    phoneNumber === ""
+import { useForm } from "react-hook-form"
 
-  const isInvalidName = name.match(/[^a-zA-Z]/)
-  const isInvalidPhone = !phoneNumber.match(
-    /^(\s*|\d+)$/)
-    const isInvalidEmail = !email.match(/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/)
+const PapermakerRegisterForm = () => {
+  // const isInvalidEmail = !email.match(
+  //   /^([a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$)$/
+  // )
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const onSubmit = (data: any) => console.log(data)
   // const ref = react.useRef();
   //     const clear = () => {
   //         ref.current.value = "";
@@ -37,7 +31,7 @@ const PapermakerRegisterForm = () => {
       <div className="hidden lg:block relative w-0 flex-1">
         <img
           className="absolute inset-0 h-full w-full object-cover"
-          src="https://www.mindmeister.com/blog/wp-content/uploads/2019/03/Document-Writing.png"
+          src="signup_img.png"
           alt=""
         />
       </div>
@@ -48,10 +42,14 @@ const PapermakerRegisterForm = () => {
               Become a papermaker
             </h2>
           </div>
-
           <div className="mt-8">
             <div className="mt-6">
-              <form action="#" method="POST" className="space-y-6">
+              <form
+                action="#"
+                method="POST"
+                className="space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
@@ -61,19 +59,17 @@ const PapermakerRegisterForm = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="email"
+                      {...register("email", {required: true ,
+                        pattern:
+                          /^([a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$)$/,
+                      })}
                       name="email"
-                      type="email"
-                      placeholder="Enter your email address"
-                      autoComplete="email"
-                      required
-                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      placeholder="Enter your email"
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
-                    {isInvalidEmail && (
-                      <div className="mt-2">
-                        <h3 className="text-red-500 text-sm">Invalid Email!</h3>
-                      </div>
+                    {errors.email && (
+                      <p className="text-red-500 text-sm">Invalid Email!</p>
                     )}
                   </div>
                   <label
@@ -84,18 +80,16 @@ const PapermakerRegisterForm = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="name"
+                      {...register("name", {required: true ,
+                        pattern: /[^a-zA-Z]/,
+                      })}
                       name="name"
                       type="text"
-                      placeholder="Enter your full name"
-                      required
-                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Enter your name"
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
-                    {isInvalidName && (
-                      <div className="mt-2">
-                        <h3 className="text-red-500 text-sm">Invalid name!</h3>
-                      </div>
+                    {errors.name && (
+                      <p className="text-red-500 text-sm">Invalid Name!</p>
                     )}
                   </div>
                   <label
@@ -106,13 +100,14 @@ const PapermakerRegisterForm = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="address"
-                      name="address"
                       type="text"
                       placeholder="Enter your address"
-                      required
+                      {...register("address", { required: true })}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
+                    {errors.address && (
+                      <p className="text-red-500 text-sm">Empty Address!</p>
+                    )}
                   </div>
                   <label
                     htmlFor="phone"
@@ -122,21 +117,18 @@ const PapermakerRegisterForm = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="phoneNumber"
-                      name="phoneNumber"
+                      {...register("phoneNumber", {required: true ,
+                        pattern: /^(\s*|\d+)$/,
+                      })}
                       type="phone"
                       placeholder="Enter your phone number"
                       autoComplete="phone"
-                      required
-                      onChange={(e) => setPhoneNumber(e.target.value)}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
-                    {isInvalidPhone && (
-                      <div className="mt-2">
-                        <h3 className="text-red-500 text-sm">
-                          Invalid Phone Number!
-                        </h3>
-                      </div>
+                    {errors.phoneNumber && (
+                      <p className="text-red-500 text-sm">
+                        Invalid Phone Number!
+                      </p>
                     )}
                   </div>
                   <label
@@ -147,16 +139,18 @@ const PapermakerRegisterForm = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="password"
-                      name="password"
+                      {...register("password", { required: true })}
                       type="password"
                       autoComplete="current-password"
                       required
                       placeholder="*******"
-                      onChange={(e) => setPassword(e.target.value)}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
+                    {errors.password && (
+                      <p className="text-red-500 text-sm">Empty Password!</p>
+                    )}
                   </div>
+
                   <label
                     htmlFor="password"
                     className="block text-sm font-medium text-gray-700"
@@ -165,14 +159,16 @@ const PapermakerRegisterForm = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      id="password"
-                      name="confirmPassword"
-                      type="confirmPassword"
+                      {...register("confirmPassword", { required: true })}
                       required
                       placeholder="*******"
-                      onChange={(e) => setPasswordConfirm(e.target.value)}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
+                    {errors.confirmPassword && (
+                      <p className="text-red-500 text-sm">
+                        Not match Password!
+                      </p>
+                    )}
                   </div>
                   <label className="block text-sm font-medium text-gray-700">
                     Photo
@@ -188,23 +184,16 @@ const PapermakerRegisterForm = () => {
                       </svg>
                     </span>
                     <button
-                      //onChange={handleImageOnChange}
-                      //ref={ref}
                       type="button"
                       className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Upload
                     </button>
                   </div>
-                </div>
-                <div>
-                  <button
+                  <input
                     type="submit"
-                    disabled={isInvalid}
                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Sign up
-                  </button>
+                  />
                 </div>
               </form>
             </div>
