@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React from "react"
 import { CheckIcon } from "@heroicons/react/outline"
 import useGetOfferedService from "../hooks/useGetOfferedService"
 import { useRouter } from "next/router"
