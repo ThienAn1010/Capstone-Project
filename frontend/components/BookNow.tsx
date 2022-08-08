@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react"
+import React from "react"
 import { CheckIcon } from "@heroicons/react/outline"
 import useGetOfferedService from "../hooks/useGetOfferedService"
 import { useRouter } from "next/router"
+import axiosInstance from "../util/axiosInstace"
 const serviceDetails = [
   "Deliver within 7 working days",
   "Real-time progress tracking",
@@ -13,17 +14,25 @@ const serviceDetails = [
 const BookNow = () => {
   const router = useRouter()
   const { data, isLoading } = useGetOfferedService(router.query.id as string)
-  const element = useRef<HTMLDivElement | null>(null)
-  useEffect(() => {
-    const intersectionObserver = new IntersectionObserver(() => {})
-    intersectionObserver.observe(element.current!)
-    return () => intersectionObserver.disconnect()
-  }, [])
+
+  const handleOnClick = async () => {
+    try {
+      const body = {
+        name: `${data?.paperMaker.user.name} - ${data?.service.name}`,
+        description: data?.description,
+        amount: data?.price,
+        id: data?.id,
+      }
+      const response = await axiosInstance.post("/checkout", body)
+      router.push(response.data.session)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div
       className={`max-w-xs shadow-md p-5 rounded-sm overflow-hidden block transition`}
-      ref={element}
     >
       <div className="-mx-5 -mt-5 relative">
         {isLoading ? (
@@ -51,7 +60,10 @@ const BookNow = () => {
       ) : (
         <>
           <h3 className="text-3xl font-bold mt-3">${data?.price}</h3>
-          <button className="w-full bg-blue-500 text-white mt-1.5 py-1">
+          <button
+            className="w-full bg-blue-500 text-white mt-1.5 py-1"
+            onClick={handleOnClick}
+          >
             Book now
           </button>
         </>
