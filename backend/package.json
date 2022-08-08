@@ -21,7 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "dev": "npx prisma generate && npm run start:dev",
     "seed": "node dist/prisma/seed.js",
-    "clean": "node dist/prisma/clean.js"
+    "clean": "node dist/prisma/clean.js",
+    "postinstall": "npx prisma generate && npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
