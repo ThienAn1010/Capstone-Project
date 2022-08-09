@@ -1,5 +1,6 @@
 import type { NextPage } from "next"
 import useGetMe from "../hooks/useGetMe"
+import Autocomplete from "react-google-autocomplete"
 
 const products = [
   {
@@ -24,7 +25,10 @@ const Checkout: NextPage = () => {
         <div className="max-w-2xl mx-auto lg:max-w-none">
           <h1 className="sr-only">Checkout</h1>
 
-          <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+          <form
+            id="checkout"
+            className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16"
+          >
             <div>
               <div>
                 <h2 className="text-lg font-medium text-gray-900">
@@ -44,14 +48,14 @@ const Checkout: NextPage = () => {
                       id="email-address"
                       name="email-address"
                       autoComplete="email"
-                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       value={data?.username}
                       defaultValue=""
                     />
                   </div>
                 </div>
                 <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                  <div className="sm:col-span-2">
+                  <div>
                     <label
                       htmlFor="first-name"
                       className="block text-sm font-medium text-gray-700"
@@ -66,12 +70,12 @@ const Checkout: NextPage = () => {
                         autoComplete="given-name"
                         value={data?.name}
                         defaultValue=""
-                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       />
                     </div>
                   </div>
 
-                  <div className="sm:col-span-2">
+                  <div>
                     <label
                       htmlFor="phone"
                       className="block text-sm font-medium text-gray-700"
@@ -84,7 +88,7 @@ const Checkout: NextPage = () => {
                         name="phone"
                         id="phone"
                         autoComplete="tel"
-                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -97,49 +101,35 @@ const Checkout: NextPage = () => {
                       Address
                     </label>
                     <div className="mt-1">
-                      <input
-                        type="text"
-                        name="address"
-                        id="address"
-                        autoComplete="street-address"
-                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      <Autocomplete
+                        aria-required
+                        apiKey={process.env.GG_API_KEY}
+                        // placeholder="Enter address"
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        onPlaceSelected={(place: any) => {
+                          console.log(JSON.stringify(place?.geometry?.location))
+                        }}
+                        options={{
+                          types: ["geocode", "establishment"],
+                        }}
                       />
                     </div>
                   </div>
-
-                  <div>
+                  <div className="sm:col-span-2">
                     <label
-                      htmlFor="city"
+                      htmlFor="note"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      City
+                      Note
                     </label>
                     <div className="mt-1">
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
-                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="region"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      District
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="region"
-                        id="region"
-                        autoComplete="address-level1"
-                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
+                      <textarea
+                        name="note"
+                        id="note"
+                        form="checkout"
+                        style={{ resize: "none" }}
+                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      ></textarea>
                     </div>
                   </div>
                 </div>
@@ -206,7 +196,7 @@ const Checkout: NextPage = () => {
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <button
                     type="submit"
-                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                    className="w-full bg-test border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500"
                   >
                     Confirm order
                   </button>
