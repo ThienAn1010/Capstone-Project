@@ -28,6 +28,9 @@ export class AuthController {
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires,
+      ...(this.configService.get('NODE_ENV') === 'production' && {
+        sameSite: 'none',
+      }),
     });
     res.redirect(`${this.configService.get('CLIENT_URL')}/${url ? url : ''}`);
   }
@@ -89,6 +92,9 @@ export class AuthController {
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      ...(this.configService.get('NODE_ENV') === 'production' && {
+        sameSite: 'none',
+      }),
     });
     return { user, accessToken };
   }
@@ -101,6 +107,9 @@ export class AuthController {
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires: new Date(expireCookie),
+      ...(this.configService.get('NODE_ENV') === 'production' && {
+        sameSite: 'none',
+      }),
     });
     res.json({});
   }
@@ -116,6 +125,9 @@ export class AuthController {
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      ...(this.configService.get('NODE_ENV') === 'production' && {
+        sameSite: 'none',
+      }),
     });
     return { accessToken: accessToken };
   }
@@ -131,6 +143,9 @@ export class AuthController {
         this.configService.get('NODE_ENV') === 'production' ? true : false,
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+      ...(this.configService.get('NODE_ENV') === 'production' && {
+        sameSite: 'none',
+      }),
     });
     return { accessToken: accessToken };
   }
