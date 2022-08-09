@@ -1,17 +1,17 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('operator', 'paperRequester', 'paperMaker');
+CREATE TYPE "Role" AS ENUM ('operator', 'paperMaker', 'user');
 
 -- CreateEnum
-CREATE TYPE "PaperRequesterStatus" AS ENUM ('available', 'busy');
+CREATE TYPE "PaperMakerStatus" AS ENUM ('available', 'busy');
 
 -- CreateEnum
-CREATE TYPE "BookingStatus" AS ENUM ('accept', 'deny');
+CREATE TYPE "BookingStatus" AS ENUM ('accept', 'deny', 'pendingConfirm', 'pendingFinished', 'drop', 'success');
 
 -- CreateTable
 CREATE TABLE "AuthProvider" (
     "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
     "providerKey" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
 
     CONSTRAINT "AuthProvider_pkey" PRIMARY KEY ("id")
 );
@@ -22,8 +22,10 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT,
     "name" TEXT NOT NULL,
+    "picture" TEXT NOT NULL DEFAULT E'https://res.cloudinary.com/dybygufkr/image/upload/v1593000869/avatar_q2ysxd.jpg',
+    "phoneNumber" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "role" "Role" NOT NULL DEFAULT E'paperRequester',
+    "role" "Role" NOT NULL DEFAULT E'user',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -37,25 +39,19 @@ CREATE TABLE "Operator" (
 );
 
 -- CreateTable
-CREATE TABLE "PaperRequester" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-
-    CONSTRAINT "PaperRequester_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "PaperMaker" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "addresslat" DOUBLE PRECISION NOT NULL,
-    "addresslon" DOUBLE PRECISION NOT NULL,
-    "totalCases" INTEGER NOT NULL,
-    "pastSuccessfulCases" INTEGER NOT NULL,
-    "rating" DOUBLE PRECISION NOT NULL,
-    "status" "PaperRequesterStatus" NOT NULL,
-    "avatar" TEXT NOT NULL,
-    "isConfirmed" BOOLEAN NOT NULL,
+    "address" TEXT NOT NULL,
+    "lat" DOUBLE PRECISION NOT NULL,
+    "long" DOUBLE PRECISION NOT NULL,
+    "totalCases" INTEGER NOT NULL DEFAULT 0,
+    "pastSuccessfulCases" INTEGER NOT NULL DEFAULT 0,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "status" "PaperMakerStatus" NOT NULL DEFAULT E'available',
+    "isConfirmed" BOOLEAN NOT NULL DEFAULT false,
+    "aboutMe" TEXT,
+    "numberOfReviews" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "PaperMaker_pkey" PRIMARY KEY ("id")
 );
@@ -76,6 +72,8 @@ CREATE TABLE "OfferedService" (
     "serviceId" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "duration" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "description" TEXT NOT NULL,
 
     CONSTRAINT "OfferedService_pkey" PRIMARY KEY ("id")
 );
@@ -83,50 +81,35 @@ CREATE TABLE "OfferedService" (
 -- CreateTable
 CREATE TABLE "Booking" (
     "id" TEXT NOT NULL,
-    "paperRequesterId" TEXT NOT NULL,
     "offeredServiceId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "note" TEXT NOT NULL,
+    "payAmount" DOUBLE PRECISION NOT NULL,
+    "status" "BookingStatus" NOT NULL DEFAULT E'pendingConfirm',
 
     CONSTRAINT "Booking_pkey" PRIMARY KEY ("id")
 );
-
--- CreateTable
-CREATE TABLE "Deal" (
-    "bookingId" TEXT NOT NULL,
-    "actualPrice" DOUBLE PRECISION NOT NULL,
-    "payAmount" DOUBLE PRECISION NOT NULL,
-    "keep" DOUBLE PRECISION NOT NULL
-);
-
--- CreateIndex
-CREATE UNIQUE INDEX "AuthProvider_userId_key" ON "AuthProvider"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "AuthProvider_providerKey_key" ON "AuthProvider"("providerKey");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
+CREATE UNIQUE INDEX "AuthProvider_userId_key" ON "AuthProvider"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Operator_userId_key" ON "Operator"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PaperRequester_userId_key" ON "PaperRequester"("userId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "PaperMaker_userId_key" ON "PaperMaker"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Deal_bookingId_key" ON "Deal"("bookingId");
+CREATE UNIQUE INDEX "Service_name_key" ON "Service"("name");
 
 -- AddForeignKey
 ALTER TABLE "AuthProvider" ADD CONSTRAINT "AuthProvider_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Operator" ADD CONSTRAINT "Operator_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "PaperRequester" ADD CONSTRAINT "PaperRequester_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PaperMaker" ADD CONSTRAINT "PaperMaker_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -138,10 +121,7 @@ ALTER TABLE "OfferedService" ADD CONSTRAINT "OfferedService_paperMakerId_fkey" F
 ALTER TABLE "OfferedService" ADD CONSTRAINT "OfferedService_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "Service"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Booking" ADD CONSTRAINT "Booking_paperRequesterId_fkey" FOREIGN KEY ("paperRequesterId") REFERENCES "PaperRequester"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Booking" ADD CONSTRAINT "Booking_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Booking" ADD CONSTRAINT "Booking_offeredServiceId_fkey" FOREIGN KEY ("offeredServiceId") REFERENCES "OfferedService"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Deal" ADD CONSTRAINT "Deal_bookingId_fkey" FOREIGN KEY ("bookingId") REFERENCES "Booking"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

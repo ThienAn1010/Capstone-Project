@@ -48,6 +48,8 @@ model PaperMaker {
   status              PaperMakerStatus @default(available)
   isConfirmed         Boolean          @default(false)
   offeredServices     OfferedService[]
+  aboutMe             String?
+  numberOfReviews     Int              @default(0)
 }
 
 model Service {
@@ -67,6 +69,7 @@ model OfferedService {
   paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
   service      Service    @relation(fields: [serviceId], references: [id])
   bookings     Booking[]
+  description  String
 }
 
 model Booking {
@@ -76,16 +79,8 @@ model Booking {
   userId           String
   user             User           @relation(fields: [userId], references: [id])
   note             String
-  transaction      Deal?
-}
-
-model Deal {
-  id          String  @id @default(cuid())
-  bookingId   String  @unique
-  actualPrice Float
-  payAmount   Float
-  keep        Float
-  booking     Booking @relation(fields: [bookingId], references: [id])
+  payAmount        Float
+  status           BookingStatus  @default(pendingConfirm)
 }
 
 enum Role {
@@ -102,5 +97,8 @@ enum PaperMakerStatus {
 enum BookingStatus {
   accept
   deny
-  pending
+  pendingConfirm
+  pendingFinished
+  drop
+  success
 }

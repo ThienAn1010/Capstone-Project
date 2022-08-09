@@ -1,3 +1,4 @@
+import Link from "next/link"
 export default function Category() {
   let categories = [
     { id: "1", name: "Marriage Certificate", src: "/Marriage Certificate.svg" },
@@ -20,12 +21,11 @@ export default function Category() {
         <h2 className="text-2xl font-semibold tracking-tight text-gray-900">
           Popular Categories
         </h2>
-        <a
-          href="#"
-          className="hidden text-sm font-medium text-test hover:text-blue-800 md:block"
-        >
-          View all categories<span aria-hidden="true"> &rarr;</span>
-        </a>
+        <Link href="/service">
+          <p className="hidden text-sm font-medium text-test hover:text-blue-800 md:block hover:cursor-pointer">
+            View all categories<span aria-hidden="true"> &rarr;</span>
+          </p>
+        </Link>
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-x-2 gap-y-4 justify-items-center sm:gap-x-4 md:grid-cols-4 md:gap-y-4 lg:gap-x-2">

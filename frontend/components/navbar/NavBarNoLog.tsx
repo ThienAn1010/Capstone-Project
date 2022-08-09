@@ -29,29 +29,33 @@ export default function NavBarNoLog() {
           <>
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-6">
-                <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
-                  <div className="flex-shrink-0 flex items-center">
-                    <a href="#">
-                      <img
-                        className="block h-8 w-auto lg:hidden"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue"
-                        alt="Workflow"
-                      />
-                    </a>
-                    <a href="#">
-                      <img
-                        className="hidden lg:block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                        alt="Workflow"
-                      />
-                    </a>
+                <Link href="/">
+                  <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
+                    <div className="flex-shrink-0 flex items-center">
+                      <a href="#">
+                        <img
+                          className="block h-8 w-auto lg:hidden"
+                          src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue"
+                          alt="Workflow"
+                        />
+                      </a>
+                      <a href="#">
+                        <img
+                          className="hidden lg:block h-8 w-auto"
+                          src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                          alt="Workflow"
+                        />
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
-                  <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
-                    CATEGORIES
-                  </p>
-                </div>
+                </Link>
+                <Link href="/service">
+                  <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
+                    <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
+                      CATEGORIES
+                    </p>
+                  </div>
+                </Link>
                 <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                   <SearchBar />
                 </div>
@@ -73,7 +77,7 @@ export default function NavBarNoLog() {
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:divide-x lg:divide-gray-100 lg:items-center lg:justify-end xl:col-span-4">
-                  <Link href={"/papermaker_register"}>
+                  <Link href={"/register"}>
                     <div className="px-4">
                       <p className="text-md subpixel-antialiased font-medium border-b border-transparent text-white hover:cursor-pointer hover:border-white">
                         BECOME A PAPERMAKER
@@ -81,47 +85,6 @@ export default function NavBarNoLog() {
                     </div>
                   </Link>
                   <div className="hidden space-x-2 pl-4 lg:flex lg:items-center lg:justify-end">
-                    {/* <div className="items-center justify-center hover:cursor-pointer">
-                      <svg
-                        fill="currentColor"
-                        className="h-8 w-8"
-                        stroke="unset"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 50 50"
-                      >
-                        <defs>
-                          <rect
-                            x="6"
-                            y="13"
-                            width="36.7659574"
-                            height="21.7358491"
-                            id="rect-1"
-                          ></rect>
-                        </defs>
-                        <g
-                          id="icons/icon-menu/icon-lang-vn"
-                          stroke="none"
-                          strokeWidth="1"
-                          fill="none"
-                          fillRule="evenodd"
-                        >
-                          <g id="Bitmap">
-                            <image
-                              x="6"
-                              y="13"
-                              width="36.7659574"
-                              height="21.7358491"
-                              href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAeCAYAAAC8AUekAAAABGdBTUEAALGOfPtRkwAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAL6ADAAQAAAABAAAAHgAAAAB0FVfBAAADG0lEQVRYCe2WyWsUQRTGv1e9JDPZo+QQjBtGwXjwpKigd/Gs/6FXwYN/gBEvohLwEiTEuKBZNPtkpru6y6+6Z5h2SCTTCyGQgp7qqXpd9Xtfvfe6ZffZXYNT2tQp5U6wz+BP6vSqU95mUsXZ5FaiGiWRUa4s5N9mH1eyC8pXnmrLgMCZ43XL3nOgohOoRvkBwLk9CHGA6FMTaFRDXwm81AVqtk4PqPxQC2azGvhyw4aMUjNQV9mP+5ARH841ScaqCJ388ExGm5D/XDYvhwXunAcoTvJSNz0Ix5LWa98eTif7/80VNuKTeZIys4fphoSwqsg0YW8METyFUdfrUFdCiB/CZKUSkgd8/I/AsM/TcsGbkGwzAu/hMGRqMC2FHSd8hsl5Kt8Re3IA/tMJAradtNB0wqw3oef3ode6zvfrQC54G7/xF0CPtOA9ciGzNbIqDrdBsjwOYacZ/ySjW7SIYT4fQH9sIV62C/WL3LXPB8/nzSrL4FYAsxbDfRCyNLK6jDGOOifQ3YNj/EPFzU6AaKEB/aaJeFHDNNNTyJr2c58bPjn6QKAXIpiNfZZDDffOMFVmkc8qb2nIaH42Eb3bg35Nxb/bsWLgdtlsCtn//TXun7yIvjGEqGa03Djy+fgrQ2WeNis0sbvy2aItv/KZnYUwMuJAzrWXOwRMTTI3RmmjCgR5Zk97Wwq8VVFNuVAXa2nIhEzLLZ1spca5hcdUnanRpoVItXoQ8v8tDs/4lnEDucBvgTqX249YiZoIX+6QysB7Mso3Lp0aclheqfwEa9ImvT3kdPp1ozg8o0BNs1BeJvy2RvR2B8Erfs9spVkb/9iF/7gF5/4Y5JKirUL0m3M0L9oKwxsLP8USyVAJn29Af6Cy9isyZU8+yoIXAZzlDbj3bOh40HGQJPqJw9tPhWgpQLzKa4XgBz0hYf3YM4jex4jXG3SMEcNqWuTl1HG6sPJ2oXiVhL94o3vAO7tw2DpllmhnY719Kp3pvH1xeAtioW1vwY5qdi46ajLfeLGXVHbP/4Fn7Uq8Lw++RKjjLnUGf1ylyrY71cr/BSy59FsLOQsYAAAAAElFTkSuQmCC"
-                            ></image>
-                            <use
-                              stroke="#FFFFFF"
-                              strokeWidth="0.5"
-                              href="#rect-1"
-                            ></use>
-                          </g>
-                        </g>
-                      </svg>
-                    </div> */}
                     <Menu as="div" className="inline-flex items-center ">
                       <div>
                         <Menu.Button className="inline-flex justify-center w-full rounded-md border border-white shadow-sm px-2 py-2 text-md font-medium text-white hover:border-2">
@@ -241,7 +204,7 @@ export default function NavBarNoLog() {
                   </svg>
                   <p className="text-md font-medium">Categories</p>
                 </div>
-                <Link href="/papermaker_register">
+                <Link href="/register">
                   <div className="border-t-4 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

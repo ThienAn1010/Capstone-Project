@@ -9,7 +9,6 @@ const clean = async () => {
   await client.user.deleteMany();
   await client.service.deleteMany();
   await client.booking.deleteMany();
-  await client.deal.deleteMany();
 };
 
 clean()
