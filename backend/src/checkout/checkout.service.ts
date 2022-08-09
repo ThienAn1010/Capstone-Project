@@ -69,6 +69,7 @@ export class CheckoutService {
       throw new BadRequestException({
         status: 'error',
         message: 'Something went wrong',
+        error,
       });
     }
   }
