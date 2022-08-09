@@ -43,8 +43,7 @@ export class CheckoutService {
   }
   async handleSuccessfulPayment(req: Request) {
     const sig = req.headers['stripe-signature'];
-    const endpointSecret =
-      'whsec_37318baed2c895221c76ccb4a4e650cf68f1c3b2bbade2362dac03dc893f3cdf';
+    const endpointSecret = this.configService.get('STRIPE_WEBHOOK_SECRET');
     try {
       const event = this.stripeService
         .getStripe()
@@ -69,6 +68,7 @@ export class CheckoutService {
       throw new BadRequestException({
         status: 'error',
         message: 'Something went wrong',
+        error,
       });
     }
   }

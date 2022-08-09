@@ -3,6 +3,7 @@ import Head from "next/head"
 import Link from "next/link"
 import LoginFacebookButton from "../components/LoginButton/LoginFacebookButton"
 import LoginGoogleButton from "../components/LoginButton/LoginGoogleButton"
+import { getFacebookOAuthUrl, getGoogleOAuthUrl } from "../util/socialLogin"
 
 const Home: NextPage = () => {
   return (
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
           <div>
             <form className="space-y-4">
               <div className="hidden md:flex justify-around space-x-8 items-center">
-                <Link href={"http://localhost:8000/auth/facebook"}>
+                <Link href={getFacebookOAuthUrl()}>
                   <div className="border border-gray-300 rounded-md px-4 py-2">
                     <div className="flex justify-center space-x-2 items-center">
                       <svg
@@ -44,7 +45,7 @@ const Home: NextPage = () => {
                     </div>
                   </div>
                 </Link>
-                <Link href={"http://localhost:8000/auth/google"}>
+                <Link href={getGoogleOAuthUrl()}>
                   <div className="border border-gray-300 rounded-md px-4 py-2">
                     <div className="flex justify-center space-x-2 items-center">
                       <svg
