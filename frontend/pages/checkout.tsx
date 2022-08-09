@@ -4,11 +4,11 @@ import useGetMe from "../hooks/useGetMe"
 const products = [
   {
     id: 1,
-    title: "Basic Tee",
+    title: "Marriage Certificate",
     href: "#",
     price: "$32.00",
-    color: "Black",
-    size: "Large",
+    color: "Nguyen Dang Lam Phuong",
+    size: "Estimated duration: 5-7 days",
     imageSrc:
       "https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg",
     imageAlt: "Front of men's Basic Tee in black.",
@@ -130,7 +130,7 @@ const Checkout: NextPage = () => {
                       htmlFor="region"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      State / Province
+                      District
                     </label>
                     <div className="mt-1">
                       <input
@@ -196,20 +196,6 @@ const Checkout: NextPage = () => {
                 </ul>
                 <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
                   <div className="flex items-center justify-between">
-                    <dt className="text-sm">Subtotal</dt>
-                    <dd className="text-sm font-medium text-gray-900">
-                      $64.00
-                    </dd>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <dt className="text-sm">Shipping</dt>
-                    <dd className="text-sm font-medium text-gray-900">$5.00</dd>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <dt className="text-sm">Taxes</dt>
-                    <dd className="text-sm font-medium text-gray-900">$5.52</dd>
-                  </div>
-                  <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>
                     <dd className="text-base font-medium text-gray-900">
                       $75.52
