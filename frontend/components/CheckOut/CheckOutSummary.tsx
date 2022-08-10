@@ -1,4 +1,22 @@
+import { useRouter } from "next/router"
+import axiosInstance from "../../util/axiosInstace"
+
 export default function CheckOutSummary({ serviceData }: any) {
+  const router = useRouter()
+  const handleOnClick = async () => {
+    try {
+      const body = {
+        name: `${serviceData?.paperMaker.user.name} - ${serviceData?.service.name}`,
+        description: serviceData?.description,
+        amount: serviceData?.price,
+        id: serviceData?.id,
+      }
+      const response = await axiosInstance.post("/checkout", body)
+      router.push(response.data.session)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="mt-10 lg:mt-0">
       <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
@@ -51,7 +69,8 @@ export default function CheckOutSummary({ serviceData }: any) {
 
         <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
           <button
-            type="submit"
+            type="button"
+            onClick={handleOnClick}
             className="w-full bg-test border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500"
           >
             Confirm order
