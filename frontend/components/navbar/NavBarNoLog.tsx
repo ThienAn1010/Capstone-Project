@@ -108,7 +108,7 @@ export default function NavBarNoLog() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="block absolute z-10 top-16 right-0 mt-2 w-80 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                        <Menu.Items className="block absolute top-16 right-0 mt-2 w-80 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-50">
                           <div className="px-4 py-3 space-y-2">
                             <p className="text-xl font-semibold">Login with</p>
                             <div className="grid grid-cols-2 gap-4">
