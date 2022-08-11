@@ -1,5 +1,6 @@
 import Autocomplete from "react-google-autocomplete"
-
+import ReactPhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css"
 export default function CheckOutForm({ userData }: any) {
   return (
     <div>
@@ -51,17 +52,14 @@ export default function CheckOutForm({ userData }: any) {
           <div>
             <label
               htmlFor="phone"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 "
             >
               Phone
             </label>
             <div className="mt-1">
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                autoComplete="tel"
-                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              <ReactPhoneInput
+                country="vn"
+                inputClass="block !w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm !h-[38px]"
               />
             </div>
           </div>
