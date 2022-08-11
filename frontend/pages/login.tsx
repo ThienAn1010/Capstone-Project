@@ -21,7 +21,7 @@ const Home: NextPage = () => {
             <form className="space-y-4">
               <div className="hidden md:flex justify-around space-x-8 items-center">
                 <Link href={getFacebookOAuthUrl()}>
-                  <div className="border border-gray-300 rounded-md px-4 py-2">
+                  <a className="border border-gray-300 rounded-md px-4 py-2 ">
                     <div className="flex justify-center space-x-2 items-center">
                       <svg
                         fill="currentColor"
@@ -43,10 +43,10 @@ const Home: NextPage = () => {
                         Login with Facebook
                       </span>
                     </div>
-                  </div>
+                  </a>
                 </Link>
                 <Link href={getGoogleOAuthUrl()}>
-                  <div className="border border-gray-300 rounded-md px-4 py-2">
+                  <a className="border border-gray-300 rounded-md px-4 py-2 ">
                     <div className="flex justify-center space-x-2 items-center">
                       <svg
                         fill="currentColor"
@@ -76,7 +76,7 @@ const Home: NextPage = () => {
                         Login with Google
                       </span>
                     </div>
-                  </div>
+                  </a>
                 </Link>
               </div>
               <div className="space-y-2 md:hidden">

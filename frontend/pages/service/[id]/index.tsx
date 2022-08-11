@@ -1,8 +1,8 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import BookNow from "../../components/BookNow"
-import Feedback from "../../components/Feedback"
-import useGetOfferedService from "../../hooks/useGetOfferedService"
+import BookNow from "../../../components/BookNow"
+import Feedback from "../../../components/Feedback"
+import useGetOfferedService from "../../../hooks/useGetOfferedService"
 
 const Detail: NextPage = () => {
   const router = useRouter()
