@@ -12,8 +12,13 @@ module.exports = {
         footer: "#F9FAFC",
         sky: colors.sky,
         teal: colors.teal,
+        checkout: "#F9FAFB",
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp"), require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 }

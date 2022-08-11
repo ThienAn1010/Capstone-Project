@@ -2,7 +2,8 @@ import React from "react"
 import { CheckIcon } from "@heroicons/react/outline"
 import useGetOfferedService from "../hooks/useGetOfferedService"
 import { useRouter } from "next/router"
-import axiosInstance from "../util/axiosInstace"
+import useGetMe from "../hooks/useGetMe"
+import Link from "next/link"
 const serviceDetails = [
   "Deliver within 7 working days",
   "Real-time progress tracking",
@@ -14,22 +15,7 @@ const serviceDetails = [
 const BookNow = () => {
   const router = useRouter()
   const { data, isLoading } = useGetOfferedService(router.query.id as string)
-
-  const handleOnClick = async () => {
-    try {
-      const body = {
-        name: `${data?.paperMaker.user.name} - ${data?.service.name}`,
-        description: data?.description,
-        amount: data?.price,
-        id: data?.id,
-      }
-      const response = await axiosInstance.post("/checkout", body)
-      router.push(response.data.session)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+  const { data: userData } = useGetMe()
   return (
     <div
       className={`max-w-xs shadow-md p-5 rounded-sm overflow-hidden block transition`}
@@ -60,17 +46,22 @@ const BookNow = () => {
       ) : (
         <>
           <h3 className="text-3xl font-bold mt-3">${data?.price}</h3>
-          <button
-            className="w-full bg-blue-500 text-white mt-1.5 py-1"
-            onClick={handleOnClick}
-          >
-            Book now
-          </button>
+          {userData ? (
+            <Link href={`/service/${router.query.id}/checkout`}>
+              <button className="w-full bg-blue-500 text-white mt-1.5 py-1">
+                Book now
+              </button>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <button className="w-full bg-blue-500 text-white mt-1.5 py-1">
+                Login to book
+              </button>
+            </Link>
+          )}
         </>
       )}
-      {/* <p className="text-sm text-center my-2 text-gray-500">
-        Cancel at any time
-      </p> */}
+
       <h4 className="font-medium mt-5">The service includes</h4>
       <ul className="text-sm space-y-1.5 mt-1">
         {isLoading
