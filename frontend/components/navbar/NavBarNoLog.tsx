@@ -31,7 +31,7 @@ export default function NavBarNoLog() {
                     <a href="#">
                       <img
                         className="block h-9 w-auto lg:hidden "
-                        src="/mobile_log.png"
+                        src="/mobile_logo.png"
                         alt="Workflow"
                       />
                     </a>
