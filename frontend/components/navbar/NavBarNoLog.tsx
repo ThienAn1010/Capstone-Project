@@ -30,8 +30,8 @@ export default function NavBarNoLog() {
                   <div className="flex-shrink-0 flex items-center">
                     <a href="#">
                       <img
-                        className="block h-8 w-auto lg:hidden "
-                        src="/mobile_logo.png"
+                        className="block h-9 w-auto lg:hidden "
+                        src="/mobile_log.png"
                         alt="Workflow"
                       />
                     </a>
