@@ -27,6 +27,5 @@
     "concurrently": "^7.2.1"
   },
   "dependencies": {
-    "react-multi-carousel": "^2.8.2"
   }
 }
