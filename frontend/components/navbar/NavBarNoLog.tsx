@@ -35,14 +35,14 @@ export default function NavBarNoLog() {
                       <img
                         className="block justify-center h-9  w-auto lg:hidden "
                         src="/mobile_logo.png"
-                        alt="Workflow"
+                        alt="mobile_logo"
                       />
                     </a>
                     <a href="#">
                       <img
                         className="hidden justify-center lg:block h-6 w-auto"
                         src="/logo.png"
-                        alt="Workflow"
+                        alt="logo"
                       />
                     </a>
                   </div>
