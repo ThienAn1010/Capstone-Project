@@ -11,11 +11,7 @@ const Register: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mx-auto">
-        <div>
-          <PapermakerRegisterForm />
-        </div>
-      </main>
+      <PapermakerRegisterForm />
     </>
   )
 }

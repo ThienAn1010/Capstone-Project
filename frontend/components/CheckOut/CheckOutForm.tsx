@@ -75,9 +75,6 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
                 {...register("email")}
               />
             </div>
-            {errors.email && (
-              <p className="mt-1 text-red-500">Email is required</p>
-            )}
           </div>
           <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <div>
@@ -96,9 +93,6 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
                   {...register("name")}
                 />
               </div>
-              {errors.name && (
-                <p className="mt-1 text-red-500">Name is required</p>
-              )}
             </div>
             <div>
               <label
