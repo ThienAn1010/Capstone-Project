@@ -1,13 +1,6 @@
 import useSWR from "swr"
+import { User } from "../types/User"
 import axiosInstance from "../util/axiosInstace"
-
-interface User {
-  id: string
-  username: string
-  password: string
-  name: string
-  picture: string
-}
 
 const useGetMe = () => {
   const { data, error, mutate } = useSWR("users/me", (url) =>

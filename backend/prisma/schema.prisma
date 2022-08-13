@@ -19,6 +19,9 @@ model User {
   username     String
   password     String?
   name         String
+  address      String?
+  lat          Float?
+  long         Float?
   picture      String        @default("https://res.cloudinary.com/dybygufkr/image/upload/v1593000869/avatar_q2ysxd.jpg")
   phoneNumber  String?
   createdAt    DateTime      @default(now())
@@ -39,15 +42,14 @@ model PaperMaker {
   id                  String           @id @default(cuid())
   userId              String           @unique
   user                User             @relation(fields: [userId], references: [id])
-  address             String
-  lat                 Float
-  long                Float
   totalCases          Int              @default(0)
   pastSuccessfulCases Int              @default(0)
   rating              Float            @default(0)
   status              PaperMakerStatus @default(available)
   isConfirmed         Boolean          @default(false)
   offeredServices     OfferedService[]
+  aboutMe             String?
+  numberOfReviews     Int              @default(0)
 }
 
 model Service {
@@ -67,6 +69,7 @@ model OfferedService {
   paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
   service      Service    @relation(fields: [serviceId], references: [id])
   bookings     Booking[]
+  description  String
 }
 
 model Booking {
@@ -76,16 +79,8 @@ model Booking {
   userId           String
   user             User           @relation(fields: [userId], references: [id])
   note             String
-  transaction      Deal?
-}
-
-model Deal {
-  id          String  @id @default(cuid())
-  bookingId   String  @unique
-  actualPrice Float
-  payAmount   Float
-  keep        Float
-  booking     Booking @relation(fields: [bookingId], references: [id])
+  payAmount        Float
+  status           BookingStatus  @default(pendingConfirm)
 }
 
 enum Role {
@@ -102,5 +97,8 @@ enum PaperMakerStatus {
 enum BookingStatus {
   accept
   deny
-  pending
+  pendingConfirm
+  pendingFinished
+  drop
+  success
 }

@@ -76,7 +76,13 @@ export class OfferedServicesService {
       };
       delete filterBy.rating;
     }
-    console.log(filterBy);
+    if (filterBy.serviceId) {
+      if (typeof filterBy.serviceId === 'object') {
+        filterBy.serviceId = {
+          in: filterBy.serviceId,
+        };
+      }
+    }
     return filterBy;
   }
   async getAllOfferedServices(query) {
@@ -95,6 +101,8 @@ export class OfferedServicesService {
             include: {
               user: {
                 select: {
+                  id: true,
+                  role: true,
                   name: true,
                   username: true,
                   picture: true,
@@ -109,9 +117,13 @@ export class OfferedServicesService {
         skip,
         take,
       });
+      const numberOfRecords = await this.prismaService.offeredService.count({
+        where: filterBy,
+      });
       return {
         status: 'success',
         length: offeredServices.length,
+        numberOfRecords,
         offeredServices: offeredServices,
       };
     } catch (error) {
@@ -123,8 +135,33 @@ export class OfferedServicesService {
     }
   }
 
+  async getOfferedService(serviceId: string) {
+    const offeredService = await this.prismaService.offeredService.findUnique({
+      where: {
+        id: serviceId,
+      },
+      include: {
+        service: true,
+        paperMaker: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                role: true,
+                name: true,
+                username: true,
+                picture: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    return offeredService;
+  }
+
   async createOfferedService(service: CreateOfferedServiceDto) {
-    const { duration, serviceId, price, userId } = service;
+    const { duration, serviceId, price, userId, description } = service;
     const paperMaker = await this.prismaService.paperMaker.findFirst({
       where: {
         userId: userId,
@@ -142,6 +179,7 @@ export class OfferedServicesService {
     const offeredService = await this.prismaService.offeredService.create({
       data: {
         duration,
+        description,
         price,
         serviceId,
         paperMakerId: paperMaker.id,

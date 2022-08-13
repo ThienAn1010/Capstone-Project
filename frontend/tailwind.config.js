@@ -7,8 +7,14 @@ module.exports = {
     extend: {
       colors: {
         test: "#3456FF",
+        footer: "#F9FAFC",
+        checkout: "#F9FAFB",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 }
