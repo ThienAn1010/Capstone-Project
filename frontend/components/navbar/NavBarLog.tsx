@@ -41,15 +41,15 @@ export default function NavBarLog({ data }: any) {
                       <a href="#">
                         <img
                           className="block h-8 w-auto lg:hidden"
-                          src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue"
-                          alt="Workflow"
+                          src="/mobile_logo.png"
+                          alt="mobile_logo"
                         />
                       </a>
                       <a href="#">
                         <img
-                          className="hidden lg:block h-8 w-auto"
-                          src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                          alt="Workflow"
+                          className="hidden lg:block h-6 w-auto"
+                          src="/logo.png"
+                          alt="logo"
                         />
                       </a>
                     </div>
@@ -113,7 +113,7 @@ export default function NavBarLog({ data }: any) {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="block absolute z-10 top-16 right-0 mt-2 w-64 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                        <Menu.Items className="block absolute top-16 right-0 mt-2 w-64 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-50">
                           <div>
                             <Menu.Item>
                               {({ active }) => (
