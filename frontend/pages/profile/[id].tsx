@@ -9,7 +9,6 @@ import useGetMe from "../../hooks/useGetMe"
 import { useRouter } from "next/router"
 import ProfileForm from "../../components/DashBoard/ProfileForm"
 import BookingHistory from "../../components/DashBoard/BookingHistory"
-import BookingHistoryTest from "../../components/DashBoard/BookingHistoryTest"
 import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
 
@@ -98,7 +97,7 @@ const Profile: NextPage = () => {
                     <ProfileForm data={data} />
                   ) : null}
                   {query.tab === "service" ? (
-                    <BookingHistoryTest/>
+                    <BookingHistory/>
                   ) : null}
                   {/* {query.tab === "service" ? <div><BookingHistoryTest></BookingHistoryTest></div> : null} */}
                   {query.tab === "password" ? <div>Hello password</div> : null}
