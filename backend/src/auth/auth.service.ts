@@ -150,13 +150,12 @@ export class AuthService {
         username,
         password: hashedPassword,
         phoneNumber,
+        address,
+        lat: 123,
+        long: 123,
         role: 'paperMaker',
         paperMaker: {
-          create: {
-            address,
-            lat: 123,
-            long: 123,
-          },
+          create: {},
         },
       },
     });
