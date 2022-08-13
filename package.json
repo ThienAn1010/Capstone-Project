@@ -25,5 +25,7 @@
   "homepage": "https://github.com/ThienAn1010/Capstone-Project#readme",
   "devDependencies": {
     "concurrently": "^7.2.1"
+  },
+  "dependencies": {
   }
 }
