@@ -113,7 +113,7 @@ export default function NavBarLog({ data }: any) {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="block absolute z-10 top-16 right-0 mt-2 w-64 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+                        <Menu.Items className="block absolute top-16 right-0 mt-2 w-64 border border-grey-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-50">
                           <div>
                             <Menu.Item>
                               {({ active }) => (

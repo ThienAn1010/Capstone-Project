@@ -19,6 +19,9 @@ model User {
   username     String
   password     String?
   name         String
+  address      String?
+  lat          Float?
+  long         Float?
   picture      String        @default("https://res.cloudinary.com/dybygufkr/image/upload/v1593000869/avatar_q2ysxd.jpg")
   phoneNumber  String?
   createdAt    DateTime      @default(now())
@@ -39,9 +42,6 @@ model PaperMaker {
   id                  String           @id @default(cuid())
   userId              String           @unique
   user                User             @relation(fields: [userId], references: [id])
-  address             String
-  lat                 Float
-  long                Float
   totalCases          Int              @default(0)
   pastSuccessfulCases Int              @default(0)
   rating              Float            @default(0)
