@@ -42,15 +42,15 @@ export default function NavBarLog({ data }: any) {
                       <a href="#">
                         <img
                           className="block h-8 w-auto lg:hidden"
-                          src="/mobile_logo.png"
-                          alt="mobile_logo"
+                          src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue"
+                          alt="Workflow"
                         />
                       </a>
                       <a href="#">
                         <img
-                          className="hidden lg:block h-6 w-auto"
-                          src="/logo.png"
-                          alt="logo"
+                          className="hidden lg:block h-8 w-auto"
+                          src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                          alt="Workflow"
                         />
                       </a>
                     </div>
