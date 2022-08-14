@@ -12,12 +12,21 @@ export class CheckoutService {
     private readonly stripeService: StripeService,
   ) {}
   async createStripeLink(user: any, checkoutDto: CheckoutDto) {
-    const { amount, description, id, name } = checkoutDto;
+    const { amount, description, id, name, address, phone, note, lat, lng } =
+      checkoutDto;
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        address,
+        lat,
+        long: lng,
+      },
+    });
     try {
       const session = await this.stripeService
         .getStripe()
         .checkout.sessions.create({
-          client_reference_id: `${user.id}||${id}`,
+          client_reference_id: `${user.id}||${id}||${address}||${phone}||${note}`,
           customer_email: user.username,
           line_items: [
             {

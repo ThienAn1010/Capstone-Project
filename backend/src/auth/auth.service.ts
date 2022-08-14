@@ -129,8 +129,17 @@ export class AuthService {
   }
 
   async register(registerDto: RegisterDto) {
-    const { address, password, phoneNumber, username, name, picture } =
-      registerDto;
+    const {
+      address,
+      password,
+      phoneNumber,
+      username,
+      name,
+      picture,
+      lat,
+      lng,
+    } = registerDto;
+
     const user = await this.prismaService.user.findFirst({
       where: {
         username,
@@ -146,17 +155,16 @@ export class AuthService {
     const createdUser = await this.prismaService.user.create({
       data: {
         name,
-        picture,
         username,
         password: hashedPassword,
         phoneNumber,
+        address,
+        lat,
+        long: lng,
         role: 'paperMaker',
+        ...(picture && { picture }),
         paperMaker: {
-          create: {
-            address,
-            lat: 123,
-            long: 123,
-          },
+          create: {},
         },
       },
     });

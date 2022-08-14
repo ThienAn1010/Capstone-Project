@@ -12,4 +12,15 @@ export class CheckoutDto {
   description: string;
   @IsNumber()
   amount: number;
+  @IsNotEmpty()
+  @IsString()
+  address: string;
+  @IsNotEmpty()
+  @IsString()
+  phone: string;
+  note?: string;
+  @IsNotEmpty()
+  lat: number;
+  @IsNotEmpty()
+  lng: number;
 }
