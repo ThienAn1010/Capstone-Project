@@ -1,13 +1,78 @@
 import Autocomplete from "react-google-autocomplete"
+import { Controller, useForm } from "react-hook-form"
+import React, { useState } from "react"
+import toast from "react-hot-toast"
+import ReactPhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css"
+import { useRouter } from "next/router"
+import axios from "axios"
+import axiosInstance from "../../util/axiosInstace"
 
 export default function CheckOutForm({ data }: any) {
+  const router = useRouter()
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    setValue,
+  } = useForm()
+
+  const onSubmit = async (data: any) => {
+    setIsLoading(true)
+    const registerAccount = (async () => {
+      let thumbnail
+      if (selectedImage) {
+        const formData = new FormData()
+        formData.append("file", selectedImage)
+        formData.append("upload_preset", "iiyg1094")
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/dybygufkr/image/upload",
+          formData
+        )
+        thumbnail = response.data.secure_url
+      }
+      const response = await axiosInstance.post("/auth/register", {
+        username: data.username,
+        name: data.name,
+        password: data.password,
+        address: data.address.formatted_address,
+        phoneNumber: data.phone,
+        lat: data.address.geometry.location.lat,
+        lng: data.address.geometry.location.lng,
+        ...(thumbnail && { picture: thumbnail }),
+      })
+      return response
+    })()
+    toast.promise(
+      registerAccount,
+      {
+        loading: "Processing...",
+        error: (error) => {
+          setIsLoading(false)
+          if (error.response.status === 400) {
+            return error.response.data.message
+          }
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          setIsLoading(false)
+          router.push("/register/success")
+          return "Successfully register account"
+        },
+      },
+      {
+        position: "top-right",
+      }
+    )
+  }
   return (
     <form
       className="divide-y divide-gray-200 lg:col-span-9"
-      action="#"
-      method="POST"
+      onSubmit={handleSubmit(onSubmit)}
     >
-      {/* Profile section */}
       <div className="py-6 px-4 sm:p-6 lg:pb-8">
         <div>
           <h2 className="text-lg leading-6 font-medium text-gray-900">
@@ -97,6 +162,10 @@ export default function CheckOutForm({ data }: any) {
                       name="user-photo"
                       type="file"
                       className="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                      onChange={(event: any) => {
+                        console.log(event.target.files[0])
+                        setSelectedImage(event.target.files[0])
+                      }}
                     />
                   </div>
                 </div>
@@ -114,7 +183,7 @@ export default function CheckOutForm({ data }: any) {
                 className="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
               >
                 <span>Change</span>
-                <span className="sr-only"> user photo</span>
+                <span className="sr-only">user photo</span>
                 <input
                   type="file"
                   id="desktop-user-photo"
@@ -135,30 +204,61 @@ export default function CheckOutForm({ data }: any) {
               Full name
             </label>
             <input
+              {...register("name", {
+                required: { value: true, message: "Name is required" },
+              })}
               type="text"
-              name="first-name"
-              id="first-name"
+              name="name"
               autoComplete="given-name"
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
               defaultValue={data?.name}
             />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.name.message as any}
+              </p>
+            )}
           </div>
 
           <div className="col-span-12 sm:col-span-6">
             <label
-              htmlFor="last-name"
+              htmlFor="phone"
               className="block text-sm font-medium text-gray-700"
             >
-              Phone
+              Phone Number
             </label>
-            <input
-              type="text"
-              name="last-name"
-              id="last-name"
-              autoComplete="family-name"
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
-              // defaultValue={data?.name}
-            />
+            <div>
+              <Controller
+                control={control}
+                name="phone"
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Phone number is required",
+                  },
+                }}
+                render={({ field: { ref, ...field } }) => (
+                  <ReactPhoneInput
+                    {...field}
+                    inputProps={{
+                      ref,
+                      required: true,
+                    }}
+                    country={"vn"}
+                    onlyCountries={["vn"]}
+                    countryCodeEditable={false}
+                    specialLabel={"Player Mobile Number"}
+                    inputClass="block !w-full border-gray-300 rounded-md shadow-sm
+                      focus:ring-blue-500 focus:border-blue-500 sm:text-sm !h-[38px]"
+                  />
+                )}
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.phone.message as any}
+                </p>
+              )}
+            </div>
           </div>
 
           <div className="col-span-12">
@@ -168,18 +268,44 @@ export default function CheckOutForm({ data }: any) {
             >
               Address
             </label>
-            <Autocomplete
-              aria-required
-              apiKey={process.env.NEXT_PUBLIC_GG_API_KEY}
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              onPlaceSelected={(place: any) => {
-                console.log(JSON.stringify(place?.geometry?.location))
+            <Controller
+              name="address"
+              control={control}
+              rules={{
+                required: "Address is required",
+                validate: {
+                  value: (value) =>
+                    typeof value === "object" ||
+                    "Select an address in the dropdown list",
+                },
               }}
-              options={{
-                types: ["geocode", "establishment"],
-                componentRestrictions: { country: "vn" },
+              render={() => {
+                return (
+                  <Autocomplete
+                    aria-required
+                    apiKey={process.env.NEXT_PUBLIC_GG_API_KEY}
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    onPlaceSelected={(place) => {
+                      try {
+                        const updatedPlace = JSON.parse(JSON.stringify(place))
+                        setValue("address", updatedPlace)
+                      } catch (error) {
+                        console.log(error)
+                      }
+                    }}
+                    options={{
+                      types: ["geocode", "establishment"],
+                      componentRestrictions: { country: "vn" },
+                    }}
+                  />
+                )
               }}
             />
+            {errors.address?.message && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.address.message as any}
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -195,7 +321,7 @@ export default function CheckOutForm({ data }: any) {
           type="submit"
           className="ml-5 bg-sky-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
         >
-          Save
+          {isLoading ? "Processing..." : "Save"}
         </button>
       </div>
     </form>
