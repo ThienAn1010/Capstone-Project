@@ -23,4 +23,8 @@ export class RegisterDto {
   @IsNotEmpty()
   name: string;
   picture?: string;
+  @IsNotEmpty()
+  lat: number;
+  @IsNotEmpty()
+  lng: number;
 }

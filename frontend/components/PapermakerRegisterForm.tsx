@@ -5,6 +5,9 @@ import "react-phone-input-2/lib/style.css"
 import React, { useState } from "react"
 import axios from "axios"
 import axiosInstance from "../util/axiosInstace"
+import toast from "react-hot-toast"
+import { useRouter } from "next/router"
+
 const PapermakerRegisterForm = () => {
   const [selectedImage, setSelectedImage] = useState(null)
   const {
@@ -15,25 +18,58 @@ const PapermakerRegisterForm = () => {
     setValue,
     getValues,
   } = useForm()
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+
   const onSubmit = async (data: any) => {
-    // let thumbnail
-    // if (selectedImage) {
-    //   const formData = new FormData()
-    //   formData.append("file", selectedImage)
-    //   formData.append("upload_preset", "iiyg1094")
-    //   try {
-    //     const response = await axios.post(
-    //       "https://api.cloudinary.com/v1_1/dybygufkr/image/upload",
-    //       formData
-    //     )
-    //     thumbnail = response.data.secure_url
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // }
-    console.log(data)
-    // axiosInstance.post("/")
+    setIsLoading(true)
+    const registerAccount = (async () => {
+      let thumbnail
+      if (selectedImage) {
+        const formData = new FormData()
+        formData.append("file", selectedImage)
+        formData.append("upload_preset", "iiyg1094")
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/dybygufkr/image/upload",
+          formData
+        )
+        thumbnail = response.data.secure_url
+      }
+      const response = await axiosInstance.post("/auth/register", {
+        username: data.username,
+        name: data.name,
+        password: data.password,
+        address: data.address.formatted_address,
+        phoneNumber: data.phone,
+        lat: data.address.geometry.location.lat,
+        lng: data.address.geometry.location.lng,
+        ...(thumbnail && { picture: thumbnail }),
+      })
+      return response
+    })()
+    toast.promise(
+      registerAccount,
+      {
+        loading: "Processing...",
+        error: (error) => {
+          setIsLoading(false)
+          if (error.response.status === 400) {
+            return error.response.data.message
+          }
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          setIsLoading(false)
+          router.push("/register/success")
+          return "Successfully register account"
+        },
+      },
+      {
+        position: "top-right",
+      }
+    )
   }
+
   return (
     <div className=" w-screen min-h-screen bg-gradient-to-bl from-test via-sky-400 to-test md:pt-30 ">
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -48,19 +84,22 @@ const PapermakerRegisterForm = () => {
               <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-2">
                   <label
-                    htmlFor="email"
+                    htmlFor="username"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
                     Username<span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
                     <input
-                      {...register("email", {
-                        required: { value: true, message: "Email is required" },
+                      {...register("username", {
+                        required: {
+                          value: true,
+                          message: "Username is required",
+                        },
                         pattern: {
                           value:
                             /^([a-zA-Z0-9]+@(?:[a-zA-Z0-9]+.)+[A-Za-z]+$)$/,
-                          message: "Email is in invalid format",
+                          message: "Username is in invalid format",
                         },
                       })}
                       placeholder="Enter your email"
@@ -271,9 +310,10 @@ const PapermakerRegisterForm = () => {
                 <div>
                   <button
                     type="submit"
-                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full disabled:bg-gray-400 disabled:cursor-wait"
+                    disabled={isLoading}
                   >
-                    Submit
+                    {isLoading ? "Processing..." : "Submit"}
                   </button>
                 </div>
               </form>
