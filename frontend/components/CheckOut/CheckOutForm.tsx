@@ -33,9 +33,8 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
         id: serviceData?.id,
         phone: data.phone,
         address: data.address.formatted_address,
-        location: {
-          ...data.address.geometry.location,
-        },
+        lat: data.address.geometry.location.lat,
+        lng: data.address.geometry.location.lng,
         ...(data.note && { note: data.note }),
       }
       setIsLoading(false)
