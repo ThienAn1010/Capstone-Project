@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
 import React, { Suspense } from "react"
-import CheckOutLoader from "../../../../components/LoadingSkeleton/checkOutLoader"
+import CheckOutLoader from "../../../../components/LoadingSkeleton/CheckOutLoader"
 import useGetMe from "../../../../hooks/useGetMe"
 import useGetOfferedService from "../../../../hooks/useGetOfferedService"
 
