@@ -20,6 +20,12 @@ export default function CheckOutForm({ userData }: any) {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true)
+    const location = {} as any
+    if (typeof data.address === "object") {
+      location.address = data.address.formatted_address
+      location.lat = data.address.geometry.location.lat
+      location.lng = data.address.geometry.location.lng
+    }
     const updateAccount = (async () => {
       let thumbnail
       if (selectedImage) {
@@ -34,10 +40,8 @@ export default function CheckOutForm({ userData }: any) {
       }
       const response = await axiosInstance.patch("/users/me", {
         name: data.name,
-        address: data.address.formatted_address,
         phoneNumber: data.phone,
-        lat: data.address.geometry.location.lat,
-        lng: data.address.geometry.location.lng,
+        ...(Object.keys("location").length === 3 && { ...location }),
         ...(thumbnail && { picture: thumbnail }),
       })
       return response
@@ -118,7 +122,6 @@ export default function CheckOutForm({ userData }: any) {
                   name="about"
                   rows={3}
                   className="shadow-sm focus:ring-sky-500 focus:border-sky-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                  defaultValue={""}
                 />
               </div>
               <p className="mt-2 text-sm text-gray-500">
@@ -225,6 +228,7 @@ export default function CheckOutForm({ userData }: any) {
               <Controller
                 control={control}
                 name="phone"
+                defaultValue={userData?.phoneNumber}
                 rules={{
                   required: {
                     value: true,
@@ -236,7 +240,6 @@ export default function CheckOutForm({ userData }: any) {
                     {...field}
                     inputProps={{
                       ref,
-                      required: true,
                     }}
                     country={"vn"}
                     onlyCountries={["vn"]}
@@ -265,13 +268,19 @@ export default function CheckOutForm({ userData }: any) {
             <Controller
               name="address"
               control={control}
+              defaultValue={userData.address}
               rules={{
-                required: "Address is required",
-                validate: {
-                  value: (value) =>
-                    typeof value === "object" ||
-                    "Select an address in the dropdown list",
+                required: {
+                  value: !userData.address,
+                  message: "Address is required",
                 },
+                ...(!userData.address && {
+                  validate: {
+                    value: (value) =>
+                      typeof value === "object" ||
+                      "Select an address in the dropdown list",
+                  },
+                }),
               }}
               render={() => {
                 return (
@@ -279,6 +288,7 @@ export default function CheckOutForm({ userData }: any) {
                     aria-required
                     apiKey={process.env.NEXT_PUBLIC_GG_API_KEY}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    defaultValue={userData.address}
                     onPlaceSelected={(place) => {
                       try {
                         const updatedPlace = JSON.parse(JSON.stringify(place))
