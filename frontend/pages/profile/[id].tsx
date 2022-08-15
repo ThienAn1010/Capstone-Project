@@ -11,6 +11,7 @@ import ProfileForm from "../../components/DashBoard/ProfileForm"
 import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
 import LoadingSpinner from "../../components/LoadingSkeleton/LoadingSpinner"
+import PapermakerProfileForm from "../../components/DashBoard/PapermakerProfileForm"
 
 const ErrorComponent = React.lazy(
   () => import("../../components/ErrorComponent")
@@ -39,6 +40,7 @@ function classNames(...classes: string[]) {
 
 const Profile: NextPage = () => {
   const { data, isLoading } = useGetMe()
+  console.log(data)
   const router = useRouter()
   const query = { ...router.query }
   const viewable = data && data.id === query.id
@@ -100,7 +102,13 @@ const Profile: NextPage = () => {
                         </nav>
                       </aside>
                       {query.tab === "profile" || query.tab === undefined ? (
-                        <ProfileForm />
+                        <>
+                          {data.role === "user" ? (
+                            <ProfileForm />
+                          ) : (
+                            <PapermakerProfileForm />
+                          )}
+                        </>
                       ) : null}
                       {query.tab === "service" ? (
                         <div>Hello service</div>
