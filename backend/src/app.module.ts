@@ -8,6 +8,8 @@ import { ServicesModule } from './service/service.module';
 import { CheckoutModule } from './checkout/checkout.module';
 import { RawBodyMiddleware } from 'middleware/raw-body.middleware';
 import { JsonBodyMiddleware } from 'middleware/json-body.middleware';
+import { PapermakerModule } from './papermaker/papermakers.module';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { JsonBodyMiddleware } from 'middleware/json-body.middleware';
     OfferedServicesModule,
     ServicesModule,
     CheckoutModule,
+    PapermakerModule,
+    BookingModule,
   ],
 })
 export class AppModule {
