@@ -53,6 +53,8 @@ export class UsersService {
           role: true,
           username: true,
           picture: true,
+          address: true,
+          phoneNumber: true,
         },
       });
       if (!user) {
@@ -115,8 +117,17 @@ export class UsersService {
         id: userId,
       },
       data: userUpdateDto,
+      select: {
+        id: true,
+        name: true,
+        role: true,
+        username: true,
+        picture: true,
+        address: true,
+        phoneNumber: true,
+      },
     });
     const accessToken = await this.createToken(updatedMe.id);
-    return accessToken;
+    return { accessToken, user: updatedMe };
   }
 }

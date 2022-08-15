@@ -100,7 +100,7 @@ const Profile: NextPage = () => {
                         </nav>
                       </aside>
                       {query.tab === "profile" || query.tab === undefined ? (
-                        <ProfileForm userData={data} />
+                        <ProfileForm />
                       ) : null}
                       {query.tab === "service" ? (
                         <div>Hello service</div>

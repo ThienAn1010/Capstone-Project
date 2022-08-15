@@ -40,7 +40,7 @@ export class UsersController {
     @Body() userUpdateDto: UserUpdateDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken = await this.usersService.updateMe(
+    const { accessToken, user: userData } = await this.usersService.updateMe(
       user.id,
       userUpdateDto,
     );
@@ -53,6 +53,6 @@ export class UsersController {
         sameSite: 'none',
       }),
     });
-    return { accessToken: accessToken };
+    return { accessToken: accessToken, user: userData };
   }
 }

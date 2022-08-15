@@ -6,10 +6,12 @@ import ReactPhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 import axios from "axios"
 import axiosInstance from "../../util/axiosInstace"
+import useGetMe from "../../hooks/useGetMe"
 
-export default function CheckOutForm({ userData }: any) {
+export default function CheckOutForm() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const { data: userData, mutate } = useGetMe()
   const {
     register,
     handleSubmit,
@@ -57,7 +59,10 @@ export default function CheckOutForm({ userData }: any) {
           }
           return "Something went wrong. Try again later !!!"
         },
-        success: () => {
+        success: (response) => {
+          if (userData) {
+            mutate({ ...response.data.user })
+          }
           setIsLoading(false)
           return "Profile updated!"
         },
@@ -234,6 +239,10 @@ export default function CheckOutForm({ userData }: any) {
                     value: true,
                     message: "Phone number is required",
                   },
+                  minLength: {
+                    value: 9 + 2,
+                    message: "Phone number must have at least 9 numbers",
+                  },
                 }}
                 render={({ field: { ref, ...field } }) => (
                   <ReactPhoneInput
@@ -316,16 +325,17 @@ export default function CheckOutForm({ userData }: any) {
 
       <div className="mt-4 py-4 px-4 flex justify-end sm:px-6">
         <button
+          type="submit"
+          className="mr-5 bg-sky-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:bg-gray-400 disabled:cursor-wait"
+          disabled={isLoading}
+        >
+          {isLoading ? "Processing..." : "Save"}
+        </button>
+        <button
           type="button"
           className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
         >
           Cancel
-        </button>
-        <button
-          type="submit"
-          className="ml-5 bg-sky-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-        >
-          {isLoading ? "Processing..." : "Save"}
         </button>
       </div>
     </form>
