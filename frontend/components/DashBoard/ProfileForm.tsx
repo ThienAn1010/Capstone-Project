@@ -277,13 +277,13 @@ export default function CheckOutForm() {
             <Controller
               name="address"
               control={control}
-              defaultValue={userData.address}
+              defaultValue={userData?.address}
               rules={{
                 required: {
-                  value: !userData.address,
+                  value: !userData?.address,
                   message: "Address is required",
                 },
-                ...(!userData.address && {
+                ...(!userData?.address && {
                   validate: {
                     value: (value) =>
                       typeof value === "object" ||
@@ -297,7 +297,7 @@ export default function CheckOutForm() {
                     aria-required
                     apiKey={process.env.NEXT_PUBLIC_GG_API_KEY}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    defaultValue={userData.address}
+                    defaultValue={userData?.address}
                     onPlaceSelected={(place) => {
                       try {
                         const updatedPlace = JSON.parse(JSON.stringify(place))
