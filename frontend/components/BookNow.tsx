@@ -17,7 +17,7 @@ const BookNow = () => {
   const { data, isLoading } = useGetOfferedService(router.query.id as string)
   const { data: userData } = useGetMe()
   return (
-    <div className="max-w-xs border border-slate-300 p-5 rounded-sm overflow-hidden block transition space-y-6">
+    <div className="max-w-xs border border-slate-300 p-5 rounded-md overflow-hidden block transition space-y-6">
       {isLoading ? (
         <>
           <h3 className="text-3xl font-bold mt-3 animate-pulse h-8 bg-gray-300 w-1/3"></h3>
