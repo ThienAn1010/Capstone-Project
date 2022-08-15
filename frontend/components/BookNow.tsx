@@ -52,11 +52,37 @@ const BookNow = () => {
       </div>
       {userData ? (
         <Link href={`/service/${router.query.id}/checkout`}>
-          <button className="book">Book now</button>
+          <button className="booknow">
+            <div className="svg-wrapper-1">
+              <div className="svg-wrapper">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <span>Book Now</span>
+          </button>
         </Link>
       ) : (
         <Link href="/login">
-          <button className="book">Login to book</button>
+          <button
+            className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+            data-mdb-ripple="true"
+            data-mdb-ripple-color="light"
+          >
+            Sign in to book
+          </button>
         </Link>
       )}
     </div>

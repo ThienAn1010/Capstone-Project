@@ -2,33 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.book {
-  margin-top: 1rem;
+.booknow {
   width: 100%;
-  padding: 0.6em 3em; 
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
+  font-size: 16px;
+  background: #3456FF;
   color: white;
-  background-color: #3456FF;
-  border: 1px solid gray;
-  border-radius: 45px;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
-  font-size: 1rem; /* 16px */
-  line-height: 1.5rem; /* 24px */
-}
-
-.book:hover {
-  background: rgb(52,86,255);
-  background: linear-gradient(90deg, rgba(52,86,255,1) 0%, rgba(9,22,121,1) 34%, rgba(0,116,255,1) 100%);
-  box-shadow: 0px 5px 10px rgba(46, 64, 229, 0.541);
-  color: #fff;
-  transform: translateY(-7px);
-}
-
-.book:active {
-  transform: translateY(-1px);
-}
+  padding: 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+ }
+ 
+ .booknow span {
+  display: block;
+  margin-left: 0.5em;
+  transition: all 0.3s ease-in-out;
+ }
+ 
+ .booknow svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+ }
+ 
+ .booknow:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+ }
+ 
+ .booknow:hover svg {
+  transform: translateX(3.7em) scale(1.1);
+ }
+ 
+ .booknow:hover span {
+  transform: translateX(12em);
+ }
+ 
+ .booknow:active {
+  transform: scale(0.95);
+ }
+ 
+ @keyframes fly-1 {
+  from {
+   transform: translateY(0.1em);
+  }
+ 
+  to {
+   transform: translateY(-0.3em);
+  }
+ }
