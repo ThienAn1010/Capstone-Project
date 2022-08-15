@@ -1,8 +1,12 @@
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import Autocomplete from "react-google-autocomplete"
-import PhoneInput from "react-phone-input-2"
+import ReactPhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 import React, { useState } from "react"
+import axios from "axios"
+import axiosInstance from "../util/axiosInstace"
+import toast from "react-hot-toast"
+import { useRouter } from "next/router"
 
 const PapermakerRegisterForm = () => {
   const [selectedImage, setSelectedImage] = useState(null)
@@ -10,124 +14,237 @@ const PapermakerRegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
+    setValue,
+    getValues,
   } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+
+  const onSubmit = async (data: any) => {
+    setIsLoading(true)
+    const registerAccount = (async () => {
+      let thumbnail
+      if (selectedImage) {
+        const formData = new FormData()
+        formData.append("file", selectedImage)
+        formData.append("upload_preset", "iiyg1094")
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/dybygufkr/image/upload",
+          formData
+        )
+        thumbnail = response.data.secure_url
+      }
+      const response = await axiosInstance.post("/auth/register", {
+        username: data.username,
+        name: data.name,
+        password: data.password,
+        address: data.address.formatted_address,
+        phoneNumber: data.phone,
+        lat: data.address.geometry.location.lat,
+        lng: data.address.geometry.location.lng,
+        ...(thumbnail && { picture: thumbnail }),
+      })
+      return response
+    })()
+    toast.promise(
+      registerAccount,
+      {
+        loading: "Processing...",
+        error: (error) => {
+          setIsLoading(false)
+          if (error.response.status === 400) {
+            return error.response.data.message
+          }
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          setIsLoading(false)
+          router.push("/register/success")
+          return "Successfully register account"
+        },
+      },
+      {
+        position: "top-right",
+      }
+    )
+  }
 
   return (
-    <div className=" w-screen min-h-screen bg-gradient-to-bl from-test via-sky-400 to-test pt-8 px-4 md:pt-30 ">
+    <div className=" w-screen min-h-screen bg-gradient-to-bl from-test via-sky-400 to-test md:pt-30 ">
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="container max-w-2xl bg-white mx-auto px-6 py-4 md:px-12 md:py-8 rounded-lg shadow-md">
           <div>
-            <h2 className="text-center mt-6 text-3xl font-extrabold text-gray-900">
+            <h2 className="text-center text-3xl font-extrabold text-gray-900">
               Become a papermaker
             </h2>
           </div>
           <div>
             <div className="mt-6">
-              <form
-                action="#"
-                method="POST"
-                className="space-y-6"
-                onSubmit={handleSubmit(onSubmit)}
-              >
+              <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-2">
                   <label
-                    htmlFor="email"
+                    htmlFor="username"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Email address
+                    Username<span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
                     <input
-                      {...register("email", {
-                        required: true,
-                        pattern:
-                          /^([a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$)$/,
+                      {...register("username", {
+                        required: {
+                          value: true,
+                          message: "Username is required",
+                        },
+                        pattern: {
+                          value:
+                            /^([a-zA-Z0-9]+@(?:[a-zA-Z0-9]+.)+[A-Za-z]+$)$/,
+                          message: "Username is in invalid format",
+                        },
                       })}
-                      name="email"
-                      type="text"
-                      required
                       placeholder="Enter your email"
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
-                    {errors.email && (
-                      <p className="text-red-500 text-sm">Invalid Email!</p>
+                    {errors.username && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.username.message as any}
+                      </p>
                     )}
                   </div>
                   <label
                     htmlFor="text"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Full Name
+                    Name<span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
                     <input
                       {...register("name", {
-                        required: true,
-                        pattern: /^[a-zA-Z\s]*$/,
+                        required: { value: true, message: "Name is required" },
                       })}
                       name="name"
                       type="text"
                       placeholder="Enter your name"
-                      required
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                     {errors.name && (
-                      <p className="text-red-500 text-sm">Invalid Name!</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.name.message as any}
+                      </p>
                     )}
                   </div>
                   <label
                     htmlFor="text"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Address
+                    Address<span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
-                    <Autocomplete
-                      aria-required
-                      apiKey={process.env.GG_API_KEY}
-                      placeholder="Enter address"
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      onPlaceSelected={(place: any) => {
-                        console.log(JSON.stringify(place?.geometry?.location))
+                    <Controller
+                      name="address"
+                      control={control}
+                      rules={{
+                        required: "Address is required",
+                        validate: {
+                          value: (value) =>
+                            typeof value === "object" ||
+                            "Select an address in the dropdown list",
+                        },
                       }}
-                      options={{
-                        types: ["geocode", "establishment"],
+                      render={() => {
+                        return (
+                          <Autocomplete
+                            aria-required
+                            apiKey={process.env.NEXT_PUBLIC_GG_API_KEY}
+                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            onPlaceSelected={(place) => {
+                              try {
+                                const updatedPlace = JSON.parse(
+                                  JSON.stringify(place)
+                                )
+                                setValue("address", updatedPlace)
+                              } catch (error) {
+                                console.log(error)
+                              }
+                            }}
+                            options={{
+                              types: ["geocode", "establishment"],
+                              componentRestrictions: { country: "vn" },
+                            }}
+                          />
+                        )
                       }}
                     />
+                    {errors.address?.message && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.address.message as any}
+                      </p>
+                    )}
                   </div>
                   <label
                     htmlFor="phone"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Phone Number
+                    Phone Number<span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
-                    <PhoneInput
-                      inputProps={{
-                        name: "phone",
-                        required: true,
-                        autoFocus: true,
+                    <Controller
+                      control={control}
+                      name="phone"
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "Phone number is required",
+                        },
                       }}
+                      render={({ field: { ref, ...field } }) => (
+                        <ReactPhoneInput
+                          {...field}
+                          inputProps={{
+                            ref,
+                            required: true,
+                          }}
+                          country={"vn"}
+                          onlyCountries={["vn"]}
+                          countryCodeEditable={false}
+                          specialLabel={"Player Mobile Number"}
+                          inputClass="block !w-full border-gray-300 rounded-md shadow-sm
+                      focus:ring-blue-500 focus:border-blue-500 sm:text-sm !h-[38px]"
+                        />
+                      )}
                     />
+                    {errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.phone.message as any}
+                      </p>
+                    )}
                   </div>
                   <label
                     htmlFor="password"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Password
+                    Password<span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
                     <input
-                      {...register("password", { required: true })}
+                      {...register("password", {
+                        required: {
+                          value: true,
+                          message: "Password is required",
+                        },
+                        minLength: {
+                          value: 6,
+                          message: "Password must be at least 6 characters",
+                        },
+                      })}
                       type="password"
-                      autoComplete="current-password"
-                      required
                       placeholder="*******"
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                     {errors.password && (
-                      <p className="text-red-500 text-sm">Empty Password!</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.password.message as any}
+                      </p>
                     )}
                   </div>
                   <label
@@ -135,18 +252,28 @@ const PapermakerRegisterForm = () => {
                     className="block text-sm font-medium text-gray-700"
                   >
                     Confirm Password
+                    <span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
                     <input
-                      {...register("confirmPassword", { required: true })}
-                      required
+                      {...register("confirmPassword", {
+                        required: {
+                          value: true,
+                          message: "Confirm password is required",
+                        },
+                        validate: {
+                          value: (value) =>
+                            value === getValues("password") ||
+                            "Confirm password must match password",
+                        },
+                      })}
                       type={"password"}
                       placeholder="*******"
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                     {errors.confirmPassword && (
-                      <p className="text-red-500 text-sm">
-                        Not match Password!
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.confirmPassword.message as any}
                       </p>
                     )}
                   </div>
@@ -154,28 +281,21 @@ const PapermakerRegisterForm = () => {
                     Photo
                   </label>
                   <div className="mt-1 mb-12 flex items-center">
-                    <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                    <div className="inline-block h-12 w-12 rounded-full overflow-hidden bg-transparent ">
                       {selectedImage && (
-                        <div>
-                          <img
-                            alt="not found"
-                            width={"250px"}
-                            src={URL.createObjectURL(selectedImage)}
-                          />
-                        </div>
+                        <img
+                          className="w-full h-full"
+                          alt="image preview"
+                          src={URL.createObjectURL(selectedImage)}
+                        />
                       )}
                       {!selectedImage && (
-                        <div>
-                          <svg
-                            className="h-full w-full text-gray-300"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                          </svg>
-                        </div>
+                        <img
+                          src="https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8="
+                          alt="shit"
+                        />
                       )}
-                    </span>
+                    </div>
                     <input
                       type="file"
                       name="myImage"
@@ -188,10 +308,13 @@ const PapermakerRegisterForm = () => {
                   </div>
                 </div>
                 <div>
-                  <input
+                  <button
                     type="submit"
-                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                  />
+                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full disabled:bg-gray-400 disabled:cursor-wait"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Processing..." : "Submit"}
+                  </button>
                 </div>
               </form>
             </div>
