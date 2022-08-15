@@ -45,7 +45,7 @@ const Profile: NextPage = () => {
   return (
     <>
       {isLoading ? (
-        <div className="container mx-auto p-8">
+        <div className="container mx-auto p-20">
           <LoadingSpinner />
         </div>
       ) : (
