@@ -10,6 +10,7 @@ import {
   LocationMarkerIcon,
   ChartSquareBarIcon,
 } from "@heroicons/react/outline"
+import DetailLoader from "../../../components/LoadingSkeleton/detailLoader"
 
 const Detail: NextPage = () => {
   const router = useRouter()
@@ -20,13 +21,13 @@ const Detail: NextPage = () => {
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <DetailLoader />
       ) : (
         <div className="container mx-auto px-14 py-12">
           <div className="grid grid-cols-3 gap-2 ">
             <div className="col-span-2 space-y-8 pl-32 pr-8">
               <div className="flex space-x-6 ">
-                <div className="">
+                <div>
                   <img
                     className="inline-block h-60 w-60 rounded-md"
                     src={data?.paperMaker.user.picture}

@@ -27,7 +27,7 @@ const links = [
   },
 ]
 
-export default function Example() {
+export default function ErrorPage() {
   return (
     <div className="bg-white">
       <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
