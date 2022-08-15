@@ -1,12 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-class Location {
-  @IsNotEmpty()
-  lat: number;
-  @IsNotEmpty()
-  lng: number;
-}
-
 export class CheckoutDto {
   @IsNotEmpty()
   @IsString()
@@ -27,5 +20,7 @@ export class CheckoutDto {
   phone: string;
   note?: string;
   @IsNotEmpty()
-  location: Location;
+  lat: number;
+  @IsNotEmpty()
+  lng: number;
 }
