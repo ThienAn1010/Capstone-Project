@@ -4,12 +4,10 @@ import React, { useState } from "react"
 import toast from "react-hot-toast"
 import ReactPhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
-import { useRouter } from "next/router"
 import axios from "axios"
 import axiosInstance from "../../util/axiosInstace"
 
-export default function CheckOutForm({ data }: any) {
-  const router = useRouter()
+export default function CheckOutForm({ userData }: any) {
   const [selectedImage, setSelectedImage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const {
@@ -22,7 +20,7 @@ export default function CheckOutForm({ data }: any) {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true)
-    const registerAccount = (async () => {
+    const updateAccount = (async () => {
       let thumbnail
       if (selectedImage) {
         const formData = new FormData()
@@ -34,10 +32,8 @@ export default function CheckOutForm({ data }: any) {
         )
         thumbnail = response.data.secure_url
       }
-      const response = await axiosInstance.post("/auth/register", {
-        username: data.username,
+      const response = await axiosInstance.patch("/users/me", {
         name: data.name,
-        password: data.password,
         address: data.address.formatted_address,
         phoneNumber: data.phone,
         lat: data.address.geometry.location.lat,
@@ -47,7 +43,7 @@ export default function CheckOutForm({ data }: any) {
       return response
     })()
     toast.promise(
-      registerAccount,
+      updateAccount,
       {
         loading: "Processing...",
         error: (error) => {
@@ -59,12 +55,11 @@ export default function CheckOutForm({ data }: any) {
         },
         success: () => {
           setIsLoading(false)
-          router.push("/register/success")
-          return "Successfully register account"
+          return "Profile updated!"
         },
       },
       {
-        position: "top-right",
+        position: "bottom-center",
       }
     )
   }
@@ -105,7 +100,7 @@ export default function CheckOutForm({ data }: any) {
                   disabled
                   autoComplete="username"
                   className="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200"
-                  defaultValue={data?.username}
+                  defaultValue={userData?.username}
                 />
               </div>
             </div>
@@ -144,7 +139,7 @@ export default function CheckOutForm({ data }: any) {
                 >
                   <img
                     className="rounded-full h-full w-full"
-                    src={data?.picture}
+                    src={userData?.picture}
                     alt="Avatar"
                   />
                 </div>
@@ -175,7 +170,7 @@ export default function CheckOutForm({ data }: any) {
             <div className="hidden relative rounded-full overflow-hidden lg:block">
               <img
                 className="relative rounded-full w-40 h-40"
-                src={data?.picture}
+                src={userData?.picture}
                 alt=""
               />
               <label
@@ -198,7 +193,7 @@ export default function CheckOutForm({ data }: any) {
         <div className="mt-6 grid grid-cols-12 gap-6">
           <div className="col-span-12 sm:col-span-6">
             <label
-              htmlFor="first-name"
+              htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
               Full name
@@ -209,9 +204,8 @@ export default function CheckOutForm({ data }: any) {
               })}
               type="text"
               name="name"
-              autoComplete="given-name"
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
-              defaultValue={data?.name}
+              defaultValue={userData?.name}
             />
             {errors.name && (
               <p className="text-red-500 text-sm mt-1">
