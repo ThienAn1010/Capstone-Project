@@ -20,6 +20,7 @@ export class CheckoutService {
         address,
         lat,
         long: lng,
+        phoneNumber: phone,
       },
     });
     try {
