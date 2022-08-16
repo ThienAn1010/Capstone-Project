@@ -28,11 +28,17 @@ const userSubNavigation = [
 ]
 
 const ppmkerSubNavigation = [
-  ...userSubNavigation,
+  { name: "Profile", href: "profile", icon: UserCircleIcon, current: false },
   {
     name: "My Service",
     href: "myservice",
     icon: BellIcon,
+    current: true,
+  },
+  {
+    name: "Booked Services",
+    href: "service",
+    icon: ClipboardListIcon,
     current: false,
   },
 ]
