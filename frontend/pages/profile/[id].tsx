@@ -1,7 +1,6 @@
 import type { NextPage } from "next"
 import {
   BellIcon,
-  KeyIcon,
   UserCircleIcon,
   ClipboardListIcon,
 } from "@heroicons/react/outline"
@@ -12,12 +11,13 @@ import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
 import LoadingSpinner from "../../components/LoadingSkeleton/LoadingSpinner"
 import PapermakerProfileForm from "../../components/DashBoard/PapermakerProfileForm"
+import MyService from "../../components/DashBoard/MyService"
 
 const ErrorComponent = React.lazy(
   () => import("../../components/ErrorComponent")
 )
 
-const subNavigation = [
+const userSubNavigation = [
   { name: "Profile", href: "profile", icon: UserCircleIcon, current: true },
   {
     name: "Booked Services",
@@ -25,10 +25,13 @@ const subNavigation = [
     icon: ClipboardListIcon,
     current: false,
   },
-  { name: "Password", href: "password", icon: KeyIcon, current: false },
+]
+
+const ppmkerSubNavigation = [
+  ...userSubNavigation,
   {
-    name: "Notifications",
-    href: "notification",
+    name: "My Service",
+    href: "myservice",
     icon: BellIcon,
     current: false,
   },
@@ -60,46 +63,89 @@ const Profile: NextPage = () => {
                   <div className="bg-white rounded-lg shadow overflow-hidden">
                     <div className="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
                       <aside className="py-6 lg:col-span-3">
-                        <nav className="space-y-1">
-                          {subNavigation.map((item) => (
-                            <p
-                              key={item.name}
-                              className={classNames(
-                                item.current
-                                  ? "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700"
-                                  : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
-                                "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
-                              )}
-                              aria-current={item.current ? "page" : undefined}
-                              onClick={async () => {
-                                delete query.page
-                                await router.replace(
-                                  {
-                                    query: {
-                                      ...query,
-                                      tab: item.href,
-                                    },
-                                  },
-                                  undefined,
-                                  {
-                                    shallow: true,
-                                  }
-                                )
-                              }}
-                            >
-                              <item.icon
+                        {data.role === "user" ? (
+                          <nav className="space-y-1">
+                            {userSubNavigation.map((item) => (
+                              <p
+                                key={item.name}
                                 className={classNames(
                                   item.current
-                                    ? "text-teal-500 group-hover:text-teal-500"
-                                    : "text-gray-400 group-hover:text-gray-500",
-                                  "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                                    ? "bg-blue-50 border-blue-500 text-blue-700 hover:bg-teal-50 hover:text-blue-700"
+                                    : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
+                                  "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
                                 )}
-                                aria-hidden="true"
-                              />
-                              <span className="truncate">{item.name}</span>
-                            </p>
-                          ))}
-                        </nav>
+                                aria-current={item.current ? "page" : undefined}
+                                onClick={async () => {
+                                  delete query.page
+                                  await router.replace(
+                                    {
+                                      query: {
+                                        ...query,
+                                        tab: item.href,
+                                      },
+                                    },
+                                    undefined,
+                                    {
+                                      shallow: true,
+                                    }
+                                  )
+                                }}
+                              >
+                                <item.icon
+                                  className={classNames(
+                                    item.current
+                                      ? "text-blue-500 group-hover:text-blue-500"
+                                      : "text-gray-400 group-hover:text-gray-500",
+                                    "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                                  )}
+                                  aria-hidden="true"
+                                />
+                                <span className="truncate">{item.name}</span>
+                              </p>
+                            ))}
+                          </nav>
+                        ) : (
+                          <nav className="space-y-1">
+                            {ppmkerSubNavigation.map((item) => (
+                              <p
+                                key={item.name}
+                                className={classNames(
+                                  item.current
+                                    ? "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700"
+                                    : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
+                                  "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
+                                )}
+                                aria-current={item.current ? "page" : undefined}
+                                onClick={async () => {
+                                  delete query.page
+                                  await router.replace(
+                                    {
+                                      query: {
+                                        ...query,
+                                        tab: item.href,
+                                      },
+                                    },
+                                    undefined,
+                                    {
+                                      shallow: true,
+                                    }
+                                  )
+                                }}
+                              >
+                                <item.icon
+                                  className={classNames(
+                                    item.current
+                                      ? "text-teal-500 group-hover:text-teal-500"
+                                      : "text-gray-400 group-hover:text-gray-500",
+                                    "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
+                                  )}
+                                  aria-hidden="true"
+                                />
+                                <span className="truncate">{item.name}</span>
+                              </p>
+                            ))}
+                          </nav>
+                        )}
                       </aside>
                       {query.tab === "profile" || query.tab === undefined ? (
                         <>
@@ -113,10 +159,10 @@ const Profile: NextPage = () => {
                       {query.tab === "service" ? (
                         <div>Hello service</div>
                       ) : null}
-                      {query.tab === "password" ? (
-                        <div>Hello password</div>
+                      {query.tab === "myservice" &&
+                      data.role === "paperMaker" ? (
+                        <MyService />
                       ) : null}
-                      {query.tab === "notification" ? <div>noti</div> : null}
                     </div>
                   </div>
                 </div>
