@@ -59,7 +59,7 @@ export default function NavBarLog({ data }: any) {
                 <Link href="/service">
                   <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
                     <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
-                      CATEGORIES
+                      SERVICES
                     </p>
                   </div>
                 </Link>
