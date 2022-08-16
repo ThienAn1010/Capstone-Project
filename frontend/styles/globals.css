@@ -5,6 +5,7 @@
 .booknow {
   width: 100%;
   font-size: 16px;
+  background: #3456FF;
   background: #3456ff;
   color: white;
   padding: 0.7em;
@@ -56,6 +57,7 @@
   to {
     transform: translateY(-0.3em);
   }
+
 }
 
 @keyframes square-animation {
@@ -198,4 +200,3 @@
 .loader-square:nth-of-type(7) {
   animation-delay: -10s;
 }
-
