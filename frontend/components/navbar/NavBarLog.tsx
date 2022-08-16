@@ -36,30 +36,29 @@ export default function NavBarLog({ data }: any) {
           <>
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-6">
-                <Link href="/">
-                  <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
-                    <div className="flex-shrink-0 flex items-center">
-                      <a href="#">
-                        <img
-                          className="block h-8 w-auto lg:hidden"
-                          src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue"
-                          alt="Workflow"
-                        />
-                      </a>
-                      <a href="#">
-                        <img
-                          className="hidden lg:block h-8 w-auto"
-                          src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                          alt="Workflow"
-                        />
-                      </a>
-                    </div>
+                <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
+                  <div className="flex-shrink-0 flex items-center">
+                    <Link href="/">
+                      <img
+                        className="block h-8 w-auto lg:hidden"
+                        src="/mobile_logo.png"
+                        alt="mobile_logo"
+                      />
+                    </Link>
+                    <Link href="/">
+                      <img
+                        className="hidden lg:block h-6 w-auto"
+                        src="/logo.png"
+                        alt="logo"
+                      />
+                    </Link>
                   </div>
-                </Link>
+                </div>
+
                 <Link href="/service">
                   <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
                     <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
-                      CATEGORIES
+                      SERVICES
                     </p>
                   </div>
                 </Link>
