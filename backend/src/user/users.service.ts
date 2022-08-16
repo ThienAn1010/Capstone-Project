@@ -130,4 +130,29 @@ export class UsersService {
     const accessToken = await this.createToken(updatedMe.id);
     return { accessToken, user: updatedMe };
   }
+
+  async getMyOfferedServices(id: string) {
+    const myOfferedService = await this.prismaService.user.findFirst({
+      where: {
+        id,
+      },
+      select: {
+        paperMaker: {
+          include: {
+            offeredServices: {
+              include: {
+                service: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!myOfferedService)
+      return new NotFoundException({
+        status: 'fail',
+        message: 'This papermaker has not registered offered service',
+      });
+    return { status: 'success', data: myOfferedService };
+  }
 }
