@@ -35,6 +35,8 @@ export class AuthGuard implements CanActivate {
           role: true,
           username: true,
           picture: true,
+          address: true,
+          phoneNumber: true,
         },
       });
       if (!user) {
