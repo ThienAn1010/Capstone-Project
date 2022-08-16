@@ -14,6 +14,7 @@ import { AuthGuard } from 'src/guard/auth.guard';
 import { UserUpdateDto } from './dto/user-update-service.dto';
 import { UsersService } from './users.service';
 import { ConfigService } from '@nestjs/config';
+import { RoleGuard } from 'src/guard/role.guard';
 
 @Controller('/users')
 export class UsersController {
@@ -33,6 +34,13 @@ export class UsersController {
     return this.usersService.getAllMyBookings(user.id);
   }
 
+  @UseGuards(RoleGuard('paperMaker'))
+  @UseGuards(AuthGuard)
+  @Get('/me/offered-services')
+  async getMyOfferedServices(@User() user) {
+    return this.usersService.getMyOfferedServices(user.id);
+  }
+
   @Patch('/me')
   @UseGuards(AuthGuard)
   async updatedMe(
@@ -40,7 +48,7 @@ export class UsersController {
     @Body() userUpdateDto: UserUpdateDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken = await this.usersService.updateMe(
+    const { accessToken, user: userData } = await this.usersService.updateMe(
       user.id,
       userUpdateDto,
     );
@@ -53,6 +61,6 @@ export class UsersController {
         sameSite: 'none',
       }),
     });
-    return { accessToken: accessToken };
+    return { accessToken: accessToken, user: userData };
   }
 }

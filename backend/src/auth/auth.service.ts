@@ -57,6 +57,8 @@ export class AuthService {
       role: true,
       username: true,
       picture: true,
+      phoneNumber: true,
+      address: true,
     };
     const findUserInDb = await this.prismaService.user.findFirst({
       where: {
