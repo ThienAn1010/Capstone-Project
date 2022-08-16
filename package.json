@@ -1,31 +1,29 @@
 {
-  "name": "capstone-project",
-  "version": "1.0.0",
-  "description": "<p align=\"center\">\r   <img src=\"https://user-images.githubusercontent.com/57244622/168282989-1aa0f4ec-01d4-4569-aea7-779226cab548.png\" alt=\"my banner\">\r </p>",
-  "main": "index.js",
-  "scripts": {
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run dev",
-    "dep:frontend": "cd frontend && npm install",
-    "dep:backend": "cd backend && npm install",
-    "start": "concurrently npm:dev:*",
-    "dep": "concurrently npm:dep:*",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ThienAn1010/Capstone-Project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ThienAn1010/Capstone-Project/issues"
-  },
-  "homepage": "https://github.com/ThienAn1010/Capstone-Project#readme",
-  "devDependencies": {
-    "concurrently": "^7.2.1"
-  },
-  "dependencies": {
-  }
+    "name": "capstone-project",
+    "version": "1.0.0",
+    "description": "<p align=\"center\">\r   <img src=\"https://user-images.githubusercontent.com/57244622/168282989-1aa0f4ec-01d4-4569-aea7-779226cab548.png\" alt=\"my banner\">\r </p>",
+    "main": "index.js",
+    "scripts": {
+        "dev:frontend": "cd frontend && npm run dev",
+        "dev:backend": "cd backend && npm run dev",
+        "dep:frontend": "cd frontend && npm install",
+        "dep:backend": "cd backend && npm install",
+        "start": "concurrently npm:dev:*",
+        "dep": "concurrently npm:dep:*",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ThienAn1010/Capstone-Project.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ThienAn1010/Capstone-Project/issues"
+    },
+    "homepage": "https://github.com/ThienAn1010/Capstone-Project#readme",
+    "devDependencies": {
+        "concurrently": "^7.2.1"
+    }
 }
