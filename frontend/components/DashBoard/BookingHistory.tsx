@@ -25,7 +25,7 @@ export default function BookingHistory({ booking }: any) {
                       </time>
                     </dd>
                   </div>
-                  <div>
+                  <div className="ml-10">
                     <dt className="font-medium text-gray-900">Total amount</dt>
                     <dd className="mt-1 font-medium text-gray-900">
                       ${booking.payAmount}

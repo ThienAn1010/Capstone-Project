@@ -7,15 +7,29 @@ const navigation = {
     statuses: [
     {
       name: "Pending",
+      dataStatus:[
+        {value: "pendingConfirm"},
+        {value: "pendingFinished"},
+      ]
     },
     {
       name: "In progress",
+      dataStatus:[
+        {value: "accept"},
+      ]
     },
     {
       name: "Finished",
+      dataStatus:[
+        {value: "success"},
+      ]
     },
     {
       name: "Canceled",
+      dataStatus:[
+        {value: "deny"},
+        {value: "drop"},
+      ]
     },
   ],
 }
@@ -52,7 +66,8 @@ export default function BookingHistoryWithNav() {
         <Tab.Panels as={Fragment}>
           {navigation.statuses.map((status) => (
             <Tab.Panel key={status.name} className="px-4 py-6 space-y-12">
-                {data?.bookings.map((booking) => (<BookingHistory booking={booking} key={booking.id} />))}
+                {data?.bookings.map((booking) => (
+                <BookingHistory booking={booking} key={booking.id} />))}
             </Tab.Panel>
           ))}
         </Tab.Panels>
