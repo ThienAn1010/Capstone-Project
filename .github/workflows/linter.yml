@@ -57,3 +57,4 @@ jobs:
                   VALIDATE_TYPESCRIPT_STANDARD: false
                   VALIDATE_JSCPD: false
                   VALIDATE_MARKDOWN: false
+                  VALIDATE_CSS: false
