@@ -1,10 +1,7 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { CheckCircleIcon } from "@heroicons/react/solid"
 
 export default function BookingHistory({ booking }: any) {
   return (
-    // <div className="divide-y divide-gray-200 lg:col-span-9">
-    <div className="py-2 sm:py-2">
       <div className="mt-5 mb-5">
         <div className="max-w-full mx-auto sm:px-2 lg:px-8">
           <div className="lg:col-span-1 lg:flex lg:items-center lg:space-x-0">
@@ -12,7 +9,7 @@ export default function BookingHistory({ booking }: any) {
               key={booking.id}
               className="bg-white border-t border-b border-gray-200 shadow-sm sm:rounded-lg sm:border"
             >
-              <div className="flex items-center p-4 border-b border-gray-200 sm:p-6 sm:grid sm:gap-x-6">
+              <div className="flex items-center p-4 border-b border-gray-200 sm:p-6 sm:grid sm:grid-cols-2 sm:gap-x-6">
                 <dl className="flex-1 grid grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
                   <div>
                     <dt className="font-medium text-gray-900">
@@ -83,11 +80,15 @@ export default function BookingHistory({ booking }: any) {
                         aria-hidden="true"
                       />
                       <p className="ml-2 text-sm font-medium text-gray-500">
+                        Status:{" "}{booking.status}
+                      </p>
+                      {/* <p className="ml-2 text-sm font-medium text-gray-500">
                         Finished on{" "}
                         <time dateTime={booking.offeredService.createdAt}>
                           {booking.offeredService.createdAt}
                         </time>
                       </p>
+                       */}
                     </div>
 
                     <div className="mt-6 border-t border-gray-200 pt-4 flex items-center space-x-4 divide-x divide-gray-200 text-sm font-medium sm:mt-0 sm:ml-4 sm:border-none sm:pt-0">
@@ -111,11 +112,8 @@ export default function BookingHistory({ booking }: any) {
                 </li>
               </ul>
             </div>
-            {/* ))} */}
           </div>
         </div>
       </div>
-    </div>
-    // </div>
   )
 }

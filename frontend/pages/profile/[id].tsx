@@ -6,11 +6,9 @@ import {
   ClipboardListIcon,
 } from "@heroicons/react/outline"
 import useGetMe from "../../hooks/useGetMe"
-import useGetUserBookings from "../../hooks/useGetUserBookings"
-import { UserBooking } from "../../types/UserBooking"
 import { useRouter } from "next/router"
 import ProfileForm from "../../components/DashBoard/ProfileForm"
-import BookingHistory from "../../components/DashBoard/BookingHistory"
+import BookingHistoryWithNav from "../../components/DashBoard/BookingHistoryWithNav"
 import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
 
@@ -38,23 +36,11 @@ const subNavigation = [
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
-interface BookingPageProps {
-  bookingsData: {
-    bookings: UserBooking[]
-    length: number
-    numberOfRecords: number
-  }
-}
 
-const key = "/users/me/bookings"
-
-const Profile: NextPage<BookingPageProps> = ({ bookingsData }) => {
+const Profile: NextPage = () => {
   const { data } = useGetMe()
   const router = useRouter()
-  const criteria = key
-  const { bookingData } = useGetUserBookings(criteria, bookingsData)
   const query = { ...router.query }
-  console.log(bookingData?.bookings.map((booking) => booking.offeredService.price))
   const viewable = data && data.id === query.id
   return (
     <>
@@ -110,13 +96,7 @@ const Profile: NextPage<BookingPageProps> = ({ bookingsData }) => {
                   {query.tab === "profile" || query.tab === undefined ? (
                     <ProfileForm data={data} />
                   ) : null}
-                  {query.tab === "service" ? (
-                    <div className="lg:col-span-9">
-                      {bookingData?.bookings.map((booking) => (
-                        <BookingHistory booking={booking} key={booking.id} />
-                      ))}
-                    </div>
-                  ) : null}
+                  {query.tab === "service" ? <BookingHistoryWithNav /> : null}
                   {query.tab === "password" ? <div>Hello password</div> : null}
                   {query.tab === "notification" ? <div>noti</div> : null}
                 </div>
