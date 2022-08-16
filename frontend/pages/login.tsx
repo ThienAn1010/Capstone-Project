@@ -33,9 +33,9 @@ const Home: NextPage = () => {
       {
         loading: "Processing...",
         error: (error) => {
-          console.log(error.response.status)
+          console.log(error)
           setIsLoading(false)
-          if (error.response.status === 400) {
+          if (error.response.status === 404 || error.response.status === 400) {
             return error.response.data.message
           }
           return "Something went wrong. Try again later !!!"
