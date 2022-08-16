@@ -26,8 +26,9 @@ export default function ProfileForm() {
     if (typeof data.address === "object") {
       location.address = data.address.formatted_address
       location.lat = data.address.geometry.location.lat
-      location.lng = data.address.geometry.location.lng
+      location.long = data.address.geometry.location.lng
     }
+    console.log(location)
     const updateAccount = (async () => {
       let thumbnail
       if (selectedImage) {
@@ -43,7 +44,7 @@ export default function ProfileForm() {
       const response = await axiosInstance.patch("/users/me", {
         name: data.name,
         phoneNumber: data.phone,
-        ...(Object.keys("location").length === 3 && { ...location }),
+        ...(typeof data.address === "object" && { ...location }),
         ...(thumbnail && { picture: thumbnail }),
       })
       return response
