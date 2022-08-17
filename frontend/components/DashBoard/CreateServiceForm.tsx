@@ -93,14 +93,6 @@ export default function CreateServiceForm() {
 
   return (
     <div className="px-4 py-4 lg:col-span-9">
-      <p className="text-center font-semibold text-xl">
-        You have not create any service!
-      </p>
-      <div className="flex items-center my-4 px-20 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-        <p className="text-center font-semibold text-xl mx-4 mb-0">
-          CREATE NOW
-        </p>
-      </div>
       <form
         className="space-y-8 divide-y divide-gray-200"
         onSubmit={handleSubmit(testSubmit)}
@@ -142,7 +134,8 @@ export default function CreateServiceForm() {
                 >
                   Expected Duration
                 </label>
-                <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
+
+                <div className="relative max-w-lg mt-1 mb-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
                   <input
                     {...register("duration", {
                       required: {
@@ -154,9 +147,9 @@ export default function CreateServiceForm() {
                     name="duration"
                     className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.name.message as any}
+                  {errors.duration && (
+                    <p className="absolute text-red-500 text-sm mt-1">
+                      {errors.duration.message as any}
                     </p>
                   )}
                   <div className="absolute inset-y-0 right-0 flex items-center">
@@ -181,7 +174,7 @@ export default function CreateServiceForm() {
                 >
                   Price
                 </label>
-                <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs  sm:col-span-2">
+                <div className="relative max-w-lg mt-1 mb-1 sm:mt-0 sm:max-w-xs  sm:col-span-2">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <span className="text-gray-500 sm:text-sm">$</span>
                   </div>
@@ -195,9 +188,9 @@ export default function CreateServiceForm() {
                     placeholder="0.00"
                     aria-describedby="price-currency"
                   />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.name.message as any}
+                  {errors.price && (
+                    <p className="absolute text-red-500 text-sm mt-1">
+                      {errors.price.message as any}
                     </p>
                   )}
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -243,16 +236,15 @@ export default function CreateServiceForm() {
                       name="description"
                       rows={3}
                       className="max-w-lg shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
-                      defaultValue={""}
                     />
-                    {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.name.message as any}
-                      </p>
-                    )}
                     <p className="mt-2 text-sm text-gray-500">
                       Write a few sentences about yourself and your service.
                     </p>
+                    {errors.description && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.description.message as any}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -278,14 +270,14 @@ export default function CreateServiceForm() {
                       className="max-w-lg shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
                       defaultValue={""}
                     />
-                    {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.name.message as any}
-                      </p>
-                    )}
                     <p className="mt-2 text-sm text-gray-500">
                       Write a few sentences about the required documents.
                     </p>
+                    {errors.documents && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.documents.message as any}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -311,14 +303,14 @@ export default function CreateServiceForm() {
                       className="max-w-lg shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
                       defaultValue={""}
                     />
-                    {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.name.message as any}
-                      </p>
-                    )}
                     <p className="mt-2 text-sm text-gray-500">
                       Write a few sentences about the estimated duration.
                     </p>
+                    {errors.estimate && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.estimate.message as any}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
