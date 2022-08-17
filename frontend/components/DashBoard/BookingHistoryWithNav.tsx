@@ -4,32 +4,26 @@ import useGetUserBooking from "../../hooks/useGetUserBookings"
 import BookingHistory from "../../components/DashBoard/BookingHistory"
 
 const navigation = {
-    statuses: [
+  statuses: [
+    {
+      name: "All",
+      key: 1,
+    },
     {
       name: "Pending",
-      dataStatus:[
-        {value: "pendingConfirm"},
-        {value: "pendingFinished"},
-      ]
+      key: 2,
     },
     {
       name: "In progress",
-      dataStatus:[
-        {value: "accept"},
-      ]
+      key: 3,
     },
     {
       name: "Finished",
-      dataStatus:[
-        {value: "success"},
-      ]
+      key: 4,
     },
     {
       name: "Canceled",
-      dataStatus:[
-        {value: "deny"},
-        {value: "drop"},
-      ]
+      key: 5,
     },
   ],
 }
@@ -66,8 +60,40 @@ export default function BookingHistoryWithNav() {
         <Tab.Panels as={Fragment}>
           {navigation.statuses.map((status) => (
             <Tab.Panel key={status.name} className="px-4 py-6 space-y-12">
-                {data?.bookings.map((booking) => (
-                <BookingHistory booking={booking} key={booking.id} />))}
+              {status.key == 1
+                ? data?.bookings.map((booking) => (
+                    <BookingHistory booking={booking} key={booking.id} />
+                  ))
+                : null}
+              {status.key == 2
+                ? data?.bookings.map((booking) =>
+                    booking.status == "pendingConfirm" ||
+                    booking.status == "pendingFinished" ? (
+                      <BookingHistory booking={booking} key={booking.id} />
+                    ) : null
+                  )
+                : null}
+              {status.key == 3
+                ? data?.bookings.map((booking) =>
+                    booking.status == "accept" ? (
+                      <BookingHistory booking={booking} key={booking.id} />
+                    ) : null
+                  )
+                : null}
+              {status.key == 4
+                ? data?.bookings.map((booking) =>
+                    booking.status == "success" ? (
+                      <BookingHistory booking={booking} key={booking.id} />
+                    ) : null
+                  )
+                : null}
+                {status.key == 5
+                ? data?.bookings.map((booking) =>
+                    booking.status == "deny" || booking.status == "drop" ? (
+                      <BookingHistory booking={booking} key={booking.id} />
+                    ) : null
+                  )
+                : null}
             </Tab.Panel>
           ))}
         </Tab.Panels>
