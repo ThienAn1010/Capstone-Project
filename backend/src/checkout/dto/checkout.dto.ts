@@ -19,8 +19,6 @@ export class CheckoutDto {
   @IsString()
   phone: string;
   note?: string;
-  @IsNotEmpty()
-  lat: number;
-  @IsNotEmpty()
-  lng: number;
+  lat?: number;
+  lng?: number;
 }

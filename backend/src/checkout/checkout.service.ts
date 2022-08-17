@@ -14,15 +14,29 @@ export class CheckoutService {
   async createStripeLink(user: any, checkoutDto: CheckoutDto) {
     const { amount, description, id, name, address, phone, note, lat, lng } =
       checkoutDto;
-    await this.prismaService.user.update({
+    const userSavedInDB = await this.prismaService.user.findUnique({
       where: { id: user.id },
-      data: {
-        address,
-        lat,
-        long: lng,
-        phoneNumber: phone,
-      },
     });
+    const updatedData = {} as any;
+    if (!userSavedInDB.address) {
+      updatedData.address = address;
+      updatedData.lat = lat;
+      updatedData.long = lng;
+    }
+    if (!userSavedInDB.phoneNumber) {
+      updatedData.phoneNumber = phone;
+    }
+    if (Object.keys(updatedData).length > 0) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          address,
+          lat,
+          long: lng,
+          phoneNumber: phone,
+        },
+      });
+    }
     try {
       const session = await this.stripeService
         .getStripe()
