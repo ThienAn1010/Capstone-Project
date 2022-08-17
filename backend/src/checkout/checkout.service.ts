@@ -88,6 +88,19 @@ export class CheckoutService {
             payAmount,
             note: note ?? '',
           },
+          include: {
+            user: true,
+            offeredService: {
+              include: {
+                service: true,
+                paperMaker: {
+                  include: {
+                    user: true,
+                  },
+                },
+              },
+            },
+          },
         });
         const sendToUser = {
           to: sessionInfo.customer_details.email, // Change to your recipient
@@ -97,17 +110,25 @@ export class CheckoutService {
           }, // Change to your verified sender
           subject: 'Successfully booked a service',
           html: `
-          <h1>Dear ${sessionInfo.customer_details.email}</h1>
-          <p>You have successfully booked a service in our system. </p>
+          <p>Dear ${data.user.name}</h1>
+          <p>You have successfully booked a service in our system.</p>
+          <p>The service (${data.offeredService.service.name}) provided by (${data.offeredService.paperMaker.user.name}) will contact you within 24 hours to proceed, or you can contact him/her directly with this phone number ${data.offeredService.paperMaker.user.phoneNumber}. </p>
+          <p>If you have any problem. Please don't hesitate to contact us</p>
+          <p>Thank you for using our service.</p>
           `,
         };
-        // const sendToPapermaker = {
-        //   to: 'test@example.com', // Change to your recipient
-        //   from: this.configService.get('SENDGRID_VERIFIED_SENDER'), // Change to your verified sender
-        //   subject: 'Sending with SendGrid is Fun',
-        //   text: 'and easy to do anywhere, even with Node.js',
-        //   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-        // };
+        const sendToPapermaker = {
+          to: data.offeredService.paperMaker.user.username, // Change to your recipient
+          from: this.configService.get('SENDGRID_VERIFIED_SENDER'), // Change to your verified sender
+          subject: 'You have a new booking',
+          html: `
+          <p>Dear ${data.offeredService.paperMaker.user.name}</h1>
+          <p>You have a new booking for your service ${data.offeredService.service.name}.</p>
+          <p>Your client booked at. </p>
+          <p>If you have any problem. Please don't hesitate to contact us</p>
+          <p>Thank you for using our service.</p>
+          `,
+        };
         await this.sendGridService.getSendGrid().send(sendToUser);
         return { status: 'success', data };
       }
