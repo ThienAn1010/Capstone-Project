@@ -1,28 +1,95 @@
-import { useState } from "react"
+import { Fragment, useState } from "react"
+import { Listbox, Transition } from "@headlessui/react"
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid"
-import { Combobox } from "@headlessui/react"
+import useGetAllServices from "../../hooks/useGetAllServices"
+import { useForm } from "react-hook-form"
+import axiosInstance from "../../util/axiosInstace"
+import toast from "react-hot-toast"
+import Select from "react-select"
+import React from "react"
 
-const people = [
-  { id: 1, name: "Durward Reynolds" },
-  { id: 2, name: "Kenton Towne" },
-  { id: 3, name: "Therese Wunsch" },
-  { id: 4, name: "Benedict Kessler" },
-  { id: 5, name: "Katelyn Rohan" },
-]
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ")
 }
 
-export default function CreateServiceForm() {
-  const [query, setQuery] = useState("")
-  const [selectedPerson, setSelectedPerson] = useState(people[0])
+const defaultSelect = [
+  {
+    id: 999,
+    name: "Please select a category",
+  },
+]
 
-  const filteredPeople =
-    query === ""
-      ? people
-      : people.filter((person: any) => {
-          return person.name.toLowerCase().includes(query.toLowerCase())
-        })
+const options = [
+  { value: "day", label: "Day" },
+  { value: "week", label: "Week" },
+  { value: "month", label: "Month" },
+]
+
+type OptionType = { value: string; label: string }
+
+export default function CreateServiceForm() {
+  const { data } = useGetAllServices()
+  const [selected, setSelected] = useState(defaultSelect[0])
+  const [isLoading, setIsLoading] = useState(false)
+  const [selectedOption, setSelectedOption] = useState("day")
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const handleSelectionChange = (option: OptionType | null) => {
+    if (option) {
+      setSelectedOption(option.value)
+    }
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const onSubmit = async (data: any) => {
+    setIsLoading(true)
+    const createService = (async () => {
+      const response = await axiosInstance.post("/offered-services", {
+        category: selected.name,
+        duration: data.duration,
+        time: selectedOption,
+        price: data.price,
+        description: data.description,
+        documents: data.documents,
+        estimate: data.estimate,
+      })
+      return response
+    })()
+    toast.promise(
+      createService,
+      {
+        loading: "Processing...",
+        error: (error) => {
+          setIsLoading(false)
+          if (error.response.status === 400) {
+            return error.response.data.message
+          }
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          return "Successfully register account"
+        },
+      },
+      {
+        position: "bottom-center",
+      }
+    )
+  }
+
+  const testSubmit = async (data: any) => {
+    console.log(selected.name)
+    console.log(data.duration)
+    console.log(selectedOption)
+    console.log(data.price)
+    console.log(data.description)
+    console.log(data.documents)
+    console.log(data.estimate)
+  }
+
   return (
     <div className="px-4 py-4 lg:col-span-9">
       <p className="text-center font-semibold text-xl">
@@ -33,7 +100,10 @@ export default function CreateServiceForm() {
           CREATE NOW
         </p>
       </div>
-      <form className="space-y-8 divide-y divide-gray-200">
+      <form
+        className="space-y-8 divide-y divide-gray-200"
+        onSubmit={handleSubmit(testSubmit)}
+      >
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div>
             <div>
@@ -46,107 +116,156 @@ export default function CreateServiceForm() {
               </p>
             </div>
 
-            <Combobox
-              as="div"
-              value={selectedPerson}
-              onChange={setSelectedPerson}
-              className="mt-6 sm:mt-5 space-y-6 sm:space-y-5"
-            >
-              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <Combobox.Label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                  Category
-                </Combobox.Label>
-                <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs  sm:col-span-2">
-                  <Combobox.Input
-                    className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                    onChange={(event) => setQuery(event.target.value)}
-                    displayValue={(person: any) => person.name}
-                  />
-                  <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-                    <SelectorIcon
-                      className="h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                  </Combobox.Button>
+            <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+              <Listbox value={selected} onChange={setSelected}>
+                {({ open }) => (
+                  <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <Listbox.Label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                      Category
+                    </Listbox.Label>
+                    <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
+                      <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <span className="block truncate">{selected.name}</span>
+                        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                          <SelectorIcon
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </Listbox.Button>
 
-                  {filteredPeople.length > 0 && (
-                    <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {filteredPeople.map((person) => (
-                        <Combobox.Option
-                          key={person.id}
-                          value={person}
-                          className={({ active }) =>
-                            classNames(
-                              "relative cursor-default select-none py-2 pl-3 pr-9",
-                              active
-                                ? "bg-indigo-600 text-white"
-                                : "text-gray-900"
-                            )
-                          }
-                        >
-                          {({ active, selected }) => (
-                            <>
-                              <span
-                                className={classNames(
-                                  "block truncate",
-                                  selected && "font-semibold"
-                                )}
-                              >
-                                {person.name}
-                              </span>
+                      <Transition
+                        show={open}
+                        as={Fragment}
+                        leave="transition ease-in duration-100"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                          {data?.map((category) => (
+                            <Listbox.Option
+                              key={category.id}
+                              className={({ active }) =>
+                                classNames(
+                                  active
+                                    ? "text-white bg-blue-600"
+                                    : "text-gray-900",
+                                  "cursor-default select-none relative py-2 pl-8 pr-4"
+                                )
+                              }
+                              value={category}
+                            >
+                              {({ selected, active }) => (
+                                <>
+                                  <span
+                                    className={classNames(
+                                      selected
+                                        ? "font-semibold"
+                                        : "font-normal",
+                                      "block truncate"
+                                    )}
+                                  >
+                                    {category.name}
+                                  </span>
 
-                              {selected && (
-                                <span
-                                  className={classNames(
-                                    "absolute inset-y-0 right-0 flex items-center pr-4",
-                                    active ? "text-white" : "text-indigo-600"
-                                  )}
-                                >
-                                  <CheckIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                </span>
+                                  {selected ? (
+                                    <span
+                                      className={classNames(
+                                        active ? "text-white" : "text-blue-600",
+                                        "absolute inset-y-0 left-0 flex items-center pl-1.5"
+                                      )}
+                                    >
+                                      <CheckIcon
+                                        className="h-5 w-5"
+                                        aria-hidden="true"
+                                      />
+                                    </span>
+                                  ) : null}
+                                </>
                               )}
-                            </>
-                          )}
-                        </Combobox.Option>
-                      ))}
-                    </Combobox.Options>
+                            </Listbox.Option>
+                          ))}
+                        </Listbox.Options>
+                      </Transition>
+                    </div>
+                  </div>
+                )}
+              </Listbox>
+            </div>
+
+            <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label
+                  htmlFor="duration"
+                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                >
+                  Expected Duration
+                </label>
+                <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
+                  <input
+                    {...register("duration", {
+                      required: {
+                        value: true,
+                        message: "Duration is required",
+                      },
+                    })}
+                    type="number"
+                    name="duration"
+                    className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.name.message as any}
+                    </p>
                   )}
+                  <div className="absolute inset-y-0 right-0 flex items-center">
+                    <label htmlFor="time" className="sr-only">
+                      Time
+                    </label>
+                    <Select
+                      options={options}
+                      isSearchable={false}
+                      defaultValue={options[0]}
+                      onChange={handleSelectionChange}
+                    />
+                  </div>
                 </div>
               </div>
-            </Combobox>
-
+            </div>
             <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label
                   htmlFor="price"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Expected Duration
+                  Price
                 </label>
                 <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs  sm:col-span-2">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
                   <input
+                    {...register("price", {
+                      required: { value: true, message: "Price is required" },
+                    })}
                     type="text"
                     name="price"
-                    id="price"
-                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                    placeholder=""
+                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    placeholder="0.00"
+                    aria-describedby="price-currency"
                   />
-                  <div className="absolute inset-y-0 right-0 flex items-center">
-                    <label htmlFor="time" className="sr-only">
-                      Time
-                    </label>
-                    <select
-                      id="time"
-                      name="time"
-                      className="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-4 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.name.message as any}
+                    </p>
+                  )}
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
                     >
-                      <option>Day</option>
-                      <option>Week</option>
-                      <option>Month</option>
-                    </select>
+                      USD
+                    </span>
                   </div>
                 </div>
               </div>
@@ -173,12 +292,23 @@ export default function CreateServiceForm() {
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
                     <textarea
-                      id="about"
-                      name="about"
+                      {...register("description", {
+                        required: {
+                          value: true,
+                          message: "Service description is required",
+                        },
+                      })}
+                      id="description"
+                      name="description"
                       rows={3}
-                      className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
+                      className="max-w-lg shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
                       defaultValue={""}
                     />
+                    {errors.name && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.name.message as any}
+                      </p>
+                    )}
                     <p className="mt-2 text-sm text-gray-500">
                       Write a few sentences about yourself and your service.
                     </p>
@@ -195,12 +325,23 @@ export default function CreateServiceForm() {
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
                     <textarea
-                      id="about"
-                      name="about"
+                      {...register("documents", {
+                        required: {
+                          value: true,
+                          message: "Required Documents is required",
+                        },
+                      })}
+                      id="documents"
+                      name="documents"
                       rows={3}
-                      className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
+                      className="max-w-lg shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
                       defaultValue={""}
                     />
+                    {errors.name && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.name.message as any}
+                      </p>
+                    )}
                     <p className="mt-2 text-sm text-gray-500">
                       Write a few sentences about the required documents.
                     </p>
@@ -217,12 +358,23 @@ export default function CreateServiceForm() {
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2">
                     <textarea
-                      id="about"
-                      name="about"
+                      {...register("estimate", {
+                        required: {
+                          value: true,
+                          message: "Estimated duration is required",
+                        },
+                      })}
+                      id="estimate"
+                      name="estimate"
                       rows={3}
-                      className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
+                      className="max-w-lg shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
                       defaultValue={""}
                     />
+                    {errors.name && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.name.message as any}
+                      </p>
+                    )}
                     <p className="mt-2 text-sm text-gray-500">
                       Write a few sentences about the estimated duration.
                     </p>
@@ -237,15 +389,16 @@ export default function CreateServiceForm() {
           <div className="flex justify-end">
             <button
               type="button"
-              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              disabled={isLoading}
             >
-              Save
+              {isLoading ? "Processing..." : "Save"}
             </button>
           </div>
         </div>
