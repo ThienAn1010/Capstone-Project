@@ -10,8 +10,6 @@ import ProfileForm from "../../components/DashBoard/ProfileForm"
 import BookingHistoryWithNav from "../../components/DashBoard/BookingHistoryWithNav"
 import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
-import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
-import React, { Suspense } from "react"
 import LoadingSpinner from "../../components/LoadingSkeleton/LoadingSpinner"
 import PapermakerProfileForm from "../../components/DashBoard/PapermakerProfileForm"
 import MyService from "../../components/DashBoard/MyService"
@@ -161,7 +159,7 @@ const Profile: NextPage = () => {
                         </>
                       ) : null}
                       {query.tab === "service" ? (
-                        <div><BookingHistoryWithNav/></div>
+                        <div className="lg:col-span-9"><BookingHistoryWithNav/></div>
                       ) : null}
                       {query.tab === "myservice" &&
                       data.role === "paperMaker" ? (

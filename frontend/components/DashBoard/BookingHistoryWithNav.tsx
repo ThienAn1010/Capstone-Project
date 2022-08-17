@@ -52,7 +52,7 @@ export default function BookingHistoryWithNav() {
                 className={({ selected }) =>
                   classNames(
                     selected
-                      ? "text-indigo-600 border-indigo-600"
+                      ? "text-blue-700 border-blue-700 "
                       : "text-gray-900 border-transparent",
                     "flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium"
                   )

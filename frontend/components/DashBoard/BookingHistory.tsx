@@ -94,7 +94,7 @@ export default function BookingHistory({ booking }: any) {
                     <div className="mt-6 border-t border-gray-200 pt-4 flex items-center space-x-4 divide-x divide-gray-200 text-sm font-medium sm:mt-0 sm:ml-4 sm:border-none sm:pt-0">
                       <div className="flex-1 flex justify-center">
                         <a
-                          className="text-indigo-600 whitespace-nowrap hover:text-indigo-500"
+                          className="text-blue-700 whitespace-nowrap hover:text-indigo-500"
                         >
                           View papermaker
                         </a>
@@ -102,7 +102,7 @@ export default function BookingHistory({ booking }: any) {
                       <div className="flex-1 pl-4 flex justify-center">
                         <a
                           href="#"
-                          className="text-indigo-600 whitespace-nowrap hover:text-indigo-500"
+                          className="text-blue-700 whitespace-nowrap hover:text-indigo-500"
                         >
                           Book again
                         </a>
