@@ -6,11 +6,8 @@ import toast from "react-hot-toast"
 import Select from "react-select"
 import React from "react"
 
-// type OptionType = { value: string; label: string }
-
 export default function CreateServiceForm() {
   const { data } = useGetAllServices()
-  // const [selected, setSelected] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -27,20 +24,13 @@ export default function CreateServiceForm() {
     }
   })
 
-  // const handleCategorySelectionChange = (option: OptionType | null) => {
-  //   if (option) {
-  //     setSelected(option.value)
-  //   }
-  // }
-
-  // eslint-disable-next-line no-unused-vars
   const onSubmit = async (data: any) => {
     setIsLoading(true)
     const createService = (async () => {
       const response = await axiosInstance.post("/offered-services", {
-        category: data.category,
-        duration: data.duration,
-        price: data.price,
+        serviceId: data.category,
+        duration: Number(data.duration),
+        price: Number(data.price),
         description: data.description,
         documents: data.documents,
         estimate: data.estimate,
@@ -59,6 +49,7 @@ export default function CreateServiceForm() {
           return "Something went wrong. Try again later !!!"
         },
         success: () => {
+          setIsLoading(false)
           return "Successfully register account"
         },
       },
@@ -67,15 +58,6 @@ export default function CreateServiceForm() {
       }
     )
   }
-
-  // const testSubmit = async (data: any) => {
-  //   console.log(data.category)
-  //   console.log(data.duration)
-  //   console.log(data.price)
-  //   console.log(data.description)
-  //   console.log(data.documents)
-  //   console.log(data.estimate)
-  // }
 
   return (
     <div className="px-4 py-4 lg:col-span-9">
@@ -338,17 +320,18 @@ export default function CreateServiceForm() {
         <div className="pt-5">
           <div className="flex justify-end">
             <button
+              type="submit"
+              className="mr-5 bg-sky-700 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:bg-gray-400 disabled:cursor-wait"
+              disabled={isLoading}
+            >
+              {isLoading ? "Processing..." : "Save"}
+            </button>
+
+            <button
               type="button"
               className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Cancel
-            </button>
-            <button
-              type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              disabled={isLoading}
-            >
-              {isLoading ? "Processing..." : "Save"}
             </button>
           </div>
         </div>

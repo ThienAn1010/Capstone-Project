@@ -5,7 +5,6 @@ import CreateServiceForm from "./CreateServiceForm"
 
 export default function MyService() {
   const { data, isLoading } = useGetMyService()
-
   return (
     <>
       {isLoading ? (
