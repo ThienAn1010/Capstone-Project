@@ -6,32 +6,19 @@ import toast from "react-hot-toast"
 import Select from "react-select"
 import React from "react"
 
-const options = [
-  { value: "day", label: "Day" },
-  { value: "week", label: "Week" },
-  { value: "month", label: "Month" },
-]
-
 type OptionType = { value: string; label: string }
 
 export default function CreateServiceForm() {
   const { data } = useGetAllServices()
-  const [isValid, setIsValid] = useState(false)
   const [selected, setSelected] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedOption, setSelectedOption] = useState("day")
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm()
-
-  const handleSelectionChange = (option: OptionType | null) => {
-    if (option) {
-      setSelectedOption(option.value)
-    }
-  }
 
   const categoryOptions = data?.map((item) => {
     return {
@@ -53,7 +40,6 @@ export default function CreateServiceForm() {
       const response = await axiosInstance.post("/offered-services", {
         category: selected,
         duration: data.duration,
-        time: selectedOption,
         price: data.price,
         description: data.description,
         documents: data.documents,
@@ -83,13 +69,9 @@ export default function CreateServiceForm() {
   }
 
   const testSubmit = async (data: any) => {
-    if (selected == "") {
-      setIsValid(true)
-    }
-    console.log(isValid)
     console.log(selected)
     console.log(data.duration)
-    console.log(selectedOption)
+
     console.log(data.price)
     console.log(data.description)
     console.log(data.documents)
@@ -136,7 +118,16 @@ export default function CreateServiceForm() {
                       return (
                         <Select
                           options={categoryOptions}
+                          isClearable={true}
                           onChange={handleCategorySelectionChange}
+                          styles={{
+                            input: (base) => ({
+                              ...base,
+                              "input:focus": {
+                                boxShadow: "none",
+                              },
+                            }),
+                          }}
                         />
                       )
                     }}
@@ -167,7 +158,7 @@ export default function CreateServiceForm() {
                         message: "Duration is required",
                       },
                     })}
-                    type="number"
+                    type="text"
                     name="duration"
                     className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
@@ -176,16 +167,13 @@ export default function CreateServiceForm() {
                       {errors.duration.message as any}
                     </p>
                   )}
-                  <div className="absolute inset-y-0 right-0 flex items-center">
-                    <label htmlFor="time" className="sr-only">
-                      Time
-                    </label>
-                    <Select
-                      options={options}
-                      isSearchable={false}
-                      defaultValue={options[0]}
-                      onChange={handleSelectionChange}
-                    />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      Day(s)
+                    </span>
                   </div>
                 </div>
               </div>
