@@ -70,6 +70,8 @@ model OfferedService {
   service      Service    @relation(fields: [serviceId], references: [id])
   bookings     Booking[]
   description  String
+  documents    String
+  estimate     String
 }
 
 model Booking {
@@ -81,6 +83,10 @@ model Booking {
   note             String
   payAmount        Float
   status           BookingStatus  @default(pendingConfirm)
+  createdAt        DateTime       @default(now())
+  acceptedAt       DateTime?
+  droppedAt        DateTime?
+  finishedAt       DateTime?
 }
 
 enum Role {
