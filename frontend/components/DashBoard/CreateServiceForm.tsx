@@ -1,23 +1,10 @@
-import { Fragment, useState } from "react"
-import { Listbox, Transition } from "@headlessui/react"
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid"
+import { useState } from "react"
 import useGetAllServices from "../../hooks/useGetAllServices"
 import { useForm } from "react-hook-form"
 import axiosInstance from "../../util/axiosInstace"
 import toast from "react-hot-toast"
 import Select from "react-select"
 import React from "react"
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ")
-}
-
-const defaultSelect = [
-  {
-    id: 999,
-    name: "Please select a category",
-  },
-]
 
 const options = [
   { value: "day", label: "Day" },
@@ -29,7 +16,8 @@ type OptionType = { value: string; label: string }
 
 export default function CreateServiceForm() {
   const { data } = useGetAllServices()
-  const [selected, setSelected] = useState(defaultSelect[0])
+  // console.log(data)
+  const [selected, setSelected] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [selectedOption, setSelectedOption] = useState("day")
   const {
@@ -44,12 +32,25 @@ export default function CreateServiceForm() {
     }
   }
 
+  const categoryOptions = data?.map((item) => {
+    return {
+      label: item.name,
+      value: item.name,
+    }
+  })
+
+  const handleCategorySelectionChange = (option: OptionType | null) => {
+    if (option) {
+      setSelected(option.value)
+    }
+  }
+
   // eslint-disable-next-line no-unused-vars
   const onSubmit = async (data: any) => {
     setIsLoading(true)
     const createService = (async () => {
       const response = await axiosInstance.post("/offered-services", {
-        category: selected.name,
+        category: selected,
         duration: data.duration,
         time: selectedOption,
         price: data.price,
@@ -81,7 +82,7 @@ export default function CreateServiceForm() {
   }
 
   const testSubmit = async (data: any) => {
-    console.log(selected.name)
+    console.log(selected)
     console.log(data.duration)
     console.log(selectedOption)
     console.log(data.price)
@@ -117,80 +118,20 @@ export default function CreateServiceForm() {
             </div>
 
             <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
-              <Listbox value={selected} onChange={setSelected}>
-                {({ open }) => (
-                  <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                    <Listbox.Label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                      Category
-                    </Listbox.Label>
-                    <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
-                      <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <span className="block truncate">{selected.name}</span>
-                        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                          <SelectorIcon
-                            className="h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </Listbox.Button>
-
-                      <Transition
-                        show={open}
-                        as={Fragment}
-                        leave="transition ease-in duration-100"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                      >
-                        <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                          {data?.map((category) => (
-                            <Listbox.Option
-                              key={category.id}
-                              className={({ active }) =>
-                                classNames(
-                                  active
-                                    ? "text-white bg-blue-600"
-                                    : "text-gray-900",
-                                  "cursor-default select-none relative py-2 pl-8 pr-4"
-                                )
-                              }
-                              value={category}
-                            >
-                              {({ selected, active }) => (
-                                <>
-                                  <span
-                                    className={classNames(
-                                      selected
-                                        ? "font-semibold"
-                                        : "font-normal",
-                                      "block truncate"
-                                    )}
-                                  >
-                                    {category.name}
-                                  </span>
-
-                                  {selected ? (
-                                    <span
-                                      className={classNames(
-                                        active ? "text-white" : "text-blue-600",
-                                        "absolute inset-y-0 left-0 flex items-center pl-1.5"
-                                      )}
-                                    >
-                                      <CheckIcon
-                                        className="h-5 w-5"
-                                        aria-hidden="true"
-                                      />
-                                    </span>
-                                  ) : null}
-                                </>
-                              )}
-                            </Listbox.Option>
-                          ))}
-                        </Listbox.Options>
-                      </Transition>
-                    </div>
-                  </div>
-                )}
-              </Listbox>
+              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label
+                  htmlFor="duration"
+                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                >
+                  Category
+                </label>
+                <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
+                  <Select
+                    options={categoryOptions}
+                    onChange={handleCategorySelectionChange}
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
