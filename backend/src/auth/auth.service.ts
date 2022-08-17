@@ -57,6 +57,8 @@ export class AuthService {
       role: true,
       username: true,
       picture: true,
+      phoneNumber: true,
+      address: true,
     };
     const findUserInDb = await this.prismaService.user.findFirst({
       where: {
@@ -119,13 +121,20 @@ export class AuthService {
         username,
       },
     });
-    if (!user) throw new NotFoundException();
+    if (!user)
+      throw new NotFoundException({
+        status: 'fail',
+        message: 'Wrong username or password...',
+      });
     const isCorrect = await bcrypt.compare(password, user.password);
     if (isCorrect) {
       const accessToken = await this.createToken(user.id);
       return accessToken;
     }
-    throw new BadRequestException();
+    throw new BadRequestException({
+      status: 'fail',
+      message: 'Wrong username or password...',
+    });
   }
 
   async register(registerDto: RegisterDto) {

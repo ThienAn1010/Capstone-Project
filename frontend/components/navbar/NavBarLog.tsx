@@ -7,6 +7,7 @@ import axiosInstance from "../../util/axiosInstace"
 import useGetMe from "../../hooks/useGetMe"
 import Link from "next/link"
 import SearchBar from "./SearchBar"
+import { useRouter } from "next/router"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -14,7 +15,7 @@ function classNames(...classes: string[]) {
 
 export default function NavBarLog({ data }: any) {
   const { mutate } = useGetMe()
-
+  const router = useRouter()
   const handleLogout = () => {
     mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
       optimisticData: undefined,
@@ -22,7 +23,6 @@ export default function NavBarLog({ data }: any) {
   }
   return (
     <>
-      {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
       <Popover
         as="header"
         className={({ open }) =>
@@ -36,30 +36,29 @@ export default function NavBarLog({ data }: any) {
           <>
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-6">
-                <Link href="/">
-                  <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
-                    <div className="flex-shrink-0 flex items-center">
-                      <a href="#">
-                        <img
-                          className="block h-8 w-auto lg:hidden"
-                          src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue"
-                          alt="Workflow"
-                        />
-                      </a>
-                      <a href="#">
-                        <img
-                          className="hidden lg:block h-8 w-auto"
-                          src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                          alt="Workflow"
-                        />
-                      </a>
-                    </div>
+                <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-1">
+                  <div className="flex-shrink-0 flex items-center">
+                    <Link href="/">
+                      <img
+                        className="block h-8 w-auto lg:hidden"
+                        src="/mobile_logo.png"
+                        alt="mobile_logo"
+                      />
+                    </Link>
+                    <Link href="/">
+                      <img
+                        className="hidden lg:block h-6 w-auto"
+                        src="/logo.png"
+                        alt="logo"
+                      />
+                    </Link>
                   </div>
-                </Link>
+                </div>
+
                 <Link href="/service">
                   <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
                     <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
-                      CATEGORIES
+                      SERVICES
                     </p>
                   </div>
                 </Link>
@@ -125,6 +124,9 @@ export default function NavBarLog({ data }: any) {
                                       : "text-gray-900",
                                     "flex justify-start space-x-2 items-center px-4 py-4 hover:cursor-pointer"
                                   )}
+                                  onClick={() =>
+                                    router.push(`/profile/${data.id}`)
+                                  }
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -140,12 +142,9 @@ export default function NavBarLog({ data }: any) {
                                       d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
                                     />
                                   </svg>
-                                  <a
-                                    href="#"
-                                    className="block text-md font-medium"
-                                  >
+                                  <p className="block text-md font-medium">
                                     Dashboard
-                                  </a>
+                                  </p>
                                 </div>
                               )}
                             </Menu.Item>
@@ -233,23 +232,25 @@ export default function NavBarLog({ data }: any) {
               className="bg-white lg:hidden"
               aria-label="Global"
             >
-              <div className="border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
-                  />
-                </svg>
-                <p className="text-md font-medium">Dashboard</p>
-              </div>
+              <Link href={`/profile/${data.id}`}>
+                <div className="border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-7 w-7"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                    />
+                  </svg>
+                  <p className="text-md font-medium">Dashboard</p>
+                </div>
+              </Link>
               <div className="border-t-2 border-gray-300 flex justify-center space-x-2 py-4 items-center hover:cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

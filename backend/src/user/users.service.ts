@@ -53,6 +53,8 @@ export class UsersService {
           role: true,
           username: true,
           picture: true,
+          address: true,
+          phoneNumber: true,
         },
       });
       if (!user) {
@@ -115,8 +117,42 @@ export class UsersService {
         id: userId,
       },
       data: userUpdateDto,
+      select: {
+        id: true,
+        name: true,
+        role: true,
+        username: true,
+        picture: true,
+        address: true,
+        phoneNumber: true,
+      },
     });
     const accessToken = await this.createToken(updatedMe.id);
-    return accessToken;
+    return { accessToken, user: updatedMe };
+  }
+
+  async getMyOfferedServices(id: string) {
+    const myOfferedService = await this.prismaService.user.findFirst({
+      where: {
+        id,
+      },
+      select: {
+        paperMaker: {
+          include: {
+            offeredServices: {
+              include: {
+                service: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!myOfferedService)
+      return new NotFoundException({
+        status: 'fail',
+        message: 'This papermaker has not registered offered service',
+      });
+    return { status: 'success', data: myOfferedService };
   }
 }
