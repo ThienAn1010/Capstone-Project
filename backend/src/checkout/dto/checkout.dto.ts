@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CheckoutDto {
   @IsNotEmpty()
@@ -18,7 +18,13 @@ export class CheckoutDto {
   @IsNotEmpty()
   @IsString()
   phone: string;
+  @IsString()
+  @IsOptional()
   note?: string;
+  @IsNumber()
+  @IsOptional()
   lat?: number;
+  @IsNumber()
+  @IsOptional()
   lng?: number;
 }

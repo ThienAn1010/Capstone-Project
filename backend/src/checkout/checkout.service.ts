@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { SendGridService } from 'src/sendgrid/sendgrid.service';
 import { StripeService } from 'src/stripe/stripe.service';
 import { CheckoutDto } from './dto/checkout.dto';
 @Injectable()
@@ -10,6 +11,7 @@ export class CheckoutService {
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
     private readonly stripeService: StripeService,
+    private readonly sendGridService: SendGridService,
   ) {}
   async createStripeLink(user: any, checkoutDto: CheckoutDto) {
     const { amount, description, id, name, address, phone, note, lat, lng } =
@@ -74,7 +76,8 @@ export class CheckoutService {
         .webhooks.constructEvent(req.body, sig, endpointSecret);
       if (event.type === 'checkout.session.completed') {
         const sessionInfo = event.data.object as any;
-        const [userId, offeredServiceId] = (
+        console.log(sessionInfo);
+        const [userId, offeredServiceId, address, note] = (
           sessionInfo.client_reference_id as string
         ).split('||');
         const payAmount = sessionInfo.amount_total / 100;
@@ -83,9 +86,29 @@ export class CheckoutService {
             userId,
             offeredServiceId,
             payAmount,
-            note: 'ABC',
+            note: note ?? '',
           },
         });
+        const sendToUser = {
+          to: sessionInfo.customer_details.email, // Change to your recipient
+          from: {
+            email: this.configService.get('SENDGRID_VERIFIED_SENDER'),
+            name: 'Paperwork',
+          }, // Change to your verified sender
+          subject: 'Successfully booked a service',
+          html: `
+          <h1>Dear ${sessionInfo.customer_details.email}</h1>
+          <p>You have successfully booked a service in our system. </p>
+          `,
+        };
+        // const sendToPapermaker = {
+        //   to: 'test@example.com', // Change to your recipient
+        //   from: this.configService.get('SENDGRID_VERIFIED_SENDER'), // Change to your verified sender
+        //   subject: 'Sending with SendGrid is Fun',
+        //   text: 'and easy to do anywhere, even with Node.js',
+        //   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        // };
+        await this.sendGridService.getSendGrid().send(sendToUser);
         return { status: 'success', data };
       }
     } catch (error) {
