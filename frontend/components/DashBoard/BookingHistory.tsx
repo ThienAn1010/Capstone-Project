@@ -4,9 +4,9 @@ import {
   CheckIcon,
   DotsCircleHorizontalIcon,
 } from "@heroicons/react/solid"
+import dayjs from "dayjs"
 
 export default function BookingHistory({ booking }: any) {
-  const dayjs = require("dayjs")
   return (
     <div className="mt-5 mb-5">
       <div className="max-w-full mx-auto sm:px-2 lg:px-8">
