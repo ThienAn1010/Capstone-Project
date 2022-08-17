@@ -1,6 +1,6 @@
 import { useState } from "react"
 import useGetAllServices from "../../hooks/useGetAllServices"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import axiosInstance from "../../util/axiosInstace"
 import toast from "react-hot-toast"
 import Select from "react-select"
@@ -16,13 +16,14 @@ type OptionType = { value: string; label: string }
 
 export default function CreateServiceForm() {
   const { data } = useGetAllServices()
-  // console.log(data)
+  const [isValid, setIsValid] = useState(false)
   const [selected, setSelected] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [selectedOption, setSelectedOption] = useState("day")
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm()
 
@@ -35,7 +36,7 @@ export default function CreateServiceForm() {
   const categoryOptions = data?.map((item) => {
     return {
       label: item.name,
-      value: item.name,
+      value: item.id,
     }
   })
 
@@ -82,6 +83,10 @@ export default function CreateServiceForm() {
   }
 
   const testSubmit = async (data: any) => {
+    if (selected == "") {
+      setIsValid(true)
+    }
+    console.log(isValid)
     console.log(selected)
     console.log(data.duration)
     console.log(selectedOption)
@@ -118,10 +123,29 @@ export default function CreateServiceForm() {
                   Category
                 </label>
                 <div className="relative max-w-lg mt-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
-                  <Select
-                    options={categoryOptions}
-                    onChange={handleCategorySelectionChange}
+                  <Controller
+                    control={control}
+                    name="category"
+                    rules={{
+                      required: {
+                        value: true,
+                        message: "Service category is required",
+                      },
+                    }}
+                    render={() => {
+                      return (
+                        <Select
+                          options={categoryOptions}
+                          onChange={handleCategorySelectionChange}
+                        />
+                      )
+                    }}
                   />
+                  {errors.category?.message && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.category.message as any}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -135,7 +159,7 @@ export default function CreateServiceForm() {
                   Expected Duration
                 </label>
 
-                <div className="relative max-w-lg mt-1 mb-1 sm:mt-0 sm:max-w-xs sm:col-span-2">
+                <div className="relative max-w-lg mt-1 mb-2 sm:mt-0 sm:max-w-xs sm:col-span-2">
                   <input
                     {...register("duration", {
                       required: {
@@ -174,7 +198,7 @@ export default function CreateServiceForm() {
                 >
                   Price
                 </label>
-                <div className="relative max-w-lg mt-1 mb-1 sm:mt-0 sm:max-w-xs  sm:col-span-2">
+                <div className="relative max-w-lg mt-1 mb-2 sm:mt-0 sm:max-w-xs  sm:col-span-2">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <span className="text-gray-500 sm:text-sm">$</span>
                   </div>
