@@ -6,11 +6,11 @@ import toast from "react-hot-toast"
 import Select from "react-select"
 import React from "react"
 
-type OptionType = { value: string; label: string }
+// type OptionType = { value: string; label: string }
 
 export default function CreateServiceForm() {
   const { data } = useGetAllServices()
-  const [selected, setSelected] = useState("")
+  // const [selected, setSelected] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -27,18 +27,18 @@ export default function CreateServiceForm() {
     }
   })
 
-  const handleCategorySelectionChange = (option: OptionType | null) => {
-    if (option) {
-      setSelected(option.value)
-    }
-  }
+  // const handleCategorySelectionChange = (option: OptionType | null) => {
+  //   if (option) {
+  //     setSelected(option.value)
+  //   }
+  // }
 
   // eslint-disable-next-line no-unused-vars
   const onSubmit = async (data: any) => {
     setIsLoading(true)
     const createService = (async () => {
       const response = await axiosInstance.post("/offered-services", {
-        category: selected,
+        category: data.category,
         duration: data.duration,
         price: data.price,
         description: data.description,
@@ -68,21 +68,20 @@ export default function CreateServiceForm() {
     )
   }
 
-  const testSubmit = async (data: any) => {
-    console.log(selected)
-    console.log(data.duration)
-
-    console.log(data.price)
-    console.log(data.description)
-    console.log(data.documents)
-    console.log(data.estimate)
-  }
+  // const testSubmit = async (data: any) => {
+  //   console.log(data.category)
+  //   console.log(data.duration)
+  //   console.log(data.price)
+  //   console.log(data.description)
+  //   console.log(data.documents)
+  //   console.log(data.estimate)
+  // }
 
   return (
     <div className="px-4 py-4 lg:col-span-9">
       <form
         className="space-y-8 divide-y divide-gray-200"
-        onSubmit={handleSubmit(testSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div>
@@ -108,18 +107,24 @@ export default function CreateServiceForm() {
                   <Controller
                     control={control}
                     name="category"
+                    defaultValue="1"
                     rules={{
                       required: {
                         value: true,
                         message: "Service category is required",
                       },
                     }}
-                    render={() => {
+                    render={({ field: { onChange, value, ref } }) => {
                       return (
                         <Select
+                          ref={ref}
                           options={categoryOptions}
+                          classNamePrefix="addl-class"
                           isClearable={true}
-                          onChange={handleCategorySelectionChange}
+                          value={categoryOptions?.find(
+                            (c) => c.value === value
+                          )}
+                          onChange={(val) => onChange(val?.value)}
                           styles={{
                             input: (base) => ({
                               ...base,
@@ -194,7 +199,7 @@ export default function CreateServiceForm() {
                     {...register("price", {
                       required: { value: true, message: "Price is required" },
                     })}
-                    type="text"
+                    type="number"
                     name="price"
                     className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     placeholder="0.00"

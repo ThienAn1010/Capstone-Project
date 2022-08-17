@@ -49,7 +49,6 @@ function classNames(...classes: string[]) {
 
 const Profile: NextPage = () => {
   const { data, isLoading } = useGetMe()
-  console.log(data)
   const router = useRouter()
   const query = { ...router.query }
   const viewable = data && data.id === query.id
