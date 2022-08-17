@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { SendGridService } from 'src/sendgrid/sendgrid.service';
 import { StripeService } from 'src/stripe/stripe.service';
 import { CheckoutDto } from './dto/checkout.dto';
+import * as dayjs from 'dayjs';
 @Injectable()
 export class CheckoutService {
   constructor(
@@ -123,13 +124,23 @@ export class CheckoutService {
           subject: 'You have a new booking',
           html: `
           <p>Dear ${data.offeredService.paperMaker.user.name}</h1>
-          <p>You have a new booking for your service ${data.offeredService.service.name}.</p>
-          <p>Your client booked at. </p>
+          <p>You have a new booking for your service ${
+            data.offeredService.service.name
+          }.</p>
+          <p>Your client booked at ${dayjs(data.createdAt).format(
+            'HH:mm',
+          )} on ${dayjs(data.createdAt).format(
+            'DD-MM-YYY',
+          )}. Please call this number ${
+            data.user.phoneNumber
+          } within 24 hours, or on the ready to receive call from your client. If you accept, please go to your dashboard and accept this request.
+          </p>
           <p>If you have any problem. Please don't hesitate to contact us</p>
           <p>Thank you for using our service.</p>
           `,
         };
         await this.sendGridService.getSendGrid().send(sendToUser);
+        await this.sendGridService.getSendGrid().send(sendToPapermaker);
         return { status: 'success', data };
       }
     } catch (error) {
