@@ -1,4 +1,4 @@
-export class UserUpdateDto {
+export interface UserUpdateDto {
   address?: string;
   phoneNumber?: string;
   name?: string;

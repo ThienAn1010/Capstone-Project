@@ -4,8 +4,54 @@ import Link from "next/link"
 import LoginFacebookButton from "../components/LoginButton/LoginFacebookButton"
 import LoginGoogleButton from "../components/LoginButton/LoginGoogleButton"
 import { getFacebookOAuthUrl, getGoogleOAuthUrl } from "../util/socialLogin"
+import { useForm } from "react-hook-form"
+import axiosInstance from "../util/axiosInstace"
+import React, { useState } from "react"
+import toast from "react-hot-toast"
+import { useRouter } from "next/router"
 
 const Home: NextPage = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = async (data: any) => {
+    setIsLoading(true)
+    const loginUser = (async () => {
+      const response = await axiosInstance.post("/auth/login", {
+        username: data.username,
+        password: data.password,
+      })
+      return response
+    })()
+    toast.promise(
+      loginUser,
+      {
+        loading: "Processing...",
+        error: (error) => {
+          console.log(error)
+          setIsLoading(false)
+          if (error.response.status === 404 || error.response.status === 400) {
+            return error.response.data.message
+          }
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          setIsLoading(false)
+          router.push("/")
+          return "Successfully logged in"
+        },
+      },
+      {
+        position: "bottom-center",
+      }
+    )
+  }
+
   return (
     <>
       <Head>
@@ -18,7 +64,7 @@ const Home: NextPage = () => {
             Login Guest Account
           </h1>
           <div>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="hidden md:flex justify-around space-x-8 items-center">
                 <Link href={getFacebookOAuthUrl()}>
                   <a className="border border-gray-300 rounded-md px-4 py-2 ">
@@ -90,18 +136,59 @@ const Home: NextPage = () => {
                 Login Papermaker Account
               </h1>
               <div>
-                <input
-                  type="text"
-                  className="form-control block w-full px-4 py-2 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Email address"
-                />
+                <label
+                  htmlFor="username"
+                  className="block text-md font-medium text-gray-700 mt-5"
+                >
+                  Username
+                </label>
+                <div className="mt-1">
+                  <input
+                    {...register("username", {
+                      required: {
+                        value: true,
+                        message: "Username is required",
+                      },
+                      pattern: {
+                        value: /^([a-zA-Z0-9]+@(?:[a-zA-Z0-9]+.)+[A-Za-z]+$)$/,
+                        message: "Username is in invalid format",
+                      },
+                    })}
+                    placeholder="Enter your email"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                  {errors.username && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.username.message as any}
+                    </p>
+                  )}
+                </div>
               </div>
               <div>
-                <input
-                  type="password"
-                  className="form-control block w-full px-4 py-2 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Password"
-                />
+                <label
+                  htmlFor="password"
+                  className="block text-md font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is required",
+                      },
+                    })}
+                    type="password"
+                    placeholder="*******"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                  {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password.message as any}
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="hidden md:flex justify-between items-center mb-6">
                 <div className="form-group form-check">
@@ -137,8 +224,9 @@ const Home: NextPage = () => {
                 className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
+                disabled={isLoading}
               >
-                Sign in
+                {isLoading ? "Processing..." : "Sign In"}
               </button>
               <div className="flex justify-center">
                 <p className="opacity-75">Become a papermaker?&nbsp;</p>
