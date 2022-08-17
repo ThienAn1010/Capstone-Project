@@ -18,7 +18,6 @@ const ErrorComponent = React.lazy(
   () => import("../../components/ErrorComponent")
 )
 
-
 const userSubNavigation = [
   { name: "Profile", href: "profile", icon: UserCircleIcon, current: true },
   {
@@ -159,7 +158,7 @@ const Profile: NextPage = () => {
                         </>
                       ) : null}
                       {query.tab === "service" ? (
-                        <div className="lg:col-span-9"><BookingHistoryWithNav/></div>
+                        <BookingHistoryWithNav />
                       ) : null}
                       {query.tab === "myservice" &&
                       data.role === "paperMaker" ? (

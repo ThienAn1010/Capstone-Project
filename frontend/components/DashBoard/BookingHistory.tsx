@@ -39,17 +39,23 @@ export default function BookingHistory({ booking }: any) {
                 </div>
               </dl>
               <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4 mt-5">
-                <button type="button" className="cursor-pointer flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  <span>View Booking</span>
+                <button
+                  type="button"
+                  className="cursor-pointer flex items-center justify-center bg-blue-200 py-2 px-2.5 border border-blue-200 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  <span className="text-blue-700">View Booking</span>
                 </button>
-                <button type="button" className="cursor-pointer flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  <span>Review</span>
+                <button
+                  type="button"
+                  className="cursor-pointer flex items-center justify-center bg-blue-700 py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  <span className="text-white">Review</span>
                 </button>
               </div>
             </div>
 
             {/* Products */}
-            <h4 className="sr-only">Items</h4>
+            <h4 className="sr-only">Orders</h4>
             <ul role="list" className="divide-y divide-gray-200">
               <li key={booking.id} className="p-4 sm:p-6">
                 <div className="flex items-center sm:items-start">
@@ -67,7 +73,7 @@ export default function BookingHistory({ booking }: any) {
                         ${booking.offeredService.price}
                       </p>
                     </div>
-                    <p className="hidden text-gray-500 sm:block sm:mt-2">
+                    <p className="hidden text-gray-500 text-justify sm:block sm:mt-2">
                       {booking.offeredService.description}
                     </p>
                   </div>
@@ -141,17 +147,14 @@ export default function BookingHistory({ booking }: any) {
                   ) : null}
                   <div className="mt-6 border-t border-gray-200 pt-4 flex items-center space-x-4 divide-x divide-gray-200 text-sm font-medium sm:mt-0 sm:ml-4 sm:border-none sm:pt-0">
                     <div className="flex-1 flex justify-center">
-                      <a className="text-blue-700 whitespace-nowrap hover:text-indigo-500">
+                      <a className="text-blue-700 whitespace-nowrap hover:text-blue-900 hover:cursor-pointer">
                         View papermaker
                       </a>
                     </div>
                     <div className="flex-1 pl-4 flex justify-center">
-                      <a
-                        href="#"
-                        className="text-blue-700 whitespace-nowrap hover:text-indigo-500"
-                      >
+                      <p className="text-blue-700 whitespace-nowrap hover:text-blue-900 hover:cursor-pointer">
                         Book again
-                      </a>
+                      </p>
                     </div>
                   </div>
                 </div>
