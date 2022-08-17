@@ -28,11 +28,17 @@ const userSubNavigation = [
 ]
 
 const ppmkerSubNavigation = [
-  ...userSubNavigation,
+  { name: "Profile", href: "profile", icon: UserCircleIcon, current: false },
   {
     name: "My Service",
     href: "myservice",
     icon: BellIcon,
+    current: true,
+  },
+  {
+    name: "Booked Services",
+    href: "service",
+    icon: ClipboardListIcon,
     current: false,
   },
 ]
@@ -43,7 +49,6 @@ function classNames(...classes: string[]) {
 
 const Profile: NextPage = () => {
   const { data, isLoading } = useGetMe()
-  console.log(data)
   const router = useRouter()
   const query = { ...router.query }
   const viewable = data && data.id === query.id
