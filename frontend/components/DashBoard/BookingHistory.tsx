@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/solid"
 
 export default function BookingHistory({ booking }: any) {
+  const dayjs = require("dayjs")
   return (
     <div className="mt-5 mb-5">
       <div className="max-w-full mx-auto sm:px-2 lg:px-8">
@@ -25,9 +26,9 @@ export default function BookingHistory({ booking }: any) {
                 <div className="hidden sm:block">
                   <dt className="font-medium text-gray-900">Date booked</dt>
                   <dd className="mt-1 text-gray-500 font-normal">
-                    <time dateTime={booking.offeredService.createdAt}>
-                      {booking.offeredService.createdAt}
-                    </time>
+                    {dayjs(booking.offeredService.createdAt).format(
+                      "DD/MM/YYYY"
+                    )}
                   </dd>
                 </div>
                 <div className="ml-10">
