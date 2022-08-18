@@ -102,17 +102,13 @@ const Detail: NextPage = () => {
                 <h2 className="text-2xl font-bold text-gray-900">
                   Required Documents
                 </h2>
-                <p className="text-justify mt-2 leading-relaxed">
-                  {data?.description}
-                </p>
+                <p className="text-justify mt-2">{data?.description}</p>
               </div>
               <div className="px-10 pb-8">
                 <h2 className="text-2xl font-bold text-gray-900 ">
                   Estimated Duration
                 </h2>
-                <p className="text-justify mt-2 leading-relaxed">
-                  {data?.description}
-                </p>
+                <p className="text-justify mt-2">{data?.description}</p>
               </div>
               <div className="pt-10 border-t-2">
                 <Feedback />
