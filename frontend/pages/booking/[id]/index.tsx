@@ -5,7 +5,7 @@ import BookingDetail from "../../../components/DashBoard/BookingDetail"
 
 const Detail: NextPage = () => {
   const router = useRouter()
-  const { data, isLoading } = useGetUserBookings()
+  const { data } = useGetUserBookings()
   console.log(data)
   return (
     // <>
