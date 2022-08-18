@@ -25,11 +25,11 @@ const Detail: NextPage = () => {
       ) : (
         <div className="container mx-auto px-14 py-12">
           <div className="grid grid-cols-3 gap-2 ">
-            <div className="col-span-2 space-y-8 pl-32 pr-8">
-              <div className="flex space-x-6 ">
+            <div className="col-span-2 space-y-8 pl-32 pr-2">
+              <div className="flex space-x-6 mb8 ">
                 <div>
                   <img
-                    className="inline-block h-60 w-60 rounded-md"
+                    className="inline-block h-60 w-60 rounded-full"
                     src={data?.paperMaker.user.picture}
                     alt=""
                   />
@@ -71,7 +71,7 @@ const Detail: NextPage = () => {
                   </div>
                   <div className="flex items-center">
                     <ClockIcon className="flex-shrink-0 h-6 w-6 " />
-                    <p className="font-semibold">&nbsp;3 - 4 weeks</p>
+                    <p className="font-semibold">&nbsp;{data?.duration} days</p>
                   </div>
                   <div className="flex items-center">
                     <LocationMarkerIcon className="flex-shrink-0 h-6 w-6 " />
@@ -88,17 +88,17 @@ const Detail: NextPage = () => {
                 </div>
               </div>
 
-              <div className="space-x-8">
-                <div className="">
+              <div className="px-10">
+                <div>
                   <h2 className="text-2xl font-bold text-gray-900">
                     Description
                   </h2>
                   <p className="text-justify mt-2 leading-relaxed">
-                    {data?.paperMaker.aboutMe}
+                    {data?.description}
                   </p>
                 </div>
               </div>
-              <div>
+              <div className="px-10">
                 <h2 className="text-2xl font-bold text-gray-900">
                   Required Documents
                 </h2>
@@ -106,7 +106,7 @@ const Detail: NextPage = () => {
                   {data?.description}
                 </p>
               </div>
-              <div className="pb-8">
+              <div className="px-10 pb-8">
                 <h2 className="text-2xl font-bold text-gray-900 ">
                   Estimated Duration
                 </h2>
@@ -118,7 +118,7 @@ const Detail: NextPage = () => {
                 <Feedback />
               </div>
             </div>
-            <div className="ml-14">
+            <div className="ml-12">
               <BookNow />
             </div>
           </div>

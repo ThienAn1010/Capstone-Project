@@ -230,6 +230,10 @@ export default function CreateServiceForm() {
                           value: true,
                           message: "Service description is required",
                         },
+                        minLength: {
+                          value: 100,
+                          message: "Please write at least 100 characters",
+                        },
                       })}
                       id="description"
                       name="description"
@@ -261,6 +265,10 @@ export default function CreateServiceForm() {
                         required: {
                           value: true,
                           message: "Required Documents is required",
+                        },
+                        minLength: {
+                          value: 100,
+                          message: "Please write at least 100 characters",
                         },
                       })}
                       id="documents"
@@ -294,6 +302,10 @@ export default function CreateServiceForm() {
                         required: {
                           value: true,
                           message: "Estimated duration is required",
+                        },
+                        minLength: {
+                          value: 100,
+                          message: "Please write at least 100 characters",
                         },
                       })}
                       id="estimate"

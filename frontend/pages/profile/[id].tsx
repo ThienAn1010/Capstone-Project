@@ -10,7 +10,6 @@ import ProfileForm from "../../components/DashBoard/ProfileForm"
 import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
 import LoadingSpinner from "../../components/LoadingSkeleton/LoadingSpinner"
-import PapermakerProfileForm from "../../components/DashBoard/PapermakerProfileForm"
 import MyService from "../../components/DashBoard/MyService"
 
 const ErrorComponent = React.lazy(
@@ -153,13 +152,7 @@ const Profile: NextPage = () => {
                         )}
                       </aside>
                       {query.tab === "profile" || query.tab === undefined ? (
-                        <>
-                          {data.role === "user" ? (
-                            <ProfileForm />
-                          ) : (
-                            <PapermakerProfileForm />
-                          )}
-                        </>
+                        <ProfileForm />
                       ) : null}
                       {query.tab === "service" ? (
                         <div>Hello service</div>
