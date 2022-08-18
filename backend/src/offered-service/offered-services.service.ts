@@ -228,19 +228,17 @@ export class OfferedServicesService {
         message: 'Not an author or invalid offered service provided',
       });
     }
-    const updatedField = {} as any;
-    if (updateOfferedServiceDto.price) {
-      updatedField.price = updateOfferedServiceDto.price;
-    }
-    if (updateOfferedServiceDto.duration) {
-      updatedField.duration = updateOfferedServiceDto.duration;
-    }
+
+    const updatedBody = { ...updateOfferedServiceDto };
+    delete updatedBody.offeredServiceId;
+    delete updatedBody.userId;
+
     const updateOfferedService = await this.prismaService.offeredService.update(
       {
         where: {
           id: updateOfferedServiceDto.offeredServiceId,
         },
-        data: updatedField,
+        data: updatedBody,
         include: {
           paperMaker: true,
           service: true,
