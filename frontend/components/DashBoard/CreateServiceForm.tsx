@@ -267,8 +267,8 @@ export default function CreateServiceForm() {
                           message: "Required Documents is required",
                         },
                         minLength: {
-                          value: 100,
-                          message: "Please write at least 100 characters",
+                          value: 50,
+                          message: "Please write at least 50 characters",
                         },
                       })}
                       id="documents"
@@ -304,8 +304,8 @@ export default function CreateServiceForm() {
                           message: "Estimated duration is required",
                         },
                         minLength: {
-                          value: 100,
-                          message: "Please write at least 100 characters",
+                          value: 50,
+                          message: "Please write at least 50 characters",
                         },
                       })}
                       id="estimate"
