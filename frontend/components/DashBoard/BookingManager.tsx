@@ -8,13 +8,14 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/solid"
 import useGetPaperMakerBooking from "../../hooks/useGetPaperMakerBooking"
+import LoadingSpinner from "../LoadingSkeleton/LoadingSpinner"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
 export default function BookingManager() {
-  const { data } = useGetPaperMakerBooking()
+  const { data, isLoading } = useGetPaperMakerBooking()
   const [openAccept, setOpenAccept] = useState(false)
   const [openDecline, setOpenDecline] = useState(false)
   const cancelButtonRef = useRef(null)
@@ -22,204 +23,210 @@ export default function BookingManager() {
   return (
     <>
       <div className="py-4 lg:col-span-9">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="sm:flex sm:items-center">
-            <div className="sm:flex-auto">
-              <h1 className="text-xl font-semibold text-gray-900">Users</h1>
-              <p className="mt-2 text-sm text-gray-700">
-                A list of all the users in your account including their name,
-                title, email and role.
-              </p>
-            </div>
+        {isLoading ? (
+          <div className="container mx-auto p-20">
+            <LoadingSpinner />
           </div>
-          <div className="mt-8 flex flex-col">
-            <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div className="overflow-y-visible shadow ring-1 mb-28 ring-black ring-opacity-5 md:rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-300 table-fixed">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                        >
-                          Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Phone
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Address
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Note
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Status
-                        </th>
-                        <th
-                          scope="col"
-                          className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                        >
-                          <span className="sr-only">Edit</span>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 bg-white">
-                      {data.bookings.map((booking: any) => (
-                        <tr key={booking.user.id}>
-                          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                            <div className="flex items-center">
-                              <div className="h-10 w-10 flex-shrink-0">
-                                <img
-                                  className="h-10 w-10 rounded-full"
-                                  src={booking.user.picture}
-                                  alt="idk"
-                                />
-                              </div>
-                              <div className="ml-4">
-                                <div className="font-medium text-gray-900">
-                                  {booking.user.name}
-                                </div>
-                                <div className="text-gray-500">
-                                  {booking.user.username}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <div className="text-gray-900">
-                              {booking.user.phoneNumber}
-                            </div>
-                          </td>
-                          <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
-                            <p className="text-sm h-full w-full line-clamp-3">
-                              {booking.user.address}
-                            </p>
-                          </td>
-                          <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
-                            <p className="text-sm line-clamp-3">
-                              {booking.note}
-                            </p>
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <span className="inline-flex rounded-md bg-yellow-100 px-4 py-2 font-semibold leading-5 text-yellow-800 text-sm">
-                              Pending
-                            </span>
-                          </td>
-                          <td className="whitespace-nowrap space-y-4 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <Menu
-                              as="div"
-                              className="relative inline-block text-left"
-                            >
-                              <div>
-                                <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ">
-                                  Action
-                                  <ChevronDownIcon
-                                    className="-mr-1 ml-2 h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                </Menu.Button>
-                              </div>
-
-                              <Transition
-                                as={Fragment}
-                                enter="transition ease-out duration-100"
-                                enterFrom="transform opacity-0 scale-95"
-                                enterTo="transform opacity-100 scale-100"
-                                leave="transition ease-in duration-75"
-                                leaveFrom="transform opacity-100 scale-100"
-                                leaveTo="transform opacity-0 scale-95"
-                              >
-                                <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 divide-y divide-gray-100 focus:outline-none">
-                                  <div className="py-1">
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <p
-                                          onClick={() => {
-                                            setOpenAccept(true)
-                                          }}
-                                          className={classNames(
-                                            active
-                                              ? "bg-emerald-100 text-gray-900"
-                                              : "text-gray-700",
-                                            "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                          )}
-                                        >
-                                          <CheckCircleIcon
-                                            className="mr-3 h-5 w-5 text-emerald-400"
-                                            aria-hidden="true"
-                                          />
-                                          Accept
-                                        </p>
-                                      )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <p
-                                          onClick={() => {
-                                            setOpenDecline(true)
-                                          }}
-                                          className={classNames(
-                                            active
-                                              ? "bg-rose-100 text-gray-900"
-                                              : "text-gray-700",
-                                            "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                          )}
-                                        >
-                                          <XCircleIcon
-                                            className="mr-3 h-5 w-5 text-rose-400 "
-                                            aria-hidden="true"
-                                          />
-                                          Decline
-                                        </p>
-                                      )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <a
-                                          href="#"
-                                          className={classNames(
-                                            active
-                                              ? "bg-cyan-100 text-gray-900"
-                                              : "text-gray-700",
-                                            "group flex items-center px-4 py-2 text-sm"
-                                          )}
-                                        >
-                                          <DocumentTextIcon
-                                            className="mr-3 h-5 w-5 text-cyan-400 "
-                                            aria-hidden="true"
-                                          />
-                                          View details
-                                        </a>
-                                      )}
-                                    </Menu.Item>
-                                  </div>
-                                </Menu.Items>
-                              </Transition>
-                            </Menu>
-                          </td>
+        ) : (
+          <div className="px-4 sm:px-6 lg:px-8">
+            <div className="sm:flex sm:items-center">
+              <div className="sm:flex-auto">
+                <h1 className="text-xl font-semibold text-gray-900">Users</h1>
+                <p className="mt-2 text-sm text-gray-700">
+                  A list of all the users in your account including their name,
+                  title, email and role.
+                </p>
+              </div>
+            </div>
+            <div className="mt-8 flex flex-col">
+              <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                  <div className="overflow-y-visible shadow ring-1 mb-28 ring-black ring-opacity-5 md:rounded-lg">
+                    <table className="min-w-full divide-y divide-gray-300 table-fixed">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Name
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
+                            Phone
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
+                            Address
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
+                            Note
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                          >
+                            Status
+                          </th>
+                          <th
+                            scope="col"
+                            className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                          >
+                            <span className="sr-only">Edit</span>
+                          </th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-gray-200 bg-white">
+                        {data.bookings.map((booking: any) => (
+                          <tr key={booking.user.id}>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                              <div className="flex items-center">
+                                <div className="h-10 w-10 flex-shrink-0">
+                                  <img
+                                    className="h-10 w-10 rounded-full"
+                                    src={booking.user.picture}
+                                    alt="idk"
+                                  />
+                                </div>
+                                <div className="ml-4">
+                                  <div className="font-medium text-gray-900">
+                                    {booking.user.name}
+                                  </div>
+                                  <div className="text-gray-500">
+                                    {booking.user.username}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="text-gray-900">
+                                {booking.user.phoneNumber}
+                              </div>
+                            </td>
+                            <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
+                              <p className="text-sm h-full w-full line-clamp-3">
+                                {booking.user.address}
+                              </p>
+                            </td>
+                            <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
+                              <p className="text-sm line-clamp-3">
+                                {booking.note}
+                              </p>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <span className="inline-flex rounded-md bg-yellow-100 px-4 py-2 font-semibold leading-5 text-yellow-800 text-sm">
+                                Pending
+                              </span>
+                            </td>
+                            <td className="whitespace-nowrap space-y-4 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                              <Menu
+                                as="div"
+                                className="relative inline-block text-left"
+                              >
+                                <div>
+                                  <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ">
+                                    Action
+                                    <ChevronDownIcon
+                                      className="-mr-1 ml-2 h-5 w-5"
+                                      aria-hidden="true"
+                                    />
+                                  </Menu.Button>
+                                </div>
+
+                                <Transition
+                                  as={Fragment}
+                                  enter="transition ease-out duration-100"
+                                  enterFrom="transform opacity-0 scale-95"
+                                  enterTo="transform opacity-100 scale-100"
+                                  leave="transition ease-in duration-75"
+                                  leaveFrom="transform opacity-100 scale-100"
+                                  leaveTo="transform opacity-0 scale-95"
+                                >
+                                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 divide-y divide-gray-100 focus:outline-none">
+                                    <div className="py-1">
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <p
+                                            onClick={() => {
+                                              setOpenAccept(true)
+                                            }}
+                                            className={classNames(
+                                              active
+                                                ? "bg-emerald-100 text-gray-900"
+                                                : "text-gray-700",
+                                              "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                            )}
+                                          >
+                                            <CheckCircleIcon
+                                              className="mr-3 h-5 w-5 text-emerald-400"
+                                              aria-hidden="true"
+                                            />
+                                            Accept
+                                          </p>
+                                        )}
+                                      </Menu.Item>
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <p
+                                            onClick={() => {
+                                              setOpenDecline(true)
+                                            }}
+                                            className={classNames(
+                                              active
+                                                ? "bg-rose-100 text-gray-900"
+                                                : "text-gray-700",
+                                              "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                            )}
+                                          >
+                                            <XCircleIcon
+                                              className="mr-3 h-5 w-5 text-rose-400 "
+                                              aria-hidden="true"
+                                            />
+                                            Decline
+                                          </p>
+                                        )}
+                                      </Menu.Item>
+                                      <Menu.Item>
+                                        {({ active }) => (
+                                          <a
+                                            href="#"
+                                            className={classNames(
+                                              active
+                                                ? "bg-cyan-100 text-gray-900"
+                                                : "text-gray-700",
+                                              "group flex items-center px-4 py-2 text-sm"
+                                            )}
+                                          >
+                                            <DocumentTextIcon
+                                              className="mr-3 h-5 w-5 text-cyan-400 "
+                                              aria-hidden="true"
+                                            />
+                                            View details
+                                          </a>
+                                        )}
+                                      </Menu.Item>
+                                    </div>
+                                  </Menu.Items>
+                                </Transition>
+                              </Menu>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* This is the modal for accept message. */}
