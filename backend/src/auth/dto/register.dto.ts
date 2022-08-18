@@ -3,6 +3,7 @@ import {
   IsNotEmpty,
   IsPhoneNumber,
   MinLength,
+  IsOptional,
 } from 'class-validator';
 
 export class RegisterDto {
@@ -22,6 +23,8 @@ export class RegisterDto {
   @IsString()
   @IsNotEmpty()
   name: string;
+  @IsString()
+  @IsOptional()
   picture?: string;
   @IsNotEmpty()
   lat: number;
