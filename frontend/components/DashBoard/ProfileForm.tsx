@@ -28,7 +28,6 @@ export default function ProfileForm() {
       location.lat = data.address.geometry.location.lat
       location.long = data.address.geometry.location.lng
     }
-    console.log(location)
     const updateAccount = (async () => {
       let thumbnail
       if (selectedImage) {
@@ -104,11 +103,16 @@ export default function ProfileForm() {
                     className="flex-shrink-0 inline-block rounded-full overflow-hidden h-12 w-12"
                     aria-hidden="true"
                   >
-                    <img
-                      className="rounded-full h-full w-full"
-                      src={userData?.picture}
-                      alt="Avatar"
-                    />
+                    {selectedImage && (
+                      <img
+                        className="w-full h-full"
+                        alt="image preview"
+                        src={URL.createObjectURL(selectedImage)}
+                      />
+                    )}
+                    {!selectedImage && (
+                      <img src={userData?.picture} alt="default" />
+                    )}
                   </div>
                   <div className="ml-5 rounded-md shadow-sm">
                     <div className="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
@@ -123,9 +127,9 @@ export default function ProfileForm() {
                         id="mobile-user-photo"
                         name="user-photo"
                         type="file"
+                        accept=".jpg,.png,.jpeg"
                         className="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
                         onChange={(event: any) => {
-                          console.log(event.target.files[0])
                           setSelectedImage(event.target.files[0])
                         }}
                       />
@@ -135,11 +139,20 @@ export default function ProfileForm() {
               </div>
 
               <div className="hidden relative w-40 h-40 ml-4 rounded-full overflow-hidden lg:block">
-                <img
-                  className="rounded-full w-40 h-40"
-                  src={userData?.picture}
-                  alt=""
-                />
+                {selectedImage && (
+                  <img
+                    className="w-full h-full object-cover"
+                    alt="image preview"
+                    src={URL.createObjectURL(selectedImage)}
+                  />
+                )}
+                {!selectedImage && (
+                  <img
+                    src={userData?.picture}
+                    alt="default"
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 <label
                   htmlFor="desktop-user-photo"
                   className="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
@@ -150,7 +163,11 @@ export default function ProfileForm() {
                     type="file"
                     id="desktop-user-photo"
                     name="user-photo"
+                    accept=".jpg,.png,.jpeg"
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                    onChange={(event: any) => {
+                      setSelectedImage(event.target.files[0])
+                    }}
                   />
                 </label>
               </div>
