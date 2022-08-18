@@ -12,11 +12,11 @@ const Card: FC<CardProps> = ({ offeredService }) => {
       <a>
         <div className="pb-3 border-b border-b-[#d1d7dc] relative">
           <div className="flex justify-start items-start">
-            <div className="mr-2">
+            <div className="mr-4">
               <img
-                className="w-[260px] h-[145px] object-cover"
+                className="h-44 w-44 object-cover rounded-full"
                 alt="Something"
-                src="https://images.smartcapitalmind.com/person-using-pen-near-documents-and-chart.jpg"
+                src={offeredService.paperMaker.user.picture}
               />
             </div>
             <div className="text-gray-500 text-sm pr-20 flex-1">
