@@ -5,11 +5,14 @@ import CreateServiceForm from "./CreateServiceForm"
 
 export default function MyService() {
   const { data, isLoading } = useGetMyService()
+  console.log(data)
   return (
     <>
       {isLoading ? (
-        <div className="container mx-auto p-20">
-          <LoadingSpinner />
+        <div className="px-4 py-4 lg:col-span-9">
+          <div className="container mx-auto p-20">
+            <LoadingSpinner />
+          </div>
         </div>
       ) : (
         <div className="px-4 py-4 lg:col-span-9">
@@ -26,7 +29,7 @@ export default function MyService() {
             </>
           )}
 
-          <CreateServiceForm />
+          <CreateServiceForm serviceData={data.data.paperMaker} />
         </div>
       )}
     </>

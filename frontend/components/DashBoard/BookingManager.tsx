@@ -162,8 +162,8 @@ export default function BookingManager() {
                             <p className="truncate text-sm">{person.note}</p>
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <span className="inline-flex rounded-md bg-green-100 px-4 py-2 font-semibold leading-5 text-green-800 text-sm">
-                              Active
+                            <span className="inline-flex rounded-md bg-yellow-100 px-4 py-2 font-semibold leading-5 text-yellow-800 text-sm">
+                              Pending
                             </span>
                           </td>
                           <td className="whitespace-nowrap space-y-4 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
