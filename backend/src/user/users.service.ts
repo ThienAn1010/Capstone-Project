@@ -86,6 +86,20 @@ export class UsersService {
         note: true,
         status: true,
         payAmount: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            address: true,
+            lat: true,
+            long: true,
+            picture: true,
+            phoneNumber: true,
+            createdAt: true,
+            role: true,
+          },
+        },
         offeredService: {
           include: {
             paperMaker: {
