@@ -40,12 +40,18 @@ export default function BookingHistory({ booking }: any) {
                 </div>
               </dl>
               <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4 mt-5">
-                <button
-                  type="button"
-                  className="cursor-pointer flex items-center justify-center bg-blue-200 py-2 px-2.5 border border-blue-200 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                <Link
+                  key={booking.id}
+                  href={`/booking/${booking.id}`}
                 >
-                  <span className="text-blue-700">View Booking</span>
-                </button>
+                  <button
+                    type="button"
+                    className="cursor-pointer flex items-center justify-center bg-blue-200 py-2 px-2.5 border border-blue-200 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    <p className="text-blue-700">View Booking</p>
+                  </button>
+                </Link>
+
                 <button
                   type="button"
                   className="cursor-pointer flex items-center justify-center bg-blue-700 py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -153,8 +159,8 @@ export default function BookingHistory({ booking }: any) {
                         href={`/service/${booking.offeredService.paperMaker.id}`}
                       >
                         <a className="text-blue-700 whitespace-nowrap hover:text-blue-900 hover:cursor-pointer">
-                        View papermaker
-                      </a>
+                          View papermaker
+                        </a>
                       </Link>
                     </div>
                   </div>

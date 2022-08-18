@@ -8,11 +8,11 @@ interface IGetUserBookings {
   status: string
 }
 
-const useGetUserBooking = () => {
+const useGetUserBookings = () => {
   const { data, error, mutate } = useSWR("/users/me/bookings", (url) =>
     axiosInstance.get<IGetUserBookings>(url).then((result) => result.data)
   )
   return { data, error, isLoading: !data && !error, mutate }
 }
 
-export default useGetUserBooking
+export default useGetUserBookings

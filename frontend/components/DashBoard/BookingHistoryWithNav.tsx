@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { Tab } from "@headlessui/react"
-import useGetUserBooking from "../../hooks/useGetUserBookings"
+import useGetUserBookings from "../../hooks/useGetUserBookings"
 import BookingHistory from "../../components/DashBoard/BookingHistory"
 import LoadingSpinner from "../LoadingSkeleton/LoadingSpinner"
 
@@ -33,7 +33,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function BookingHistoryWithNav() {
-  const { data, isLoading } = useGetUserBooking()
+  const { data, isLoading } = useGetUserBookings()
   console.log(data)
   return (
     <div className="divide-y divide-gray-200 lg:col-span-9">
