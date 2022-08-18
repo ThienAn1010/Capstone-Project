@@ -12,65 +12,13 @@ import useGetPaperMakerBooking from "../../hooks/useGetPaperMakerBooking"
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "0903321813",
-    email: "lindsay.walton@1example.com",
-    role: "135/1/3 Nguyen Huu Canh, District 1, Ho Chi Minh City",
-    note: "Hello, everyone. My name's Brandon, and I've been working at Sunny Incorporated for five years now. I work in the tech department and stare at a computer screen all day, which is maybe why we've never met. It's a pleasure to get to know everyone here and, if you ever have problems with your computer, you now know who to call. I'm always available for a chat by the coffee machine, and I hope we can all work together and continue to be of value to the company!",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "0903321813",
-    email: "lindsay.walton@2example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "0903321813",
-    email: "lindsay.walton@3example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "0903321813",
-    email: "lindsay.walton@4example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "0903321813",
-    email: "lindsay.walton@5example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "0903321813",
-    email: "lindsay.walton@6example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-]
 
 export default function BookingManager() {
   const { data } = useGetPaperMakerBooking()
   const [openAccept, setOpenAccept] = useState(false)
   const [openDecline, setOpenDecline] = useState(false)
   const cancelButtonRef = useRef(null)
-  const userData = data?.bookings[0]?.user
-  console.log(userData)
+  console.log(data)
   return (
     <>
       <div className="py-4 lg:col-span-9">
@@ -130,38 +78,40 @@ export default function BookingManager() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {people.map((person) => (
-                        <tr key={person.email}>
+                      {data.bookings.map((booking: any) => (
+                        <tr key={booking.user.id}>
                           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                             <div className="flex items-center">
                               <div className="h-10 w-10 flex-shrink-0">
                                 <img
                                   className="h-10 w-10 rounded-full"
-                                  src={person.image}
+                                  src={booking.user.picture}
                                   alt="idk"
                                 />
                               </div>
                               <div className="ml-4">
                                 <div className="font-medium text-gray-900">
-                                  {person.name}
+                                  {booking.user.name}
                                 </div>
                                 <div className="text-gray-500">
-                                  {person.email}
+                                  {booking.user.username}
                                 </div>
                               </div>
                             </div>
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            <div className="text-gray-900">{person.title}</div>
+                            <div className="text-gray-900">
+                              {booking.user.phoneNumber}
+                            </div>
                           </td>
                           <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
                             <p className="text-sm h-full w-full line-clamp-3">
-                              {person.role}
+                              {booking.user.address}
                             </p>
                           </td>
                           <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
                             <p className="text-sm line-clamp-3">
-                              {person.note}
+                              {booking.note}
                             </p>
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
