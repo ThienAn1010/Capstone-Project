@@ -1,4 +1,3 @@
-import useGetMe from "../../hooks/useGetMe"
 import { Fragment, useRef, useState } from "react"
 import { Menu, Dialog, Transition } from "@headlessui/react"
 import { CheckIcon } from "@heroicons/react/outline"
@@ -8,6 +7,7 @@ import {
   DocumentTextIcon,
   ChevronDownIcon,
 } from "@heroicons/react/solid"
+import useGetPaperMakerBooking from "../../hooks/useGetPaperMakerBooking"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -65,12 +65,12 @@ const people = [
 ]
 
 export default function BookingManager() {
-  const { data } = useGetMe()
+  const { data } = useGetPaperMakerBooking()
   const [openAccept, setOpenAccept] = useState(false)
   const [openDecline, setOpenDecline] = useState(false)
-
   const cancelButtonRef = useRef(null)
-  console.log(data)
+  const userData = data?.bookings[0]?.user
+  console.log(userData)
   return (
     <>
       <div className="py-4 lg:col-span-9">
@@ -88,7 +88,7 @@ export default function BookingManager() {
             <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div className="overflow-y-visible shadow ring-1 mb-28 ring-black ring-opacity-5 md:rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-300">
+                  <table className="min-w-full divide-y divide-gray-300 table-fixed">
                     <thead className="bg-gray-50">
                       <tr>
                         <th
@@ -154,12 +154,15 @@ export default function BookingManager() {
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             <div className="text-gray-900">{person.title}</div>
                           </td>
-
-                          <td className="whitespace-pre-line max-w-[200px] px-2 py-4 text-sm text-gray-500">
-                            {person.role}
+                          <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
+                            <p className="text-sm h-full w-full line-clamp-3">
+                              {person.role}
+                            </p>
                           </td>
-                          <td className="whitespace-pre-line max-w-[200px] truncate px-2 py-4 text-sm text-gray-500">
-                            <p className="truncate text-sm">{person.note}</p>
+                          <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
+                            <p className="text-sm line-clamp-3">
+                              {person.note}
+                            </p>
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             <span className="inline-flex rounded-md bg-yellow-100 px-4 py-2 font-semibold leading-5 text-yellow-800 text-sm">
