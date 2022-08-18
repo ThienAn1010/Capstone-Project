@@ -28,7 +28,6 @@ export default function CreateServiceForm({ serviceData }: any) {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true)
-    console.log(hasService)
     const createOrUpdateService = (async () => {
       if (hasService) {
         console.log("patch")
