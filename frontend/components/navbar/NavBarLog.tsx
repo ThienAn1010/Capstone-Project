@@ -56,11 +56,11 @@ export default function NavBarLog({ data }: any) {
                 </div>
 
                 <Link href="/service">
-                  <div className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
+                  <a className="hidden lg:flex lg:items-center lg:justify-center xl:col-span-1">
                     <p className="text-md subpixel-antialiased text-white font-medium cursor-pointer transition duration-150 border-b border-transparent hover:border-white">
                       SERVICES
                     </p>
-                  </div>
+                  </a>
                 </Link>
                 <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                   <SearchBar />
