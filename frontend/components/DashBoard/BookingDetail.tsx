@@ -60,99 +60,94 @@ export default function BookingDetail({ booking }: any) {
         {/* Products */}
         <div className="mt-6">
           <h2 className="sr-only">Products purchased</h2>
-
           <div className="space-y-8">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-lg"
-              >
-                <div className="py-6 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8">
-                  <div className="sm:flex lg:col-span-12">
-                    <div className="flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40">
-                      <img
-                        src={booking.offeredService.paperMaker.user.picture}
-                        alt="Papermaker Image"
-                        className="w-full h-full object-center object-cover sm:w-full sm:h-full"
-                      />
-                    </div>
-                    <div className="mt-6 sm:mt-0 sm:ml-6">
-                      <h3 className="text-base font-medium text-gray-900">
-                        {booking.offeredService.paperMaker.user.name}
-                      </h3>
-                      <p className="mt-2 text-sm font-medium text-gray-900">
-                        ${booking.payAmount}
-                      </p>
-                      <p className="mt-3 text-sm text-gray-600">
-                        Service:{" "}
-                        <span className="inline-block font-medium text-gray-900">
-                          {booking.offeredService.service.name}{" "}
-                        </span>
-                      </p>
-                      <p className="mt-3 text-sm text-gray-500">
-                        {booking.offeredService.description}
-                      </p>
-                      <p className="mt-3 text-sm text-gray-600">
-                        Duration:{" "}
-                        <span className="inline-block font-medium text-gray-900">
-                          {booking.offeredService.duration}{" "}
-                        </span>{" "}
-                        days
-                      </p>
-                    </div>
+            <div className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-lg">
+              <div className="py-6 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8">
+                <div className="sm:flex lg:col-span-12">
+                  <div className="flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40">
+                    <img
+                      src={booking.offeredService.paperMaker.user.picture}
+                      alt="Papermaker Image"
+                      className="w-full h-full object-center object-cover sm:w-full sm:h-full"
+                    />
+                  </div>
+                  <div className="mt-6 sm:mt-0 sm:ml-6">
+                    <h3 className="text-base font-medium text-gray-900">
+                      {booking.offeredService.paperMaker.user.name}
+                    </h3>
+                    <p className="mt-2 text-sm font-medium text-gray-900">
+                      ${booking.payAmount}
+                    </p>
+                    <p className="mt-3 text-sm text-gray-600">
+                      Service:{" "}
+                      <span className="inline-block font-medium text-gray-900">
+                        {booking.offeredService.service.name}{" "}
+                      </span>
+                    </p>
+                    <p className="mt-3 text-sm text-gray-500">
+                      {booking.offeredService.description}
+                    </p>
+                    <p className="mt-3 text-sm text-gray-600">
+                      Duration:{" "}
+                      <span className="inline-block font-medium text-gray-900">
+                        {booking.offeredService.duration}{" "}
+                      </span>{" "}
+                      days
+                    </p>
                   </div>
                 </div>
+              </div>
 
-                <div className="border-t border-gray-200 py-6 px-4 sm:px-6 lg:p-8">
-                  <h4 className="sr-only">Status</h4>
-                  <p className="text-sm font-medium text-gray-900">
-                    Expected completion on{" "}
-                    <time className="font-medium text-gray-900">
-                      {dayjs(booking.createdAt)
-                        .add(booking.offeredService.duration, "day")
-                        .format("MMMM D, YYYY")}
-                    </time>
-                  </p>
-                  <div className="mt-6" aria-hidden="true">
-                    <div className="bg-gray-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-2 bg-indigo-600 rounded-full"
-                        style={{
-                          width: `calc((${product.step} * 2 + 1) / 8 * 100%)`,
-                        }}
-                      />
+              <div className="border-t border-gray-200 py-6 px-4 sm:px-6 lg:p-8">
+                <h4 className="sr-only">Status</h4>
+                <p className="text-sm font-medium text-gray-900">
+                  Expected completion on{" "}
+                  <time className="font-medium text-gray-900">
+                    {dayjs(booking.createdAt)
+                      .add(booking.offeredService.duration, "day")
+                      .format("MMMM D, YYYY")}
+                  </time>
+                </p>
+                <div className="mt-6" aria-hidden="true">
+                  <div className="bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className="h-2 bg-indigo-600 rounded-full"
+                      style={{
+                        width: `calc((${products[0].step} * 2 + 1) / 8 * 100%)`,
+                      }}
+                    />
+                  </div>
+                  <div className="hidden sm:grid grid-cols-4 text-sm font-medium text-gray-600 mt-6">
+                    <div className="text-indigo-600">Booking placed</div>
+                    <div
+                      className={classNames(
+                        products[0].step > 0 ? "text-indigo-600" : "",
+                        "text-center"
+                      )}
+                    >
+                      Accepted
                     </div>
-                    <div className="hidden sm:grid grid-cols-4 text-sm font-medium text-gray-600 mt-6">
-                      <div className="text-indigo-600">Booking placed</div>
-                      <div
-                        className={classNames(
-                          product.step > 0 ? "text-indigo-600" : "",
-                          "text-center"
-                        )}
-                      >
-                        Accepted
-                      </div>
-                      <div
-                        className={classNames(
-                          product.step > 1 ? "text-indigo-600" : "",
-                          "text-center"
-                        )}
-                      >
-                        Processing
-                      </div>
-                      <div
-                        className={classNames(
-                          product.step > 2 ? "text-indigo-600" : "",
-                          "text-right"
-                        )}
-                      >
-                        Success
-                      </div>
+                    <div
+                      className={classNames(
+                        products[0].step > 1 ? "text-indigo-600" : "",
+                        "text-center"
+                      )}
+                    >
+                      Processing
+                    </div>
+                    <div
+                      className={classNames(
+                        products[0].step > 2 ? "text-indigo-600" : "",
+                        "text-right"
+                      )}
+                    >
+                      Success
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+            ))
           </div>
         </div>
 
