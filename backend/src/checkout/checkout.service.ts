@@ -60,7 +60,9 @@ export class CheckoutService {
             },
           ],
           mode: 'payment',
-          success_url: `${this.configService.get('CLIENT_URL')}/?success=true`,
+          success_url: `${this.configService.get(
+            'CLIENT_URL',
+          )}/checkout/success`,
           cancel_url: `${this.configService.get('CLIENT_URL')}/?canceled=true`,
         });
       return { status: 'success', session: session.url };
