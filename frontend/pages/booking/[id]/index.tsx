@@ -1,14 +1,13 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import useGetUserBookings from "../../../hooks/useGetUserBookings"
 import BookingDetail from "../../../components/DashBoard/BookingDetail"
 import LoadingSpinner from "../../../components/LoadingSkeleton/LoadingSpinner"
+import useGetMyBooking from "../../../hooks/useGetMyBooking"
 
 const Detail: NextPage = () => {
   const router = useRouter()
-  const { data, isLoading } = useGetUserBookings()
-  const id = router.query.id
-  console.log(data)
+  const { data, isLoading } = useGetMyBooking(router.query.id as string)
+
   return (
     <>
       {isLoading ? (
@@ -16,11 +15,7 @@ const Detail: NextPage = () => {
           <LoadingSpinner />
         </div>
       ) : (
-        <>
-          {data?.bookings.map((booking) =>
-            booking.id == id ? <BookingDetail booking={booking} /> : null
-          )}
-        </>
+        <>{data && <BookingDetail booking={data?.booking} />}</>
       )}
     </>
   )
