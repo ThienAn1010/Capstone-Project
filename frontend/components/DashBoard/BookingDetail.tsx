@@ -82,9 +82,26 @@ export default function BookingDetail({ booking }: any) {
                       <p className="text-gray-500 pr-2">{booking.id}</p>
                     </div>
                     <div>
-                      <p className="ml-2 px-2 rounded-md bg-yellow-200 font-semibold leading-5 text-yellow-800">
-                        Pending
-                      </p>
+                      {booking.status === "pendingConfirm" && (
+                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-yellow-100 text-yellow-800 text-sm">
+                          Pending
+                        </span>
+                      )}
+                      {booking.status === "accept" && (
+                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-green-100 text-green-800 text-sm">
+                          In Progress
+                        </span>
+                      )}
+                      {booking.status === "deny" && (
+                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                          Declined
+                        </span>
+                      )}
+                      {booking.status === "drop" && (
+                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                          Cancelled
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
