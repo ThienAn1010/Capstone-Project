@@ -8,6 +8,7 @@ import {
 import useGetMe from "../../hooks/useGetMe"
 import { useRouter } from "next/router"
 import ProfileForm from "../../components/DashBoard/ProfileForm"
+import BookingHistoryWithNav from "../../components/DashBoard/BookingHistoryWithNav"
 import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
 import LoadingSpinner from "../../components/LoadingSkeleton/LoadingSpinner"
@@ -163,7 +164,7 @@ const Profile: NextPage = () => {
                         <ProfileForm />
                       ) : null}
                       {query.tab === "service" ? (
-                        <div>Hello service</div>
+                        <BookingHistoryWithNav />
                       ) : null}
                       {query.tab === "manager" && data.role === "paperMaker" ? (
                         <BookingManager />
