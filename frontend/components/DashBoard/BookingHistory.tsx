@@ -155,8 +155,8 @@ export default function BookingHistory({ booking }: any) {
                   <div className="mt-6 border-t border-gray-200 pt-4 flex items-center space-x-4 divide-x divide-gray-200 text-sm font-medium sm:mt-0 sm:ml-4 sm:border-none sm:pt-0">
                     <div className="flex-1 flex justify-center">
                       <Link
-                        key={booking.offeredService.paperMaker.id}
-                        href={`/service/${booking.offeredService.paperMaker.id}`}
+                        key={booking.offeredService.id}
+                        href={`/service/${booking.offeredService.id}`}
                       >
                         <a className="text-blue-700 whitespace-nowrap hover:text-blue-900 hover:cursor-pointer">
                           View papermaker
