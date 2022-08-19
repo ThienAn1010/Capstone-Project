@@ -67,7 +67,9 @@ export default function BookingHistoryWithNav() {
               <Tab.Panel key={status.name} className="px-4 py-6 space-y-12">
                 {status.key == 1 ? (
                   data?.bookings.length == 0 ? (
-                    <div className="text-center text-gray-500"><p>No booking placed</p></div>
+                    <div className="text-center text-gray-500">
+                      <p>No booking placed</p>
+                    </div>
                   ) : (
                     data?.bookings.map((booking) => (
                       <BookingHistory booking={booking} key={booking.id} />
@@ -80,7 +82,9 @@ export default function BookingHistoryWithNav() {
                       booking.status === "pendingConfirm" ||
                       booking.status == "pendingFinished"
                   ).length == 0 ? (
-                    <div className="text-center text-gray-500"><p>No booking placed</p></div>
+                    <div className="text-center text-gray-500">
+                      <p>No booking placed</p>
+                    </div>
                   ) : (
                     data?.bookings.map((booking) =>
                       booking.status == "pendingConfirm" ||
@@ -94,7 +98,9 @@ export default function BookingHistoryWithNav() {
                   data?.bookings.filter(
                     (booking) => booking.status === "accept"
                   ).length == 0 ? (
-                    <div className="text-center text-gray-500"><p>No booking placed</p></div>
+                    <div className="text-center text-gray-500">
+                      <p>No booking placed</p>
+                    </div>
                   ) : (
                     data?.bookings.map((booking) =>
                       booking.status == "accept" ? (
@@ -107,7 +113,9 @@ export default function BookingHistoryWithNav() {
                   data?.bookings.filter(
                     (booking) => booking.status === "success"
                   ).length == 0 ? (
-                    <div className="text-center text-gray-500"><p>No booking placed</p></div>
+                    <div className="text-center text-gray-500">
+                      <p>No booking placed</p>
+                    </div>
                   ) : (
                     data?.bookings.map((booking) =>
                       booking.status == "success" ? (
@@ -118,9 +126,12 @@ export default function BookingHistoryWithNav() {
                 ) : null}
                 {status.key == 5 ? (
                   data?.bookings.filter(
-                    (booking) => booking.status == "deny" || booking.status == "drop"
+                    (booking) =>
+                      booking.status == "deny" || booking.status == "drop"
                   ).length == 0 ? (
-                    <div className="text-center text-gray-500"><p>No booking placed</p></div>
+                    <div className="text-center text-gray-500">
+                      <p>No booking placed</p>
+                    </div>
                   ) : (
                     data?.bookings.map((booking) =>
                       booking.status == "deny" || booking.status == "drop" ? (

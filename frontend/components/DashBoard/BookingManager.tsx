@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/solid"
 import useGetPaperMakerBooking from "../../hooks/useGetPaperMakerBooking"
 import LoadingSpinner from "../LoadingSkeleton/LoadingSpinner"
+import Link from "next/link"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -195,21 +196,25 @@ export default function BookingManager() {
                                       </Menu.Item>
                                       <Menu.Item>
                                         {({ active }) => (
-                                          <a
-                                            href="#"
-                                            className={classNames(
-                                              active
-                                                ? "bg-cyan-100 text-gray-900"
-                                                : "text-gray-700",
-                                              "group flex items-center px-4 py-2 text-sm"
-                                            )}
+                                          <Link
+                                            key={booking.id}
+                                            href={`/booking/${booking.id}`}
                                           >
-                                            <DocumentTextIcon
-                                              className="mr-3 h-5 w-5 text-cyan-400 "
-                                              aria-hidden="true"
-                                            />
-                                            View details
-                                          </a>
+                                            <p
+                                              className={classNames(
+                                                active
+                                                  ? "bg-cyan-100 text-gray-900"
+                                                  : "text-gray-700",
+                                                "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                              )}
+                                            >
+                                              <DocumentTextIcon
+                                                className="mr-3 h-5 w-5 text-cyan-400 "
+                                                aria-hidden="true"
+                                              />
+                                              View details
+                                            </p>
+                                          </Link>
                                         )}
                                       </Menu.Item>
                                     </div>

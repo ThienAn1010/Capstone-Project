@@ -19,86 +19,43 @@ const products = [
       "https://tailwindui.com/img/ecommerce-images/confirmation-page-03-product-01.jpg",
     imageAlt: "Insulated bottle with white base and black snap lid.",
   },
-  // More products...
 ]
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
+
 export default function BookingDetail({ booking }: any) {
   return (
-    <div className="bg-gray-50">
-      <div className="max-w-2xl mx-auto pt-16 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="mb-5">
-          <a
-            href="#"
-            className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:block"
-          >
-            <span aria-hidden="true">&larr;</span>Back
-          </a>
-        </div>
-        <div className="px-4 space-y-2 sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0">
-          <div className="flex sm:items-baseline sm:space-x-4">
-            <dd className="text-xl font-normal text-gray-500 sm:text-xl">
-              Order ID
-            </dd>
-            <dd className="text-gray-500 font-normal">{booking.id}</dd>
-          </div>
-          <p className="text-sm text-gray-600">
-            Booking placed{" "}
-            <time className="font-medium text-gray-900">
-              {dayjs(booking.createdAt).format("MMMM D, YYYY")}
-            </time>
-          </p>
-          <a
-            href="#"
-            className="text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:hidden"
-          >
-            View invoice<span aria-hidden="true"> &rarr;</span>
-          </a>
-        </div>
-
+    <div className="bg-checkout">
+      <div className="max-w-2xl mx-auto pt-16 sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8">
         {/* Products */}
         <div className="mt-6">
           <h2 className="sr-only">Products purchased</h2>
           <div className="space-y-8">
             <div className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-lg">
-              <div className="py-6 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8">
-                <div className="sm:flex lg:col-span-12">
-                  <div className="flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40">
-                    <img
-                      src={booking.offeredService.paperMaker.user.picture}
-                      alt="Papermaker Image"
-                      className="w-full h-full object-center object-cover sm:w-full sm:h-full"
-                    />
+              <div className="py-2 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+                <div className="pb-2 justify-between border-b sm:flex lg:col-span-12">
+                  <div>
+                    <div className="flex items-center text-gray-500 hover:cursor-pointer">
+                      &larr;
+                      <p className="text-gray-500">Back</p>
+                    </div>
                   </div>
-                  <div className="mt-6 sm:mt-0 sm:ml-6">
-                    <h3 className="text-base font-medium text-gray-900">
-                      {booking.offeredService.paperMaker.user.name}
-                    </h3>
-                    <p className="mt-2 text-sm font-medium text-gray-900">
-                      ${booking.payAmount}
-                    </p>
-                    <p className="mt-3 text-sm text-gray-600">
-                      Service:{" "}
-                      <span className="inline-block font-medium text-gray-900">
-                        {booking.offeredService.service.name}{" "}
-                      </span>
-                    </p>
-                    <p className="mt-3 text-sm text-gray-500">
-                      {booking.offeredService.description}
-                    </p>
-                    <p className="mt-3 text-sm text-gray-600">
-                      Duration:{" "}
-                      <span className="inline-block font-medium text-gray-900">
-                        {booking.offeredService.duration}{" "}
-                      </span>{" "}
-                      days
-                    </p>
+                  <div className="flex items-baseline divide-x divide-gray-400">
+                    <div className="flex items-baseline">
+                      <p className="text-gray-500 uppercase">Order ID&nbsp;</p>
+                      <p className="text-gray-500 pr-2">{booking.id}</p>
+                    </div>
+                    <div>
+                      <p className="ml-2 px-2 rounded-md bg-yellow-200 font-semibold leading-5 text-yellow-800">
+                        Pending
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div className="border-t border-gray-200 py-6 px-4 sm:px-6 lg:p-8">
+              <div className="py-2 px-4 sm:px-6 lg:px-8">
                 <h4 className="sr-only">Status</h4>
                 <p className="text-sm font-medium text-gray-900">
                   Expected completion on{" "}
@@ -146,8 +103,52 @@ export default function BookingDetail({ booking }: any) {
                   </div>
                 </div>
               </div>
+              <div className="mt-2 py-2 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+                <div className="bg-blue-300 sm:flex lg:col-span-6">
+                  <div className="flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40">
+                    <img
+                      src={booking.offeredService.paperMaker.user.picture}
+                      alt="Papermaker Image"
+                      className="w-full h-full object-center object-cover sm:w-full sm:h-full"
+                    />
+                  </div>
+                  <div className="mt-6 sm:mt-0 sm:ml-6">
+                    <h3 className="text-base font-medium text-gray-900">
+                      {booking.offeredService.paperMaker.user.name}
+                    </h3>
+                    <p className="mt-2 text-sm font-medium text-gray-900">
+                      ${booking.payAmount}
+                    </p>
+                    <p className="mt-3 text-sm text-gray-600">
+                      Booking placed{" "}
+                      <time className="font-medium text-gray-900">
+                        {dayjs(booking.createdAt).format("MMMM D, YYYY")}
+                      </time>
+                    </p>
+                    <p className="mt-3 text-sm text-gray-600">
+                      Service:{" "}
+                      <span className="inline-block font-medium text-gray-900">
+                        {booking.offeredService.service.name}{" "}
+                      </span>
+                    </p>
+                    <p className="mt-3 text-sm text-gray-600">
+                      Duration:{" "}
+                      <span className="inline-block font-medium text-gray-900">
+                        {booking.offeredService.duration}{" "}
+                      </span>{" "}
+                      days
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-yellow-300 sm:flex lg:col-span-3">
+                  <h3 className="text-base font-medium text-gray-900">
+                    Papermaker address
+                  </h3>
+                  <p className="mt-2 text-sm font-medium text-gray-900"></p>
+                </div>
+                <div className="bg-red-300 sm:flex lg:col-span-3"></div>
+              </div>
             </div>
-            ))
           </div>
         </div>
 
