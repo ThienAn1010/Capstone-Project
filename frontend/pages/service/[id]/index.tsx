@@ -111,7 +111,7 @@ const Detail: NextPage = () => {
                 </h2>
                 <p className="text-justify mt-2">{data?.estimate}</p>
               </div>
-              <div className="pb-8">
+              <div className="pb-8 px-10">
                 <h2 className="text-2xl font-bold text-gray-900 ">
                   Location
                 </h2>
