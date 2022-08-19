@@ -40,11 +40,6 @@ const ppmkerSubNavigation = [
     href: "manager",
     icon: ClipboardListIcon,
   },
-  {
-    name: "Booked Services",
-    href: "service",
-    icon: ClipboardCheckIcon,
-  },
 ]
 
 function classNames(...classes: string[]) {
@@ -164,7 +159,7 @@ const Profile: NextPage = () => {
                       {query.tab === "profile" || query.tab === undefined ? (
                         <ProfileForm />
                       ) : null}
-                      {query.tab === "service" ? (
+                      {query.tab === "service" && data.role === "user" ? (
                         <BookingHistoryWithNav />
                       ) : null}
                       {query.tab === "manager" && data.role === "paperMaker" ? (

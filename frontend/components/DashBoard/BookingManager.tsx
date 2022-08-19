@@ -9,7 +9,9 @@ import {
 } from "@heroicons/react/solid"
 import useGetPaperMakerBooking from "../../hooks/useGetPaperMakerBooking"
 import LoadingSpinner from "../LoadingSkeleton/LoadingSpinner"
-import Link from "next/link"
+import axiosInstance from "../../util/axiosInstace"
+import toast from "react-hot-toast"
+import { useRouter } from "next/router"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -19,7 +21,43 @@ export default function BookingManager() {
   const { data, isLoading } = useGetPaperMakerBooking()
   const [openAccept, setOpenAccept] = useState(false)
   const [openDecline, setOpenDecline] = useState(false)
+  const [bookingId, setBookingId] = useState("")
+  const [isAccept, setIsAccept] = useState(false)
   const cancelButtonRef = useRef(null)
+  const router = useRouter()
+  console.log(data)
+
+  const acceptOrder = () => {
+    const acceptOrDenyService = (async () => {
+      if (isAccept) {
+        const response = await axiosInstance.patch(`/bookings/${bookingId}`, {
+          status: "accept",
+        })
+        return response
+      } else {
+        const response = await axiosInstance.patch(`/bookings/${bookingId}`, {
+          status: "deny",
+        })
+        return response
+      }
+    })()
+    toast.promise(
+      acceptOrDenyService,
+      {
+        loading: "Processing...",
+        error: () => {
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          router.reload()
+          return "Successfully register account"
+        },
+      },
+      {
+        position: "bottom-center",
+      }
+    )
+  }
   console.log(data)
   return (
     <>
@@ -86,7 +124,7 @@ export default function BookingManager() {
                       </thead>
                       <tbody className="divide-y divide-gray-200 bg-white">
                         {data.bookings.map((booking: any) => (
-                          <tr key={booking.user.id}>
+                          <tr key={booking.id}>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                               <div className="flex items-center">
                                 <div className="h-10 w-10 flex-shrink-0">
@@ -157,6 +195,8 @@ export default function BookingManager() {
                                           <p
                                             onClick={() => {
                                               setOpenAccept(true)
+                                              setBookingId(booking.id)
+                                              setIsAccept(true)
                                             }}
                                             className={classNames(
                                               active
@@ -178,6 +218,8 @@ export default function BookingManager() {
                                           <p
                                             onClick={() => {
                                               setOpenDecline(true)
+                                              setBookingId(booking.id)
+                                              setIsAccept(false)
                                             }}
                                             className={classNames(
                                               active
@@ -196,25 +238,25 @@ export default function BookingManager() {
                                       </Menu.Item>
                                       <Menu.Item>
                                         {({ active }) => (
-                                          <Link
-                                            key={booking.id}
-                                            href={`/booking/${booking.id}`}
+                                          <p
+                                            className={classNames(
+                                              active
+                                                ? "bg-cyan-100 text-gray-900"
+                                                : "text-gray-700",
+                                              "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                            )}
+                                            onClick={() =>
+                                              router.push(
+                                                `/booking/${booking.id}`
+                                              )
+                                            }
                                           >
-                                            <p
-                                              className={classNames(
-                                                active
-                                                  ? "bg-cyan-100 text-gray-900"
-                                                  : "text-gray-700",
-                                                "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                              )}
-                                            >
-                                              <DocumentTextIcon
-                                                className="mr-3 h-5 w-5 text-cyan-400 "
-                                                aria-hidden="true"
-                                              />
-                                              View details
-                                            </p>
-                                          </Link>
+                                            <DocumentTextIcon
+                                              className="mr-3 h-5 w-5 text-cyan-400 "
+                                              aria-hidden="true"
+                                            />
+                                            View details
+                                          </p>
                                         )}
                                       </Menu.Item>
                                     </div>
@@ -305,7 +347,10 @@ export default function BookingManager() {
                   <button
                     type="button"
                     className="w-full inline-flex justify-center rounded-md border  shadow-sm px-4 py-2 bg-green-600 text-base font-semibold text-white hover:bg-green-700 focus:outline-none sm:col-start-1 sm:text-sm"
-                    onClick={() => setOpenAccept(false)}
+                    onClick={() => {
+                      setOpenAccept(false)
+                      acceptOrder()
+                    }}
                   >
                     Accept
                   </button>
