@@ -11,13 +11,17 @@
     "pre-commit": "npm run lint -- --fix && git add -A ."
   },
   "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@headlessui/react": "^1.6.5",
     "@heroicons/react": "^1.0.6",
+    "@react-google-maps/api": "^2.12.1",
     "axios": "^0.27.2",
+    "google-map-react": "^2.2.0",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.1.0",
     "react-google-autocomplete": "^2.7.0",
+    "react-google-maps-loader": "^4.3.0",
     "react-hook-form": "^7.34.0",
     "react-hot-toast": "^2.3.0",
     "react-multi-carousel": "^2.8.0",

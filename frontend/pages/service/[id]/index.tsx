@@ -11,6 +11,7 @@ import {
   ChartSquareBarIcon,
 } from "@heroicons/react/outline"
 import DetailLoader from "../../../components/LoadingSkeleton/detailLoader"
+import Map from "../../../components/Map/Map"
 
 const Detail: NextPage = () => {
   const router = useRouter()
@@ -113,6 +114,12 @@ const Detail: NextPage = () => {
                 <p className="text-justify mt-2 leading-relaxed">
                   {data?.description}
                 </p>
+              </div>
+              <div className="pb-8">
+                <h2 className="text-2xl font-bold text-gray-900 ">
+                  Location
+                </h2>
+                <Map />
               </div>
               <div className="pt-10 border-t-2">
                 <Feedback />
