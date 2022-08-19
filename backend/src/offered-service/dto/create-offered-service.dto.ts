@@ -13,5 +13,11 @@ export class CreateOfferedServiceDto {
   @IsString()
   @IsNotEmpty()
   description: string;
+  @IsString()
+  @IsNotEmpty()
+  documents: string;
+  @IsString()
+  @IsNotEmpty()
+  estimate: string;
   userId: string;
 }
