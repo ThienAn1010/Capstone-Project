@@ -34,10 +34,7 @@ function classNames(...classes: string[]) {
 
 export default function BookingHistoryWithNav() {
   const { data, isLoading } = useGetUserBookings()
-  console.log(
-    data?.bookings.filter((booking) => booking.status === "pendingConfirm")
-      .length
-  )
+
   return (
     <div className="divide-y divide-gray-200 lg:col-span-9">
       {isLoading ? (

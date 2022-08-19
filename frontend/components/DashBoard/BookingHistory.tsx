@@ -27,7 +27,7 @@ export default function BookingHistory({ booking }: any) {
                 <div className="hidden sm:block">
                   <dt className="font-medium text-gray-900">Date booked</dt>
                   <dd className="mt-1 text-gray-500 font-normal">
-                    {dayjs(booking.offeredService.createdAt).format(
+                    {dayjs(booking.createdAt).format(
                       "DD/MM/YYYY"
                     )}
                   </dd>
