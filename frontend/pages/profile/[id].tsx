@@ -84,7 +84,9 @@ const Profile: NextPage = () => {
                                     : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                                   "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
                                 )}
-                                aria-current={item.current ? "page" : undefined}
+                                aria-current={
+                                  tab === item.href ? "page" : undefined
+                                }
                                 onClick={async () => {
                                   delete query.page
                                   await router.replace(
@@ -125,7 +127,9 @@ const Profile: NextPage = () => {
                                     : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                                   "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
                                 )}
-                                aria-current={item.current ? "page" : undefined}
+                                aria-current={
+                                  tab === item.href ? "page" : undefined
+                                }
                                 onClick={async () => {
                                   delete query.page
                                   await router.replace(
