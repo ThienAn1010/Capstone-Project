@@ -292,13 +292,14 @@ const PapermakerRegisterForm = () => {
                       {!selectedImage && (
                         <img
                           src="https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8="
-                          alt="shit"
+                          alt="default"
                         />
                       )}
                     </div>
                     <input
                       type="file"
                       name="myImage"
+                      accept=".jpg,.png,.jpeg"
                       className="ml-5 w-full bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       onChange={(event: any) => {
                         console.log(event.target.files[0])

@@ -7,6 +7,7 @@ import { OfferedService } from "../../types/OfferedService"
 import { User } from "../../types/User"
 import axiosInstance from "../../util/axiosInstace"
 import Autocomplete from "react-google-autocomplete"
+import useGetMe from "../../hooks/useGetMe"
 interface CheckoutFormProps {
   userData: User
   serviceData: OfferedService
@@ -22,6 +23,7 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
     formState: { errors },
   } = useForm()
   const [isLoading, setIsLoading] = useState(false)
+  const { data } = useGetMe()
 
   const onSubmit = async (data: any) => {
     setIsLoading(true)
@@ -32,13 +34,18 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
         amount: serviceData?.price,
         id: serviceData?.id,
         phone: data.phone,
-        address: data.address.formatted_address,
-        lat: data.address.geometry.location.lat,
-        lng: data.address.geometry.location.lng,
         ...(data.note && { note: data.note }),
       }
-      setIsLoading(false)
+      if (typeof data.address === "string") {
+        body.address = data.address
+      }
+      if (typeof data.address === "object") {
+        body.address = data.address.formatted_address
+        body.lat = data.address.geometry.location.lat
+        body.lng = data.address.geometry.location.lng
+      }
       const response = await axiosInstance.post("/checkout", body)
+      setIsLoading(false)
       router.push(response.data.session)
     } catch (error) {
       setIsLoading(false)
@@ -104,13 +111,22 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
                 <Controller
                   control={control}
                   name="phone"
-                  rules={{ required: true }}
+                  defaultValue={data?.phoneNumber}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Phone number is required",
+                    },
+                    minLength: {
+                      value: 9 + 2,
+                      message: "Phone number must have at least 9 numbers",
+                    },
+                  }}
                   render={({ field: { ref, ...field } }) => (
                     <ReactPhoneInput
                       {...field}
                       inputProps={{
                         ref,
-                        required: true,
                       }}
                       country={"vn"}
                       onlyCountries={["vn"]}
@@ -122,7 +138,9 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
                   )}
                 />
                 {errors.phone && (
-                  <p className="mt-1 text-red-500">Phone number is required</p>
+                  <p className="mt-1 text-red-500">
+                    {errors.phone.message as any}
+                  </p>
                 )}
               </div>
             </div>
@@ -137,8 +155,19 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
                 <Controller
                   name="address"
                   control={control}
+                  defaultValue={userData?.address}
                   rules={{
-                    required: true,
+                    required: {
+                      value: !userData?.address,
+                      message: "Address is required",
+                    },
+                    ...(!userData?.address && {
+                      validate: {
+                        value: (value) =>
+                          typeof value === "object" ||
+                          "Select an address in the dropdown list",
+                      },
+                    }),
                   }}
                   render={() => {
                     return (
@@ -146,6 +175,7 @@ const CheckOutForm: FC<CheckoutFormProps> = ({ userData, serviceData }) => {
                         aria-required
                         apiKey={process.env.NEXT_PUBLIC_GG_API_KEY}
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        defaultValue={userData?.address}
                         onPlaceSelected={(place) => {
                           try {
                             const updatedPlace = JSON.parse(

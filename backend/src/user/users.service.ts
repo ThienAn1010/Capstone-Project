@@ -73,16 +73,33 @@ export class UsersService {
     return user;
   }
 
-  async getAllMyBookings(userId: string) {
+  async getAllMyBookings(user: any) {
     const bookings = await this.prismaService.booking.findMany({
       where: {
-        userId,
+        ...(user.role === 'user' && { userId: user.id }),
+        ...(user.role === 'paperMaker' && {
+          offeredService: { paperMaker: { userId: user.id } },
+        }),
       },
       select: {
         id: true,
         note: true,
         status: true,
         payAmount: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            address: true,
+            lat: true,
+            long: true,
+            picture: true,
+            phoneNumber: true,
+            createdAt: true,
+            role: true,
+          },
+        },
         offeredService: {
           include: {
             paperMaker: {
@@ -132,6 +149,31 @@ export class UsersService {
   }
 
   async getMyOfferedServices(id: string) {
+    const myOfferedService = await this.prismaService.user.findFirst({
+      where: {
+        id,
+      },
+      select: {
+        paperMaker: {
+          include: {
+            offeredServices: {
+              include: {
+                service: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!myOfferedService)
+      return new NotFoundException({
+        status: 'fail',
+        message: 'This papermaker has not registered offered service',
+      });
+    return { status: 'success', data: myOfferedService };
+  }
+
+  async getMyBooked(id: string) {
     const myOfferedService = await this.prismaService.user.findFirst({
       where: {
         id,

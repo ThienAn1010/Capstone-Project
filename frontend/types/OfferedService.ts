@@ -23,4 +23,6 @@ export interface OfferedService {
   service: Service
   serviceId: string
   description: string
+  documents: string
+  estimate: string
 }
