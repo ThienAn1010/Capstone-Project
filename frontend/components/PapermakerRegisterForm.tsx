@@ -60,7 +60,7 @@ const PapermakerRegisterForm = () => {
         },
         success: () => {
           setIsLoading(false)
-          router.push("/register/success")
+          router.push("/")
           return "Successfully register account"
         },
       },
