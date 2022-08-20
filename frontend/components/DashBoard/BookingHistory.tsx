@@ -27,9 +27,7 @@ export default function BookingHistory({ booking }: any) {
                 <div className="hidden sm:block">
                   <dt className="font-medium text-gray-900">Date booked</dt>
                   <dd className="mt-1 text-gray-500 font-normal">
-                    {dayjs(booking.createdAt).format(
-                      "DD/MM/YYYY"
-                    )}
+                    {dayjs(booking.createdAt).format("DD/MM/YYYY")}
                   </dd>
                 </div>
                 <div className="ml-10">
@@ -40,10 +38,7 @@ export default function BookingHistory({ booking }: any) {
                 </div>
               </dl>
               <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4 mt-5">
-                <Link
-                  key={booking.id}
-                  href={`/booking/${booking.id}`}
-                >
+                <Link key={booking.id} href={`/booking/${booking.id}`}>
                   <button
                     type="button"
                     className="cursor-pointer flex items-center justify-center bg-blue-200 py-2 px-2.5 border border-blue-200 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

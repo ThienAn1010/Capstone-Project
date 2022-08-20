@@ -20,34 +20,25 @@ const ErrorComponent = React.lazy(
 )
 
 const userSubNavigation = [
-  { name: "Profile", href: "profile", icon: UserCircleIcon, current: true },
+  { name: "Profile", href: "profile", icon: UserCircleIcon },
   {
     name: "Booked Services",
     href: "service",
     icon: ClipboardCheckIcon,
-    current: false,
   },
 ]
 
 const ppmkerSubNavigation = [
-  { name: "Profile", href: "profile", icon: UserCircleIcon, current: false },
+  { name: "Profile", href: "profile", icon: UserCircleIcon },
   {
     name: "My Service",
     href: "myservice",
     icon: BellIcon,
-    current: true,
   },
   {
     name: "Booking Manager",
     href: "manager",
     icon: ClipboardListIcon,
-    current: false,
-  },
-  {
-    name: "Booked Services",
-    href: "service",
-    icon: ClipboardCheckIcon,
-    current: false,
   },
 ]
 
@@ -60,6 +51,7 @@ const Profile: NextPage = () => {
   const router = useRouter()
   const query = { ...router.query }
   const viewable = data && data.id === query.id
+  const tab = router.query.tab
   return (
     <>
       {isLoading ? (
@@ -82,12 +74,14 @@ const Profile: NextPage = () => {
                               <p
                                 key={item.name}
                                 className={classNames(
-                                  item.current
+                                  tab === item.href
                                     ? "bg-blue-50 border-blue-500 text-blue-700 hover:bg-blue-50 hover:text-blue-700"
                                     : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                                   "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
                                 )}
-                                aria-current={item.current ? "page" : undefined}
+                                aria-current={
+                                  tab === item.href ? "page" : undefined
+                                }
                                 onClick={async () => {
                                   delete query.page
                                   await router.replace(
@@ -106,7 +100,7 @@ const Profile: NextPage = () => {
                               >
                                 <item.icon
                                   className={classNames(
-                                    item.current
+                                    tab === item.href
                                       ? "text-blue-500 group-hover:text-blue-500"
                                       : "text-gray-400 group-hover:text-gray-500",
                                     "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -123,12 +117,14 @@ const Profile: NextPage = () => {
                               <p
                                 key={item.name}
                                 className={classNames(
-                                  item.current
+                                  tab === item.href
                                     ? "bg-blue-50 border-blue-500 text-blue-700 hover:bg-blue-50 hover:text-blue-700"
                                     : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                                   "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
                                 )}
-                                aria-current={item.current ? "page" : undefined}
+                                aria-current={
+                                  tab === item.href ? "page" : undefined
+                                }
                                 onClick={async () => {
                                   delete query.page
                                   await router.replace(
@@ -147,7 +143,7 @@ const Profile: NextPage = () => {
                               >
                                 <item.icon
                                   className={classNames(
-                                    item.current
+                                    tab === item.href
                                       ? "text-blue-500 group-hover:text-blue-500"
                                       : "text-gray-400 group-hover:text-gray-500",
                                     "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -163,7 +159,7 @@ const Profile: NextPage = () => {
                       {query.tab === "profile" || query.tab === undefined ? (
                         <ProfileForm />
                       ) : null}
-                      {query.tab === "service" ? (
+                      {query.tab === "service" && data.role === "user" ? (
                         <BookingHistoryWithNav />
                       ) : null}
                       {query.tab === "manager" && data.role === "paperMaker" ? (
