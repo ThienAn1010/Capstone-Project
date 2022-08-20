@@ -8,6 +8,6 @@ export class SendGridService {
     this.configService.get('SENDGRID_API_KEY'),
   );
   getSendGrid() {
-    return this.sendgrid;
+    return sgMail;
   }
 }

@@ -99,8 +99,7 @@ export default function PapermakerProfileForm() {
               </label>
               <div className="mt-1 rounded-md shadow-sm flex">
                 <span className="bg-slate-50 border border-r-0 capitalize border-slate-300 rounded-l-md px-3 inline-flex items-center text-slate-500 sm:text-sm">
-                  {/* {data?.role} */}
-                  User
+                  {userData?.role}
                 </span>
                 <input
                   type="text"

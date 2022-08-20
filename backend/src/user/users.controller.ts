@@ -31,7 +31,7 @@ export class UsersController {
   @Get(`/me/bookings`)
   @UseGuards(AuthGuard)
   async getAllMyBookings(@User() user) {
-    return this.usersService.getAllMyBookings(user.id);
+    return this.usersService.getAllMyBookings(user);
   }
 
   @UseGuards(RoleGuard('paperMaker'))

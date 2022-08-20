@@ -3,37 +3,42 @@ import {
   BellIcon,
   UserCircleIcon,
   ClipboardListIcon,
+  ClipboardCheckIcon,
 } from "@heroicons/react/outline"
 import useGetMe from "../../hooks/useGetMe"
 import { useRouter } from "next/router"
 import ProfileForm from "../../components/DashBoard/ProfileForm"
+import BookingHistoryWithNav from "../../components/DashBoard/BookingHistoryWithNav"
 import HeaderDisclosure from "../../components/DashBoard/HeaderDisclosure"
 import React, { Suspense } from "react"
 import LoadingSpinner from "../../components/LoadingSkeleton/LoadingSpinner"
-import PapermakerProfileForm from "../../components/DashBoard/PapermakerProfileForm"
 import MyService from "../../components/DashBoard/MyService"
+import BookingManager from "../../components/DashBoard/BookingManager"
 
 const ErrorComponent = React.lazy(
   () => import("../../components/ErrorComponent")
 )
 
 const userSubNavigation = [
-  { name: "Profile", href: "profile", icon: UserCircleIcon, current: true },
+  { name: "Profile", href: "profile", icon: UserCircleIcon },
   {
     name: "Booked Services",
     href: "service",
-    icon: ClipboardListIcon,
-    current: false,
+    icon: ClipboardCheckIcon,
   },
 ]
 
 const ppmkerSubNavigation = [
-  ...userSubNavigation,
+  { name: "Profile", href: "profile", icon: UserCircleIcon },
   {
     name: "My Service",
     href: "myservice",
     icon: BellIcon,
-    current: false,
+  },
+  {
+    name: "Booking Manager",
+    href: "manager",
+    icon: ClipboardListIcon,
   },
 ]
 
@@ -43,10 +48,10 @@ function classNames(...classes: string[]) {
 
 const Profile: NextPage = () => {
   const { data, isLoading } = useGetMe()
-  console.log(data)
   const router = useRouter()
   const query = { ...router.query }
   const viewable = data && data.id === query.id
+  const tab = router.query.tab
   return (
     <>
       {isLoading ? (
@@ -59,8 +64,8 @@ const Profile: NextPage = () => {
             <div>
               <HeaderDisclosure />
               <main className="relative -mt-32">
-                <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
-                  <div className="bg-white rounded-lg shadow overflow-hidden">
+                <div className="max-w-screen-2xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
+                  <div className=" bg-white rounded-lg shadow overflow-hidden">
                     <div className="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
                       <aside className="py-6 lg:col-span-3">
                         {data.role === "user" ? (
@@ -69,12 +74,14 @@ const Profile: NextPage = () => {
                               <p
                                 key={item.name}
                                 className={classNames(
-                                  item.current
+                                  tab === item.href
                                     ? "bg-blue-50 border-blue-500 text-blue-700 hover:bg-blue-50 hover:text-blue-700"
                                     : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                                   "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
                                 )}
-                                aria-current={item.current ? "page" : undefined}
+                                aria-current={
+                                  tab === item.href ? "page" : undefined
+                                }
                                 onClick={async () => {
                                   delete query.page
                                   await router.replace(
@@ -93,7 +100,7 @@ const Profile: NextPage = () => {
                               >
                                 <item.icon
                                   className={classNames(
-                                    item.current
+                                    tab === item.href
                                       ? "text-blue-500 group-hover:text-blue-500"
                                       : "text-gray-400 group-hover:text-gray-500",
                                     "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -110,12 +117,14 @@ const Profile: NextPage = () => {
                               <p
                                 key={item.name}
                                 className={classNames(
-                                  item.current
+                                  tab === item.href
                                     ? "bg-blue-50 border-blue-500 text-blue-700 hover:bg-blue-50 hover:text-blue-700"
                                     : "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                                   "group border-l-4 px-3 py-2 flex items-center text-sm font-medium hover:cursor-pointer"
                                 )}
-                                aria-current={item.current ? "page" : undefined}
+                                aria-current={
+                                  tab === item.href ? "page" : undefined
+                                }
                                 onClick={async () => {
                                   delete query.page
                                   await router.replace(
@@ -134,7 +143,7 @@ const Profile: NextPage = () => {
                               >
                                 <item.icon
                                   className={classNames(
-                                    item.current
+                                    tab === item.href
                                       ? "text-blue-500 group-hover:text-blue-500"
                                       : "text-gray-400 group-hover:text-gray-500",
                                     "flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -148,16 +157,13 @@ const Profile: NextPage = () => {
                         )}
                       </aside>
                       {query.tab === "profile" || query.tab === undefined ? (
-                        <>
-                          {data.role === "user" ? (
-                            <ProfileForm />
-                          ) : (
-                            <PapermakerProfileForm />
-                          )}
-                        </>
+                        <ProfileForm />
                       ) : null}
-                      {query.tab === "service" ? (
-                        <div>Hello service</div>
+                      {query.tab === "service" && data.role === "user" ? (
+                        <BookingHistoryWithNav />
+                      ) : null}
+                      {query.tab === "manager" && data.role === "paperMaker" ? (
+                        <BookingManager />
                       ) : null}
                       {query.tab === "myservice" &&
                       data.role === "paperMaker" ? (
