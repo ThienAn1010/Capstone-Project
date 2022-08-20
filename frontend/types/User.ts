@@ -7,4 +7,6 @@ export interface User {
   role: "user" | "paperMaker"
   phoneNumber?: string
   address?: string
+  lat: number
+  long: number
 }
