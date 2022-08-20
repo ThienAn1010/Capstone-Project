@@ -1,8 +1,8 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import ThankYou from "../components/ThankYou"
+import ThankYou from "../../components/ThankYou"
 
-const Register: NextPage = () => {
+const Success: NextPage = () => {
   return (
     <>
       <Head>
@@ -15,4 +15,4 @@ const Register: NextPage = () => {
   )
 }
 
-export default Register
+export default Success

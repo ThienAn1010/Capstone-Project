@@ -69,7 +69,7 @@ export default function CreateServiceForm({ serviceData }: any) {
         },
         success: () => {
           setIsLoading(false)
-          return "Successfully register account"
+          return "Successfully create a service"
         },
       },
       {

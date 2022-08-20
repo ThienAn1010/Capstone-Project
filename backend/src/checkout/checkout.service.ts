@@ -132,7 +132,7 @@ export class CheckoutService {
           <p>Your client booked at ${dayjs(data.createdAt).format(
             'HH:mm',
           )} on ${dayjs(data.createdAt).format(
-            'DD-MM-YYY',
+            'DD-MM-YYYY',
           )}. Please call this number ${
             data.user.phoneNumber
           } within 24 hours, or on the ready to receive call from your client. If you accept, please go to your dashboard and accept this request.

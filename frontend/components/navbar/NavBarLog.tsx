@@ -17,6 +17,7 @@ export default function NavBarLog({ data }: any) {
   const { mutate } = useGetMe()
   const router = useRouter()
   const handleLogout = () => {
+    router.push("/")
     mutate(() => axiosInstance.post("/auth/logout").then(() => undefined), {
       optimisticData: undefined,
     })
