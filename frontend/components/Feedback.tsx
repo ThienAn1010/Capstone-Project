@@ -54,10 +54,10 @@ const Feedback = () => {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto lg:max-w-full lg:py-32 lg:grid lg:grid-cols-12 lg:gap-x-8">
+      <div className="max-w-2xl mx-auto lg:max-w-full lg:grid lg:grid-cols-12 lg:gap-x-4">
         <div className="lg:col-span-4">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-            Paper Requester Reviews
+          <h2 className="text-2xl font-bold tracking-tight text-center text-gray-900">
+            Reviews
           </h2>
 
           <div className="mt-3 flex items-center">
@@ -149,7 +149,7 @@ const Feedback = () => {
           <h3 className="sr-only">Recent reviews</h3>
 
           <div className="flow-root">
-            <div className="-my-12 divide-y divide-gray-200">
+            <div className="divide-y divide-gray-200">
               {reviews.featured.map((review) => (
                 <div key={review.id} className="py-4">
                   <div className="flex items-center">

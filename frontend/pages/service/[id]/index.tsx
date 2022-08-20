@@ -3,6 +3,14 @@ import { useRouter } from "next/router"
 import BookNow from "../../../components/BookNow"
 import Feedback from "../../../components/Feedback"
 import useGetOfferedService from "../../../hooks/useGetOfferedService"
+import { StarIcon } from "@heroicons/react/solid"
+import {
+  BriefcaseIcon,
+  ClockIcon,
+  LocationMarkerIcon,
+  ChartSquareBarIcon,
+} from "@heroicons/react/outline"
+import DetailLoader from "../../../components/LoadingSkeleton/detailLoader"
 
 const Detail: NextPage = () => {
   const router = useRouter()
@@ -11,68 +19,108 @@ const Detail: NextPage = () => {
   )
   console.log({ data, error, isLoading })
   return (
-    <div className="container mx-auto px-14 py-12 ">
-      <div className="grid grid-cols-3 gap-2">
-        <div className="col-span-2 space-y-8 pl-28 pr-8">
-          <div>
-            <h3 className="text-xl font-bold uppercase text-gray-500 ">
-              PaperMaker
-            </h3>
-            {isLoading ? (
-              <h1 className="text-4xl font-bold animate-pulse bg-gray-500 h-[36px]"></h1>
-            ) : (
-              <>
-                <h3 className="text-4xl font-bold text-gray-900 my-1">
-                  {`${data?.paperMaker.user.name}`}
-                </h3>
-                {/* <h3 className="text-xl font-semibold text-gray-900 my-1">
-                  {`${data?.service.name}`}
-                </h3> */}
-              </>
-            )}
-          </div>
-          <div className="flex space-x-8">
-            <div>
-              <h3 className="font-bold text-gray-500 text-xl">Total Orders</h3>
-              <h2 className="text-center text-2xl font-bold">{`${data?.paperMaker.totalCases}`}</h2>
+    <>
+      {isLoading ? (
+        <DetailLoader />
+      ) : (
+        <div className="container mx-auto px-14 py-12">
+          <div className="grid grid-cols-3 gap-2 ">
+            <div className="col-span-2 space-y-8 pl-32 pr-2">
+              <div className="flex space-x-6 mb8 ">
+                <div>
+                  <img
+                    className="inline-block h-60 w-60 rounded-full"
+                    src={data?.paperMaker.user.picture}
+                    alt="papermaker avatar"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold uppercase text-gray-500 ">
+                    PaperMaker
+                  </h3>
+                  <h3 className="text-4xl font-bold text-gray-900">
+                    {data?.paperMaker.user.name}
+                  </h3>
+                  <div className="flex items-center">
+                    <StarIcon
+                      className="flex-shrink-0 h-6 w-6 text-yellow-400"
+                      aria-hidden="true"
+                    />
+                    <StarIcon
+                      className="flex-shrink-0 h-6 w-6 text-yellow-400"
+                      aria-hidden="true"
+                    />
+                    <StarIcon
+                      className="flex-shrink-0 h-6 w-6 text-yellow-400"
+                      aria-hidden="true"
+                    />
+                    <StarIcon
+                      className="flex-shrink-0 h-6 w-6 text-yellow-400"
+                      aria-hidden="true"
+                    />
+                    <StarIcon
+                      className="flex-shrink-0 h-6 w-6 text-yellow-400"
+                      aria-hidden="true"
+                    />
+                    <p>&nbsp;(149)</p>
+                    <p className="text-slate-500">&nbsp;22 Orders in Queue</p>
+                  </div>
+                  <div className="flex items-center">
+                    <BriefcaseIcon className="flex-shrink-0 h-6 w-6 " />
+                    <p className="font-semibold">&nbsp;{data?.service.name}</p>
+                  </div>
+                  <div className="flex items-center">
+                    <ClockIcon className="flex-shrink-0 h-6 w-6 " />
+                    <p className="font-semibold">&nbsp;{data?.duration} days</p>
+                  </div>
+                  <div className="flex items-center">
+                    <LocationMarkerIcon className="flex-shrink-0 h-6 w-6 " />
+                    <p className="font-semibold">
+                      &nbsp;District 1, Ho Chi Minh City
+                    </p>
+                  </div>
+                  <div className="flex items-center">
+                    <ChartSquareBarIcon className="flex-shrink-0 h-6 w-6 " />
+                    <p className="font-semibold">
+                      &nbsp;{data?.paperMaker.totalCases} Total Orders
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="px-10">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    Description
+                  </h2>
+                  <p className="text-justify mt-2 leading-relaxed">
+                    {data?.description}
+                  </p>
+                </div>
+              </div>
+              <div className="px-10">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Required Documents
+                </h2>
+                <p className="text-justify mt-2">{data?.documents}</p>
+              </div>
+              <div className="px-10 pb-8">
+                <h2 className="text-2xl font-bold text-gray-900 ">
+                  Estimated Duration
+                </h2>
+                <p className="text-justify mt-2">{data?.estimate}</p>
+              </div>
+              <div className="pt-10 border-t-2">
+                <Feedback />
+              </div>
             </div>
-            <div>
-              <h3 className="font-bold text-gray-500 text-xl">Rating</h3>
-              <h2 className="text-center text-2xl font-bold">{`${data?.paperMaker.rating}`}</h2>
+            <div className="ml-12">
+              <BookNow />
             </div>
-          </div>
-          <div className="space-x-8">
-            <div className="">
-              <h2 className="text-xl font-bold text-gray-900">About me</h2>
-              {isLoading ? (
-                <>
-                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
-                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
-                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
-                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
-                  <p className="animate-pulse bg-gray-400 w-full h-5"></p>
-                </>
-              ) : (
-                <p className="text-justify">{data?.paperMaker.aboutMe}</p>
-              )}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-gray-900">Service</h2>
-            <p>{data?.description}</p>
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-gray-900">Statistics</h2>
-          </div>
-          <div className="pt-16">
-            <Feedback />
           </div>
         </div>
-        <div className="relative ml-14">
-          <BookNow />
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 export default Detail
