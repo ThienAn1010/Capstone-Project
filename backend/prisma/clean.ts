@@ -4,11 +4,11 @@ const client = new PrismaClient();
 
 const clean = async () => {
   await client.authProvider.deleteMany();
+  await client.booking.deleteMany();
   await client.offeredService.deleteMany();
+  await client.service.deleteMany();
   await client.paperMaker.deleteMany();
   await client.user.deleteMany();
-  await client.service.deleteMany();
-  await client.booking.deleteMany();
 };
 
 clean()
