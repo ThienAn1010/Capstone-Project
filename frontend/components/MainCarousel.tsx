@@ -3,7 +3,7 @@ import Link from "next/link"
 export default function MainCarousel() {
   return (
     <div className="relative">
-      <div className="absolute text-white z-50 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] justify-center items-center text-3xl text-center max-w-[960px]">
+      <div className="absolute text-white z-[2] top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] justify-center items-center text-3xl text-center max-w-[960px]">
         <p className="font-['Playfair_Display'] font-black text-[42px] w-[760px] tracking-wide leading-tight text-center mx-auto">
           We Ensure the best Paperwork Service for you
         </p>
