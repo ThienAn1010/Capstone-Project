@@ -60,7 +60,9 @@ export class CheckoutService {
             },
           ],
           mode: 'payment',
-          success_url: `${this.configService.get('CLIENT_URL')}/?success=true`,
+          success_url: `${this.configService.get(
+            'CLIENT_URL',
+          )}/checkout/success`,
           cancel_url: `${this.configService.get('CLIENT_URL')}/?canceled=true`,
         });
       return { status: 'success', session: session.url };
@@ -130,7 +132,7 @@ export class CheckoutService {
           <p>Your client booked at ${dayjs(data.createdAt).format(
             'HH:mm',
           )} on ${dayjs(data.createdAt).format(
-            'DD-MM-YYY',
+            'DD-MM-YYYY',
           )}. Please call this number ${
             data.user.phoneNumber
           } within 24 hours, or on the ready to receive call from your client. If you accept, please go to your dashboard and accept this request.
