@@ -38,25 +38,20 @@ export default function Map() {
     <div className="mt-10 border-4 border-orange-300 hover:border-indigo-400">
       <div>
         <GoogleMap
-          zoom={15}
-          center={center}
-          mapContainerStyle={mapContainerStyle}
-          mapContainerClassName="map-container"
-          options={{
-            disableDefaultUI: true,
-            zoomControl: true,
-          }}
-          onClick={onMapClick}
+            zoom={20}
+            center={center}
+            mapContainerStyle={mapContainerStyle}
+            mapContainerClassName="map-container"
+            options={{
+                disableDefaultUI: true,
+                zoomControl: true,
+                fullscreenControl: true
+            }}
+            onClick={onMapClick}
         >
-          {markers.map((marker: any) => (
-            <Marker
-              key={`${marker.lat}-${marker.lng}`}
-              position={{ lat: marker.lat, lng: marker.lng }}
-            />
-          ))}
-          {markers.map((marker: any) => (
-            <Marker key={`${marker.lat}-${marker.lng}`} position={center} />
-          ))}
+            {markers.map((marker: any) => (
+                <Marker key={`${marker.lat}-${marker.lng}`} position={center} />
+            ))}
         </GoogleMap>
       </div>
     </div>
