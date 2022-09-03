@@ -2,15 +2,20 @@ import {
   BooleanField,
   Datagrid,
   List,
-  NumberField,
   ReferenceField,
   TextField,
   DateField,
+  EditButton,
+  BooleanInput,
 } from "react-admin";
 
+const postFilters = [
+  <BooleanInput key={1} source={"isConfirmed"} label="Confirmed" />,
+];
+
 export const PaperMakerList = () => (
-  <List>
-    <Datagrid rowClick="edit">
+  <List filters={postFilters}>
+    <Datagrid rowClick="edit" bulkActionButtons={false}>
       <ReferenceField
         reference={"User"}
         source={"userId"}
@@ -35,8 +40,15 @@ export const PaperMakerList = () => (
       >
         <TextField source="phoneNumber" />
       </ReferenceField>
+      <ReferenceField
+        reference={"User"}
+        source={"userId"}
+        label="Address"
+        link={false}
+      >
+        <TextField source="address" />
+      </ReferenceField>
 
-      <TextField source="status" />
       <TextField source="aboutMe" />
       <BooleanField source="isConfirmed" label="Confirmed" />
       <ReferenceField
@@ -47,6 +59,8 @@ export const PaperMakerList = () => (
       >
         <DateField source="createdAt" showTime />
       </ReferenceField>
+
+      <EditButton />
     </Datagrid>
   </List>
 );
