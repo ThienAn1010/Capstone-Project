@@ -27,7 +27,7 @@ export const PaperMakerList = () => (
       <ReferenceField
         reference={"User"}
         source={"userId"}
-        label="Email"
+        label="Username"
         link={false}
       >
         <TextField source="username" />
@@ -49,7 +49,6 @@ export const PaperMakerList = () => (
         <TextField source="address" />
       </ReferenceField>
 
-      <TextField source="aboutMe" />
       <BooleanField source="isConfirmed" label="Confirmed" />
       <ReferenceField
         reference={"User"}

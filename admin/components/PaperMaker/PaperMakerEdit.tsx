@@ -25,6 +25,7 @@ const PaperMakerEditActions = (props: any) => (
 export const PaperMakerEdit = () => (
   <Edit actions={<PaperMakerEditActions />}>
     <SimpleForm toolbar={<PaperMakerEditToolbar />}>
+      <h3>PaperMaker Info:</h3>
       <ReferenceField
         reference={"User"}
         source={"userId"}

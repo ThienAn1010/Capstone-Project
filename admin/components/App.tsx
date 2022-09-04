@@ -1,7 +1,10 @@
 import { Admin, Resource, ListGuesser, EditGuesser } from "react-admin";
 import postgrestRestProvider from "@promitheus/ra-data-postgrest";
-import { PaperMakerList } from "./PaperMakerList";
-import { PaperMakerEdit } from "./PaperMakerEdit";
+import { PaperMakerEdit } from "./PaperMaker/PaperMakerEdit";
+import { PaperMakerList } from "./PaperMaker/PaperMakerList";
+import { UserList } from "./User/UserList";
+import { UserEdit } from "./User/UserEdit";
+import { BookingList } from "./Booking/BookingList";
 
 const dataProvider = postgrestRestProvider("/api/admin");
 
@@ -13,9 +16,9 @@ const App = () => {
         list={PaperMakerList}
         edit={PaperMakerEdit}
       />
+      <Resource name={"User"} list={UserList} edit={UserEdit} />
+      <Resource name={"Booking"} list={BookingList} edit={EditGuesser} />
       <Resource name={"OfferedService"} list={ListGuesser} />
-      <Resource name={"Booking"} list={ListGuesser} />
-      <Resource name={"User"} list={ListGuesser} />
     </Admin>
   );
 };
