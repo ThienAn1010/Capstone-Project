@@ -1,8 +1,8 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
+import { GoogleMap, useLoadScript} from "@react-google-maps/api"
 import useGetOfferedService from "../../hooks/useGetOfferedService"
-
+import {MarkerF} from '@react-google-maps/api'
 const mapContainerStyle = {
   height: "70vh",
 }
@@ -10,18 +10,7 @@ const mapContainerStyle = {
 export default function Map() {
   const router = useRouter()
   const { data } = useGetOfferedService(router.query.id as string)
-  const [markers, setMarkers] = React.useState([{}])
-
-  const onMapClick = React.useCallback((event: any) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-        time: new Date(),
-      },
-    ])
-  }, [])
+  const [markers] = React.useState([{}])
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GG_API_KEY!,
@@ -30,7 +19,9 @@ export default function Map() {
     lat: data!.paperMaker.user.lat!,
     lng: data!.paperMaker.user.long!,
   }
-
+  const onLoad = (marker: any) => {
+    console.log('marker: ', marker)
+  }
   console.log(data)
   if (!isLoaded)
     return <div className="text-center mt-5 text-3xl">Loading ...</div>
@@ -47,10 +38,13 @@ export default function Map() {
                 zoomControl: true,
                 fullscreenControl: true
             }}
-            onClick={onMapClick}
+            onLoad={onLoad}
         >
             {markers.map((marker: any) => (
-                <Marker key={`${marker.lat}-${marker.lng}`} position={center} />
+                <MarkerF
+                key={`${marker.lat}-${marker.lng}`}
+                position={center}
+                />
             ))}
         </GoogleMap>
       </div>
