@@ -48,7 +48,7 @@ export default function NavBarLog({ data }: any) {
                     </Link>
                     <Link href="/">
                       <img
-                        className="hidden lg:block h-6 w-auto"
+                        className="hidden lg:block h-6 w-auto hover:cursor-pointer"
                         src="/logo.png"
                         alt="logo"
                       />
