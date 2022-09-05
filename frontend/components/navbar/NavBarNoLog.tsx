@@ -40,7 +40,7 @@ export default function NavBarNoLog() {
                     </Link>
                     <Link href="/">
                       <img
-                        className="hidden justify-center lg:block h-6 w-auto"
+                        className="hidden justify-center lg:block h-6 w-auto hover:cursor-pointer"
                         src="/logo.png"
                         alt="logo"
                       />
