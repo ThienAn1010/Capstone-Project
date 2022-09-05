@@ -84,11 +84,6 @@ export default function NavBarLog({ data }: any) {
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:divide-x lg:divide-gray-100 lg:items-center lg:justify-end xl:col-span-4">
-                  <div className="px-4">
-                    <p className="text-md subpixel-antialiased font-medium border-b border-transparent text-white hover:cursor-pointer hover:border-white">
-                      BECOME A PAPERMAKER
-                    </p>
-                  </div>
                   <div className="hidden space-x-2 pl-4 lg:flex lg:items-center lg:justify-end">
                     <Menu as="div" className="inline-flex items-center">
                       <div>
