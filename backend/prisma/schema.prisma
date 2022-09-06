@@ -72,6 +72,7 @@ model OfferedService {
   description  String
   documents    String
   estimate     String
+  thumbnail    String     @default("https://images.smartcapitalmind.com/person-using-pen-near-documents-and-chart.jpg")
 }
 
 model Booking {

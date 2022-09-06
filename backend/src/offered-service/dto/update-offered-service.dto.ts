@@ -21,4 +21,7 @@ export class UpdateOfferedServiceDto {
   estimate: string;
   offeredServiceId: string;
   userId: string;
+  @IsString()
+  @IsOptional()
+  thumbnail?: string;
 }

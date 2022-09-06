@@ -1,4 +1,10 @@
-import { IsString, IsNumber, IsNotEmpty, IsInt } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsNotEmpty,
+  IsInt,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateOfferedServiceDto {
   @IsNumber()
@@ -20,4 +26,7 @@ export class CreateOfferedServiceDto {
   @IsNotEmpty()
   estimate: string;
   userId: string;
+  @IsString()
+  @IsOptional()
+  thumbnail: string;
 }
