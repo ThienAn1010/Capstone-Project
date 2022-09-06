@@ -7,12 +7,13 @@ import { UserEdit } from "./User/UserEdit";
 import { BookingList } from "./Booking/BookingList";
 import { BookingEdit } from "./Booking/BookingEdit";
 import { OfferedserviceList } from "./OfferedService/OfferedServiceList";
+import authProvider from "../src/authProvider";
 
 const dataProvider = postgrestRestProvider("/api/admin");
 
 const App = () => {
   return (
-    <Admin dataProvider={dataProvider}>
+    <Admin dataProvider={dataProvider} authProvider={authProvider}>
       <Resource
         name={"PaperMaker"}
         list={PaperMakerList}
