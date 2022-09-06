@@ -11,12 +11,42 @@ import {
 export const OfferedserviceList = () => (
   <List>
     <Datagrid rowClick="edit">
-      <TextField source="id" />
       <ReferenceField source="paperMakerId" reference="PaperMaker">
-        <TextField source="email" />
+        <ReferenceField
+          reference={"User"}
+          source={"userId"}
+          label="Email"
+          link={false}
+        >
+          <TextField source="username" />
+        </ReferenceField>
       </ReferenceField>
       <ReferenceField source="serviceId" reference="Service" link={false}>
         <TextField source="name" />
+      </ReferenceField>
+      <ReferenceField
+        source="paperMakerId"
+        reference="PaperMaker"
+        link={false}
+        label="Total Bookings"
+      >
+        <TextField source="totalCases" />
+      </ReferenceField>
+      <ReferenceField
+        source="paperMakerId"
+        reference="PaperMaker"
+        link={false}
+        label="Total Successful Booking"
+      >
+        <TextField source="pastSuccessfulCases" />
+      </ReferenceField>
+      <ReferenceField
+        source="paperMakerId"
+        reference="PaperMaker"
+        link={false}
+        label="Rating"
+      >
+        <TextField source="rating" />
       </ReferenceField>
       <NumberField source="price" />
       <NumberField source="duration" />
