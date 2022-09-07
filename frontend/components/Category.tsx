@@ -38,6 +38,9 @@ export default function Category() {
                 className="w-full h-full object-center hover:scale-110"
               />
             </div>
+            <p className="hidden text-lg font-medium text-center mt-3 text-stone-700 hover:text-blue-900 md:block hover:cursor-pointer">
+                {category.name}
+              </p>
           </div>
         ))}
       </div>
