@@ -1,7 +1,9 @@
 import { BookingStatus } from '@prisma/client';
-import { IsNotEmpty } from 'class-validator';
+import { IsOptional } from 'class-validator';
 
 export class UpdatedBookingDto {
-  @IsNotEmpty()
+  @IsOptional()
   status: BookingStatus;
+  @IsOptional()
+  isFinishedConfirmed: boolean;
 }

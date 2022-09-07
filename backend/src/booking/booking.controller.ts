@@ -1,7 +1,4 @@
 import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
-import { User } from 'src/decorator/user.decorator';
-import { AuthGuard } from 'src/guard/auth.guard';
-import { RoleGuard } from 'src/guard/role.guard';
 import { BookingService } from './booking.service';
 import { UpdatedBookingDto } from './dto/updated-booking.dto';
 
