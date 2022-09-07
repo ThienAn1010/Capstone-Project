@@ -8,6 +8,12 @@ const select = {
   user: true,
   status: true,
   payAmount: true,
+  createdAt: true,
+  acceptedAt: true,
+  droppedAt: true,
+  finishedAt: true,
+  isFinishedConfirmed: true,
+  isDroppedConfirmed: true,
   offeredService: {
     include: {
       paperMaker: {
@@ -64,7 +70,7 @@ export class BookingService {
         id: bookingId,
       },
       data: {
-        status: updatedBookingDto.status,
+        ...(updatedBookingDto.status && { status: updatedBookingDto.status }),
         ...(updatedBookingDto.status === 'accept' && {
           acceptedAt: new Date(),
         }),
@@ -73,6 +79,9 @@ export class BookingService {
         }),
         ...(updatedBookingDto.status === 'success' && {
           finishedAt: new Date(),
+        }),
+        ...(updatedBookingDto.isFinishedConfirmed && {
+          isFinishedConfirmed: updatedBookingDto.isFinishedConfirmed,
         }),
       },
       select,
