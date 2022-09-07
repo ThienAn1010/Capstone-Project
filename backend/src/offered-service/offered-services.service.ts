@@ -175,6 +175,7 @@ export class OfferedServicesService {
       description,
       documents,
       estimate,
+      thumbnail,
     } = service;
     const paperMaker = await this.prismaService.paperMaker.findFirst({
       where: {
@@ -199,6 +200,7 @@ export class OfferedServicesService {
         paperMakerId: paperMaker.id,
         documents,
         estimate,
+        ...(thumbnail && { thumbnail }),
       },
       include: {
         service: true,

@@ -26,7 +26,6 @@ export default function BookingManager() {
   const [bookingId, setBookingId] = useState("")
   const cancelButtonRef = useRef(null)
   const router = useRouter()
-  console.log(data)
 
   const acceptOrDenyOrder = (action: string) => {
     const acceptOrDenyService = (async () => {
@@ -117,194 +116,207 @@ export default function BookingManager() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200 bg-white">
-                        {data.bookings.map((booking: any) => (
-                          <tr key={booking.id}>
-                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                              <div className="flex items-center">
-                                <div className="h-10 w-10 flex-shrink-0">
-                                  <img
-                                    className="h-10 w-10 rounded-full"
-                                    src={booking.user.picture}
-                                    alt="idk"
-                                  />
-                                </div>
-                                <div className="ml-4">
-                                  <div className="font-medium text-gray-900">
-                                    {booking.user.name}
-                                  </div>
-                                  <div className="text-gray-500">
-                                    {booking.user.username}
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="text-gray-900">
-                                {booking.user.phoneNumber}
-                              </div>
-                            </td>
-                            <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
-                              <p className="text-sm h-full w-full line-clamp-3">
-                                {booking.user.address}
+                        {data.bookings.length == 0 ? (
+                          <tr>
+                            <td colSpan={5}>
+                              <p className="text-lg text-center font-semibold p-4">
+                                You do not have any booking yet!
                               </p>
-                            </td>
-                            <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
-                              <p className="text-sm line-clamp-3">
-                                {booking.note}
-                              </p>
-                            </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              {booking.status === "pendingConfirm" && (
-                                <span className="inline-flex rounded-md bg-yellow-100 px-4 py-2 font-semibold leading-5 text-yellow-800 text-sm">
-                                  Pending
-                                </span>
-                              )}
-                              {booking.status === "accept" && (
-                                <span className="inline-flex rounded-md bg-green-100 px-4 py-2 font-semibold leading-5 text-green-800 text-sm">
-                                  In Progress
-                                </span>
-                              )}
-                              {booking.status === "deny" && (
-                                <span className="inline-flex rounded-md bg-red-100 px-4 py-2 font-semibold leading-5 text-red-800 text-sm">
-                                  Declined
-                                </span>
-                              )}
-                              {booking.status === "drop" && (
-                                <span className="inline-flex rounded-md bg-red-100 px-4 py-2 font-semibold leading-5 text-red-800 text-sm">
-                                  Cancelled
-                                </span>
-                              )}
-                            </td>
-                            <td className="whitespace-nowrap space-y-4 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                              <Menu
-                                as="div"
-                                className="relative inline-block text-left"
-                              >
-                                <div>
-                                  <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ">
-                                    Action
-                                    <ChevronDownIcon
-                                      className="-mr-1 ml-2 h-5 w-5"
-                                      aria-hidden="true"
-                                    />
-                                  </Menu.Button>
-                                </div>
-
-                                <Transition
-                                  as={Fragment}
-                                  enter="transition ease-out duration-100"
-                                  enterFrom="transform opacity-0 scale-95"
-                                  enterTo="transform opacity-100 scale-100"
-                                  leave="transition ease-in duration-75"
-                                  leaveFrom="transform opacity-100 scale-100"
-                                  leaveTo="transform opacity-0 scale-95"
-                                >
-                                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 divide-y divide-gray-100 focus:outline-none">
-                                    <div className="py-1">
-                                      {booking.status === "pendingConfirm" && (
-                                        <>
-                                          <Menu.Item>
-                                            {({ active }) => (
-                                              <p
-                                                onClick={() => {
-                                                  setOpenAccept(true)
-                                                  setBookingId(booking.id)
-                                                }}
-                                                className={classNames(
-                                                  active
-                                                    ? "bg-emerald-100 text-gray-900"
-                                                    : "text-gray-700",
-                                                  "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                                )}
-                                              >
-                                                <CheckCircleIcon
-                                                  className="mr-3 h-5 w-5 text-emerald-400"
-                                                  aria-hidden="true"
-                                                />
-                                                Accept
-                                              </p>
-                                            )}
-                                          </Menu.Item>
-                                          <Menu.Item>
-                                            {({ active }) => (
-                                              <p
-                                                onClick={() => {
-                                                  setOpenDecline(true)
-                                                  setBookingId(booking.id)
-                                                }}
-                                                className={classNames(
-                                                  active
-                                                    ? "bg-rose-100 text-gray-900"
-                                                    : "text-gray-700",
-                                                  "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                                )}
-                                              >
-                                                <XCircleIcon
-                                                  className="mr-3 h-5 w-5 text-rose-400 "
-                                                  aria-hidden="true"
-                                                />
-                                                Decline
-                                              </p>
-                                            )}
-                                          </Menu.Item>
-                                        </>
-                                      )}
-                                      <Menu.Item>
-                                        {({ active }) => (
-                                          <p
-                                            className={classNames(
-                                              active
-                                                ? "bg-cyan-100 text-gray-900"
-                                                : "text-gray-700",
-                                              "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                            )}
-                                            onClick={() =>
-                                              router.push(
-                                                `/booking/${booking.id}`
-                                              )
-                                            }
-                                          >
-                                            <DocumentTextIcon
-                                              className="mr-3 h-5 w-5 text-cyan-400 "
-                                              aria-hidden="true"
-                                            />
-                                            View details
-                                          </p>
-                                        )}
-                                      </Menu.Item>
-                                      {booking.status === "accept" && (
-                                        <>
-                                          <Menu.Item>
-                                            {({ active }) => (
-                                              <p
-                                                onClick={() => {
-                                                  setOpenDrop(true)
-                                                  setBookingId(booking.id)
-                                                }}
-                                                className={classNames(
-                                                  active
-                                                    ? "bg-red-100 text-gray-900"
-                                                    : "text-gray-700",
-                                                  "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                                )}
-                                              >
-                                                <ExclamationCircleIcon
-                                                  className="mr-3 h-5 w-5 text-red-400"
-                                                  aria-hidden="true"
-                                                />
-                                                Cancel
-                                              </p>
-                                            )}
-                                          </Menu.Item>
-                                        </>
-                                      )}
-                                    </div>
-                                  </Menu.Items>
-                                </Transition>
-                              </Menu>
                             </td>
                           </tr>
-                        ))}
+                        ) : (
+                          <>
+                            {data.bookings.map((booking: any) => (
+                              <tr key={booking.id}>
+                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                  <div className="flex items-center">
+                                    <div className="h-10 w-10 flex-shrink-0">
+                                      <img
+                                        className="h-10 w-10 rounded-full"
+                                        src={booking.user.picture}
+                                        alt="idk"
+                                      />
+                                    </div>
+                                    <div className="ml-4">
+                                      <div className="font-medium text-gray-900">
+                                        {booking.user.name}
+                                      </div>
+                                      <div className="text-gray-500">
+                                        {booking.user.username}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                  <div className="text-gray-900">
+                                    {booking.user.phoneNumber}
+                                  </div>
+                                </td>
+                                <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
+                                  <p className="text-sm h-full w-full line-clamp-3">
+                                    {booking.user.address}
+                                  </p>
+                                </td>
+                                <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
+                                  <p className="text-sm line-clamp-3">
+                                    {booking.note}
+                                  </p>
+                                </td>
+                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                  {booking.status === "pendingConfirm" && (
+                                    <span className="inline-flex rounded-md bg-yellow-100 px-4 py-2 font-semibold leading-5 text-yellow-800 text-sm">
+                                      Pending
+                                    </span>
+                                  )}
+                                  {booking.status === "accept" && (
+                                    <span className="inline-flex rounded-md bg-green-100 px-4 py-2 font-semibold leading-5 text-green-800 text-sm">
+                                      In Progress
+                                    </span>
+                                  )}
+                                  {booking.status === "deny" && (
+                                    <span className="inline-flex rounded-md bg-red-100 px-4 py-2 font-semibold leading-5 text-red-800 text-sm">
+                                      Declined
+                                    </span>
+                                  )}
+                                  {booking.status === "drop" && (
+                                    <span className="inline-flex rounded-md bg-red-100 px-4 py-2 font-semibold leading-5 text-red-800 text-sm">
+                                      Cancelled
+                                    </span>
+                                  )}
+                                </td>
+                                <td className="whitespace-nowrap space-y-4 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                  <Menu
+                                    as="div"
+                                    className="relative inline-block text-left"
+                                  >
+                                    <div>
+                                      <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none ">
+                                        Action
+                                        <ChevronDownIcon
+                                          className="-mr-1 ml-2 h-5 w-5"
+                                          aria-hidden="true"
+                                        />
+                                      </Menu.Button>
+                                    </div>
+
+                                    <Transition
+                                      as={Fragment}
+                                      enter="transition ease-out duration-100"
+                                      enterFrom="transform opacity-0 scale-95"
+                                      enterTo="transform opacity-100 scale-100"
+                                      leave="transition ease-in duration-75"
+                                      leaveFrom="transform opacity-100 scale-100"
+                                      leaveTo="transform opacity-0 scale-95"
+                                    >
+                                      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 divide-y divide-gray-100 focus:outline-none">
+                                        <div className="py-1">
+                                          {booking.status ===
+                                            "pendingConfirm" && (
+                                            <>
+                                              <Menu.Item>
+                                                {({ active }) => (
+                                                  <p
+                                                    onClick={() => {
+                                                      setOpenAccept(true)
+                                                      setBookingId(booking.id)
+                                                    }}
+                                                    className={classNames(
+                                                      active
+                                                        ? "bg-emerald-100 text-gray-900"
+                                                        : "text-gray-700",
+                                                      "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                                    )}
+                                                  >
+                                                    <CheckCircleIcon
+                                                      className="mr-3 h-5 w-5 text-emerald-400"
+                                                      aria-hidden="true"
+                                                    />
+                                                    Accept
+                                                  </p>
+                                                )}
+                                              </Menu.Item>
+                                              <Menu.Item>
+                                                {({ active }) => (
+                                                  <p
+                                                    onClick={() => {
+                                                      setOpenDecline(true)
+                                                      setBookingId(booking.id)
+                                                    }}
+                                                    className={classNames(
+                                                      active
+                                                        ? "bg-rose-100 text-gray-900"
+                                                        : "text-gray-700",
+                                                      "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                                    )}
+                                                  >
+                                                    <XCircleIcon
+                                                      className="mr-3 h-5 w-5 text-rose-400 "
+                                                      aria-hidden="true"
+                                                    />
+                                                    Decline
+                                                  </p>
+                                                )}
+                                              </Menu.Item>
+                                            </>
+                                          )}
+                                          <Menu.Item>
+                                            {({ active }) => (
+                                              <p
+                                                className={classNames(
+                                                  active
+                                                    ? "bg-cyan-100 text-gray-900"
+                                                    : "text-gray-700",
+                                                  "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                                )}
+                                                onClick={() =>
+                                                  router.push(
+                                                    `/booking/${booking.id}`
+                                                  )
+                                                }
+                                              >
+                                                <DocumentTextIcon
+                                                  className="mr-3 h-5 w-5 text-cyan-400 "
+                                                  aria-hidden="true"
+                                                />
+                                                View details
+                                              </p>
+                                            )}
+                                          </Menu.Item>
+                                          {booking.status === "accept" && (
+                                            <>
+                                              <Menu.Item>
+                                                {({ active }) => (
+                                                  <p
+                                                    onClick={() => {
+                                                      setOpenDrop(true)
+                                                      setBookingId(booking.id)
+                                                    }}
+                                                    className={classNames(
+                                                      active
+                                                        ? "bg-red-100 text-gray-900"
+                                                        : "text-gray-700",
+                                                      "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                                    )}
+                                                  >
+                                                    <ExclamationCircleIcon
+                                                      className="mr-3 h-5 w-5 text-red-400"
+                                                      aria-hidden="true"
+                                                    />
+                                                    Cancel
+                                                  </p>
+                                                )}
+                                              </Menu.Item>
+                                            </>
+                                          )}
+                                        </div>
+                                      </Menu.Items>
+                                    </Transition>
+                                  </Menu>
+                                </td>
+                              </tr>
+                            ))}
+                          </>
+                        )}
                       </tbody>
                     </table>
                   </div>
