@@ -1,12 +1,12 @@
 import type { NextPage } from "next"
 import Head from "next/head"
 import MainCarousel from "../components/MainCarousel"
-// import Category from "../components/Category"
 import CombinedSlider from "../components/MainCardSlider/CombinedSlider"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axiosInstance from "../util/axiosInstace"
 import useGetMe from "../hooks/useGetMe"
+import Category from "../components/Category"
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -71,7 +71,7 @@ const Home: NextPage = () => {
 
       <MainCarousel />
       <main className="mx-auto container">
-        {/* <Category /> */}
+        <Category />
         <CombinedSlider />
       </main>
     </>

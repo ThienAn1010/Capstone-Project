@@ -14,7 +14,7 @@ export default function BookingHistory({ booking }: any) {
         <div className="lg:col-span-1 lg:flex lg:items-center lg:space-x-0">
           <div
             key={booking.id}
-            className="bg-white border-t border-b border-gray-200 shadow-sm sm:rounded-lg sm:border"
+            className="min-w-full bg-white border-t border-b border-gray-200 shadow-sm sm:rounded-lg sm:border"
           >
             <div className="flex items-center p-4 border-b border-gray-200 sm:p-6 sm:grid sm:grid-cols-2 sm:gap-x-6">
               <dl className="flex-1 grid grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
