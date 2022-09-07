@@ -6,6 +6,7 @@ import { SendGridService } from 'src/sendgrid/sendgrid.service';
 import { StripeService } from 'src/stripe/stripe.service';
 import { CheckoutDto } from './dto/checkout.dto';
 import * as dayjs from 'dayjs';
+import { RefundDto } from './dto/refund.dto';
 @Injectable()
 export class CheckoutService {
   constructor(
@@ -90,6 +91,7 @@ export class CheckoutService {
             offeredServiceId,
             payAmount,
             note: note ?? '',
+            paymentIntentId: sessionInfo.payment_intent,
           },
           include: {
             user: true,
@@ -153,5 +155,20 @@ export class CheckoutService {
         error,
       });
     }
+  }
+
+  async handleRefund(refundDto: RefundDto) {
+    const session = await this.stripeService.getStripe();
+    try {
+      const refund = await session.refunds.create({
+        amount: refundDto.amount,
+        payment_intent: refundDto.paymentIntentId,
+      });
+      console.log(refund);
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error);
+    }
+    return { status: 200, message: 'Successfully Refund' };
   }
 }

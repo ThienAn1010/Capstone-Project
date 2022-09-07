@@ -88,7 +88,7 @@ model Booking {
   finishedAt          DateTime?
   isDroppedConfirmed  Boolean        @default(false)
   isFinishedConfirmed Boolean        @default(false)
-  paymentIntentId     String         @default("")
+  paymentIntentId     String
   user                User           @relation(fields: [userId], references: [id])
   offeredService      OfferedService @relation(fields: [offeredServiceId], references: [id])
 }

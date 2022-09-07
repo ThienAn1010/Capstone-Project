@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import {
@@ -39,10 +40,26 @@ const CustomButton = () => {
     previousData: record,
   });
   const handleDialogClose = () => setOpen(false);
-  const handleConfirm = () => {
-    update();
+  const handleConfirm = async () => {
+    try {
+      await axios.post(
+        `/checkout/refund`,
+        {
+          paymentIntentId: record.paymentIntentId,
+          amount: record.payAmount,
+        },
+        {
+          baseURL: process.env.NEXT_PUBLIC_BACKEND_API_DEVELOPMENT,
+        }
+      );
+      await update();
+    } catch (error) {
+      console.log(error);
+    }
     handleDialogClose();
   };
+
+  console.log(record);
 
   if (record.droppedAt && !record.isDroppedConfirmed) {
     return (
@@ -68,6 +85,7 @@ const CustomButton = () => {
       </>
     );
   }
+  return null;
 };
 
 export const BookingList = () => {
