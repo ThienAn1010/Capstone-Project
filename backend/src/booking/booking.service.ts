@@ -65,6 +65,15 @@ export class BookingService {
       },
       data: {
         status: updatedBookingDto.status,
+        ...(updatedBookingDto.status === 'accept' && {
+          acceptedAt: new Date(),
+        }),
+        ...(updatedBookingDto.status === 'drop' && {
+          droppedAt: new Date(),
+        }),
+        ...(updatedBookingDto.status === 'success' && {
+          finishedAt: new Date(),
+        }),
       },
       select,
     });
