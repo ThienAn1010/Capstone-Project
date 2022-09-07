@@ -1,26 +1,6 @@
 import dayjs from "dayjs"
 import { CheckIcon } from "@heroicons/react/solid"
-
-const products = [
-  {
-    id: 1,
-    name: "Nomad Tumbler",
-    description:
-      "This durable and portable insulated tumbler will keep your beverage at the perfect temperature during your next adventure.",
-    href: "#",
-    price: "35.00",
-    status: "Preparing to ship",
-    step: 0,
-    date: "March 24, 2021",
-    datetime: "2021-03-24",
-    address: ["Floyd Miles", "7363 Cynthia Pass", "Toronto, ON N3Y 4H8"],
-    email: "f•••@example.com",
-    phone: "1•••••••••40",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/confirmation-page-03-product-01.jpg",
-    imageAlt: "Insulated bottle with white base and black snap lid.",
-  },
-]
+import { useEffect, useState } from "react"
 
 const steps = [
   {
@@ -60,12 +40,31 @@ function classNames(...classes: string[]) {
 }
 
 export default function BookingDetail({ booking }: any) {
+  const [step, setStep] = useState(0)
+  console.log(booking)
+
+  function getCurrentStep() {
+    if (booking.status === "pendingConfirm") {
+      setStep(0)
+    } else if (booking.status === "accept") {
+      setStep(1)
+    } else if (booking.status === "pendingFinished") {
+      setStep(2)
+    } else if (booking.status === "success") {
+      setStep(3)
+    }
+  }
+
+  useEffect(() => {
+    getCurrentStep()
+  })
+
   return (
     <div className="bg-checkout pb-12">
       <div className="max-w-2xl mx-auto pt-16 sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8">
         {/* Products */}
         <div className="mt-6">
-          <h2 className="sr-only">Products purchased</h2>
+          <h2 className="sr-only">Orders Booked</h2>
           <div className="space-y-8">
             <div className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-t-lg">
               <div className="py-2 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
@@ -121,7 +120,7 @@ export default function BookingDetail({ booking }: any) {
                     <div
                       className="h-2 bg-blue-600 rounded-full"
                       style={{
-                        width: `calc((${products[0].step} * 2 + 1) / 8 * 100%)`,
+                        width: `calc((${step} * 2 + 1) / 7 * 100%)`,
                       }}
                     />
                   </div>
@@ -129,7 +128,7 @@ export default function BookingDetail({ booking }: any) {
                     <div className="text-blue-600">Booking placed</div>
                     <div
                       className={classNames(
-                        products[0].step > 0 ? "text-blue-600" : "",
+                        step > 0 ? "text-blue-600" : "",
                         "text-center"
                       )}
                     >
@@ -137,7 +136,7 @@ export default function BookingDetail({ booking }: any) {
                     </div>
                     <div
                       className={classNames(
-                        products[0].step > 1 ? "text-blue-600" : "",
+                        step > 1 ? "text-blue-600" : "",
                         "text-center"
                       )}
                     >
@@ -145,7 +144,7 @@ export default function BookingDetail({ booking }: any) {
                     </div>
                     <div
                       className={classNames(
-                        products[0].step > 2 ? "text-blue-600" : "",
+                        step > 2 ? "text-blue-600" : "",
                         "text-right"
                       )}
                     >

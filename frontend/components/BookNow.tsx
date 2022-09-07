@@ -25,7 +25,12 @@ const BookNow = () => {
         </>
       ) : (
         <>
-          <h3 className="text-4xl font-bold">${data?.price}</h3>
+          <img
+            src={data?.thumbnail}
+            alt="service picture"
+            className="h-48 w-full object-cover"
+          />
+          <h3 className="text-4xl font-bold border-t pt-2">${data?.price}</h3>
         </>
       )}
       <div>

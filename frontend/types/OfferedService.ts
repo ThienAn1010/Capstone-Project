@@ -25,4 +25,5 @@ export interface OfferedService {
   description: string
   documents: string
   estimate: string
+  thumbnail: string
 }

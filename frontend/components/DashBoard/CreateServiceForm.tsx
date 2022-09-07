@@ -101,7 +101,7 @@ export default function CreateServiceForm({ serviceData }: any) {
 
   const thumbs = files.map((file: any) => (
     <div key={file.name}>
-      <div className="h-full w-full rounded-md">
+      <div className="h-80 w-full rounded-md mt-4">
         <img
           src={file.preview}
           alt="Service Image"
@@ -487,9 +487,9 @@ export default function CreateServiceForm({ serviceData }: any) {
                     <p className="mt-4 text-red-500 text-lg">{error}</p>
                   </>
                 )}
+                {thumbs}
               </div>
               <div className="text-center">
-                {thumbs}
                 {files.length > 0 && (
                   <button
                     type="button"
