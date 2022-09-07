@@ -19,17 +19,17 @@ model User {
   username     String
   password     String?
   name         String
-  address      String?
-  lat          Float?
-  long         Float?
   picture      String        @default("https://res.cloudinary.com/dybygufkr/image/upload/v1593000869/avatar_q2ysxd.jpg")
   phoneNumber  String?
   createdAt    DateTime      @default(now())
   role         Role          @default(user)
-  operator     Operator?
-  paperMaker   PaperMaker?
+  address      String?
+  lat          Float?
+  long         Float?
   authProvider AuthProvider?
   bookings     Booking[]
+  operator     Operator?
+  paperMaker   PaperMaker?
 }
 
 model Operator {
@@ -41,15 +41,15 @@ model Operator {
 model PaperMaker {
   id                  String           @id @default(cuid())
   userId              String           @unique
-  user                User             @relation(fields: [userId], references: [id])
   totalCases          Int              @default(0)
   pastSuccessfulCases Int              @default(0)
   rating              Float            @default(0)
   status              PaperMakerStatus @default(available)
   isConfirmed         Boolean          @default(false)
-  offeredServices     OfferedService[]
   aboutMe             String?
   numberOfReviews     Int              @default(0)
+  user                User             @relation(fields: [userId], references: [id])
+  offeredServices     OfferedService[]
 }
 
 model Service {
@@ -66,30 +66,30 @@ model OfferedService {
   price        Float
   duration     Int
   createdAt    DateTime   @default(now())
-  paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
-  service      Service    @relation(fields: [serviceId], references: [id])
-  bookings     Booking[]
   description  String
   documents    String
   estimate     String
+  paperMaker   PaperMaker @relation(fields: [paperMakerId], references: [id])
+  service      Service    @relation(fields: [serviceId], references: [id])
+  bookings     Booking[]
   thumbnail    String     @default("https://images.smartcapitalmind.com/person-using-pen-near-documents-and-chart.jpg")
 }
 
 model Booking {
   id                  String         @id @default(cuid())
   offeredServiceId    String
-  offeredService      OfferedService @relation(fields: [offeredServiceId], references: [id])
   userId              String
-  user                User           @relation(fields: [userId], references: [id])
   note                String
   payAmount           Float
   status              BookingStatus  @default(pendingConfirm)
-  createdAt           DateTime       @default(now())
   acceptedAt          DateTime?
+  createdAt           DateTime       @default(now())
   droppedAt           DateTime?
   finishedAt          DateTime?
-  isFinishedConfirmed Boolean        @default(false)
   isDroppedConfirmed  Boolean        @default(false)
+  isFinishedConfirmed Boolean        @default(false)
+  offeredService      OfferedService @relation(fields: [offeredServiceId], references: [id])
+  user                User           @relation(fields: [userId], references: [id])
 }
 
 enum Role {
