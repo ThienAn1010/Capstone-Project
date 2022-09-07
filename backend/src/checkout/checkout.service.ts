@@ -80,7 +80,7 @@ export class CheckoutService {
       if (event.type === 'checkout.session.completed') {
         const sessionInfo = event.data.object as any;
         console.log(sessionInfo);
-        const [userId, offeredServiceId, address, note] = (
+        const [userId, offeredServiceId, address, phone, note] = (
           sessionInfo.client_reference_id as string
         ).split('||');
         const payAmount = sessionInfo.amount_total / 100;
@@ -137,6 +137,7 @@ export class CheckoutService {
             data.user.phoneNumber
           } within 24 hours, or on the ready to receive call from your client. If you accept, please go to your dashboard and accept this request.
           </p>
+          <p>Note: This is the address of your client: ${data.user.address}</p>
           <p>If you have any problem. Please don't hesitate to contact us</p>
           <p>Thank you for using our service.</p>
           `,

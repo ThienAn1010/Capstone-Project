@@ -4,6 +4,7 @@ import HorizontalCard from "./HorizontalCard"
 import VerticalCard from "./VerticalCard"
 
 export default function CardSlider({ ppmkers }: any) {
+   console.log(ppmkers)
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -22,20 +23,19 @@ export default function CardSlider({ ppmkers }: any) {
       items: 1,
     },
   }
-  const update_ppmker = [ppmkers[0], ppmkers[1], ppmkers[2]]
   return (
     <div className="max-w-2xl mx-auto py-4 px-4 sm:py-8 sm:px-6 lg:max-w-full">
       <div className="md:flex md:items-center md:justify-between md:px-2">
         <div className="flex flew-row flex-wrap">
           <h2 className="text-2xl font-semibold text-gray-900">
-            Popular papermakers in&nbsp;
+            Popular papermakers
           </h2>
-          <a
+          {/* <a
             href="#"
             className="text-2xl font-semibold text-test hover:underline hover:text-blue-700"
           >
-            {ppmkers[0].type}
-          </a>
+            {ppmkers[0].service.name}
+          </a> */}
         </div>
 
         <a
@@ -56,7 +56,7 @@ export default function CardSlider({ ppmkers }: any) {
       </div>
       <div className="block py-4 md:hidden">
         <div className="grid grid-cols-1 gap-4">
-          {update_ppmker.map((ppmker) => (
+          {ppmkers.map((ppmker: any) => (
             <div key={ppmker.id}>
               <HorizontalCard ppmker={ppmker} />
             </div>

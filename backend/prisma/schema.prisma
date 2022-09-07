@@ -76,18 +76,20 @@ model OfferedService {
 }
 
 model Booking {
-  id               String         @id @default(cuid())
-  offeredServiceId String
-  offeredService   OfferedService @relation(fields: [offeredServiceId], references: [id])
-  userId           String
-  user             User           @relation(fields: [userId], references: [id])
-  note             String
-  payAmount        Float
-  status           BookingStatus  @default(pendingConfirm)
-  createdAt        DateTime       @default(now())
-  acceptedAt       DateTime?
-  droppedAt        DateTime?
-  finishedAt       DateTime?
+  id                  String         @id @default(cuid())
+  offeredServiceId    String
+  offeredService      OfferedService @relation(fields: [offeredServiceId], references: [id])
+  userId              String
+  user                User           @relation(fields: [userId], references: [id])
+  note                String
+  payAmount           Float
+  status              BookingStatus  @default(pendingConfirm)
+  createdAt           DateTime       @default(now())
+  acceptedAt          DateTime?
+  droppedAt           DateTime?
+  finishedAt          DateTime?
+  isFinishedConfirmed Boolean        @default(false)
+  isDroppedConfirmed  Boolean        @default(false)
 }
 
 enum Role {
@@ -105,7 +107,6 @@ enum BookingStatus {
   accept
   deny
   pendingConfirm
-  pendingFinished
   drop
   success
 }

@@ -1,18 +1,22 @@
 import Link from "next/link"
 export default function Category() {
   let categories = [
-    { id: "1", name: "Marriage Certificate", src: "/Marriage Certificate.svg" },
-    { id: "2", name: "Work Permit", src: "/Work Permit.svg" },
-    { id: "3", name: "Driver License", src: "/Driver License.svg" },
-    { id: "4", name: "Social Insurance", src: "/Social Insurance.svg" },
-    { id: "5", name: "Medical Insurance", src: "/Medical Insurance.svg" },
+    {
+      id: "1",
+      name: "Marriage Certificate",
+      src: "/Marriage Certificate.webp",
+    },
+    { id: "2", name: "Work Permit", src: "/Work Permit.webp" },
+    { id: "3", name: "Driver License", src: "/Driver License.webp" },
+    { id: "4", name: "Social Insurance", src: "/Social Insurance.webp" },
+    { id: "5", name: "Medical Insurance", src: "/Medical Insurance.webp" },
     {
       id: "6",
       name: "Practising Certificate",
-      src: "/Practising Certificate.svg",
+      src: "/Practising Certificate.webp",
     },
-    { id: "7", name: "Personal Income Tax", src: "/Personal Income Tax.svg" },
-    { id: "8", name: "Passport", src: "/Passport.svg" },
+    { id: "7", name: "Personal Income Tax", src: "/Personal Income Tax.webp" },
+    { id: "8", name: "Passport", src: "/Passport.webp" },
   ]
 
   return (
@@ -38,6 +42,9 @@ export default function Category() {
                 className="w-full h-full object-center hover:scale-110"
               />
             </div>
+            <p className="hidden text-lg font-medium text-center mt-3 text-stone-700 hover:text-blue-900 md:block hover:cursor-pointer">
+              {category.name}
+            </p>
           </div>
         ))}
       </div>
