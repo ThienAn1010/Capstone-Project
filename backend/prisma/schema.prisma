@@ -88,8 +88,9 @@ model Booking {
   finishedAt          DateTime?
   isDroppedConfirmed  Boolean        @default(false)
   isFinishedConfirmed Boolean        @default(false)
-  offeredService      OfferedService @relation(fields: [offeredServiceId], references: [id])
+  paymentIntentId     String
   user                User           @relation(fields: [userId], references: [id])
+  offeredService      OfferedService @relation(fields: [offeredServiceId], references: [id])
 }
 
 enum Role {
