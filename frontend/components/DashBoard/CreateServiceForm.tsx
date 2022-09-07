@@ -1,13 +1,46 @@
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import useGetAllServices from "../../hooks/useGetAllServices"
 import { Controller, useForm } from "react-hook-form"
 import axiosInstance from "../../util/axiosInstace"
 import toast from "react-hot-toast"
 import Select from "react-select"
 import React from "react"
+import { useDropzone } from "react-dropzone"
 import LoadingSpinner from "../LoadingSkeleton/LoadingSpinner"
+import axios from "axios"
+
+const baseStyle = {
+  flex: 1,
+  width: "100%",
+  display: "flex",
+  marginTop: "1rem",
+  flexDirection: "column" as "column",
+  alignItems: "center",
+  padding: "20px",
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: "#D3D3D3",
+  borderStyle: "dashed",
+  color: "#bdbdbd",
+  outline: "none",
+  transition: "border .24s ease-in-out",
+}
+
+const focusedStyle = {
+  borderColor: "#2196f3",
+}
+
+const acceptStyle = {
+  borderColor: "#00e676",
+}
+
+const rejectStyle = {
+  borderColor: "#ff1744",
+}
 
 export default function CreateServiceForm({ serviceData }: any) {
+  const [files, setFiles]: any = useState([])
+  const [error, setError] = useState("")
   const { data, isLoading: serviceLoading } = useGetAllServices()
   const [isLoading, setIsLoading] = useState(false)
   const serviceId = serviceData?.offeredServices[0]?.id
@@ -26,11 +59,81 @@ export default function CreateServiceForm({ serviceData }: any) {
     }
   })
 
+  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
+    useDropzone({
+      accept: {
+        "image/*": [".jpeg", ".jpg", ".png"],
+      },
+      maxSize: 10485760,
+      maxFiles: 1,
+      multiple: false,
+      onDrop: (acceptedFiles, fileRejections) => {
+        setFiles(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          )
+        )
+        fileRejections.forEach((file) => {
+          file.errors.forEach((err) => {
+            if (err.code === "file-too-large") {
+              setError("Error: File must not exceed 10MB limit!")
+            }
+
+            if (err.code === "file-invalid-type") {
+              setError("Error: File must be an image!")
+            }
+          })
+        })
+      },
+    })
+
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isFocused ? focusedStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    [isFocused, isDragAccept, isDragReject]
+  )
+
+  const thumbs = files.map((file: any) => (
+    <div key={file.name}>
+      <div className="h-80 w-full rounded-md mt-4">
+        <img
+          src={file.preview}
+          alt="Service Image"
+          onLoad={() => {
+            URL.revokeObjectURL(file.preview)
+          }}
+          className="object-cover border-gray-300 border rounded-md h-full w-full group-hover:mix-blend-multiply"
+        />
+      </div>
+    </div>
+  ))
+
+  useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+    return () => files.forEach((file: any) => URL.revokeObjectURL(file.preview))
+  })
+
   const onSubmit = async (data: any) => {
     setIsLoading(true)
     const createOrUpdateService = (async () => {
+      let thumbnail
+      if (files.length == 1) {
+        const formData = new FormData()
+        formData.append("file", files[0])
+        formData.append("upload_preset", "iiyg1094")
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/dybygufkr/image/upload",
+          formData
+        )
+        thumbnail = response.data.secure_url
+      }
       if (hasService) {
-        console.log("patch")
         const response = await axiosInstance.patch(
           `/offered-services/${serviceId}`,
           {
@@ -40,11 +143,11 @@ export default function CreateServiceForm({ serviceData }: any) {
             description: data.description,
             documents: data.documents,
             estimate: data.estimate,
+            thumbnail: thumbnail,
           }
         )
         return response
       } else {
-        console.log("post")
         const response = await axiosInstance.post("/offered-services", {
           serviceId: data.category,
           duration: Number(data.duration),
@@ -52,6 +155,7 @@ export default function CreateServiceForm({ serviceData }: any) {
           description: data.description,
           documents: data.documents,
           estimate: data.estimate,
+          thumbnail: thumbnail,
         })
         return response
       }
@@ -151,7 +255,6 @@ export default function CreateServiceForm({ serviceData }: any) {
                   </div>
                 </div>
               </div>
-
               <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                   <label
@@ -344,6 +447,58 @@ export default function CreateServiceForm({ serviceData }: any) {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="pt-8 sm:pt-10">
+              <div>
+                <h3 className="text-lg leading-6 font-medium text-gray-900">
+                  Service Display Picture
+                </h3>
+                <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                  Provide an image of the service or use the default image
+                </p>
+              </div>
+
+              <div {...getRootProps({ style })}>
+                <svg
+                  className="mx-auto h-12 w-12 text-gray-400"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <input {...getInputProps()} />
+                <p className="text-xs text-gray-500">
+                  PNG, JPG, GIF up to 10MB
+                </p>
+                <p className="text-xs text-gray-500">
+                  Click to select image or drag an image in.
+                </p>
+                {error && (
+                  <>
+                    <p className="mt-4 text-red-500 text-lg">{error}</p>
+                  </>
+                )}
+                {thumbs}
+              </div>
+              <div className="text-center">
+                {files.length > 0 && (
+                  <button
+                    type="button"
+                    className="justify-center mt-4 py-2 px-4 bg-red-600 text-white active:bg-red-700 text-sm font-bold uppercase rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                    onClick={() => setFiles([])}
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
             </div>
           </div>
