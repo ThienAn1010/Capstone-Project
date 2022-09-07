@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import Head from "next/head"
 import MainCarousel from "../components/MainCarousel"
-import Category from "../components/Category"
+// import Category from "../components/Category"
 import CombinedSlider from "../components/MainCardSlider/CombinedSlider"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
