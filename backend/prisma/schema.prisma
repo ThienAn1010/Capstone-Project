@@ -89,6 +89,7 @@ model Booking {
   finishedAt          DateTime?
   isFinishedConfirmed Boolean        @default(false)
   isDroppedConfirmed  Boolean        @default(false)
+  paymentIntentId     String         @default("")
 }
 
 enum Role {
