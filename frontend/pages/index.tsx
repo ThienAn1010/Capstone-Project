@@ -71,7 +71,7 @@ const Home: NextPage = () => {
 
       <MainCarousel />
       <main className="mx-auto container">
-        <Category />
+        {/* <Category /> */}
         <CombinedSlider />
       </main>
     </>
