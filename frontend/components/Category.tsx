@@ -1,7 +1,11 @@
 import Link from "next/link"
 export default function Category() {
   let categories = [
-    { id: "1", name: "Marriage Certificate", src: "/Marriage Certificate.webp" },
+    {
+      id: "1",
+      name: "Marriage Certificate",
+      src: "/Marriage Certificate.webp",
+    },
     { id: "2", name: "Work Permit", src: "/Work Permit.webp" },
     { id: "3", name: "Driver License", src: "/Driver License.webp" },
     { id: "4", name: "Social Insurance", src: "/Social Insurance.webp" },
@@ -39,8 +43,8 @@ export default function Category() {
               />
             </div>
             <p className="hidden text-lg font-medium text-center mt-3 text-stone-700 hover:text-blue-900 md:block hover:cursor-pointer">
-                {category.name}
-              </p>
+              {category.name}
+            </p>
           </div>
         ))}
       </div>
