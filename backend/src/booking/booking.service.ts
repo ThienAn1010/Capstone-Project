@@ -53,6 +53,9 @@ export class BookingService {
   async getAllBookings() {
     const bookings = await this.prismaService.booking.findMany({
       select,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
     return { status: 'success', length: bookings.length, bookings: bookings };
   }
