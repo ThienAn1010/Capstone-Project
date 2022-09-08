@@ -6,4 +6,6 @@ export class RefundDto {
   paymentIntentId: string;
   @IsNotEmpty()
   amount: number;
+  @IsNotEmpty()
+  userId: string;
 }

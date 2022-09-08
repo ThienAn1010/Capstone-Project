@@ -7,6 +7,7 @@ import { StripeService } from 'src/stripe/stripe.service';
 import { CheckoutDto } from './dto/checkout.dto';
 import * as dayjs from 'dayjs';
 import { RefundDto } from './dto/refund.dto';
+
 @Injectable()
 export class CheckoutService {
   constructor(
@@ -166,9 +167,33 @@ export class CheckoutService {
       });
       console.log(refund);
     } catch (error) {
-      console.log(error);
       throw new BadRequestException(error);
     }
+
+    try {
+      const user = await this.prismaService.user.findUnique({
+        where: { id: refundDto.userId },
+      });
+      const sendToUser = {
+        to: user.username, // Change to your recipient
+        from: {
+          email: this.configService.get('SENDGRID_VERIFIED_SENDER'),
+          name: 'Paperwork',
+        }, // Change to your verified sender
+        subject: 'Refund successfully',
+        html: `
+          <p>Dear ${user.username}</h1>
+          <p>We have refund back to you $${refundDto.amount} to your account.</p>
+
+          <p>If you have any problem. Please don't hesitate to contact us</p>
+          <p>Thank you for using our service.</p>
+          `,
+      };
+      await this.sendGridService.getSendGrid().send(sendToUser);
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
+
     return { status: 200, message: 'Successfully Refund' };
   }
 }
