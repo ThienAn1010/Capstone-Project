@@ -15,7 +15,7 @@ const navigation = {
       key: 2,
     },
     {
-      name: "In progress",
+      name: "In Progress",
       key: 3,
     },
     {
@@ -23,7 +23,7 @@ const navigation = {
       key: 4,
     },
     {
-      name: "Canceled",
+      name: "Cancelled",
       key: 5,
     },
   ],
@@ -34,7 +34,7 @@ function classNames(...classes: string[]) {
 
 export default function BookingHistoryWithNav() {
   const { data, isLoading } = useGetUserBookings()
-
+  console.log(data)
   return (
     <div className="divide-y divide-gray-200 lg:col-span-9">
       {isLoading ? (
@@ -71,24 +71,23 @@ export default function BookingHistoryWithNav() {
                       <p>No booking placed</p>
                     </div>
                   ) : (
-                    data?.bookings.map((booking) => (
-                      <BookingHistory booking={booking} key={booking.id} />
-                    ))
+                    data?.bookings
+                      .reverse()
+                      .map((booking) => (
+                        <BookingHistory booking={booking} key={booking.id} />
+                      ))
                   )
                 ) : null}
                 {status.key == 2 ? (
                   data?.bookings.filter(
-                    (booking) =>
-                      booking.status === "pendingConfirm" ||
-                      booking.status == "pendingFinished"
+                    (booking) => booking.status === "pendingConfirm"
                   ).length == 0 ? (
                     <div className="text-center text-gray-500">
                       <p>No booking placed</p>
                     </div>
                   ) : (
                     data?.bookings.map((booking) =>
-                      booking.status == "pendingConfirm" ||
-                      booking.status == "pendingFinished" ? (
+                      booking.status == "pendingConfirm" ? (
                         <BookingHistory booking={booking} key={booking.id} />
                       ) : null
                     )
@@ -133,11 +132,13 @@ export default function BookingHistoryWithNav() {
                       <p>No booking placed</p>
                     </div>
                   ) : (
-                    data?.bookings.map((booking) =>
-                      booking.status == "deny" || booking.status == "drop" ? (
-                        <BookingHistory booking={booking} key={booking.id} />
-                      ) : null
-                    )
+                    data?.bookings
+                      .reverse()
+                      .map((booking) =>
+                        booking.status == "deny" || booking.status == "drop" ? (
+                          <BookingHistory booking={booking} key={booking.id} />
+                        ) : null
+                      )
                   )
                 ) : null}
               </Tab.Panel>

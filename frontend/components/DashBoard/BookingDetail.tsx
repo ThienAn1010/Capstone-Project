@@ -114,30 +114,42 @@ export default function BookingDetail({ booking }: any) {
                     </div>
                     <div>
                       {booking.status === "pendingConfirm" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-yellow-100 text-yellow-800 text-sm">
+                        <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-yellow-100 text-yellow-800 text-sm">
                           Pending
                         </span>
                       )}
                       {booking.status === "accept" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-green-100 text-green-800 text-sm">
+                        <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-green-100 text-green-800 text-sm">
                           In Progress
                         </span>
                       )}
                       {booking.status === "deny" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                        <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-red-100 text-red-800 text-sm">
                           Declined
                         </span>
                       )}
                       {booking.status === "drop" &&
-                        booking.isFinishedConfirmed === false && (
-                          <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                        booking.isDroppedConfirmed === false && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-orange-100 text-orange-800 text-sm">
                             Pending Refund
                           </span>
                         )}
                       {booking.status === "drop" &&
-                        booking.isFinishedConfirmed && (
-                          <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                        booking.isDroppedConfirmed && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-red-100 text-red-800 text-sm">
                             Cancelled
+                          </span>
+                        )}
+                      {booking.status === "success" &&
+                        booking.isFinishedConfirmed === false && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-indigo-100 text-indigo-800 text-sm">
+                            Pending Finish
+                          </span>
+                        )}
+                      {booking.status === "success" &&
+                        booking.isFinishedConfirmed && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-emerald-100 text-emerald-800 text-sm">
+                            Finished
                           </span>
                         )}
                     </div>

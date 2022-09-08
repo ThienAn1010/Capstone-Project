@@ -6,7 +6,6 @@ import {
   XCircleIcon,
   DocumentTextIcon,
   ChevronDownIcon,
-  ExclamationCircleIcon,
 } from "@heroicons/react/solid"
 import useGetPaperMakerBooking from "../../hooks/useGetPaperMakerBooking"
 import LoadingSpinner from "../LoadingSkeleton/LoadingSpinner"
@@ -22,7 +21,7 @@ export default function BookingManager() {
   const { data, isLoading } = useGetPaperMakerBooking()
   const [openAccept, setOpenAccept] = useState(false)
   const [openDecline, setOpenDecline] = useState(false)
-  const [openDrop, setOpenDrop] = useState(false)
+  const [openFinish, setopenFinish] = useState(false)
   const [bookingId, setBookingId] = useState("")
   const cancelButtonRef = useRef(null)
   const router = useRouter()
@@ -158,7 +157,10 @@ export default function BookingManager() {
                                 </td>
                                 <td className="max-w-[200px] px-2 py-4 text-sm text-gray-500">
                                   <p className="text-sm line-clamp-3">
-                                    {booking.note}
+                                    {!booking.note ||
+                                    booking.note === "undefined"
+                                      ? "None"
+                                      : booking.note}
                                   </p>
                                 </td>
                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -177,11 +179,30 @@ export default function BookingManager() {
                                       Declined
                                     </span>
                                   )}
-                                  {booking.status === "drop" && (
-                                    <span className="inline-flex rounded-md bg-red-100 px-4 py-2 font-semibold leading-5 text-red-800 text-sm">
-                                      Cancelled
-                                    </span>
-                                  )}
+                                  {booking.status === "drop" &&
+                                    booking.isDroppedConfirmed === false && (
+                                      <span className="inline-flex rounded-md bg-orange-100 px-4 py-2 font-semibold leading-5 text-orange-800 text-sm">
+                                        Pending Cancel
+                                      </span>
+                                    )}
+                                  {booking.status === "drop" &&
+                                    booking.isDroppedConfirmed === true && (
+                                      <span className="inline-flex rounded-md bg-red-100 px-4 py-2 font-semibold leading-5 text-red-800 text-sm">
+                                        Cancelled
+                                      </span>
+                                    )}
+                                  {booking.status === "success" &&
+                                    booking.isFinishedConfirmed === false && (
+                                      <span className="inline-flex rounded-md bg-indigo-100 px-4 py-2 font-semibold leading-5 text-indigo-800 text-sm">
+                                        Pending Finished
+                                      </span>
+                                    )}
+                                  {booking.status === "success" &&
+                                    booking.isFinishedConfirmed === true && (
+                                      <span className="inline-flex rounded-md bg-emerald-100 px-4 py-2 font-semibold leading-5 text-emerald-800 text-sm">
+                                        Finished
+                                      </span>
+                                    )}
                                 </td>
                                 <td className="whitespace-nowrap space-y-4 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                   <Menu
@@ -253,6 +274,32 @@ export default function BookingManager() {
                                                       aria-hidden="true"
                                                     />
                                                     Decline
+                                                  </p>
+                                                )}
+                                              </Menu.Item>
+                                            </>
+                                          )}
+                                          {booking.status === "accept" && (
+                                            <>
+                                              <Menu.Item>
+                                                {({ active }) => (
+                                                  <p
+                                                    onClick={() => {
+                                                      setopenFinish(true)
+                                                      setBookingId(booking.id)
+                                                    }}
+                                                    className={classNames(
+                                                      active
+                                                        ? "bg-emerald-100 text-gray-900"
+                                                        : "text-gray-700",
+                                                      "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
+                                                    )}
+                                                  >
+                                                    <CheckCircleIcon
+                                                      className="mr-3 h-5 w-5 text-emerald-400"
+                                                      aria-hidden="true"
+                                                    />
+                                                    Finish
                                                   </p>
                                                 )}
                                               </Menu.Item>
@@ -477,12 +524,12 @@ export default function BookingManager() {
       </Transition.Root>
 
       {/* This is the modal for cancel message. */}
-      <Transition.Root show={openDrop} as={Fragment}>
+      <Transition.Root show={openFinish} as={Fragment}>
         <Dialog
           as="div"
           className="fixed z-10 inset-0 overflow-y-auto"
           initialFocus={cancelButtonRef}
-          onClose={setOpenDrop}
+          onClose={setopenFinish}
         >
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <Transition.Child
@@ -515,9 +562,9 @@ export default function BookingManager() {
             >
               <div className="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                 <div>
-                  <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-                    <ExclamationCircleIcon
-                      className="h-6 w-6 text-red-600"
+                  <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-emerald-100">
+                    <CheckCircleIcon
+                      className="h-6 w-6 text-emerald-600"
                       aria-hidden="true"
                     />
                   </div>
@@ -526,11 +573,12 @@ export default function BookingManager() {
                       as="h3"
                       className="text-lg leading-6 font-medium text-gray-900"
                     >
-                      Cancel Booking
+                      Finish Booking
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure that you want to cancel this booking?
+                        Are you sure that you want to confirm finishing this
+                        booking?
                       </p>
                       <p className="text-sm text-gray-500">
                         You can not undo this action.
@@ -543,16 +591,16 @@ export default function BookingManager() {
                     type="button"
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-semibold text-white hover:bg-red-700 focus:outline-none sm:col-start-1 sm:text-sm"
                     onClick={() => {
-                      setOpenDrop(false)
-                      acceptOrDenyOrder("drop")
+                      setopenFinish(false)
+                      acceptOrDenyOrder("success")
                     }}
                   >
-                    Yes, cancel this booking
+                    Yes, finish this booking
                   </button>
                   <button
                     type="button"
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:col-start-2 sm:text-sm"
-                    onClick={() => setOpenDrop(false)}
+                    onClick={() => setopenFinish(false)}
                     ref={cancelButtonRef}
                   >
                     Cancel
