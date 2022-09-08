@@ -46,13 +46,22 @@ export default function BookingHistory({ booking }: any) {
                     <p className="text-blue-700">View Booking</p>
                   </button>
                 </Link>
-
-                <button
-                  type="button"
-                  className="cursor-pointer flex items-center justify-center bg-blue-700 py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  <span className="text-white">Review</span>
-                </button>
+                {booking.status === "success" && (
+                  <button
+                    type="button"
+                    className="cursor-pointer flex items-center justify-center bg-blue-700 py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    <span className="text-white">Review</span>
+                  </button>
+                )}
+                {booking.status === "pendingFinished" && (
+                  <button
+                    type="button"
+                    className="cursor-pointer flex items-center justify-center bg-blue-700 py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    <span className="text-white">Complete</span>
+                  </button>
+                )}
               </div>
             </div>
 
@@ -132,18 +141,18 @@ export default function BookingHistory({ booking }: any) {
                         aria-hidden="true"
                       />
                       <p className="ml-2 text-sm font-medium text-gray-500">
-                        Status: Deny
+                        Status: Denied
                       </p>
                     </div>
                   ) : null}
                   {booking.status == "drop" ? (
                     <div className="flex items-center">
                       <XCircleIcon
-                        className="w-5 h-5 text-green-500"
+                        className="w-5 h-5 text-red-500"
                         aria-hidden="true"
                       />
                       <p className="ml-2 text-sm font-medium text-gray-500">
-                        Status: Drop
+                        Status: Cancelled
                       </p>
                     </div>
                   ) : null}

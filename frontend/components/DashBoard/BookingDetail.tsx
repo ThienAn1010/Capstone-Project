@@ -1,6 +1,7 @@
 import dayjs from "dayjs"
 import { CheckIcon } from "@heroicons/react/solid"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
 
 const steps = [
   {
@@ -40,6 +41,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function BookingDetail({ booking }: any) {
+  const router = useRouter()
   const [step, setStep] = useState(0)
   console.log(booking)
 
@@ -70,9 +72,12 @@ export default function BookingDetail({ booking }: any) {
               <div className="py-2 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
                 <div className="pb-2 justify-between border-b sm:flex lg:col-span-12">
                   <div>
-                    <div className="flex items-center text-gray-500 hover:cursor-pointer">
+                    <div
+                      className="flex items-center text-gray-500 hover:cursor-pointer"
+                      onClick={() => router.back()}
+                    >
                       &larr;
-                      <p className="text-gray-500">Back</p>
+                      <p className="text-gray-500 hover:text-blue-400">Back</p>
                     </div>
                   </div>
                   <div className="flex items-baseline divide-x divide-gray-400">
