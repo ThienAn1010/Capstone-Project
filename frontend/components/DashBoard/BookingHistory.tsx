@@ -8,6 +8,7 @@ import dayjs from "dayjs"
 import Link from "next/link"
 
 export default function BookingHistory({ booking }: any) {
+  console.log(booking)
   return (
     <div className="mt-5 mb-5">
       <div className="max-w-full mx-auto sm:px-2 lg:px-8">
@@ -145,7 +146,8 @@ export default function BookingHistory({ booking }: any) {
                       </p>
                     </div>
                   ) : null}
-                  {booking.status == "drop" ? (
+                  {booking.status == "drop" &&
+                  booking.isFinishedConfirmed === true ? (
                     <div className="flex items-center">
                       <XCircleIcon
                         className="w-5 h-5 text-red-500"
@@ -153,6 +155,18 @@ export default function BookingHistory({ booking }: any) {
                       />
                       <p className="ml-2 text-sm font-medium text-gray-500">
                         Status: Cancelled
+                      </p>
+                    </div>
+                  ) : null}
+                  {booking.status == "drop" &&
+                  booking.isFinishedConfirmed === false ? (
+                    <div className="flex items-center">
+                      <XCircleIcon
+                        className="w-5 h-5 text-red-500"
+                        aria-hidden="true"
+                      />
+                      <p className="ml-2 text-sm font-medium text-gray-500">
+                        Status: Pending Refund
                       </p>
                     </div>
                   ) : null}
