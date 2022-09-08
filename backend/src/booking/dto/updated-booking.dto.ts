@@ -6,4 +6,6 @@ export class UpdatedBookingDto {
   status: BookingStatus;
   @IsOptional()
   isFinishedConfirmed: boolean;
+  @IsOptional()
+  isDone: boolean;
 }

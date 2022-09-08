@@ -47,6 +47,7 @@ const RefundButton = () => {
         {
           paymentIntentId: record.paymentIntentId,
           amount: record.payAmount,
+          userId: record.userId,
         },
         {
           baseURL: process.env.NEXT_PUBLIC_BACKEND_API_DEVELOPMENT,
@@ -99,11 +100,10 @@ const ActionButton = () => {
   const handleDialogClose = () => setOpen(false);
   const handleConfirm = async () => {
     try {
-      await axios.post(
-        `/checkout/refund`,
+      await axios.patch(
+        `/bookings/${record.id}`,
         {
-          paymentIntentId: record.paymentIntentId,
-          amount: record.payAmount,
+          isDone: true,
         },
         {
           baseURL: process.env.NEXT_PUBLIC_BACKEND_API_DEVELOPMENT,
