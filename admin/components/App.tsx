@@ -14,7 +14,7 @@ const dataProvider = postgrestRestProvider("/api/admin");
 const App = () => {
   return (
     // <Admin dataProvider={dataProvider} authProvider={authProvider}>
-    <Admin dataProvider={dataProvider}>
+    <Admin dataProvider={dataProvider} authProvider={authProvider}>
       <Resource name={"PaperMaker"} list={PaperMakerList} />
       <Resource name={"User"} list={UserList} edit={UserEdit} />
       <Resource name={"Booking"} list={BookingList} />
