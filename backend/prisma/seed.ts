@@ -34,7 +34,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '1',
-      username: 'papermaker1@gmail.com',
+      username: 'papermaker1@yop.com',
       name: 'Vu Minh Long',
       picture:
         'https://lh3.googleusercontent.com/a-/AOh14GhPZG1XjXzqUqxvmsVQfoBts1TfWUcTn1fnLn_e=s96-c',
@@ -69,7 +69,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '2',
-      username: 'papermaker2@gmail.com',
+      username: 'papermaker2@yop.com',
       name: 'Vu Minh Phuc',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1000_thumb.jpg',
       address: 'Phuong 4, Quan Tan Binh',
@@ -102,7 +102,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '3',
-      username: 'papermaker3@gmail.com',
+      username: 'papermaker3@yop.com',
       name: 'Phuc Minh Hoa',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1001_thumb.jpg',
       password,
@@ -137,7 +137,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '4',
-      username: 'papermaker4@gmail.com',
+      username: 'papermaker4@yop.com',
       name: 'Minh Vu Phuc',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1002_thumb.jpg',
       password,
@@ -172,7 +172,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '5',
-      username: 'papermaker5@gmail.com',
+      username: 'papermaker5@yop.com',
       name: 'Vu Duc Trung',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1003_thumb.jpg',
       password,
@@ -206,7 +206,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123456',
       id: '16',
-      username: 'giovanniastika@gmail.com',
+      username: 'giovanniastika@yop.com',
       name: 'Giovanni Astika',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1004_thumb.jpg',
       password,
@@ -240,7 +240,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123456',
       id: '17',
-      username: 'hienhoangovu@gmail.com',
+      username: 'hienhoangovu@yop.com',
       name: 'Ngo Vu Hien Hoa',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1005_thumb.jpg',
       password,
@@ -275,7 +275,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935312345',
       id: '18',
-      username: 'hungmanhnguyen@gmail.com',
+      username: 'hungmanhnguyen@yop.com',
       name: 'Nguyen Hung Manh ',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-2686_thumb.jpg',
       password,
@@ -310,7 +310,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123456',
       id: '19',
-      username: 'giahandao@gmail.com',
+      username: 'giahandao@yop.com',
       name: 'Han Dao',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1617_thumb.jpg',
       password,
@@ -344,7 +344,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123321',
       id: '20',
-      username: 'michalepanjatan@gmail.com',
+      username: 'michalepanjatan@yop.com',
       name: 'Michale Panjatan',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1100_thumb.jpg',
       password,
@@ -379,7 +379,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123322',
       id: '21',
-      username: 'antran@gmail.com',
+      username: 'antran@yop.com',
       name: 'An Tran',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-3311_thumb.jpg',
       password,
@@ -414,7 +414,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123323',
       id: '22',
-      username: 'PhuongTran@gmail.com',
+      username: 'PhuongTran@yop.com',
       name: 'Phuong Tran',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-5052_thumb.jpg',
       password,
@@ -449,7 +449,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123325',
       id: '23',
-      username: 'diemdo@gmail.com',
+      username: 'diemdo@yop.com',
       name: 'Diem Do',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-5625_thumb.jpg',
       password,
@@ -484,7 +484,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123421',
       id: '24',
-      username: 'phucnguyen@gmail.com',
+      username: 'phucnguyen@yop.com',
       name: 'Phuc Nguyen',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-5194_thumb.jpg',
       password,
@@ -519,7 +519,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0934423321',
       id: '25',
-      username: 'ThaoDo@gmail.com',
+      username: 'ThaoDo@yop.com',
       name: 'Thao Do',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-3157_thumb.jpg',
       password,
@@ -553,7 +553,7 @@ const seed = async () => {
     data: {
       phoneNumber: '345',
       id: '26',
-      username: 'papermaker6@gmail.com',
+      username: 'papermaker6@yop.com',
       name: 'Nguyen Le Huy',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1111_thumb.jpg',
       password,
@@ -588,7 +588,7 @@ const seed = async () => {
     data: {
       phoneNumber: '456',
       id: '27',
-      username: 'papermaker7@gmail.com',
+      username: 'papermaker7@yop.com',
       name: 'Phan Boi Chau',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1112_thumb.jpg',
       password,
@@ -622,7 +622,7 @@ const seed = async () => {
     data: {
       phoneNumber: '789',
       id: '28',
-      username: 'papermaker8@gmail.com',
+      username: 'papermaker8@yop.com',
       name: 'Nguyen Tat Thanh',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1113_thumb.jpg',
       password,
@@ -657,7 +657,7 @@ const seed = async () => {
     data: {
       phoneNumber: '678',
       id: '29',
-      username: 'papermaker9@gmail.com',
+      username: 'papermaker9@yop.com',
       name: 'Phan Boi Chau',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1114_thumb.jpg',
       password,
@@ -692,7 +692,7 @@ const seed = async () => {
     data: {
       phoneNumber: '456',
       id: '30',
-      username: 'papermaker10@gmail.com',
+      username: 'papermaker10@yop.com',
       name: 'Huynh Minh Hung',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1115_thumb.jpg',
       password,
@@ -727,7 +727,7 @@ const seed = async () => {
     data: {
       phoneNumber: '456',
       id: '31',
-      username: 'papermaker11@gmail.com',
+      username: 'papermaker11@yop.com',
       name: 'Nguyen Dang Lam Phuong',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1116_thumb.jpg',
       password,
@@ -762,7 +762,7 @@ const seed = async () => {
     data: {
       phoneNumber: '456',
       id: '32',
-      username: 'papermaker12@gmail.com',
+      username: 'papermaker12@yop.com',
       name: 'Nguyen Tan Dung',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1117_thumb.jpg',
       password,
@@ -797,7 +797,7 @@ const seed = async () => {
     data: {
       phoneNumber: '456',
       id: '33',
-      username: 'papermaker13@gmail.com',
+      username: 'papermaker13@yop.com',
       name: 'Le Cong Vinh',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1118_thumb.jpg',
       password,
@@ -832,7 +832,7 @@ const seed = async () => {
     data: {
       phoneNumber: '456',
       id: '34',
-      username: 'papermaker14@gmail.com',
+      username: 'papermaker14@yop.com',
       name: 'Mai Hong Ngoc',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1119_thumb.jpg',
       password,
@@ -867,7 +867,7 @@ const seed = async () => {
     data: {
       phoneNumber: '456',
       id: '35',
-      username: 'papermaker15@gmail.com',
+      username: 'papermaker15@yop.com',
       name: 'Nguyen Kieu Cam Tho',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1232_thumb.jpg',
       password,
