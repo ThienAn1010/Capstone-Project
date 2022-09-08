@@ -2,7 +2,6 @@ import { StarIcon } from "@heroicons/react/solid"
 import Link from "next/link"
 
 export default function VerticalCard({ ppmker }: any) {
-  console.log(ppmker)
   return (
     <div className="flex flex-wrap -mx-4 px-2 group cursor-pointer">
       <Link key={ppmker.id} href={`/service/${ppmker.id}`}>
@@ -11,7 +10,7 @@ export default function VerticalCard({ ppmker }: any) {
             <div className="relative pb-48 overflow-hidden">
               <img
                 className="absolute h-full w-full object-cover"
-                src={`${ppmker.paperMaker.user.picture}`}
+                src={`${ppmker.thumbnail}`}
                 alt=""
               />
             </div>
