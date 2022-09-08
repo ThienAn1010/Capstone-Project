@@ -119,7 +119,7 @@ export class BookingService {
           }</strong> days, and will finish in <strong>${dayjs(
             booking.acceptedAt,
           )
-            .add(booking.offeredService.duration)
+            .add(booking.offeredService.duration, 'd')
             .format('DD-MM-YYYY')}</strong></p>
           <p>If you have any problem. Please don't hesitate to contact us</p>
           <p>Thank you for using our service.</p>
