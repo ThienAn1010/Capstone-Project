@@ -2,6 +2,8 @@ import dayjs from "dayjs"
 import { CheckIcon } from "@heroicons/react/solid"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import axiosInstance from "../../util/axiosInstace"
+import toast from "react-hot-toast"
 
 const steps = [
   {
@@ -61,6 +63,31 @@ export default function BookingDetail({ booking }: any) {
     getCurrentStep()
   })
 
+  const acceptOrDenyOrder = () => {
+    const acceptOrDenyService = (async () => {
+      const response = await axiosInstance.patch(`/bookings/${booking.id}`, {
+        status: "drop",
+      })
+      return response
+    })()
+    toast.promise(
+      acceptOrDenyService,
+      {
+        loading: "Processing...",
+        error: () => {
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          router.reload()
+          return "Success"
+        },
+      },
+      {
+        position: "bottom-left",
+      }
+    )
+  }
+
   return (
     <div className="bg-checkout pb-12">
       <div className="max-w-2xl mx-auto pt-16 sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -101,11 +128,18 @@ export default function BookingDetail({ booking }: any) {
                           Declined
                         </span>
                       )}
-                      {booking.status === "drop" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
-                          Cancelled
-                        </span>
-                      )}
+                      {booking.status === "drop" &&
+                        booking.isFinishedConfirmed === false && (
+                          <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                            Pending Refund
+                          </span>
+                        )}
+                      {booking.status === "drop" &&
+                        booking.isFinishedConfirmed && (
+                          <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                            Cancelled
+                          </span>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -385,6 +419,15 @@ export default function BookingDetail({ booking }: any) {
                 </dd>
               </div>
             </dl>
+          </div>
+          <div className="text-center mt-4">
+            <button
+              type="button"
+              className="mt-3 w-32 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-red-200 text-base font-semibold text-red-800 hover:bg-red-100 focus:outline-none sm:mt-0"
+              onClick={() => acceptOrDenyOrder()}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
