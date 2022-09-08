@@ -7,7 +7,7 @@ export default function MainCarousel() {
         <p className="font-['Playfair_Display'] font-black text-[42px] w-[760px] tracking-wide leading-tight text-center mx-auto">
           We Ensure the best Paperwork Service for you
         </p>
-        <p className="font-['Roboto'] text-sm mt-[20px]">
+        <p className="font-['Roboto'] text-base mt-[20px]">
           We know how difficulty it is to find the right person for your paper
           work. With Paperwork, every paper maker is transperant with duration,
           price, certificate so you can safely choose one that match your case
