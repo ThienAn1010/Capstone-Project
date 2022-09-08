@@ -51,7 +51,6 @@ export default function BookingManager() {
       }
     )
   }
-  console.log(data)
   return (
     <>
       <div className="py-4 lg:col-span-9">
@@ -282,32 +281,6 @@ export default function BookingManager() {
                                               </p>
                                             )}
                                           </Menu.Item>
-                                          {booking.status === "accept" && (
-                                            <>
-                                              <Menu.Item>
-                                                {({ active }) => (
-                                                  <p
-                                                    onClick={() => {
-                                                      setOpenDrop(true)
-                                                      setBookingId(booking.id)
-                                                    }}
-                                                    className={classNames(
-                                                      active
-                                                        ? "bg-red-100 text-gray-900"
-                                                        : "text-gray-700",
-                                                      "group flex items-center px-4 py-2 text-sm hover:cursor-pointer"
-                                                    )}
-                                                  >
-                                                    <ExclamationCircleIcon
-                                                      className="mr-3 h-5 w-5 text-red-400"
-                                                      aria-hidden="true"
-                                                    />
-                                                    Cancel
-                                                  </p>
-                                                )}
-                                              </Menu.Item>
-                                            </>
-                                          )}
                                         </div>
                                       </Menu.Items>
                                     </Transition>
