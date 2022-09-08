@@ -91,6 +91,7 @@ model Booking {
   paymentIntentId     String
   user                User           @relation(fields: [userId], references: [id])
   offeredService      OfferedService @relation(fields: [offeredServiceId], references: [id])
+  isDone              Boolean        @default(false)
 }
 
 enum Role {
