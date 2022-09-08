@@ -71,11 +71,9 @@ export default function BookingHistoryWithNav() {
                       <p>No booking placed</p>
                     </div>
                   ) : (
-                    data?.bookings
-                      .reverse()
-                      .map((booking) => (
-                        <BookingHistory booking={booking} key={booking.id} />
-                      ))
+                    data?.bookings.map((booking) => (
+                      <BookingHistory booking={booking} key={booking.id} />
+                    ))
                   )
                 ) : null}
                 {status.key == 2 ? (
@@ -132,13 +130,11 @@ export default function BookingHistoryWithNav() {
                       <p>No booking placed</p>
                     </div>
                   ) : (
-                    data?.bookings
-                      .reverse()
-                      .map((booking) =>
-                        booking.status == "deny" || booking.status == "drop" ? (
-                          <BookingHistory booking={booking} key={booking.id} />
-                        ) : null
-                      )
+                    data?.bookings.map((booking) =>
+                      booking.status == "deny" || booking.status == "drop" ? (
+                        <BookingHistory booking={booking} key={booking.id} />
+                      ) : null
+                    )
                   )
                 ) : null}
               </Tab.Panel>
