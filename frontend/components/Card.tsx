@@ -14,7 +14,7 @@ const Card: FC<CardProps> = ({ offeredService }) => {
           <div className="flex justify-start items-start">
             <div className="mr-4">
               <img
-                className="h-44 w-44 object-cover rounded-lg"
+                className="w-[260px] h-[145px] object-cover rounded-lg"
                 alt="Something"
                 src={offeredService.thumbnail}
               />
