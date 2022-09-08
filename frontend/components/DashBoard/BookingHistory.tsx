@@ -96,14 +96,6 @@ export default function BookingHistory({ booking }: any) {
                         <span className="text-white">Finish</span>
                       </button>
                     )}
-                  {booking.status === "pendingFinished" && (
-                    <button
-                      type="button"
-                      className="cursor-pointer flex items-center justify-center bg-blue-700 py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      <span className="text-white">Complete</span>
-                    </button>
-                  )}
                 </div>
               </div>
 
