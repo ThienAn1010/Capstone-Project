@@ -9,6 +9,7 @@
     "dev:admin": "cd admin && npm run dev",
     "dep:frontend": "cd frontend && npm install",
     "dep:backend": "cd backend && npm install",
+    "dep:admin": "cd backend && npm install",
     "start": "concurrently npm:dev:*",
     "dep": "concurrently npm:dep:*",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -93,6 +93,7 @@ export class BookingService {
         ...(updatedBookingDto.isFinishedConfirmed && {
           isFinishedConfirmed: updatedBookingDto.isFinishedConfirmed,
         }),
+        ...(updatedBookingDto.isDone && { isDone: true }),
       },
       select,
     });
@@ -104,7 +105,25 @@ export class BookingService {
       });
     }
 
-    if (!updatedBookingDto.isFinishedConfirmed) {
+    if (updatedBookingDto.isDone) {
+      const sendToUser = {
+        to: booking.offeredService.paperMaker.user.username, // Change to your recipient
+        from: {
+          email: this.configService.get('SENDGRID_VERIFIED_SENDER'),
+          name: 'Paperwork',
+        }, // Change to your verified sender
+        subject: `Payment successfully`,
+        html: `
+          <p>Dear ${booking.offeredService.paperMaker.user.name}</h1>
+          <p>We have transfer ${booking.payAmount} to your account</p>
+          <p>If you have any problem. Please don't hesitate to contact us</p>
+          <p>Thank you for using our service.</p>
+          `,
+      };
+      await this.sendGridService.getSendGrid().send(sendToUser);
+    }
+
+    if (updatedBookingDto.status) {
       if (booking.status === 'accept') {
         const sendToUser = {
           to: booking.user.username, // Change to your recipient
@@ -115,7 +134,7 @@ export class BookingService {
           subject: `Your booking has been accepted`,
           html: `
           <p>Dear ${booking.user.name}</h1>
-          <p>Your boooking has been accepted by ${
+          <p>Your booking has been accepted by ${
             booking.offeredService.paperMaker.user.name
           }. You can keep track of the progress in the dashboard. The paperwork is expected to take <strong>${
             booking.offeredService.duration
@@ -192,7 +211,7 @@ export class BookingService {
           subject: `Your booking has been completed`,
           html: `
           <p>Dear ${booking.user.name}</h1>
-          <p>Your boooking has been completed. Please confirm it in your dashboard to finish the process.</p>
+          <p>Your booking has been completed. Please confirm it in your dashboard to finish the process.</p>
           <p>If you have any problem. Please don't hesitate to contact us</p>
           <p>Thank you for using our service.</p>
           `,
