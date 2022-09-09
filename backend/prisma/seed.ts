@@ -45,6 +45,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 10,
           rating: 2.8,
           pastSuccessfulCases: 5,
@@ -77,6 +78,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 1000,
           rating: 4.8,
           pastSuccessfulCases: 1000,
@@ -90,7 +92,7 @@ const seed = async () => {
               description:
                 'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                '- Copy of Business Registration.<br/>- Registration letter for recruitment needs.<br/>- Letter of introduction/power of attorney.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
               estimate: '10 working days',
             },
           },
@@ -112,6 +114,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 500,
           rating: 4.2,
           pastSuccessfulCases: 250,
@@ -125,7 +128,7 @@ const seed = async () => {
               description:
                 "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                '- Registration book (original and 2 photocopies) <br/>- Old ID card (if any)',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
               estimate: '7 working days.',
             },
           },
@@ -147,6 +150,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 1000,
           rating: 4.8,
           pastSuccessfulCases: 1000,
@@ -160,7 +164,7 @@ const seed = async () => {
               description:
                 'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                '- Copy of Business Registration.<br/>- Registration letter for recruitment needs.<br/>- Letter of introduction/power of attorney.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
               estimate: '10 working days',
             },
           },
@@ -182,6 +186,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 21,
           rating: 2.9,
           pastSuccessfulCases: 20,
@@ -216,6 +221,7 @@ const seed = async () => {
       long: 106.71724,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 500,
           rating: 3.8,
           pastSuccessfulCases: 400,
@@ -250,6 +256,7 @@ const seed = async () => {
       long: 106.68415921309577,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 600,
           rating: 4.8,
           pastSuccessfulCases: 550,
@@ -263,7 +270,7 @@ const seed = async () => {
               description:
                 "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                '- Registration book (original and 2 photocopies) <br/>- Old ID card (if any)',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
               estimate: '7 working days.',
             },
           },
@@ -285,6 +292,7 @@ const seed = async () => {
       long: 106.71724,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 4.5,
           pastSuccessfulCases: 199,
@@ -298,7 +306,7 @@ const seed = async () => {
               description:
                 'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                '- Authenticated household registration book of the buyer and seller.<br/>- Identity card or passport authenticated by the buyer or seller.<br/>- The sale and purchase contract certified by the notary office.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
               estimate: 'Within 30 working days',
             },
           },
@@ -320,6 +328,7 @@ const seed = async () => {
       long: 106.68089061124546,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 5.0,
           pastSuccessfulCases: 100,
@@ -354,6 +363,7 @@ const seed = async () => {
       long: 106.70558405542431,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 3.5,
           pastSuccessfulCases: 500,
@@ -367,7 +377,7 @@ const seed = async () => {
               description:
                 'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                '- Copy of Business Registration.<br/>- Registration letter for recruitment needs.<br/>- Letter of introduction/power of attorney.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
               estimate: '10 working days',
             },
           },
@@ -389,6 +399,7 @@ const seed = async () => {
       long: 106.69970597076711,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 3.5,
           pastSuccessfulCases: 500,
@@ -402,7 +413,7 @@ const seed = async () => {
               description:
                 'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                '- Copy of Business Registration.<br/>- Registration letter for recruitment needs.<br/>- Letter of introduction/power of attorney.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
               estimate: '10 working days',
             },
           },
@@ -424,6 +435,7 @@ const seed = async () => {
       long: 106.68326526706699,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 4.5,
           pastSuccessfulCases: 180,
@@ -437,7 +449,7 @@ const seed = async () => {
               description:
                 "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                '- Registration book (original and 2 photocopies) <br/>- Old ID card (if any)',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
               estimate: '7 working days.',
             },
           },
@@ -459,6 +471,7 @@ const seed = async () => {
       long: 106.6989938535741,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 5.0,
           pastSuccessfulCases: 200,
@@ -472,7 +485,7 @@ const seed = async () => {
               description:
                 "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                '- Registration book (original and 2 photocopies) <br/>- Old ID card (if any)',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
               estimate: '7 working days.',
             },
           },
@@ -494,6 +507,7 @@ const seed = async () => {
       long: 106.6772342265885,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 300,
           rating: 5.0,
           pastSuccessfulCases: 300,
@@ -507,7 +521,7 @@ const seed = async () => {
               description:
                 "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                '- Registration book (original and 2 photocopies) <br/>- Old ID card (if any)',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
               estimate: '7 working days.',
             },
           },
@@ -529,6 +543,7 @@ const seed = async () => {
       long: 106.67201072658852,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 4.0,
           pastSuccessfulCases: 80,
@@ -563,6 +578,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 4.2,
           pastSuccessfulCases: 600,
@@ -576,7 +592,7 @@ const seed = async () => {
               description:
                 "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                '- Registration book (original and 2 photocopies) <br/>- Old ID card (if any)',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
               estimate: '7 working days.',
             },
           },
@@ -598,6 +614,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 48,
           rating: 4.2,
           pastSuccessfulCases: 20,
@@ -632,6 +649,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 977,
           rating: 3.0,
           pastSuccessfulCases: 800,
@@ -645,7 +663,7 @@ const seed = async () => {
               description:
                 'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                '- Copy of Business Registration.<br/>- Registration letter for recruitment needs.<br/>- Letter of introduction/power of attorney.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
               estimate: '10 working days',
             },
           },
@@ -667,6 +685,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 113,
           rating: 4.7,
           pastSuccessfulCases: 112,
@@ -680,7 +699,7 @@ const seed = async () => {
               description:
                 'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                '- Authenticated household registration book of the buyer and seller.<br/>- Identity card or passport authenticated by the buyer or seller.<br/>- The sale and purchase contract certified by the notary office.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
               estimate: 'Within 30 working days',
             },
           },
@@ -702,6 +721,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 333,
           rating: 3.0,
           pastSuccessfulCases: 200,
@@ -715,7 +735,7 @@ const seed = async () => {
               description:
                 'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                '- Authenticated household registration book of the buyer and seller.<br/>- Identity card or passport authenticated by the buyer or seller.<br/>- The sale and purchase contract certified by the notary office.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
               estimate: 'Within 30 working days',
             },
           },
@@ -737,6 +757,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 1.3,
           pastSuccessfulCases: 20,
@@ -750,7 +771,7 @@ const seed = async () => {
               description:
                 'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                '- Copy of Business Registration.<br/>- Registration letter for recruitment needs.<br/>- Letter of introduction/power of attorney.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
               estimate: '10 working days',
             },
           },
@@ -772,6 +793,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 2222,
           rating: 3.7,
           pastSuccessfulCases: 1753,
@@ -785,7 +807,7 @@ const seed = async () => {
               description:
                 'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                '- Authenticated household registration book of the buyer and seller.<br/>- Identity card or passport authenticated by the buyer or seller.<br/>- The sale and purchase contract certified by the notary office.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
               estimate: 'Within 30 working days',
             },
           },
@@ -807,6 +829,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 666,
           rating: 4.3,
           pastSuccessfulCases: 522,
@@ -820,7 +843,7 @@ const seed = async () => {
               description:
                 'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                '- Authenticated household registration book of the buyer and seller.<br/>- Identity card or passport authenticated by the buyer or seller.<br/>- The sale and purchase contract certified by the notary office.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
               estimate: 'Within 30 working days',
             },
           },
@@ -842,6 +865,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 750,
           rating: 4.6,
           pastSuccessfulCases: 705,
@@ -855,7 +879,7 @@ const seed = async () => {
               description:
                 'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                '- Copy of Business Registration.<br/>- Registration letter for recruitment needs.<br/>- Letter of introduction/power of attorney.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
               estimate: '10 working days',
             },
           },
@@ -877,6 +901,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 480,
           rating: 3.5,
           pastSuccessfulCases: 235,
@@ -890,7 +915,7 @@ const seed = async () => {
               description:
                 "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                '- Registration book (original and 2 photocopies) <br/>- Old ID card (if any)',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
               estimate: '7 working days.',
             },
           },
