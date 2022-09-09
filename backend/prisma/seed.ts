@@ -45,6 +45,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 10,
           rating: 2.8,
           pastSuccessfulCases: 5,
@@ -77,6 +78,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 1000,
           rating: 4.8,
           pastSuccessfulCases: 1000,
@@ -112,6 +114,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 500,
           rating: 4.2,
           pastSuccessfulCases: 250,
@@ -147,6 +150,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 1000,
           rating: 4.8,
           pastSuccessfulCases: 1000,
@@ -182,6 +186,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 21,
           rating: 2.9,
           pastSuccessfulCases: 20,
@@ -216,6 +221,7 @@ const seed = async () => {
       long: 106.71724,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 500,
           rating: 3.8,
           pastSuccessfulCases: 400,
@@ -250,6 +256,7 @@ const seed = async () => {
       long: 106.68415921309577,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 600,
           rating: 4.8,
           pastSuccessfulCases: 550,
@@ -285,6 +292,7 @@ const seed = async () => {
       long: 106.71724,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 4.5,
           pastSuccessfulCases: 199,
@@ -320,6 +328,7 @@ const seed = async () => {
       long: 106.68089061124546,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 5.0,
           pastSuccessfulCases: 100,
@@ -354,6 +363,7 @@ const seed = async () => {
       long: 106.70558405542431,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 3.5,
           pastSuccessfulCases: 500,
@@ -389,6 +399,7 @@ const seed = async () => {
       long: 106.69970597076711,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 3.5,
           pastSuccessfulCases: 500,
@@ -424,6 +435,7 @@ const seed = async () => {
       long: 106.68326526706699,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 4.5,
           pastSuccessfulCases: 180,
@@ -459,6 +471,7 @@ const seed = async () => {
       long: 106.6989938535741,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 5.0,
           pastSuccessfulCases: 200,
@@ -494,6 +507,7 @@ const seed = async () => {
       long: 106.6772342265885,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 300,
           rating: 5.0,
           pastSuccessfulCases: 300,
@@ -529,6 +543,7 @@ const seed = async () => {
       long: 106.67201072658852,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 4.0,
           pastSuccessfulCases: 80,
@@ -563,6 +578,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 4.2,
           pastSuccessfulCases: 600,
@@ -598,6 +614,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 48,
           rating: 4.2,
           pastSuccessfulCases: 20,
@@ -632,6 +649,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 977,
           rating: 3.0,
           pastSuccessfulCases: 800,
@@ -667,6 +685,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 113,
           rating: 4.7,
           pastSuccessfulCases: 112,
@@ -702,6 +721,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 333,
           rating: 3.0,
           pastSuccessfulCases: 200,
@@ -737,6 +757,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 1.3,
           pastSuccessfulCases: 20,
@@ -772,6 +793,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 2222,
           rating: 3.7,
           pastSuccessfulCases: 1753,
@@ -807,6 +829,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 666,
           rating: 4.3,
           pastSuccessfulCases: 522,
@@ -842,6 +865,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 750,
           rating: 4.6,
           pastSuccessfulCases: 705,
@@ -877,6 +901,7 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 480,
           rating: 3.5,
           pastSuccessfulCases: 235,
