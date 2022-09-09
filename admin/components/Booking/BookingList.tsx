@@ -118,7 +118,7 @@ const ActionButton = () => {
 
   console.log(record);
 
-  if (record.finishedAt && record.isFinishedConfirmed && !record.done) {
+  if (record.finishedAt && record.isFinishedConfirmed && !record.isDone) {
     return (
       <>
         <Button
