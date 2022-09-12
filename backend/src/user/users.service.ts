@@ -81,11 +81,20 @@ export class UsersService {
           offeredService: { paperMaker: { userId: user.id } },
         }),
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
       select: {
         id: true,
         note: true,
         status: true,
         payAmount: true,
+        createdAt: true,
+        acceptedAt: true,
+        droppedAt: true,
+        finishedAt: true,
+        isFinishedConfirmed: true,
+        isDroppedConfirmed: true,
         user: {
           select: {
             id: true,

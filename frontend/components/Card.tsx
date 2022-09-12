@@ -14,9 +14,9 @@ const Card: FC<CardProps> = ({ offeredService }) => {
           <div className="flex justify-start items-start">
             <div className="mr-4">
               <img
-                className="h-44 w-44 object-cover rounded-full"
+                className="w-[260px] h-[145px] object-cover rounded-lg"
                 alt="Something"
-                src={offeredService.paperMaker.user.picture}
+                src={offeredService.thumbnail}
               />
             </div>
             <div className="text-gray-500 text-sm pr-20 flex-1">

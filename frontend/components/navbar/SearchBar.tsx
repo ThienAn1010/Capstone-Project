@@ -41,6 +41,8 @@ export default function SearchBar() {
           <div className="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
             <div className="w-full">
               <Select
+                id="disable-searchbar-select"
+                instanceId="disable-searchbar-select"
                 isDisabled={true}
                 isLoading={true}
                 placeholder={<>Loading...</>}
@@ -54,6 +56,8 @@ export default function SearchBar() {
           <div className="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
             <div className="w-full">
               <Select
+                id="searchbar-select"
+                instanceId="searchbar-select"
                 isClearable={true}
                 isSearchable={true}
                 isLoading={isLoading}

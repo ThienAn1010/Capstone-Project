@@ -31,7 +31,7 @@ const bookingFilters = [
   />,
 ];
 
-const CustomButton = () => {
+const RefundButton = () => {
   const record = useRecordContext();
   const [open, setOpen] = useState(false);
   const [update, { data, isLoading, error }] = useUpdate("Booking", {
@@ -47,6 +47,7 @@ const CustomButton = () => {
         {
           paymentIntentId: record.paymentIntentId,
           amount: record.payAmount,
+          userId: record.userId,
         },
         {
           baseURL: process.env.NEXT_PUBLIC_BACKEND_API_DEVELOPMENT,
@@ -68,17 +69,73 @@ const CustomButton = () => {
           variant="contained"
           size="small"
           sx={{ textTransform: "capitalize" }}
-          color="info"
+          color="error"
           disableRipple
           onClick={() => setOpen(true)}
         >
-          Confirm
+          Refund
         </Button>
         <Confirm
           isOpen={open}
           loading={isLoading}
           title={`Refund back to the user?`}
-          content={`Are you sure you want to refund this user?`}
+          content={`Are you sure you want to do this action?`}
+          onConfirm={handleConfirm}
+          onClose={handleDialogClose}
+        />
+      </>
+    );
+  }
+  return null;
+};
+
+const ActionButton = () => {
+  const record = useRecordContext();
+  const [open, setOpen] = useState(false);
+  const [update, { data, isLoading, error }] = useUpdate("Booking", {
+    id: record.id,
+    data: { isDone: true },
+    previousData: record,
+  });
+  const handleDialogClose = () => setOpen(false);
+  const handleConfirm = async () => {
+    try {
+      await axios.patch(
+        `/bookings/${record.id}`,
+        {
+          isDone: true,
+        },
+        {
+          baseURL: process.env.NEXT_PUBLIC_BACKEND_API_DEVELOPMENT,
+        }
+      );
+      await update();
+    } catch (error) {
+      console.log(error);
+    }
+    handleDialogClose();
+  };
+
+  console.log(record);
+
+  if (record.finishedAt && record.isFinishedConfirmed && !record.isDone) {
+    return (
+      <>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ textTransform: "capitalize" }}
+          color="primary"
+          disableRipple
+          onClick={() => setOpen(true)}
+        >
+          Finished
+        </Button>
+        <Confirm
+          isOpen={open}
+          loading={isLoading}
+          title={`Transfer payment?`}
+          content={`Are you sure you want to do this action?`}
           onConfirm={handleConfirm}
           onClose={handleDialogClose}
         />
@@ -117,7 +174,16 @@ export const BookingList = () => {
         />
         ;
         <DateField source="createdAt" />
-        <CustomButton />
+        <FunctionField
+          render={(record: any) => {
+            if (record.finishedAt && record.isFinishedConfirmed) {
+              return <ActionButton />;
+            }
+            if (record.droppedAt && !record.isDroppedConfirmed) {
+              return <RefundButton />;
+            }
+          }}
+        />
       </Datagrid>
     </List>
   );

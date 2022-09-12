@@ -87,7 +87,7 @@ const PapermakerRegisterForm = () => {
                     htmlFor="username"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Username<span className="text-red-500 ml-0.5">*</span>
+                    Username
                   </label>
                   <div className="mt-1">
                     <input
@@ -115,7 +115,7 @@ const PapermakerRegisterForm = () => {
                     htmlFor="text"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Name<span className="text-red-500 ml-0.5">*</span>
+                    Name
                   </label>
                   <div className="mt-1">
                     <input
@@ -137,7 +137,7 @@ const PapermakerRegisterForm = () => {
                     htmlFor="text"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Address<span className="text-red-500 ml-0.5">*</span>
+                    Address
                   </label>
                   <div className="mt-1">
                     <Controller
@@ -185,7 +185,7 @@ const PapermakerRegisterForm = () => {
                     htmlFor="phone"
                     className="block text-sm font-medium text-gray-700 mt-5"
                   >
-                    Phone Number<span className="text-red-500 ml-0.5">*</span>
+                    Phone Number
                   </label>
                   <div className="mt-1">
                     <Controller
@@ -223,7 +223,7 @@ const PapermakerRegisterForm = () => {
                     htmlFor="password"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Password<span className="text-red-500 ml-0.5">*</span>
+                    Password
                   </label>
                   <div className="mt-1">
                     <input
@@ -252,7 +252,6 @@ const PapermakerRegisterForm = () => {
                     className="block text-sm font-medium text-gray-700"
                   >
                     Confirm Password
-                    <span className="text-red-500 ml-0.5">*</span>
                   </label>
                   <div className="mt-1">
                     <input

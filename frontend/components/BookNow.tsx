@@ -17,7 +17,7 @@ const BookNow = () => {
   const { data, isLoading } = useGetOfferedService(router.query.id as string)
   const { data: userData } = useGetMe()
   return (
-    <div className="max-w-xs border border-slate-300 p-5 rounded-md overflow-hidden block transition space-y-6">
+    <div className="max-w-xs border border-slate-300 rounded-md overflow-hidden block transition">
       {isLoading ? (
         <>
           <h3 className="text-3xl font-bold mt-3 animate-pulse h-8 bg-gray-300 w-1/3"></h3>
@@ -28,14 +28,14 @@ const BookNow = () => {
           <img
             src={data?.thumbnail}
             alt="service picture"
-            className="h-48 w-full object-cover"
+            className="h-48 w-full object-cover "
           />
-          <h3 className="text-4xl font-bold border-t pt-2">${data?.price}</h3>
+          <h3 className="text-4xl font-bold px-5 mt-2">${data?.price}</h3>
         </>
       )}
-      <div>
+      <div className="px-5 mt-2">
         <h4 className="font-medium">The service includes</h4>
-        <ul className="text-sm space-y-1.5 mt-1">
+        <ul className="text-sm space-y-2 mt-1">
           {isLoading
             ? Array.from({ length: 5 }).map((_, index) => (
                 <li
@@ -55,41 +55,43 @@ const BookNow = () => {
               ))}
         </ul>
       </div>
-      {userData ? (
-        <Link href={`/service/${router.query.id}/checkout`}>
-          <button className="booknow">
-            <div className="svg-wrapper-1">
-              <div className="svg-wrapper">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
+      <div className="px-5 pb-4">
+        {userData ? (
+          <Link href={`/service/${router.query.id}/checkout`}>
+            <button className="booknow">
+              <div className="svg-wrapper-1">
+                <div className="svg-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-7 w-7"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                </div>
               </div>
-            </div>
-            <span>Book Now</span>
-          </button>
-        </Link>
-      ) : (
-        <Link href="/login">
-          <button
-            className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-            data-mdb-ripple="true"
-            data-mdb-ripple-color="light"
-          >
-            Sign in to book
-          </button>
-        </Link>
-      )}
+              <span>Book Now</span>
+            </button>
+          </Link>
+        ) : (
+          <Link href="/login">
+            <button
+              className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+            >
+              Sign in to book
+            </button>
+          </Link>
+        )}
+      </div>
     </div>
   )
 }

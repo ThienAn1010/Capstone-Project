@@ -1,6 +1,11 @@
 import dayjs from "dayjs"
 import { CheckIcon } from "@heroicons/react/solid"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import axiosInstance from "../../util/axiosInstace"
+import toast from "react-hot-toast"
+import duration from "dayjs/plugin/duration"
+dayjs.extend(duration)
 
 const steps = [
   {
@@ -40,6 +45,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function BookingDetail({ booking }: any) {
+  const router = useRouter()
   const [step, setStep] = useState(0)
   console.log(booking)
 
@@ -59,6 +65,31 @@ export default function BookingDetail({ booking }: any) {
     getCurrentStep()
   })
 
+  const acceptOrDenyOrder = () => {
+    const acceptOrDenyService = (async () => {
+      const response = await axiosInstance.patch(`/bookings/${booking.id}`, {
+        status: "drop",
+      })
+      return response
+    })()
+    toast.promise(
+      acceptOrDenyService,
+      {
+        loading: "Processing...",
+        error: () => {
+          return "Something went wrong. Try again later !!!"
+        },
+        success: () => {
+          router.reload()
+          return "Success"
+        },
+      },
+      {
+        position: "bottom-left",
+      }
+    )
+  }
+
   return (
     <div className="bg-checkout pb-12">
       <div className="max-w-2xl mx-auto pt-16 sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -70,9 +101,12 @@ export default function BookingDetail({ booking }: any) {
               <div className="py-2 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
                 <div className="pb-2 justify-between border-b sm:flex lg:col-span-12">
                   <div>
-                    <div className="flex items-center text-gray-500 hover:cursor-pointer">
+                    <div
+                      className="flex items-center text-gray-500 hover:cursor-pointer"
+                      onClick={() => router.back()}
+                    >
                       &larr;
-                      <p className="text-gray-500">Back</p>
+                      <p className="text-gray-500 hover:text-blue-400">Back</p>
                     </div>
                   </div>
                   <div className="flex items-baseline divide-x divide-gray-400">
@@ -82,39 +116,78 @@ export default function BookingDetail({ booking }: any) {
                     </div>
                     <div>
                       {booking.status === "pendingConfirm" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-yellow-100 text-yellow-800 text-sm">
+                        <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-yellow-100 text-yellow-800 text-sm">
                           Pending
                         </span>
                       )}
                       {booking.status === "accept" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-green-100 text-green-800 text-sm">
+                        <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-green-100 text-green-800 text-sm">
                           In Progress
                         </span>
                       )}
                       {booking.status === "deny" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                        <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-red-100 text-red-800 text-sm">
                           Declined
                         </span>
                       )}
-                      {booking.status === "drop" && (
-                        <span className="ml-2 px-2 rounded-md  font-semibold leading-5 bg-red-100 text-red-800 text-sm">
-                          Cancelled
-                        </span>
-                      )}
+                      {booking.status === "drop" &&
+                        booking.isDroppedConfirmed === false && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-orange-100 text-orange-800 text-sm">
+                            Pending Refund
+                          </span>
+                        )}
+                      {booking.status === "drop" &&
+                        booking.isDroppedConfirmed && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-red-100 text-red-800 text-sm">
+                            Cancelled
+                          </span>
+                        )}
+                      {booking.status === "success" &&
+                        booking.isFinishedConfirmed === false && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-indigo-100 text-indigo-800 text-sm">
+                            Pending Finish
+                          </span>
+                        )}
+                      {booking.status === "success" &&
+                        booking.isFinishedConfirmed && (
+                          <span className="ml-2 px-2 rounded-md font-semibold leading-5 bg-emerald-100 text-emerald-800 text-sm">
+                            Finished
+                          </span>
+                        )}
                     </div>
                   </div>
                 </div>
               </div>
               <div className="py-2 px-4 sm:px-6 lg:px-8">
                 <h4 className="sr-only">Status</h4>
-                <p className="text-sm font-medium text-gray-900">
-                  Expected completion on{" "}
-                  <time className="font-medium text-gray-900">
-                    {dayjs(booking.createdAt)
-                      .add(booking.offeredService.duration, "day")
-                      .format("MMMM D, YYYY")}
-                  </time>
-                </p>
+                <div className="pb-2 justify-between sm:flex lg:col-span-12">
+                  <p className="text-sm font-medium text-gray-900">
+                    Expected completion on{" "}
+                    <time className="font-medium text-gray-900">
+                      {dayjs(booking.createdAt)
+                        .add(booking.offeredService.duration, "day")
+                        .format("MMMM D, YYYY")}
+                    </time>
+                  </p>
+                  {booking.status === "accept" && (
+                    <p className="text-sm font-medium text-gray-900">
+                      Deadline:{" "}
+                      <time className="font-medium text-gray-900">
+                        {dayjs(booking.acceptedAt)
+                          .add(booking.offeredService.duration, "day")
+                          .diff(dayjs(booking.acceptedAt), "day")
+                          .toString()}
+                      </time>{" "}
+                      days left
+                    </p>
+                  )}
+                  {booking.status === "success" && (
+                    <p className="text-sm font-medium text-gray-900">
+                      Deadline: Your booking has been finished
+                    </p>
+                  )}
+                </div>
+
                 <div className="mt-6" aria-hidden="true">
                   <div className="bg-gray-200 rounded-full overflow-hidden">
                     <div
@@ -380,6 +453,15 @@ export default function BookingDetail({ booking }: any) {
                 </dd>
               </div>
             </dl>
+          </div>
+          <div className="text-center mt-4">
+            <button
+              type="button"
+              className="mt-3 w-32 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-red-200 text-base font-semibold text-red-800 hover:bg-red-100 focus:outline-none sm:mt-0"
+              onClick={() => acceptOrDenyOrder()}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>

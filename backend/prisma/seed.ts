@@ -54,7 +54,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '1',
-      username: 'papermaker1@gmail.com',
+      username: 'papermaker1@yopmail.com',
       name: 'Vu Minh Long',
       picture:
         'https://lh3.googleusercontent.com/a-/AOh14GhPZG1XjXzqUqxvmsVQfoBts1TfWUcTn1fnLn_e=s96-c',
@@ -65,22 +65,21 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 10,
           rating: 2.8,
           pastSuccessfulCases: 5,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'I have always stood by one basic principle regarding my work: providing the best and quickest paperwork service for couples to tie the wedding knot.',
           offeredServices: {
             create: {
               duration: 10,
               price: 100,
               serviceId: '1',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'A marriage certificate is an official statement that two people are married. In most jurisdictions, a marriage certificate is issued by a government official only after the civil registration of the marriage.',
+              documents: 'National ID card/Passport',
+              estimate: 'Within 15 working days.',
             },
           },
         },
@@ -91,7 +90,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '2',
-      username: 'papermaker2@gmail.com',
+      username: 'papermaker2@yopmail.com',
       name: 'Vu Minh Phuc',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1000_thumb.jpg',
       address: 'Phuong 4, Quan Tan Binh',
@@ -99,22 +98,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 1000,
           rating: 4.8,
           pastSuccessfulCases: 1000,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Applying for work permits in Vietnam can be complicated if you do not have adequate local knowledge or experience as the procedure requires different steps and documents which may be subject to the change of legal regulation. I will update you with the latest regulations on Vietnam work permits; minimize your documents to be submitted for work permit application; and instruct you how to prepare and where to get all the necessary documents; Contact me at 0123456789.',
           offeredServices: {
             create: {
               duration: 20,
               price: 50,
               serviceId: '2',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
+              estimate: '10 working days',
             },
           },
         },
@@ -125,7 +124,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '3',
-      username: 'papermaker3@gmail.com',
+      username: 'papermaker3@yopmail.com',
       name: 'Phuc Minh Hoa',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1001_thumb.jpg',
       password,
@@ -135,22 +134,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 500,
           rating: 4.2,
           pastSuccessfulCases: 250,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Receive feedbacks, answer questions from people about citizen identity card coming into operation.',
           offeredServices: {
             create: {
               duration: 10,
               price: 300,
               serviceId: '3',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
+              estimate: '7 working days.',
             },
           },
         },
@@ -161,7 +160,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '4',
-      username: 'papermaker4@gmail.com',
+      username: 'papermaker4@yopmail.com',
       name: 'Minh Vu Phuc',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1002_thumb.jpg',
       password,
@@ -171,22 +170,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 1000,
           rating: 4.8,
           pastSuccessfulCases: 1000,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Applying for work permits in Vietnam can be complicated if you do not have adequate local knowledge or experience as the procedure requires different steps and documents which may be subject to the change of legal regulation. I will update you with the latest regulations on Vietnam work permits; minimize your documents to be submitted for work permit application; and instruct you how to prepare and where to get all the necessary documents; Contact me at 0123456789.',
           offeredServices: {
             create: {
               duration: 5,
               price: 300,
               serviceId: '2',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
+              estimate: '10 working days',
             },
           },
         },
@@ -197,7 +196,7 @@ const seed = async () => {
     data: {
       phoneNumber: '123',
       id: '5',
-      username: 'papermaker5@gmail.com',
+      username: 'papermaker5@yopmail.com',
       name: 'Vu Duc Trung',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1003_thumb.jpg',
       password,
@@ -207,22 +206,21 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 21,
           rating: 2.9,
           pastSuccessfulCases: 20,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'I have always stood by one basic principle regarding my work: providing the best and quickest paperwork service for couples to tie the wedding knot.',
           offeredServices: {
             create: {
               duration: 14,
               price: 50,
               serviceId: '1',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'A marriage certificate is an official statement that two people are married. In most jurisdictions, a marriage certificate is issued by a government official only after the civil registration of the marriage.',
+              documents: 'National ID card/Passport',
+              estimate: 'Within 15 working days.',
             },
           },
         },
@@ -233,7 +231,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123456',
       id: '16',
-      username: 'giovanniastika@gmail.com',
+      username: 'giovanniastika@yopmail.com',
       name: 'Giovanni Astika',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1004_thumb.jpg',
       password,
@@ -243,22 +241,21 @@ const seed = async () => {
       long: 106.71724,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 500,
           rating: 3.8,
           pastSuccessfulCases: 400,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'I have always stood by one basic principle regarding my work: providing the best and quickest paperwork service for couples to tie the wedding knot.',
           offeredServices: {
             create: {
               duration: 10,
               price: 30,
               serviceId: '1',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'A marriage certificate is an official statement that two people are married. In most jurisdictions, a marriage certificate is issued by a government official only after the civil registration of the marriage.',
+              documents: 'National ID card/Passport',
+              estimate: 'Within 15 working days.',
             },
           },
         },
@@ -269,7 +266,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123456',
       id: '17',
-      username: 'hienhoangovu@gmail.com',
+      username: 'hienhoangovu@yopmail.com',
       name: 'Ngo Vu Hien Hoa',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1005_thumb.jpg',
       password,
@@ -279,22 +276,22 @@ const seed = async () => {
       long: 106.68415921309577,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 600,
           rating: 4.8,
           pastSuccessfulCases: 550,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Receive feedbacks, answer questions from people about citizen identity card coming into operation.',
           offeredServices: {
             create: {
               duration: 15,
               price: 40,
               serviceId: '3',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
+              estimate: '7 working days.',
             },
           },
         },
@@ -305,7 +302,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935312345',
       id: '18',
-      username: 'hungmanhnguyen@gmail.com',
+      username: 'hungmanhnguyen@yopmail.com',
       name: 'Nguyen Hung Manh ',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-2686_thumb.jpg',
       password,
@@ -315,22 +312,22 @@ const seed = async () => {
       long: 106.71724,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 4.5,
           pastSuccessfulCases: 199,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'As real estate consultancy attorneys, we find that land is a great value and is the most important property, of each person, while the procedures of changing the name of the owner of Red Book, the procedures of land registration is very complicated and take so much time. To help customers save time and quickly get the Red Book, Pink Book, we have prestigious lawyers in Ho Chi Minh City who will provide the best service of getting Red Book.',
           offeredServices: {
             create: {
               duration: 10,
               price: 35,
               serviceId: '4',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
+              estimate: 'Within 30 working days',
             },
           },
         },
@@ -341,7 +338,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123456',
       id: '19',
-      username: 'giahandao@gmail.com',
+      username: 'giahandao@yopmail.com',
       name: 'Han Dao',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1617_thumb.jpg',
       password,
@@ -351,22 +348,21 @@ const seed = async () => {
       long: 106.68089061124546,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 5.0,
           pastSuccessfulCases: 100,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'I have always stood by one basic principle regarding my work: providing the best and quickest paperwork service for couples to tie the wedding knot.',
           offeredServices: {
             create: {
               duration: 12,
               price: 35,
               serviceId: '1',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'A marriage certificate is an official statement that two people are married. In most jurisdictions, a marriage certificate is issued by a government official only after the civil registration of the marriage.',
+              documents: 'National ID card/Passport',
+              estimate: 'Within 15 working days.',
             },
           },
         },
@@ -377,7 +373,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123321',
       id: '20',
-      username: 'michalepanjatan@gmail.com',
+      username: 'michalepanjatan@yopmail.com',
       name: 'Michale Panjatan',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1100_thumb.jpg',
       password,
@@ -387,22 +383,22 @@ const seed = async () => {
       long: 106.70558405542431,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 3.5,
           pastSuccessfulCases: 500,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Applying for work permits in Vietnam can be complicated if you do not have adequate local knowledge or experience as the procedure requires different steps and documents which may be subject to the change of legal regulation. I will update you with the latest regulations on Vietnam work permits; minimize your documents to be submitted for work permit application; and instruct you how to prepare and where to get all the necessary documents; Contact me at 0123456789.',
           offeredServices: {
             create: {
               duration: 15,
               price: 35,
               serviceId: '2',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
+              estimate: '10 working days',
             },
           },
         },
@@ -413,7 +409,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123322',
       id: '21',
-      username: 'antran@gmail.com',
+      username: 'antran@yopmail.com',
       name: 'An Tran',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-3311_thumb.jpg',
       password,
@@ -423,22 +419,22 @@ const seed = async () => {
       long: 106.69970597076711,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 3.5,
           pastSuccessfulCases: 500,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Applying for work permits in Vietnam can be complicated if you do not have adequate local knowledge or experience as the procedure requires different steps and documents which may be subject to the change of legal regulation. I will update you with the latest regulations on Vietnam work permits; minimize your documents to be submitted for work permit application; and instruct you how to prepare and where to get all the necessary documents; Contact me at 0123456789.',
           offeredServices: {
             create: {
               duration: 20,
               price: 30,
               serviceId: '2',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
+              estimate: '10 working days',
             },
           },
         },
@@ -449,7 +445,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123323',
       id: '22',
-      username: 'PhuongTran@gmail.com',
+      username: 'PhuongTran@yopmail.com',
       name: 'Phuong Tran',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-5052_thumb.jpg',
       password,
@@ -459,22 +455,22 @@ const seed = async () => {
       long: 106.68326526706699,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 4.5,
           pastSuccessfulCases: 180,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Receive feedbacks, answer questions from people about citizen identity card coming into operation.',
           offeredServices: {
             create: {
               duration: 10,
               price: 40,
               serviceId: '3',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
+              estimate: '7 working days.',
             },
           },
         },
@@ -485,7 +481,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123325',
       id: '23',
-      username: 'diemdo@gmail.com',
+      username: 'diemdo@yopmail.com',
       name: 'Diem Do',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-5625_thumb.jpg',
       password,
@@ -495,22 +491,22 @@ const seed = async () => {
       long: 106.6989938535741,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 200,
           rating: 5.0,
           pastSuccessfulCases: 200,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Receive feedbacks, answer questions from people about citizen identity card coming into operation.',
           offeredServices: {
             create: {
               duration: 10,
               price: 35,
               serviceId: '3',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
+              estimate: '7 working days.',
             },
           },
         },
@@ -521,7 +517,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0935123421',
       id: '24',
-      username: 'phucnguyen@gmail.com',
+      username: 'phucnguyen@yopmail.com',
       name: 'Phuc Nguyen',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-5194_thumb.jpg',
       password,
@@ -531,22 +527,22 @@ const seed = async () => {
       long: 106.6772342265885,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 300,
           rating: 5.0,
           pastSuccessfulCases: 300,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Receive feedbacks, answer questions from people about citizen identity card coming into operation.',
           offeredServices: {
             create: {
               duration: 10,
               price: 50,
               serviceId: '3',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
+              estimate: '7 working days.',
             },
           },
         },
@@ -557,7 +553,7 @@ const seed = async () => {
     data: {
       phoneNumber: '0934423321',
       id: '25',
-      username: 'ThaoDo@gmail.com',
+      username: 'ThaoDo@yopmail.com',
       name: 'Thao Do',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-3157_thumb.jpg',
       password,
@@ -567,22 +563,21 @@ const seed = async () => {
       long: 106.67201072658852,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 4.0,
           pastSuccessfulCases: 80,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'I have always stood by one basic principle regarding my work: providing the best and quickest paperwork service for couples to tie the wedding knot.',
           offeredServices: {
             create: {
               duration: 20,
               price: 30,
               serviceId: '1',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'A marriage certificate is an official statement that two people are married. In most jurisdictions, a marriage certificate is issued by a government official only after the civil registration of the marriage.',
+              documents: 'National ID card/Passport',
+              estimate: 'Within 15 working days.',
             },
           },
         },
@@ -592,8 +587,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '345',
-      id: '6',
-      username: 'papermaker6@gmail.com',
+      id: '26',
+      username: 'papermaker6@yopmail.com',
       name: 'Nguyen Le Huy',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1111_thumb.jpg',
       password,
@@ -603,22 +598,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 700,
           rating: 4.2,
           pastSuccessfulCases: 600,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Receive feedbacks, answer questions from people about citizen identity card coming into operation.',
           offeredServices: {
             create: {
               duration: 12,
               price: 75,
               serviceId: '3',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
+              estimate: '7 working days.',
             },
           },
         },
@@ -628,8 +623,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '456',
-      id: '7',
-      username: 'papermaker7@gmail.com',
+      id: '27',
+      username: 'papermaker7@yopmail.com',
       name: 'Phan Boi Chau',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1112_thumb.jpg',
       password,
@@ -639,22 +634,21 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 48,
           rating: 4.2,
           pastSuccessfulCases: 20,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'I have always stood by one basic principle regarding my work: providing the best and quickest paperwork service for couples to tie the wedding knot.',
           offeredServices: {
             create: {
               duration: 4,
               price: 70,
               serviceId: '1',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'A marriage certificate is an official statement that two people are married. In most jurisdictions, a marriage certificate is issued by a government official only after the civil registration of the marriage.',
+              documents: 'National ID card/Passport',
+              estimate: 'Within 15 working days.',
             },
           },
         },
@@ -664,8 +658,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '789',
-      id: '8',
-      username: 'papermaker8@gmail.com',
+      id: '28',
+      username: 'papermaker8@yopmail.com',
       name: 'Nguyen Tat Thanh',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1113_thumb.jpg',
       password,
@@ -675,22 +669,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 977,
           rating: 3.0,
           pastSuccessfulCases: 800,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Applying for work permits in Vietnam can be complicated if you do not have adequate local knowledge or experience as the procedure requires different steps and documents which may be subject to the change of legal regulation. I will update you with the latest regulations on Vietnam work permits; minimize your documents to be submitted for work permit application; and instruct you how to prepare and where to get all the necessary documents; Contact me at 0123456789.',
           offeredServices: {
             create: {
               duration: 11,
               price: 48,
               serviceId: '2',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
+              estimate: '10 working days',
             },
           },
         },
@@ -700,8 +694,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '678',
-      id: '9',
-      username: 'papermaker9@gmail.com',
+      id: '29',
+      username: 'papermaker9@yopmail.com',
       name: 'Phan Boi Chau',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1114_thumb.jpg',
       password,
@@ -711,22 +705,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 113,
           rating: 4.7,
           pastSuccessfulCases: 112,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'As real estate consultancy attorneys, we find that land is a great value and is the most important property, of each person, while the procedures of changing the name of the owner of Red Book, the procedures of land registration is very complicated and take so much time. To help customers save time and quickly get the Red Book, Pink Book, we have prestigious lawyers in Ho Chi Minh City who will provide the best service of getting Red Book.',
           offeredServices: {
             create: {
               duration: 7,
               price: 30,
               serviceId: '4',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
+              estimate: 'Within 30 working days',
             },
           },
         },
@@ -736,8 +730,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '456',
-      id: '10',
-      username: 'papermaker10@gmail.com',
+      id: '30',
+      username: 'papermaker10@yopmail.com',
       name: 'Huynh Minh Hung',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1115_thumb.jpg',
       password,
@@ -747,22 +741,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 333,
           rating: 3.0,
           pastSuccessfulCases: 200,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'As real estate consultancy attorneys, we find that land is a great value and is the most important property, of each person, while the procedures of changing the name of the owner of Red Book, the procedures of land registration is very complicated and take so much time. To help customers save time and quickly get the Red Book, Pink Book, we have prestigious lawyers in Ho Chi Minh City who will provide the best service of getting Red Book.',
           offeredServices: {
             create: {
               duration: 7,
               price: 10,
               serviceId: '4',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
+              estimate: 'Within 30 working days',
             },
           },
         },
@@ -772,8 +766,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '456',
-      id: '11',
-      username: 'papermaker11@gmail.com',
+      id: '31',
+      username: 'papermaker11@yopmail.com',
       name: 'Nguyen Dang Lam Phuong',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1116_thumb.jpg',
       password,
@@ -783,22 +777,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 100,
           rating: 1.3,
           pastSuccessfulCases: 20,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Applying for work permits in Vietnam can be complicated if you do not have adequate local knowledge or experience as the procedure requires different steps and documents which may be subject to the change of legal regulation. Contact me at 0123456789.',
           offeredServices: {
             create: {
               duration: 9,
               price: 67,
               serviceId: '2',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
+              estimate: '10 working days',
             },
           },
         },
@@ -808,8 +802,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '456',
-      id: '12',
-      username: 'papermaker12@gmail.com',
+      id: '32',
+      username: 'papermaker12@yopmail.com',
       name: 'Nguyen Tan Dung',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1117_thumb.jpg',
       password,
@@ -819,22 +813,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 2222,
           rating: 3.7,
           pastSuccessfulCases: 1753,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'As real estate consultancy attorneys, we find that land is a great value and is the most important property, of each person, while the procedures of changing the name of the owner of Red Book, the procedures of land registration is very complicated and take so much time. To help customers save time and quickly get the Red Book, Pink Book, we have prestigious lawyers in Ho Chi Minh City who will provide the best service of getting Red Book.',
           offeredServices: {
             create: {
               duration: 13,
               price: 130,
               serviceId: '4',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
+              estimate: 'Within 30 working days',
             },
           },
         },
@@ -844,8 +838,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '456',
-      id: '13',
-      username: 'papermaker13@gmail.com',
+      id: '33',
+      username: 'papermaker13@yopmail.com',
       name: 'Le Cong Vinh',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1118_thumb.jpg',
       password,
@@ -855,22 +849,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 666,
           rating: 4.3,
           pastSuccessfulCases: 522,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'As real estate consultancy attorneys, we find that land is a great value and is the most important property, of each person, while the procedures of changing the name of the owner of Red Book, the procedures of land registration is very complicated and take so much time. To help customers save time and quickly get the Red Book, Pink Book, we have prestigious lawyers in Ho Chi Minh City who will provide the best service of getting Red Book.',
           offeredServices: {
             create: {
               duration: 20,
               price: 200,
               serviceId: '4',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Land Use Certificate is the land use certificate to be issued by the Authority which shall confer to the Company the exclusive granted land use right in respect of the Site in accordance with the terms and conditions set forth therein.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Authenticated household registration book of the buyer and seller, Identity card or passport authenticated by the buyer or seller, and the sale and purchase contract certified by the notary office.',
+              estimate: 'Within 30 working days',
             },
           },
         },
@@ -880,8 +874,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '456',
-      id: '14',
-      username: 'papermaker14@gmail.com',
+      id: '34',
+      username: 'papermaker14@yopmail.com',
       name: 'Mai Hong Ngoc',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1119_thumb.jpg',
       password,
@@ -891,22 +885,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 750,
           rating: 4.6,
           pastSuccessfulCases: 705,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Applying for work permits in Vietnam can be complicated if you do not have adequate local knowledge or experience as the procedure requires different steps and documents which may be subject to the change of legal regulation. I will update you with the latest regulations on Vietnam work permits; minimize your documents to be submitted for work permit application; and instruct you how to prepare and where to get all the necessary documents; Contact me at 0123456789.',
           offeredServices: {
             create: {
               duration: 5,
               price: 30,
               serviceId: '2',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Vietnam work permit is an official certificate issued by the Department of Labor, Invalid and Social Affairs to allow its holder to work in Vietnam legally. It cannot be applied directly by the workers/foreigners, but with the assistance of their employers or a service center in Vietnam. And Vietnam work permit is an important paper to apply for a temporary residence card or a working visa for Vietnam.',
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Copy of Business Registration, Registration letter for recruitment needs, and Letter of introduction/power of attorney.',
+              estimate: '10 working days',
             },
           },
         },
@@ -916,8 +910,8 @@ const seed = async () => {
   await client.user.create({
     data: {
       phoneNumber: '456',
-      id: '15',
-      username: 'papermaker15@gmail.com',
+      id: '35',
+      username: 'papermaker15@yopmail.com',
       name: 'Nguyen Kieu Cam Tho',
       picture: 'https://faces-img.xcdn.link/thumb-lorem-face-1232_thumb.jpg',
       password,
@@ -927,22 +921,22 @@ const seed = async () => {
       long: 106.649307,
       paperMaker: {
         create: {
+          isConfirmed: true,
           totalCases: 480,
           rating: 3.5,
           pastSuccessfulCases: 235,
           aboutMe:
-            'Donec accumsan justo nulla, non viverra ante molestie nec. Maecenas eu viverra elit, at gravida nulla. Aliquam maximus risus sit amet suscipit volutpat. Donec erat urna, ultrices id consectetur in, ornare sit amet risus. Sed tincidunt, odio sit amet malesuada ultricies, orci dolor fermentum nibh, vitae consectetur lectus erat at lorem',
+            'Receive feedbacks, answer questions from people about citizen identity card coming into operation.',
           offeredServices: {
             create: {
               duration: 17,
               price: 120,
               serviceId: '3',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                "Citizen identification means basic information about a citizen's background and identity in accordance with this Law. Thus, the citizen identification card is simply understood as the main identification document of a Vietnamese citizen, which must clearly and fully contain the citizen's personal information.",
               documents:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
-              estimate:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at magna id lacus tincidunt porttitor in a nulla. Fusce ut nisl interdum, ultricies nulla eget, molestie enim. Integer commodo non quam ut molestie. Nulla facilisi. Sed vitae felis elementum, tempus ex vel, vehicula neque. Curabitur enim felis, malesuada sed elementum quis, lobortis vel nulla. In faucibus lorem lacus, ut rhoncus sapien facilisis at.',
+                'Registration book (original and 2 photocopies) and old ID card (if any)',
+              estimate: '7 working days.',
             },
           },
         },
