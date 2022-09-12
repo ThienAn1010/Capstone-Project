@@ -19,13 +19,33 @@ const seed = async () => {
       },
       {
         id: '3',
-        name: 'ID Card',
-        description: 'This deals with ID Card',
+        name: 'Driver License',
+        description: 'This deals with Driver License',
       },
       {
         id: '4',
-        name: 'Certificates of land use right',
-        description: 'This deals with land use',
+        name: 'Social Insurance',
+        description: 'This deals with Social Insurance',
+      },
+      {
+        id: '5',
+        name: 'Medical Insurance',
+        description: 'This deals with Medical Insurance',
+      },
+      {
+        id: '6',
+        name: 'Practising Certificate',
+        description: 'This deals with Practising Certificate',
+      },
+      {
+        id: '7',
+        name: 'Personal Income Tax',
+        description: 'This deals with Income Tax',
+      },
+      {
+        id: '8',
+        name: 'Passport',
+        description: 'This deals with Passport',
       },
     ],
     skipDuplicates: true,
